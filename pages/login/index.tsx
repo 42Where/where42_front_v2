@@ -1,6 +1,11 @@
+import LoginMain from '@/Organisms/Login/LoginMain';
+import LoginTemplate from '@/Templates/Login/LoginTemplate';
+
 function Login() {
   return (
-    <h1>"로그인페이지입니다"</h1>
+    <LoginTemplate
+      rightComponent={LoginMain}
+    />
   );
 }
 
