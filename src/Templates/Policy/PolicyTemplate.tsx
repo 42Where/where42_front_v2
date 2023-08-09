@@ -13,9 +13,9 @@ const PolicyTemplate: React.FC<PolicyTemplateProps> = ({
   // footerComponent,
 }) => {
   return (
-    <div className={style.policyTemplate}>
+    <div className={style['policy-template']}>
       {/* headerComponent 추후 구현 필요 */}
-      <div className={style.policyMain}>{mainComponent()}</div>
+      <div className={style['policy-template-main']}>{mainComponent()}</div>
       {/* footerComponent 추후 구현 필요 */}
     </div>
   );

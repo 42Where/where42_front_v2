@@ -1,4 +1,4 @@
-.policyTemplate {
+.policy-template {
   min-height: 100vh;
   width: 100%;
 
@@ -6,7 +6,7 @@
   flex-direction: column;
 }
 
-.policyMain {
+.policy-template-main {
   padding: 20px 100px;
   flex: 1;
   background-color: #fcfdff;

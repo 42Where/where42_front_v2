@@ -2,13 +2,13 @@ import styles from './PolicyContent.module.css';
 
 const PolicyContent: React.FC = () => {
   return (
-    <div className={styles.policyContent}>
-      <p className={styles.policyText}>
+    <div className={styles['policy-content']}>
+      <p className={styles['policy-text']}>
         (재)이노베이션 아카데미는 『개인정보 보호법』 제15조 등 관련 법령에 따라
         서비스 이용자의 개인정보보호를 매우 중시하며, 서비스 제공에 반드시
         필요한 개인정보의 수집⦁이용을 위하여 귀하의 동의를 받고자 합니다.
       </p>
-      <table className={styles.policyTable}>
+      <table className={styles['policy-table']}>
         <tbody>
           <tr>
             <th>개인정보의 수집 및 이용 목적:</th>
@@ -37,7 +37,7 @@ const PolicyContent: React.FC = () => {
           </tr>
         </tbody>
       </table>
-      <div className={styles.fixedButtonsContainer}>
+      <div className={styles['fixed-buttons-container']}>
         {/* TODO - 버튼을 테이블과 겹치지 않게 상위 div의 우하단에 고정시키려고 했는데 잘 모르겠음 버튼 작업하면서 추가작업 필요*/}
         <button>거절</button>
         <button>동의</button>
