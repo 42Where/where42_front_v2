@@ -3,7 +3,7 @@ import style from './PolicyTemplate.module.css';
 
 interface PolicyTemplateProps {
   // headerComponent: () => ReactNode; - 추후 구현 필요
-  mainComponent: React.FC;
+  mainComponent: () => ReactNode;
   // footerComponent: () => ReactNode; - 추후 구현 필요
 }
 

@@ -1,7 +1,7 @@
 import styles from './PolicyMain.module.css';
 import PolicyContent from '@/Molecules/Policy/PolicyContent';
 
-const PolicyMain: React.FC = () => {
+function PolicyMain() {
   return (
     <div className={styles.main}>
       <div className={styles.policyTitle}>
