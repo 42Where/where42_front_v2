@@ -1,5 +1,5 @@
 import styles from './PolicyMain.module.css';
-import PolicyContent from '@/Molecules/Policy/PolicyContent';
+import PolicyContent from '@/Organisms/Policy/PolicyContent';
 
 function PolicyMain() {
   return (
