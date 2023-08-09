@@ -1,7 +1,8 @@
+import PolicyMain from '@/Organisms/Policy/PolicyMain';
+import PolicyTemplate from '@/Templates/Policy/PolicyTemplate';
+
 function Policy() {
-  return (
-    <h1>"약관동의페이지입니다"</h1>
-  );
+  return <PolicyTemplate mainComponent={PolicyMain} />;
 }
 
 export default Policy;

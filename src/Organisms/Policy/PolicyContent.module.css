@@ -1,0 +1,55 @@
+.policy-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  background-color: #fcfdff;
+}
+
+.policy-text {
+  width: 100%;
+  height: 100%;
+
+  font-style: normal;
+  font-weight: 250;
+  font-size: 16px;
+  line-height: 18px;
+
+  flex: 1;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  z-index: 0;
+  color: #111111;
+}
+/* TODO - 프로젝트 공통으로 사용할 폰트, 굵기, 크기, border-radius등등 결정 필요  */
+
+.fixed-buttons-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.policy-table {
+  display: table;
+  flex: 1;
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid #ffdddd;
+  border-radius: 24px;
+}
+/* TODO - border-radius가 의도한대로 동작하지 않는것 수정해야함 */
+
+.policy-table th,
+.policy-table td {
+  display: table-cell;
+  padding: 10px;
+  border: 2px solid #ffdddd;
+  border-radius: 24px;
+}
