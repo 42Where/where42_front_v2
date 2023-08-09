@@ -30,9 +30,10 @@
 /* TODO - 프로젝트 공통으로 사용할 폰트, 굵기, 크기, border-radius등등 결정 필요  */
 
 .fixed-buttons-container {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .policy-table {
