@@ -1,0 +1,39 @@
+.profile-image {
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.profile-image--large {
+  width: 128px;
+  height: 128px;
+}
+
+.profile-image--medium {
+  width: 96px;
+  height: 96px;
+}
+
+.profile-image-border {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.profile-image-border--active {
+  box-shadow: inset 0px 0px 0px 3px #ffb5b5;
+}
+
+.profile-image-border--inactive {
+  display: none;
+}
+
+.profile-image-border-inner {
+  position: absolute;
+  left: 5.81%;
+  right: 75.58%;
+  top: 2.91%;
+  bottom: 78.49%;
+  border-radius: 50%;
+  background: #ffb5b5;
+  border: 3px solid #fcfdff;
+}
