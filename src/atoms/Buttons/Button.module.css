@@ -1,0 +1,73 @@
+.button {
+  /* 
+    TODO: font mixin 적용
+
+    현재 font 관련 mixin 이 없습니다.
+    mixin 을 만들면 해당 영역에 font mixin 을 적용해주세요.
+   */
+
+  /*
+    TODO: color 변수 적용
+    Color 값을 직접 사용하지 않고, 변수로 사용해야합니다.
+
+    color 변수가 만들어지면 해당 영역에 변수를 적용해주세요.
+  */
+  color: #fcfdff;
+  background-color: #132743;
+
+  border-radius: 70px;
+
+  padding: 0 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.button-primary {
+  color: #fcfdff;
+  background-color: #132743;
+
+  border: 1px solid #132743;
+}
+.button-primary:hover {
+  background: #88a0c3;
+  border: 1px solid #88a0c3;
+}
+
+.button-primary:active {
+  background: #4a6282;
+  border: 1px solid #4a6282;
+}
+
+.button-secondary {
+  color: #132743;
+  background-color: #fcfdff;
+
+  border: 1px solid #132743;
+}
+
+.button-secondary:active {
+  background: #d9d9d9;
+}
+
+.button-secondary:hover {
+  color: #7f848d;
+  border: 1px solid #7f848d;
+}
+
+.button-Small {
+  height: 32px;
+  min-width: 80px;
+}
+
+.button-Medium {
+  height: 48px;
+  min-width: 80px;
+}
+
+.button-Large {
+  height: 64px;
+  min-width: 120px;
+}
