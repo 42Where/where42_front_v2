@@ -2,6 +2,13 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import ProfileImage from "./ProfileImage";
 
+/**
+ * - 사용자의 프로필사진과 출석여부를 표시하는 컴포넌트입니다.
+ * - src가 주어지지 않으면 기본 프로필사진을 표시합니다.
+ * - active가 true이면 테두리와 활성화아이콘을 표시합니다.
+ * - size가 medium이면 96x96, large이면 128x128 크기로 표시합니다.
+ */
+
 export default {
   title: "Atoms/ProfileImage",
   component: ProfileImage,

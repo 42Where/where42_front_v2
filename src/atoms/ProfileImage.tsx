@@ -1,16 +1,8 @@
 import { useState } from "react";
 import Image from "next/image";
-import PropTypes from "prop-types";
 import styles from "./ProfileImage.module.css";
 
-import DefaultProfileImage from "../../public/Common/DefaultProfileImageLarge.svg";
-
-/**
-- 사용자의 프로필사진과 출석여부를 표시하는 컴포넌트입니다.
-- src가 주어지지 않으면 기본 프로필사진을 표시합니다.
-- active가 true이면 테두리를 표시합니다.
-- size가 medium이면 96x96, large이면 128x128 크기로 표시합니다.
-**/
+import DefaultProfileImage from "../../../public/Common/DefaultProfileImageLarge.svg";
 
 type ProfileImageProps = {
   /**
@@ -23,6 +15,7 @@ type ProfileImageProps = {
   active?: boolean;
   /**
    *프로필사진의 크기입니다.
+   * - 모바일용 small 구현 필요할수도 있음
    */
   size?: "medium" | "large";
 };
@@ -62,21 +55,6 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
       />
     </div>
   );
-};
-
-ProfileImage.propTypes = {
-  /**
-   *프로필사진의 URL입니다.
-   */
-  src: PropTypes.string,
-  /**
-   *사용자의 출석여부를 표시합니다.
-   */
-  active: PropTypes.bool,
-  /**
-   *프로필사진의 크기입니다.
-   */
-  size: PropTypes.oneOf(["medium", "large", undefined, null]),
 };
 
 export default ProfileImage;
