@@ -33,8 +33,8 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
 
   const mode = active ? "active" : "inactive";
 
-  const borderClassNames = `${styles["profile-image-border"]} ${
-    styles[`profile-image-border--${mode}`]
+  const borderClassNames = `${styles["profile-image-active-indicator"]} ${
+    styles[`profile-image-active-indicator--${mode}`]
   } ${styles[`profile-image--${size}`]}`;
   const imageClassNames = `${styles["profile-image"]} ${
     styles[`profile-image--${size}`]
@@ -43,7 +43,7 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
   return (
     <div>
       <div className={borderClassNames}>
-        <div className={styles["profile-image-border-inner"]} />
+        <div className={styles["profile-image-active-indicator-dot"]} />
       </div>
       <Image
         className={imageClassNames}
