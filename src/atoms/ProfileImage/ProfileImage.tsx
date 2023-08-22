@@ -45,11 +45,15 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
   };
 
   const mode = isActive ? "active" : "inactive";
-  var imageSize;
+  let imageSize;
 
-  if (size === "large") imageSize = 128;
-  else if (size === "medium") imageSize = 96;
-  else imageSize = 64;
+  if (size === "large") {
+    imageSize = 128;
+  } else if (size === "medium") {
+    imageSize = 96;
+  } else {
+    imageSize = 64;
+  }
 
   return (
     <div className={styles[size]} onClick={onClick}>
