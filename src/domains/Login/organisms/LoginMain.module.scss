@@ -14,9 +14,19 @@
   gap: 3rem;
 }
 
+@import "styles/font.scss";
+
 .title {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: center;
+
+  h3 {
+    @extend .header-3;
+  }
+
+  h1 {
+    @include font($type: ".header-1");
+  }
 }
