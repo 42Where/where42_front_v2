@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Image from "next/image";
-import styles from "./ProfileImage.module.css";
+
+import imageStyles from "./ProfileImage.module.css";
+import indicatorStyles from "./ProfileImageActiveIndicator.module.css";
 
 import DefaultProfileImage from "../../../public/Common/DefaultProfileImageLarge.svg";
 
@@ -47,23 +49,39 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
   const mode = isActive ? "active" : "inactive";
   let imageSize;
 
-  if (size === "large") {
-    imageSize = 128;
-  } else if (size === "medium") {
-    imageSize = 96;
-  } else {
-    imageSize = 64;
+  switch (size) {
+    case "large":
+      imageSize = 128;
+      break;
+    case "medium":
+      imageSize = 96;
+      break;
+    case "small":
+      imageSize = 64;
+      break;
+    default:
+      imageSize = 96;
+      break;
   }
 
+  const imageSizeClassName = imageStyles[`profile-image--${size}`];
+  const indicatorClassName = indicatorStyles[`active-indicator--${mode}`];
+  const indicatorBorderClassName = `${
+    indicatorStyles["active-indicator__border"]
+  } ${indicatorStyles[`active-indicator__border--${size}`]}`;
+  const indicatorDotClassName = `${indicatorStyles["active-indicator__dot"]} ${
+    indicatorStyles[`active-indicator__dot--${size}`]
+  }`;
+
   return (
-    <div className={styles[size]} onClick={onClick}>
-      <div className={styles[mode]}>
-        <div className={styles["indicator-border"]}>
-          <div className={styles["indicator-dot"]} />
+    <div className={imageSizeClassName} onClick={onClick}>
+      <div className={indicatorClassName}>
+        <div className={indicatorBorderClassName}>
+          <div className={indicatorDotClassName} />
         </div>
       </div>
       <Image
-        className={styles["profile-image"]}
+        className={imageStyles["profile-image__image"]}
         src={imageSrc}
         width={imageSize}
         height={imageSize}

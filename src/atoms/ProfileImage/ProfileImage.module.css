@@ -1,72 +1,18 @@
-.profile-image {
+.profile-image__image {
   border-radius: 50%;
   object-fit: cover;
   z-index: -1;
 }
 
-.large {
+.profile-image--large {
   width: 128px;
   height: 128px;
 }
-.medium {
+.profile-image--medium {
   width: 96px;
   height: 96px;
 }
-.small {
+.profile-image--small {
   width: 64px;
   height: 64px;
-}
-
-.active .indicator-border {
-  position: absolute;
-  border-radius: 50%;
-}
-.large .indicator-border {
-  width: 128px;
-  height: 128px;
-  box-shadow: inset 0px 0px 0px 4px #ffb5b5;
-}
-.medium .indicator-border {
-  width: 96px;
-  height: 96px;
-  box-shadow: inset 0px 0px 0px 3px #ffb5b5;
-}
-.small .indicator-border {
-  width: 64px;
-  height: 64px;
-  box-shadow: inset 0px 0px 0px 2px #ffb5b5;
-}
-
-.active .indicator-dot {
-  position: absolute;
-  border-radius: 50%;
-  background: #ffb5b5;
-}
-
-.large .indicator-dot {
-  width: 22px;
-  height: 22px;
-  top: 1px;
-  left: 5px;
-  border: 4px solid #fcfdff;
-}
-
-.medium .indicator-dot {
-  width: 16px;
-  height: 16px;
-  top: 1px;
-  left: 4px;
-  border: 3px solid #fcfdff;
-}
-
-.small .indicator-dot {
-  width: 11px;
-  height: 11px;
-  top: 1px;
-  left: 3px;
-  border: 2px solid #fcfdff;
-}
-
-.inactive {
-  display: none;
 }
