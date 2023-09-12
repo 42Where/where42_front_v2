@@ -1,29 +1,44 @@
 import { useState } from "react";
 import Image from "next/image";
-import styles from "./ProfileImage.module.css";
+
+import imageStyles from "./ProfileImage.module.css";
+import indicatorStyles from "./ProfileImageActiveIndicator.module.css";
 
 import DefaultProfileImage from "../../../public/Common/DefaultProfileImageLarge.svg";
 
 type ProfileImageProps = {
   /**
-   *프로필사진의 URL입니다.
+   * 사용자의 아이디입니다.
+   * Imaged의 alt로 사용됩니다. 인자가 없을경우 "ProfileImage"가 사용됩니다.
+   */
+  loginId?: string;
+  /**
+   * 프로필사진의 URL입니다.
+   * 인자가 들어오지 않거나 이미지 로딩에 실패할경우 기본 이미지파일을 사용합니다.
    */
   src?: string;
   /**
-   *사용자의 출석여부를 표시합니다.
+   * 사용자의 출석여부를 의미합니다.
+   * 출석했을경우 테두리와 활성화 아이콘이 표시됩니다.
    */
-  active?: boolean;
+  isActive?: boolean;
   /**
-   *프로필사진의 크기입니다.
-   * - 모바일용 small 구현 필요할수도 있음
+   * 프로필사진의 크기입니다.
+   * small: 64px, medium: 96px, large: 128px
    */
-  size?: "medium" | "large";
+  size?: "small" | "medium" | "large";
+  /**
+   * 프로필사진을 클릭했을때 실행되는 함수입니다.
+   */
+  onClick?: () => void;
 };
 
 const ProfileImage: React.FC<ProfileImageProps> = ({
-  src = undefined,
-  active = false,
+  loginId = "ProfileImage",
+  src = DefaultProfileImage,
+  isActive = false,
   size = "medium",
+  onClick = () => {},
 }) => {
   const [imageSrc, setImageSrc] = useState(src);
 
@@ -31,26 +46,46 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
     setImageSrc(DefaultProfileImage);
   };
 
-  const mode = active ? "active" : "inactive";
+  const mode = isActive ? "active" : "inactive";
+  let imageSize;
 
-  const borderClassNames = `${styles["profile-image-active-indicator"]} ${
-    styles[`profile-image-active-indicator--${mode}`]
-  } ${styles[`profile-image--${size}`]}`;
-  const imageClassNames = `${styles["profile-image"]} ${
-    styles[`profile-image--${size}`]
+  switch (size) {
+    case "large":
+      imageSize = 128;
+      break;
+    case "medium":
+      imageSize = 96;
+      break;
+    case "small":
+      imageSize = 64;
+      break;
+    default:
+      imageSize = 96;
+      break;
+  }
+
+  const imageSizeClassName = imageStyles[`profile-image--${size}`];
+  const indicatorClassName = indicatorStyles[`active-indicator--${mode}`];
+  const indicatorBorderClassName = `${
+    indicatorStyles["active-indicator__border"]
+  } ${indicatorStyles[`active-indicator__border--${size}`]}`;
+  const indicatorDotClassName = `${indicatorStyles["active-indicator__dot"]} ${
+    indicatorStyles[`active-indicator__dot--${size}`]
   }`;
 
   return (
-    <div>
-      <div className={borderClassNames}>
-        <div className={styles["profile-image-active-indicator-dot"]} />
+    <div className={imageSizeClassName} onClick={onClick}>
+      <div className={indicatorClassName}>
+        <div className={indicatorBorderClassName}>
+          <div className={indicatorDotClassName} />
+        </div>
       </div>
       <Image
-        className={imageClassNames}
-        src={imageSrc ? imageSrc : DefaultProfileImage}
-        width={size === "large" ? 128 : 96}
-        height={size === "large" ? 128 : 96}
-        alt={"ProfileImage"}
+        className={imageStyles["profile-image__image"]}
+        src={imageSrc}
+        width={imageSize}
+        height={imageSize}
+        alt={loginId}
         onError={imageErrorHandler}
       />
     </div>
