@@ -11,7 +11,7 @@ import ProfileCard from "./ProfileCard";
  */
 
 export default {
-  title: "Atoms/ProfileCard",
+  title: "Molecules/ProfileCard",
   component: ProfileCard,
   tags: ["autodocs"],
 } as Meta;
