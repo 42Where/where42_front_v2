@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import Image from "next/image";
 import HelpIcon from "&/Common/HelpIcon.svg";
 import Logo from "&/BI.svg";
-import styles from "./LoginMain.module.css";
+import styles from "./LoginMain.module.scss";
 
 function LoginMain() {
   return (
