@@ -1,7 +1,21 @@
+@font-face {
+  font-family: "GmarketSans";
+  src:
+    url("~&/fonts/GmarketSansBold.otf") format("otf"),
+    url("~&/fonts/GmarketSansLight.otf") format("otf"),
+    url("~&/fonts/GmarketSansMedium.otf") format("otf"),
+    url("~&/fonts/GmarketSansTTFBold.ttf") format("truetype"),
+    url("~&/fonts/GmarketSansTTFLight.ttf") format("truetype"),
+    url("~&/fonts/GmarketSansTTFMedium.ttf") format("truetype");
+
+  font-style: normal;
+  line-height: normal;
+}
+
 %font-base {
   color: var(--first-0, #132743);
 
-  font-family: Roboto;
+  font-family: "GmarketSans";
 
   font-style: normal;
   line-height: normal;
