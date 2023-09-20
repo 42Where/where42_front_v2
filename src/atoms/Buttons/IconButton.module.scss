@@ -1,0 +1,42 @@
+@import "/styles/font";
+@import "/styles/variables";
+
+.iconButton {
+  /* layout */
+  display: inline-flex;
+  align-items: center;
+
+  &Large {
+    padding: 10px 14px;
+    gap: 5px;
+  }
+  &Medium {
+    padding: 8px 12px;
+    gap: 4px;
+  }
+  &Small {
+    padding: 6px 10px;
+    gap: 3px;
+  }
+
+  /* style */
+  border-radius: 64px;
+  box-shadow: 0 0 0 2px $primary-color-0 inset;
+
+  &Text {
+    color: $primary-color-0;
+
+    &Large {
+      @extend .body-1;
+    }
+    &Medium {
+      @extend .body-3;
+    }
+    &Small {
+      @extend .body-5;
+    }
+  }
+
+  /* etc */
+  cursor: pointer;
+}
