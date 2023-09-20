@@ -27,6 +27,6 @@
   }
 
   h1 {
-    @include font($type: ".header-1");
+    @extend .header-1;
   }
 }
