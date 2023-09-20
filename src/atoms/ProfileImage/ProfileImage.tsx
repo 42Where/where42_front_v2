@@ -4,7 +4,7 @@ import Image from "next/image";
 import imageStyles from "./ProfileImage.module.css";
 import indicatorStyles from "./ProfileImageActiveIndicator.module.css";
 
-import DefaultProfileImage from "../../../public/Common/DefaultProfileImageLarge.svg";
+import DefaultProfileImage from "&/Common/defaultProfileImageLarge.svg";
 
 type ProfileImageProps = {
   /**
