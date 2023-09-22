@@ -1,0 +1,20 @@
+.header {
+  /* layout */
+  display: flex;
+  width: 100%;
+  padding: 4px 18px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+
+  /* style */
+  background: var(--greywhite, #fcfdff);
+
+  &__buttonwrapper {
+    /* layout */
+    display: flex;
+    align-items: center;
+    padding-right: 8px;
+    gap: 16px;
+  }
+}
