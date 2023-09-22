@@ -1,39 +1,40 @@
 @import "/styles/font";
 @import "/styles/variables";
 
-.iconButton {
+.iconbutton {
   /* layout */
   display: inline-flex;
   align-items: center;
 
-  &Large {
-    padding: 10px 14px;
-    gap: 5px;
-  }
-  &Medium {
-    padding: 8px 12px;
+  &--small {
+    padding: 6px 10px;
     gap: 4px;
   }
-  &Small {
-    padding: 6px 10px;
-    gap: 3px;
+  &--medium {
+    padding: 10px 14px;
+    gap: 6px;
+  }
+  &--large {
+    padding: 14px 18px;
+    gap: 8px;
   }
 
   /* style */
   border-radius: 64px;
   box-shadow: 0 0 0 2px $primary-color-0 inset;
 
-  &Text {
+  &__text {
+    /* style */
     color: $primary-color-0;
 
-    &Large {
-      @extend .body-1;
+    &--small {
+      @extend .body-5;
     }
-    &Medium {
+    &--medium {
       @extend .body-3;
     }
-    &Small {
-      @extend .body-5;
+    &--large {
+      @extend .body-1;
     }
   }
 

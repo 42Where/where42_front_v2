@@ -37,27 +37,20 @@ const IconButton: React.FC<IconButtonProps> = ({
   onClick,
   text,
 }) => {
-  let IconButtonStyle;
-  let IconButtonTextStyle;
+  const IconButtonStyle =
+    styles.iconbutton + " " + styles[`iconbutton--${size}`];
+  const IconButtonTextStyle =
+    styles["iconbutton__text"] + " " + styles[`iconbutton__text--${size}`];
   let iconSize;
 
   switch (size) {
     case "small":
-      IconButtonStyle = styles.iconButton + " " + styles.iconButtonSmall;
-      IconButtonTextStyle =
-        styles.iconButtonText + " " + styles.iconButtonTextSmall;
       iconSize = 16;
       break;
     case "medium":
-      IconButtonStyle = styles.iconButton + " " + styles.iconButtonMedium;
-      IconButtonTextStyle =
-        styles.iconButtonText + " " + styles.iconButtonTextMedium;
       iconSize = 24;
       break;
     case "large":
-      IconButtonStyle = styles.iconButton + " " + styles.iconButtonLarge;
-      IconButtonTextStyle =
-        styles.iconButtonText + " " + styles.iconButtonTextLarge;
       iconSize = 32;
       break;
   }
