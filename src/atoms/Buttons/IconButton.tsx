@@ -1,4 +1,7 @@
+import React from "react";
 import Image from "next/image";
+
+import { Size } from "@/atoms/types/enums";
 
 import styles from "./IconButton.module.scss";
 
@@ -19,11 +22,11 @@ interface IconButtonProps {
    * small/medium/large
    * default: medium
    */
-  size?: "small" | "medium" | "large";
+  size?: Size;
   /**
    * 상위 컴포넌트에서 전달받는 onClick 함수
    */
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler;
   /**
    * 버튼에 표시할 텍스트
    */
@@ -33,7 +36,7 @@ interface IconButtonProps {
 const IconButton: React.FC<IconButtonProps> = ({
   Icon,
   value = false,
-  size = "medium",
+  size = Size.Medium,
   onClick,
   text,
 }) => {
@@ -61,6 +64,7 @@ const IconButton: React.FC<IconButtonProps> = ({
       if (typeof Icon === "string" || typeof Icon === "object") {
         return (
           <Image
+            className={styles["iconbutton--icononly"]}
             src={Icon}
             width={iconSize}
             height={iconSize}
@@ -69,7 +73,14 @@ const IconButton: React.FC<IconButtonProps> = ({
           />
         );
       } else if (typeof Icon === "function") {
-        return <Icon value={value} size={size} onClick={onClick} />;
+        return (
+          <Icon
+            className={styles["iconbutton--icononly"]}
+            value={value}
+            size={size}
+            onClick={onClick}
+          />
+        );
       }
     default:
       let IconComponent;

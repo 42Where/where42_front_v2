@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { Size } from "@/atoms/types/enums";
+
 import IconButton from "./IconButton";
 import Checkbox from "./Checkbox";
 import NewGroupIcon from "&/Icons/newGroup.svg";
@@ -16,18 +18,18 @@ export default {
 } as Meta;
 
 export const BasicIconButton: StoryObj<typeof IconButton> = {
-  args: { Icon: Checkbox, size: "small", text: "체크박스" },
+  args: { Icon: Checkbox, size: Size.Small, text: "체크박스" },
 };
 
 export const NewGroupButton: StoryObj<typeof IconButton> = {
-  args: { Icon: NewGroupIcon, size: "small", text: "새 그룹" },
+  args: { Icon: NewGroupIcon, size: Size.Small, text: "새 그룹" },
 };
 
 export const ShowLoginToggleButton: StoryObj<typeof IconButton> = {
   args: {
     Icon: Checkbox,
     value: false,
-    size: "small",
+    size: Size.Small,
     text: "출근한 친구만 보기",
   },
 };
