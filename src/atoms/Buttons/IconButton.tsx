@@ -56,7 +56,8 @@ const IconButton: React.FC<IconButtonProps> = ({
   }
 
   switch (text) {
-    case undefined || "":
+    case undefined:
+    case "":
       if (typeof Icon === "string" || typeof Icon === "object") {
         return (
           <Image
