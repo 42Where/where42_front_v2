@@ -5,8 +5,7 @@ import SearchIcon from "&/Icons/search.svg";
 import SignOutIcon from "&/Icons/signOut.svg";
 
 import Image from "next/image";
-// import IconButton from "@/atoms/IconButton/IconButton";
-// TODO: IconButton 구현 후 Image들을 IconButton으로 변경
+import IconButton from "@/atoms/Buttons/IconButton";
 
 import styles from "./Header.module.scss";
 
@@ -42,38 +41,39 @@ const Header: React.FC<HeaderProps> = ({ url }) => {
   switch (url) {
     case "/main":
       ButtonWrapper = [
-        <Image
-          src={SearchIcon}
-          alt="search"
+        <IconButton
+          Icon={SearchIcon}
           onClick={SearchClickHandler}
+          size="medium"
           key={"search"}
         />,
-        <Image
-          src={SignOutIcon}
-          alt="signout"
+        <IconButton
+          Icon={SignOutIcon}
           onClick={SignOutClickHandler}
+          size="medium"
           key={"signout"}
         />,
       ];
       break;
     case "/search":
       ButtonWrapper = [
-        <Image
-          src={SignOutIcon}
-          alt="signout"
+        <IconButton
+          Icon={SignOutIcon}
           onClick={SignOutClickHandler}
+          size="medium"
           key={"signout"}
         />,
       ];
       break;
     default:
       ButtonWrapper = [];
-      break;
   }
 
   return (
     <div className={styles.header}>
       <Image src={Logo} alt="logo" onClick={LogoClickHandler} />
+      {/* TODO?: 추후에 이미지 사이즈를 그대로 사용하는 아이콘 버튼이 필요할경우
+      IconButton의 props를 수정하거나 별개의 컴포넌트로 구현이 필요할수도 있음*/}
       <div className={styles["header__buttonwrapper"]}>{ButtonWrapper}</div>
     </div>
   );
