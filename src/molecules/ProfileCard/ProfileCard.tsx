@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import Image from "next/image";
 
-import FunctionButton from "&/Common/Icons/FunctionButton.svg";
+import FunctionButton from "&/Icons/functionButton.svg";
 
 import ProfileImage from "@/atoms/ProfileImage/ProfileImage";
 import cardStyles from "./ProfileCard.module.css";

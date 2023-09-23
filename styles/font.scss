@@ -102,6 +102,37 @@
   font-size: 16px;
 }
 
-@mixin font($type: ".body-3") {
-  @extend #{$type};
+.body-6 {
+  @extend %body-base;
+  font-size: 12px;
+}
+
+%light-base {
+  @extend %font-base;
+  font-weight: 300;
+}
+
+.light-1 {
+  @extend %light-base;
+  font-size: 20px;
+}
+
+.light-2 {
+  @extend %light-base;
+  font-size: 16px;
+}
+
+.light-3 {
+  @extend %light-base;
+  font-size: 12px;
+}
+
+.light-4 {
+  @extend %light-base;
+  font-size: 8px;
+}
+
+.light-5 {
+  @extend %light-base;
+  font-size: 4px;
 }

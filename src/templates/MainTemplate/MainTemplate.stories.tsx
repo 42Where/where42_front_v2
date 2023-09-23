@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { within, userEvent } from "@storybook/testing-library";
+// import { within, userEvent } from "@storybook/testing-library";
 
 import MainTemplate from "./MainTemplate";
+
+import Header from "@/molecules/Header/Header";
 
 const meta = {
   title: "Components/templates/MainTemplate",
@@ -44,7 +46,7 @@ const bodyEl = () => {
 
 export const Default: Story = {
   args: {
-    headerComponent: () => headerEl(),
+    headerComponent: () => <Header url="/main" />,
     bodyComponent: () => bodyEl(),
   },
   render: (args) => (

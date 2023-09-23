@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import Image from "next/image";
-import HelpIcon from "&/Common/HelpIcon.svg";
+import HelpIcon from "&/Icons/help.svg";
 import Logo from "&/BI.svg";
 import styles from "./LoginMain.module.scss";
 
