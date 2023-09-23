@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import User from "@/atoms/types/User";
+import { Size } from "@/atoms/types/enums";
+
 import ProfileImage from "./ProfileImage";
 
 /**
@@ -12,47 +15,40 @@ import ProfileImage from "./ProfileImage";
 export default {
   title: "Atoms/ProfileImage",
   component: ProfileImage,
-  argTypes: {
-    src: {
-      control: {
-        type: "text",
-      },
-    },
-    isActive: {
-      control: {
-        type: "boolean",
-      },
-    },
-    size: {
-      control: {
-        type: "select",
-        options: ["small", "medium", "large"],
-      },
-    },
-  },
   tags: ["autodocs"],
 } as Meta;
 
 // const Template: Story = (args) => <ProfileImage {...args} />;
 export const BasicProfileImage: StoryObj<typeof ProfileImage> = {
   args: {
-    src: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg",
-    isActive: true,
-    size: "medium",
+    user: {
+      login: "",
+      profileImgSrc:
+        "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg",
+      location: "개포",
+    } as User,
+    size: Size.Medium,
   },
 };
 
 export const DefaultProfileImage: StoryObj<typeof ProfileImage> = {
   args: {
-    isActive: false,
-    size: "medium",
+    user: {
+      login: "test",
+      profileImgSrc: undefined,
+      location: undefined,
+    } as User,
   },
 };
 
-export const FailedProfileImage: StoryObj<typeof ProfileImage> = {
+export const Mykang: StoryObj<typeof ProfileImage> = {
   args: {
-    src: "asdasd",
-    isActive: false,
-    size: "medium",
+    user: {
+      login: "mykang",
+      profileImgSrc:
+        "https://cdn.intra.42.fr/users/7ba3314a458b65fd50c749fd184301da/mykang.jpg",
+      location: "개포",
+    } as User,
+    size: Size.Medium,
   },
 };
