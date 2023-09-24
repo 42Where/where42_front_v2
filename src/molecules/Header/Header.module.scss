@@ -1,20 +1,21 @@
+@import "/styles/variables.scss";
+
 .header {
   /* layout */
   display: flex;
   width: 100%;
-  padding: 4px 18px;
+  padding: 0.25rem 1.125rem;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
 
   /* style */
-  background: var(--greywhite, #fcfdff);
+  background: $graywhite-color-0;
 
   &__buttonwrapper {
     /* layout */
     display: flex;
-    align-items: center;
-    padding-right: 8px;
-    gap: 16px;
+    margin-right: 1rem;
+    gap: 1rem;
   }
 }
