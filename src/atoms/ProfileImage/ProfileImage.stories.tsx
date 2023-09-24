@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import User from "@/atoms/types/User";
-import { Size } from "@/atoms/types/enums";
+import User from "@/Types/User";
+import { Size } from "@/Types/enums";
 
 import ProfileImage from "./ProfileImage";
 

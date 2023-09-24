@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-import { Size } from "@/atoms/types/enums";
+import { Size } from "@/Types/enums";
 
 import styles from "./IconButton.module.scss";
 

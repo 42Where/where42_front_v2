@@ -4,7 +4,7 @@ import Logo from "&/Icons/logoB.svg";
 import SearchIcon from "&/Icons/search.svg";
 import SignOutIcon from "&/Icons/signOut.svg";
 
-import { Size } from "@/atoms/types/enums";
+import { Size } from "@/Types/enums";
 
 import Image from "next/image";
 import IconButton from "@/atoms/Buttons/IconButton";

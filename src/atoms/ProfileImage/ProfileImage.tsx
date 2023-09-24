@@ -2,8 +2,8 @@ import { useState } from "react";
 import Image from "next/image";
 import DefaultProfileImage from "&/Common/defaultProfileImageLarge.svg";
 
-import { Size } from "@/atoms/types/enums";
-import User from "@/atoms/types/User";
+import { Size } from "@/Types/enums";
+import User from "@/Types/User";
 
 import imageStyles from "./ProfileImage.module.scss";
 import indicatorStyles from "./ProfileImageIndicator.module.scss";
@@ -36,13 +36,13 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
   let imageSize;
 
   switch (size) {
-    case "large":
+    case Size.Small:
       imageSize = 128;
       break;
-    case "medium":
+    case Size.Medium:
       imageSize = 96;
       break;
-    case "small":
+    case Size.Large:
       imageSize = 64;
       break;
   }

@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { Fragment } from "react";
 
 import CheckImage from "&/Icons/Checkbox/check.svg";
 import UncheckImage from "&/Icons/Checkbox/uncheck.svg";
 
+import { Size } from "@/Types/enums";
 // import styles from "./Checkbox.module.css";
 
 interface CheckboxProps {
@@ -16,7 +16,7 @@ interface CheckboxProps {
    * small/medium/large
    * default: medium
    */
-  size?: "small" | "medium" | "large";
+  size?: Size;
   /**
    * 상위 컴포넌트에서 전달받는 onClick 함수
    */
@@ -25,19 +25,19 @@ interface CheckboxProps {
 
 const Checkbox: React.FC<CheckboxProps> = ({
   value = false,
-  size = "medium",
+  size = Size.Medium,
   onClick,
 }) => {
   let imageSize;
 
   switch (size) {
-    case "small":
+    case Size.Small:
       imageSize = 16;
       break;
-    case "medium":
+    case Size.Medium:
       imageSize = 24;
       break;
-    case "large":
+    case Size.Large:
       imageSize = 32;
       break;
   }

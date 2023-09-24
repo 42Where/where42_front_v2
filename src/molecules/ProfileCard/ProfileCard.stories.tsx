@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Size } from "@/atoms/types/enums";
+import { Size } from "@/Types/enums";
 
 import ProfileCard, { ProfileCardProps } from "./ProfileCard";
 import IconButton from "@/atoms/Buttons/IconButton";

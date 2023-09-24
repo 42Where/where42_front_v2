@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Size } from "@/atoms/types/enums";
+import { Size } from "@/Types/enums";
 
 import IconButton from "./IconButton";
 import Checkbox from "./Checkbox";

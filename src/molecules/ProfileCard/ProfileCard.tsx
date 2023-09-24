@@ -1,5 +1,5 @@
-import { Size } from "@/atoms/types/enums";
-import User from "@/atoms/types/User";
+import { Size } from "@/Types/enums";
+import User from "@/Types/User";
 import ProfileImage from "@/atoms/ProfileImage/ProfileImage";
 
 import cardStyles from "./ProfileCard.module.scss";
