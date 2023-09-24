@@ -4,6 +4,8 @@ import Logo from "&/Icons/logoB.svg";
 import SearchIcon from "&/Icons/search.svg";
 import SignOutIcon from "&/Icons/signOut.svg";
 
+import { Size } from "@/atoms/types/enums";
+
 import Image from "next/image";
 import IconButton from "@/atoms/Buttons/IconButton";
 
@@ -44,13 +46,13 @@ const Header: React.FC<HeaderProps> = ({ url }) => {
         <IconButton
           Icon={SearchIcon}
           onClick={SearchClickHandler}
-          size="medium"
+          size={Size.Medium}
           key={"search"}
         />,
         <IconButton
           Icon={SignOutIcon}
           onClick={SignOutClickHandler}
-          size="medium"
+          size={Size.Medium}
           key={"signout"}
         />,
       ];
@@ -60,7 +62,7 @@ const Header: React.FC<HeaderProps> = ({ url }) => {
         <IconButton
           Icon={SignOutIcon}
           onClick={SignOutClickHandler}
-          size="medium"
+          size={Size.Medium}
           key={"signout"}
         />,
       ];
