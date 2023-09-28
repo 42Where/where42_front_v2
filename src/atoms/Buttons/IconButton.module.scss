@@ -1,4 +1,4 @@
-@import "/styles/font";
+@import "/styles/fonts";
 @import "/styles/variables";
 
 .iconbutton {
@@ -21,11 +21,11 @@
 
   /* style */
   border-radius: 64px;
-  box-shadow: 0 0 0 2px $primary-color-0 inset;
+  box-shadow: 0 0 0 2px $color-primary-0 inset;
 
   &__text {
     /* style */
-    color: $primary-color-0;
+    color: $color-primary-0;
 
     &--small {
       @extend .body-5;
