@@ -3,18 +3,17 @@
   "editor.indentSize": 2,
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll": true
+  },
+  "eslint.validate": [
+    "typescript",
+    "typescriptreact",
+    "javascript",
+    "javascriptreact"
+  ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true
-  // "editor.codeActionsOnSave": {
-  //   "source.fixAll.eslint": true
-  // },
-  // "eslint.validate": [
-  //   "typescript",
-  //   "typescriptreact"
-  // ],
-  // "eslint.format.enable": true,
-  // "eslint.lintTask.enable": true,
-  // "eslint.run": "onSave",
-  // "eslint.workingDirectories": ["./src", "./public", "./styles"]
-  // eslint 적용 확인 후 추가 필요
 }
