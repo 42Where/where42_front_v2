@@ -5,7 +5,7 @@ import SearchIcon from "&/Icons/search.svg";
 import SignOutIcon from "&/Icons/signOut.svg";
 
 import Image from "next/image";
-import IconButton from "@/atoms/Buttons/IconButton";
+import IconButton from "@/atoms/buttons/IconButton/IconButton";
 
 import styles from "./Header.module.scss";
 
