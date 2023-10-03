@@ -44,32 +44,32 @@
 
 .header-1 {
   @extend %header-base;
-  font-size: 56px;
+  font-size: 3.5rem;
 }
 
 .header-2 {
   @extend %header-base;
-  font-size: 48px;
+  font-size: 3rem;
 }
 
 .header-3 {
   @extend %header-base;
-  font-size: 40px;
+  font-size: 2.5rem;
 }
 
 .header-4 {
   @extend %header-base;
-  font-size: 32px;
+  font-size: 2rem;
 }
 
 .header-5 {
   @extend %header-base;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .header-6 {
   @extend %header-base;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 %body-base {
@@ -79,32 +79,32 @@
 
 .body-1 {
   @extend %body-base;
-  font-size: 32px;
+  font-size: 2rem;
 }
 
 .body-2 {
   @extend %body-base;
-  font-size: 28px;
+  font-size: 1.75rem;
 }
 
 .body-3 {
   @extend %body-base;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .body-4 {
   @extend %body-base;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .body-5 {
   @extend %body-base;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .body-6 {
   @extend %body-base;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 %light-base {
@@ -114,25 +114,25 @@
 
 .light-1 {
   @extend %light-base;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .light-2 {
   @extend %light-base;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .light-3 {
   @extend %light-base;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .light-4 {
   @extend %light-base;
-  font-size: 8px;
+  font-size: 0.5rem;
 }
 
 .light-5 {
   @extend %light-base;
-  font-size: 4px;
+  font-size: 0.25rem;
 }
