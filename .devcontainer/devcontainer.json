@@ -8,8 +8,11 @@
     "vscode": {
       "extensions": [
         "dbaeumer.vscode-eslint",
-        "GitHub.copilot",
-        "esbenp.prettier-vscode"
+        "github.copilot",
+        "github.copilot-chat",
+        "ms-ceintl.vscode-language-pack-ko",
+        "esbenp.prettier-vscode",
+        "mrmlnc.vscode-scss"
       ]
     }
   }

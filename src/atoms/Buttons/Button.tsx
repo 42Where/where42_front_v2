@@ -45,7 +45,7 @@ const Button: React.FC<ButtonProps> = ({
   const mode = primary ? styles["button-primary"] : styles["button-secondary"];
 
   const classNames = [styles["button"], styles[`button-${size}`], mode].join(
-    " "
+    " ",
   );
 
   return (
