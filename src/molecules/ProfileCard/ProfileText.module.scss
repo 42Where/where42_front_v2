@@ -1,0 +1,48 @@
+@import "/styles/variables";
+@import "/styles/fonts";
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  &--small {
+    gap: 0.375rem;
+  }
+  &--medium {
+    gap: 0.5rem;
+  }
+  &--large {
+    gap: 0.625rem;
+  }
+
+  &__main-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__login {
+    &--small {
+      @extend .header-6;
+    }
+    &--medium {
+      @extend .header-5;
+    }
+    &--large {
+      @extend .header-4;
+    }
+  }
+  &__comment {
+    &--small {
+      @extend .body-5;
+    }
+    &--medium {
+      @extend .body-4;
+    }
+    &--large {
+      @extend .body-3;
+    }
+  }
+}
