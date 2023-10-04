@@ -5,8 +5,9 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: max-content;
-  height: max-content;
+  width: fit-content;
+  flex-shrink: 0;
+  flex-grow: 0;
 
   border-radius: 4rem;
   background: $color-greywhite-0;
