@@ -72,8 +72,7 @@ const IconButton: React.FC<IconButtonProps> = ({
           width={IconSize}
           height={IconSize}
           alt={"아이콘버튼"}
-          placeholder="blur"
-          blurDataURL={BlurImage}
+          placeholder="empty"
           onClick={clickHandler}
         />
       );
