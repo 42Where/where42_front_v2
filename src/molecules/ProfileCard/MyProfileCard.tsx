@@ -88,9 +88,6 @@ const MyProfileCard: React.FC<MyProfileCardProps> = ({
         >
           <Checkbox isChecked={attendanceOnly.state} size="small" />
         </IconTextButton>
-        <IconTextButton text="자리비움" size="small" onClick={stepOut.toggle}>
-          <Checkbox isChecked={stepOut.state} size="small" />
-        </IconTextButton>
         <IconTextButton text="새 그룹" size="small" onClick={newGroup}>
           <IconButton Icon={NewGroupIcon} size="small" />
         </IconTextButton>
