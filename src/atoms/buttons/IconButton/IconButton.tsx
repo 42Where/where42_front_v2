@@ -42,11 +42,10 @@ const IconButton: React.FC<IconButtonProps> = ({
     (event: React.MouseEvent) => {
       event.preventDefault();
       if (onClick === undefined) {
-        event.stopPropagation();
-        // onClick이 없을경우 이벤트 전파 방지
+        // onClick이 없을경우 early return
         return;
       }
-
+      event.stopPropagation();
       onClick();
       // console.log("IconButton clickHandler");
       // 보기 안좋지만 훅 연결이 아니라 표현만을 위해 사용할수도 있어 이렇게 구현
