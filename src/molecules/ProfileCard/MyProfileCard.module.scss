@@ -1,0 +1,49 @@
+@import "./ProfileCard.module";
+
+.my-profile-card {
+  @extend .profile-card;
+  position: relative;
+  width: auto;
+  border-radius: 0;
+
+  &:hover {
+    box-shadow: none;
+  }
+
+  &--small {
+    min-height: 6rem;
+    min-width: 26.5rem;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  &--medium {
+    min-height: 6rem;
+    min-width: 30rem;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  &--large {
+    min-width: 36rem;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  &__icons {
+    display: flex;
+    gap: 0.5rem;
+    position: absolute;
+
+    &--small {
+      right: 1rem;
+      bottom: 0.25rem;
+    }
+    &--medium {
+      right: 1rem;
+      bottom: 0.25rem;
+    }
+    &--large {
+      right: 1.5rem;
+      bottom: 0.75rem;
+    }
+  }
+}
