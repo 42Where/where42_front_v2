@@ -1,0 +1,50 @@
+@import "/styles/variables";
+@import "/styles/fonts";
+
+.dropdown-cell {
+  display: flex;
+  align-items: center;
+
+  border-radius: 0.125rem;
+  color: $color-primary-0;
+  cursor: pointer;
+  background-color: $color-greywhite-0;
+
+  &--large {
+    padding: 0.5rem;
+    @extend .body-4;
+  }
+  &--medium {
+    padding: 0.375rem 0.5rem;
+    @extend .body-5;
+  }
+  &--small {
+    padding: 0.25rem 0.5rem;
+    @extend .body-6;
+  }
+
+  &:hover {
+    color: $color-greywhite-0;
+    background-color: $color-primary-0;
+  }
+
+  &--danger {
+    color: $color-red-0;
+    background-color: $color-greywhite-0;
+
+    &:hover {
+      background-color: $color-red-0;
+    }
+  }
+
+  &--disable {
+    cursor: wait;
+    color: $color-grey-2;
+
+    &:hover {
+      color: $color-grey-1;
+      background-color: $color-grey-2;
+    }
+    // TODO: 색을 바꾸는게 나을지 그냥 로딩커서만 띄우는게 나은지 논의 필요
+  }
+}
