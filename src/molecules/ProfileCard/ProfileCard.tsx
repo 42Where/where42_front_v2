@@ -22,11 +22,11 @@ type ProfileCardProps = {
   /**
    * 프로필사진을 클릭했을 때 실행할 함수입니다.
    */
-  profileImageOnClick?: () => void;
+  profileImageOnClick?: React.MouseEventHandler;
   /**
    * 기능버튼을 클릭했을 때 실행할 함수입니다.
    * 추후에 본인일경우 설정 아이콘을 표시하거나 모달을 띄우는 등의 기능이 필요할 수 있음.   */
-  functionButtonOnClick?: () => void;
+  functionButtonOnClick?: React.MouseEventHandler;
 };
 
 const ProfileCard: React.FC<ProfileCardProps> = ({

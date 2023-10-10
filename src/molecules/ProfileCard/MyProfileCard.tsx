@@ -24,23 +24,19 @@ type MyProfileCardProps = {
   /**
    * 프로필사진을 클릭했을 때 실행할 함수입니다. - 아마도 새창에서 인트라 프로필 페이지
    */
-  profileImageOnClick?: () => void;
+  profileImageOnClick?: React.MouseEventHandler;
   /**
    * 기능버튼을 클릭했을 때 실행할 함수입니다. - 아마도 설정 모달이나 드롭다운
    */
-  functionButtonOnClick?: () => void;
+  functionButtonOnClick?: React.MouseEventHandler;
   /**
    * 출석한 친구만 보기 토글 함수와 값 - 추후에 zustand로 관리
    */
-  attendanceOnly?: { state: boolean; toggle: () => void };
-  /**
-   * 자리비움 토글 함수와 값 - 추후에 zustand로 관리
-   */
-  stepOut?: { state: boolean; toggle: () => void };
+  attendanceOnly?: { state: boolean; onClick: React.MouseEventHandler };
   /**
    * 새 그룹 생성 함수
    */
-  newGroup?: () => void;
+  newGroupOnClick?: React.MouseEventHandler;
   // TODO: api 구현 이후에 자기자신을 의미하는 타입 정의 필요
 };
 
@@ -49,9 +45,8 @@ const MyProfileCard: React.FC<MyProfileCardProps> = ({
   size,
   profileImageOnClick,
   functionButtonOnClick,
-  attendanceOnly = { state: false, toggle: () => {} },
-  stepOut = { state: false, toggle: () => {} },
-  newGroup = () => {},
+  attendanceOnly,
+  newGroupOnClick,
 }) => {
   if (user === undefined) {
     return <ProfileCardSkeleton size={size} />;
@@ -84,11 +79,10 @@ const MyProfileCard: React.FC<MyProfileCardProps> = ({
         <IconTextButton
           text="출근한 친구만 보기"
           size="small"
-          onClick={attendanceOnly.toggle}
-        >
-          <Checkbox isChecked={attendanceOnly.state} size="small" />
+          onClick={attendanceOnly?.onClick}>
+          <Checkbox isChecked={attendanceOnly?.state ?? false} size="small" />
         </IconTextButton>
-        <IconTextButton text="새 그룹" size="small" onClick={newGroup}>
+        <IconTextButton text="새 그룹" size="small" onClick={newGroupOnClick}>
           <IconButton Icon={NewGroupIcon} size="small" />
         </IconTextButton>
       </div>

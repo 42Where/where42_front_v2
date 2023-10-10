@@ -10,7 +10,7 @@ import styles from "./ProfileImage.module.scss";
 type ProfileImageProps = {
   user: User;
   size: Size;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler;
 };
 
 const ProfileImage: React.FC<ProfileImageProps> = ({
@@ -19,11 +19,6 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
   onClick = () => {},
 }) => {
   const [imageSrc, setImageSrc] = useState(profileImgSrc);
-
-  const clickHandler = (event: React.MouseEvent) => {
-    event.preventDefault();
-    onClick();
-  };
 
   const imageErrorHandler = () => {
     setImageSrc(DefaultProfileImage);
@@ -40,7 +35,7 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
   const ImageClassName = styles["profile-image__image"];
 
   return (
-    <div className={ProfileImageClassName} onClick={clickHandler}>
+    <div className={ProfileImageClassName} onClick={onClick}>
       {location ? <div className={indicatorClassName} /> : null}
       <Image
         className={ImageClassName}
