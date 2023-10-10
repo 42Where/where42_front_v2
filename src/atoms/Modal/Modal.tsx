@@ -13,19 +13,21 @@ const Modal = () => {
     [closeModal]
   );
 
-  return isOpen ? (
-    <div
-      className={styles.modal}
-      onClick={isImportant ? undefined : backgroundClickHandler}
-    >
-      <div
-        className={styles.modal__content}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {children}
-      </div>
-    </div>
-  ) : null;
+  return (
+    <>
+      {isOpen ? (
+        <div
+          className={styles.modal}
+          onClick={isImportant ? undefined : backgroundClickHandler}>
+          <div
+            className={styles.modal__content}
+            onClick={(e) => e.stopPropagation()}>
+            {children}
+          </div>
+        </div>
+      ) : null}
+    </>
+  );
 };
 
 export default Modal;
