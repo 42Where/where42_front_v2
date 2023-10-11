@@ -1,29 +1,24 @@
 @import "/styles/variables";
 
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* 배경에 어둡게 설정 */
   display: flex;
   justify-content: center; /* 수평 가운데 정렬 */
   align-items: center; /* 수직 가운데 정렬 */
   z-index: 999; /* 다른 요소 위에 레이어 표시 */
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 배경에 어둡게 설정 */
 
   &__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    height: fit-content;
-    padding: 1.5rem;
-    gap: 1.5rem;
+    max-width: 70rem;
+    max-height: 90vh;
 
+    padding: 1.5rem;
     border-radius: 1rem;
     background: $color-greywhite-0;
-    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.25);
   }
 }
