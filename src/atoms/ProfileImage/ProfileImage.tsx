@@ -48,15 +48,23 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
       <Image
         className={ImageClassName}
         src={imageSrc}
+        loader={({ src }) => src}
         width={imageSize}
         height={imageSize}
         alt={login}
         placeholder="empty"
-        unoptimized={true}
         onError={imageErrorHandler}
       />
     </div>
   );
 };
 
-export default ProfileImage;
+export default React.memo(ProfileImage, (prevProps, nextProps) => {
+  return (
+    prevProps.user.login === nextProps.user.login &&
+    prevProps.user.profileImgSrc === nextProps.user.profileImgSrc &&
+    prevProps.user.location === nextProps.user.location &&
+    prevProps.onClick === nextProps.onClick &&
+    prevProps.size === nextProps.size
+  );
+});

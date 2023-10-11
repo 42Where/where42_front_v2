@@ -1,3 +1,4 @@
+import React from "react";
 import User from "@/types/User";
 import { Size } from "@/types/enums";
 
@@ -59,4 +60,4 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   );
 };
 
-export default ProfileCard;
+export default React.memo(ProfileCard);
