@@ -10,7 +10,7 @@ interface CheckboxProps {
   /**
    * 체크 여부
    */
-  isChecked: boolean;
+  isChecked?: boolean;
   /**
    * size
    * small/medium/large
@@ -19,7 +19,7 @@ interface CheckboxProps {
   size: "small" | "medium" | "large";
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({ isChecked, size }) => {
+const Checkbox: React.FC<CheckboxProps> = ({ isChecked = false, size }) => {
   // TODO: ts 파일 내에서도 성능문제 없이 rem값을 사용할수 있는지 확인 필요
   // recoil로 rem값을 관리하는 방법도 고려해볼것
   const imageSize = size === "small" ? 16 : size === "medium" ? 24 : 32;
