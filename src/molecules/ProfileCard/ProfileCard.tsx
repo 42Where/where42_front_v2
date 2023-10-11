@@ -1,13 +1,11 @@
-import FunctionButtonIcon from "&/Icons/functionButton.svg";
-import UserAddIcon from "&/Icons/userAdd.svg";
 import User from "@/types/User";
 import { Size } from "@/types/enums";
-import IconButton from "@/atoms/buttons/IconButton/IconButton";
+
 import ProfileImage from "@/atoms/ProfileImage/ProfileImage";
+import ProfileText from "./ProfileText";
 import ProfileCardSkeleton from "./ProfileCardSkeleton";
 
 import styles from "./ProfileCard.module.scss";
-import ProfileText from "./ProfileText";
 
 type ProfileCardProps = {
   /**
@@ -24,16 +22,19 @@ type ProfileCardProps = {
    */
   profileImageOnClick?: () => void;
   /**
-   * 기능버튼을 클릭했을 때 실행할 함수입니다.
-   * 추후에 본인일경우 설정 아이콘을 표시하거나 모달을 띄우는 등의 기능이 필요할 수 있음.   */
-  functionButtonOnClick?: () => void;
+   * 기능버튼
+   * 친구가 아닐경우 친구추가 아이콘을 표시합니다.
+   * 친구일 경우 기능버튼을 표시합니다.
+   * 체크박스를 표시할 수도 있습니다.
+   */
+  children?: React.ReactNode;
 };
 
 const ProfileCard: React.FC<ProfileCardProps> = ({
   user,
   size,
+  children,
   profileImageOnClick,
-  functionButtonOnClick,
 }) => {
   if (user === undefined) {
     return <ProfileCardSkeleton size={size} />;
@@ -52,11 +53,8 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
         <ProfileImage user={user} size={size} onClick={profileImageOnClick} />
         <ProfileText user={user} size={size} />
       </div>
-      <IconButton
-        Icon={user.isFriend ? FunctionButtonIcon : UserAddIcon}
-        size={size}
-        onClick={functionButtonOnClick}
-      />
+      {/* 기능버튼 */}
+      {children}
     </div>
   );
 };
