@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Image from "next/image";
 
 import DefaultProfileImage from "&/Common/defaultProfileImageLarge.svg";
@@ -16,18 +16,21 @@ type ProfileImageProps = {
 const ProfileImage: React.FC<ProfileImageProps> = ({
   user: { login, profileImgSrc = DefaultProfileImage, location },
   size,
-  onClick = () => {},
+  onClick,
 }) => {
   const [imageSrc, setImageSrc] = useState(profileImgSrc);
-
-  const clickHandler = (event: React.MouseEvent) => {
-    event.preventDefault();
-    onClick();
-  };
 
   const imageErrorHandler = () => {
     setImageSrc(DefaultProfileImage);
   };
+
+  const openProfile = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      window.open(`https://profile.intra.42.fr/users/${login}`, "_blank");
+    },
+    [login]
+  );
 
   const imageSize = size === "small" ? 64 : size === "medium" ? 96 : 128;
 
@@ -40,15 +43,16 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
   const ImageClassName = styles["profile-image__image"];
 
   return (
-    <div className={ProfileImageClassName} onClick={clickHandler}>
+    <div className={ProfileImageClassName} onClick={onClick ?? openProfile}>
       {location ? <div className={indicatorClassName} /> : null}
       <Image
         className={ImageClassName}
         src={imageSrc}
         width={imageSize}
         height={imageSize}
-        alt={`${login}'s profile image`}
+        alt={login}
         placeholder="empty"
+        unoptimized={true}
         onError={imageErrorHandler}
       />
     </div>
