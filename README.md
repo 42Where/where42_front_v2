@@ -8,7 +8,7 @@
 
 ## 실행 방법
 
-- node, git 설치가 필요합니다
+- node.js, git 설치가 필요합니다
 
 ```bash
 git clone https://github.com/42Where/where42_front_v2.git
