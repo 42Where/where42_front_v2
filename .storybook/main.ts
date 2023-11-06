@@ -31,6 +31,7 @@ const config: StorybookConfig = {
         ...config.resolve.alias,
         "@": path.resolve(__dirname, "../src"),
         "&": path.resolve(__dirname, "../public"),
+        "%": path.resolve(__dirname, "../styles"),
       };
     }
     return config;
