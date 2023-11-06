@@ -1,31 +1,26 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
+import { Button } from "antd";
 import useModalStore from "@/stores/useModalStore";
-import IconTextButton from "@/atoms/buttons/IconButton/IconTextButton";
-import IconButton from "@/atoms/buttons/IconButton/IconButton";
-
-import XIcon from "&/Icons/cross.svg";
 import Terms from "@/atoms/Terms/Terms";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { openModal, openImportantModal, closeModal } = useModalStore();
 
   return (
     <main>
+			<Button type="primary">버튼</Button>
+			<Button type="primary" danger>버튼</Button>
       <section>
-        <button
+        <Button
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             openModal(<div>모달창</div>);
           }}
         >
           모달창 띄우기
-        </button>
+        </Button>
         <br />
-        <br />
-        <button
+        <Button
+          type="primary"
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
             openImportantModal(
@@ -43,7 +38,7 @@ export default function Home() {
           }}
         >
           약관동의 모달창 띄우기
-        </button>
+        </Button>
       </section>
     </main>
   );
