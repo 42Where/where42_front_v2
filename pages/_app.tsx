@@ -7,19 +7,19 @@ import theme from "%/theme/themeConfig";
 
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function App({ Component, pageProps }: AppProps) {
+  // TODO: server side 에서 page 를 generating 할때, localStorage 에 접근할 수 없음
   // 로그인을 하지 않았다면
-  const isAuth = false;
+  const { isAuth, protectedRoutes } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    const protectedRoutes = ["/main"];
-
     if (!isAuth && protectedRoutes.includes(router.pathname)) {
       router.push("/");
     }
-  }, [isAuth, router]);
+  }, [isAuth, protectedRoutes, router]);
 
   return (
     <ConfigProvider theme={theme}>
