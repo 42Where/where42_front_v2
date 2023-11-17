@@ -1,3 +1,5 @@
+import React from "react";
+
 import User from "@/types/User";
 import { Size } from "@/types/enums";
 import TextBox from "@/atoms/TextBox/TextBox";
@@ -48,4 +50,11 @@ const ProfileText: React.FC<ProfileTextProps> = ({ user, size }) => {
   );
 };
 
-export default ProfileText;
+export default React.memo(ProfileText, (prevProps, nextProps) => {
+  return (
+    prevProps.user.login === nextProps.user.login &&
+    prevProps.user.location === nextProps.user.location &&
+    prevProps.user.comment === nextProps.user.comment &&
+    prevProps.size === nextProps.size
+  );
+});

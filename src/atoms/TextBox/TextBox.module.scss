@@ -38,8 +38,9 @@
     &--large {
       @extend .body-3;
     }
-    &:not(.text-box--border) {
-      color: $color-greywhite-0;
+    color: $color-greywhite-0;
+    .text-box--border & {
+      color: $color-primary-0;
     }
   }
 }

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import MyProfileCard from "./MyProfileCard";
-import DemoUser from "../../../test/DemoUser";
+import { DemoUser } from "../../../test/DemoUser";
 
 /**
  * - 본인의 프로필사진과 아이디, 위치, 한줄소개를 표시하는 컴포넌트입니다.

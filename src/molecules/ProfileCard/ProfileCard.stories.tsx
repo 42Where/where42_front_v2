@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import FunctionButtonIcon from "&/Icons/functionButton.svg";
+import AddUserIcon from "&/Icons/userAdd.svg";
+import { DemoUser, DemoUserB, NotUser } from "@/../test/DemoUser";
+import IconButton from "@/atoms/buttons/IconButton/IconButton";
+import Checkbox from "@/atoms/buttons/Checkbox/Checkbox";
 import ProfileCard from "./ProfileCard";
-import DemoUser from "../../../test/DemoUser";
 
 /**
  * - 사용자의 프로필사진과 아이디, 위치, 한줄소개를 표시하는 컴포넌트입니다.
@@ -14,24 +18,35 @@ export default {
   tags: ["autodocs"],
 } as Meta;
 
-export const Default: StoryObj<typeof ProfileCard> = {
+export const Friend: StoryObj<typeof ProfileCard> = {
   args: {
     user: DemoUser,
     size: "medium",
+    children: <IconButton Icon={FunctionButtonIcon} size="medium" />,
   },
 };
 
-export const Friend: StoryObj<typeof ProfileCard> = {
+export const NotFriend: StoryObj<typeof ProfileCard> = {
   args: {
-    user: { ...DemoUser, isFriend: true },
+    user: DemoUserB,
     size: "medium",
+    children: <IconButton Icon={AddUserIcon} size="medium" />,
   },
 };
 
 export const WithoutComment: StoryObj<typeof ProfileCard> = {
   args: {
-    user: { ...DemoUser, comment: "" },
+    user: NotUser,
     size: "medium",
+    children: <IconButton Icon={FunctionButtonIcon} size="medium" />,
+  },
+};
+
+export const CheckboxProfile: StoryObj<typeof ProfileCard> = {
+  args: {
+    user: DemoUser,
+    size: "medium",
+    children: <Checkbox isChecked={true} size="medium" />,
   },
 };
 

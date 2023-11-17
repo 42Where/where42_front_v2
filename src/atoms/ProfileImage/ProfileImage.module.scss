@@ -1,9 +1,11 @@
 @import "/styles/variables.scss";
 
 .profile-image {
+  position: relative;
   border-radius: 50%;
   background-color: $color-greywhite-0;
 
+  cursor: pointer;
   &--large {
     width: 128px;
     height: 128px;

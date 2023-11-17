@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import User from "@/types/User";
 import { Size } from "@/types/enums";
 
-import DemoUser from "@/../test/DemoUser";
+import { DemoUser, AbsentUser, JBOK, MYKANG } from "@/../test/DemoUser";
 
 import ProfileImage from "./ProfileImage";
 
@@ -36,11 +36,21 @@ export const DefaultProfileImage: StoryObj<typeof ProfileImage> = {
 
 export const AbsentProfileImage: StoryObj<typeof ProfileImage> = {
   args: {
-    user: {
-      ...DemoUser,
-      profileImgSrc: "https://www.google.com",
-      location: undefined,
-    },
+    user: AbsentUser,
+    size: "medium",
+  },
+};
+
+export const JBOKProfileImage: StoryObj<typeof ProfileImage> = {
+  args: {
+    user: JBOK,
+    size: "medium",
+  },
+};
+
+export const MYKANGProfileImage: StoryObj<typeof ProfileImage> = {
+  args: {
+    user: MYKANG,
     size: "medium",
   },
 };

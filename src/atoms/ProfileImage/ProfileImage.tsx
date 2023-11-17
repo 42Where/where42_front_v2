@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Image from "next/image";
 
 import DefaultProfileImage from "&/Common/defaultProfileImageLarge.svg";
@@ -16,18 +16,21 @@ type ProfileImageProps = {
 const ProfileImage: React.FC<ProfileImageProps> = ({
   user: { login, profileImgSrc = DefaultProfileImage, location },
   size,
-  onClick = () => {},
+  onClick,
 }) => {
   const [imageSrc, setImageSrc] = useState(profileImgSrc);
-
-  const clickHandler = (event: React.MouseEvent) => {
-    event.preventDefault();
-    onClick();
-  };
 
   const imageErrorHandler = () => {
     setImageSrc(DefaultProfileImage);
   };
+
+  const openProfile = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      window.open(`https://profile.intra.42.fr/users/${login}`, "_blank");
+    },
+    [login]
+  );
 
   const imageSize = size === "small" ? 64 : size === "medium" ? 96 : 128;
 
@@ -40,14 +43,15 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
   const ImageClassName = styles["profile-image__image"];
 
   return (
-    <div className={ProfileImageClassName} onClick={clickHandler}>
+    <div className={ProfileImageClassName} onClick={onClick ?? openProfile}>
       {location ? <div className={indicatorClassName} /> : null}
       <Image
         className={ImageClassName}
         src={imageSrc}
+        loader={({ src }) => src}
         width={imageSize}
         height={imageSize}
-        alt={`${login}'s profile image`}
+        alt={login}
         placeholder="empty"
         onError={imageErrorHandler}
       />
@@ -55,4 +59,12 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
   );
 };
 
-export default ProfileImage;
+export default React.memo(ProfileImage, (prevProps, nextProps) => {
+  return (
+    prevProps.user.login === nextProps.user.login &&
+    prevProps.user.profileImgSrc === nextProps.user.profileImgSrc &&
+    prevProps.user.location === nextProps.user.location &&
+    prevProps.onClick === nextProps.onClick &&
+    prevProps.size === nextProps.size
+  );
+});

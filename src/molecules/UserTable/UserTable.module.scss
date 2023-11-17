@@ -1,0 +1,9 @@
+@import "/styles/variables";
+
+.profile-table {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1rem;
+  background-color: $color-greywhite-0;
+}

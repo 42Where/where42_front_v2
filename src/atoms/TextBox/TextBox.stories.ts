@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import TextBox from "./TextBox";
-// import DemoUser from "../../../test/DemoUser";
 
 /**
  * 텍스트 컴포넌트
@@ -27,16 +26,3 @@ export const TextBox2: StoryObj<typeof TextBox> = {
     size: "medium",
   },
 };
-
-export const Skeleton: StoryObj<typeof TextBox> = {
-  args: {
-    text: "",
-    size: "medium",
-  },
-};
-
-// export const DefaultProfileCard: StoryObj<typeof ProfileCard> = {
-//   args: {
-//     loginId: "aaaaa",
-//   },
-// };
