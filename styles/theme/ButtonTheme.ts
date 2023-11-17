@@ -1,27 +1,16 @@
-const colorPrimary0 = "#132743";
-const colorPrimary1 = "#4a6282";
-const colorPrimary2 = "#88a0c3";
-const colorSecondary0 = "#ffb5b5";
-const colorSecondary1 = "#ffc6c6";
-const colorSecondary2 = "#ffdddd";
-const colorGrey0 = "#3f4135";
-const colorGrey1 = "#7f848d";
-const colorGrey2 = "#d9d9d9";
-const colorGreywhite0 = "#fcfdff";
-const colorRed0 = "#b20000";
-const colorGreen0 = "#00621b";
+import color from "./Colors";
 
 const ButtonTheme = {
   // color
-  defaultColor: colorPrimary0,
-  defaultBorderColor: colorPrimary0,
+  defaultColor: color.Primary0,
+  defaultBorderColor: color.Primary0,
 
-  colorPrimary: colorPrimary0,
-  colorPrimaryActive: colorPrimary0,
-  colorPrimaryText: colorGreywhite0,
+  colorPrimary: color.Primary0,
+  colorPrimaryActive: color.Primary0,
+  colorPrimaryText: color.Greywhite0,
 
-  colorError: colorRed0,
-  colorErrorBg: colorGreywhite0,
+  colorError: color.Red0,
+  colorErrorBg: color.Greywhite0,
   // style
   size: 32,
   borderRadiusSM: 24,
