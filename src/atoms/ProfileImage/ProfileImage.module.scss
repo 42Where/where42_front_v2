@@ -22,6 +22,19 @@
   &__image {
     object-fit: cover;
     border-radius: 50%;
+
+    &--large {
+      width: 128px;
+      height: 128px;
+    }
+    &--medium {
+      width: 96px;
+      height: 96px;
+    }
+    &--small {
+      width: 64px;
+      height: 64px;
+    }
   }
 
   &__indicator {
