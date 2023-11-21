@@ -10,7 +10,7 @@ import styles from "./ProfileImage.module.scss";
 type ProfileImageProps = {
   user: User;
   size: Size;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler;
 };
 
 const ProfileImage: React.FC<ProfileImageProps> = ({
@@ -24,7 +24,7 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
     setImageSrc(DefaultProfileImage);
   };
 
-  const openProfile = useCallback(
+  const defaultOnClick = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
       window.open(`https://profile.intra.42.fr/users/${login}`, "_blank");
@@ -40,20 +40,23 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
     styles["profile-image__indicator"] +
     " " +
     styles[`profile-image__indicator--${size}`];
-  const ImageClassName = styles["profile-image__image"];
+  const ImageClassName =
+    styles["profile-image__image"] +
+    " " +
+    styles[`profile-image__image--${size}`];
 
   return (
-    <div className={ProfileImageClassName} onClick={onClick ?? openProfile}>
+    <div className={ProfileImageClassName} onClick={onClick ?? defaultOnClick}>
       {location ? <div className={indicatorClassName} /> : null}
       <Image
         className={ImageClassName}
         src={imageSrc}
-        loader={({ src }) => src}
         width={imageSize}
         height={imageSize}
         alt={login}
         placeholder="empty"
         onError={imageErrorHandler}
+        unoptimized={true}
       />
     </div>
   );
