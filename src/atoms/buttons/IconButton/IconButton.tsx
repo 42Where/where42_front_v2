@@ -23,7 +23,7 @@ interface IconButtonProps {
   /**
    * 상위 컴포넌트에서 전달받는 onClick 함수
    */
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler;
   /**
    * 자식 컴포넌트
    */
@@ -36,30 +36,13 @@ const IconButton: React.FC<IconButtonProps> = ({
   onClick,
   children,
 }) => {
-  // const [isError, setIsError] = useState(false);
-
-  const clickHandler = useCallback(
-    (event: React.MouseEvent) => {
-      event.preventDefault();
-      if (onClick === undefined) {
-        // onClick이 없을경우 early return
-        return;
-      }
-      event.stopPropagation();
-      onClick();
-      // console.log("IconButton clickHandler");
-      // 보기 안좋지만 훅 연결이 아니라 표현만을 위해 사용할수도 있어 이렇게 구현
-    },
-    [onClick]
-  );
-
   const IconStyle = styles.iconbutton + " " + styles[`iconbutton--${size}`];
   const IconSize = size === "small" ? 16 : size === "medium" ? 24 : 32;
 
   switch (Icon) {
     case undefined:
       return (
-        <div className={IconStyle} onClick={clickHandler}>
+        <div className={IconStyle} onClick={onClick}>
           {children}
         </div>
       );
@@ -72,7 +55,7 @@ const IconButton: React.FC<IconButtonProps> = ({
           height={IconSize}
           alt={"아이콘버튼"}
           placeholder="empty"
-          onClick={clickHandler}
+          onClick={onClick}
         />
       );
   }

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 
 import styles from "./IconTextButton.module.scss";
 
@@ -15,7 +15,7 @@ interface IconTextButtonProps {
   /**
    * 상위 컴포넌트에서 전달받는 onClick 함수
    */
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler;
   /**
    * 아이콘으로 사용할 자식 컴포넌트
    */
@@ -33,29 +33,11 @@ const IconTextButton: React.FC<IconTextButtonProps> = ({
   onClick,
   children,
 }) => {
-  // const [isError, setIsError] = useState(false);
-
-  const clickHandler = useCallback(
-    (event: React.MouseEvent) => {
-      event.preventDefault();
-      if (onClick === undefined) {
-        event.stopPropagation();
-        // onClick이 없을경우 이벤트 전파 방지
-        return;
-      }
-
-      onClick();
-      // console.log("IconButton clickHandler");
-      // 보기 안좋지만 훅 연결 없이 표현만을 위해 사용할수도 있어 이렇게 구현
-    },
-    [onClick]
-  );
-
   const ContainerStyle =
     styles.icontextbutton + " " + styles["icontextbutton--" + size];
 
   return (
-    <div className={ContainerStyle} onClick={clickHandler}>
+    <div className={ContainerStyle} onClick={onClick}>
       {children}
       {text}
     </div>
