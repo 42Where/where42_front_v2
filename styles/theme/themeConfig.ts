@@ -8,6 +8,7 @@ const theme: ThemeConfig = {
   token: {
     fontSize: 16,
     fontFamily: "GmarketSans",
+    fontWeightStrong: 500,
 
     colorPrimary: color.Primary0,
     colorError: color.Red0,
