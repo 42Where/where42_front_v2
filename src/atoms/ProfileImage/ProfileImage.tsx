@@ -57,6 +57,7 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
         placeholder="empty"
         onError={imageErrorHandler}
         unoptimized={true}
+        priority={true}
       />
     </div>
   );
