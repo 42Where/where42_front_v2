@@ -57,3 +57,42 @@ export const MYKANG: User = {
   locationUsageAgreement: true,
   isFriend: true,
 };
+
+export const SUHWPARK: User = {
+  login: "suhwpark",
+  profileImgSrc:
+    "https://cdn.intra.42.fr/users/bfbd0304c07861187ca1e35ebc364df5/suhwpark.jpg",
+  location: "개포 어딘가",
+  comment: "",
+  locationUsageAgreement: true,
+  isFriend: true,
+};
+export const JAEYOJUN: User = {
+  login: "jaeyojun",
+  profileImgSrc:
+    "https://cdn.intra.42.fr/users/c9852e0e0f875b95ed78b845660bed11/jaeyojun.jpg",
+  location: "개포 어딘가",
+  comment: "",
+  locationUsageAgreement: true,
+  isFriend: true,
+};
+
+export const JNAM: User = {
+  login: "jnam",
+  profileImgSrc:
+    "https://cdn.intra.42.fr/users/64c04e132380be916e19ac8d5024f4e7/jnam.jpg",
+  location: "개포 어딘가",
+  comment: "",
+  locationUsageAgreement: true,
+  isFriend: true,
+};
+
+export const JONHAN: User = {
+  login: "jonhan",
+  profileImgSrc:
+    "https://cdn.intra.42.fr/users/38a82726dd986935853559a43cf329c5/jonhan.jpg",
+  location: "개포 어딘가",
+  comment: "",
+  locationUsageAgreement: true,
+  isFriend: true,
+};
