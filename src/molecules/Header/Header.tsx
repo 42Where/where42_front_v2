@@ -33,48 +33,39 @@ const Header: React.FC = () => {
     // 재활용 가능성이 많은 함수이므로 다른곳에서 구현후 import해서 재사용해야할수도 있음
   };
 
-  if (currentPath === "/main") {
-    return (
-      <div className={styles.header}>
-        <Logo />
-        <div className={styles["header__buttonwrapper"]}>
-          <AIcon
-            icon={SearchIcon}
-            onClick={SearchClickHandler}
-            size="medium"
-            key={"search"}
-          />
-          <AIcon
-            icon={SignOutIcon}
-            onClick={SignOutClickHandler}
-            size="medium"
-            key={"signout"}
-          />
-        </div>
-      </div>
-    );
-  } else if (currentPath === "/search") {
-    return (
-      <div className={styles.header}>
-        <Logo />
-        <div className={styles["header__buttonwrapper"]}>
-          <AIcon
-            icon={SignOutIcon}
-            onClick={SignOutClickHandler}
-            size="medium"
-            key={"signout"}
-          />
-        </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className={styles.header}>
-        <Logo />
-        <div className={styles["header__buttonwrapper"]} />
-      </div>
-    );
-  }
+  const LogoComponent = <Logo onClick={LogoClickHandler} />;
+  const Buttons =
+    currentPath === "/main" ? (
+      <>
+        <AIcon
+          icon={SearchIcon}
+          onClick={SearchClickHandler}
+          size="medium"
+          key={"search"}
+        />
+        <AIcon
+          icon={SignOutIcon}
+          onClick={SignOutClickHandler}
+          size="medium"
+          key={"signout"}
+        />
+      </>
+    ) : currentPath === "/search" ? (
+      <AIcon
+        icon={SignOutIcon}
+        onClick={SignOutClickHandler}
+        size="medium"
+        key={"signout"}
+      />
+    ) : null;
+
+  return (
+    <div className={styles.header}>
+      {LogoComponent}
+      <div className={styles["header__buttonwrapper"]}>{Buttons}</div>
+    </div>
+  );
+
   // TODO?: 추후에 이미지 사이즈를 그대로 사용하는 아이콘 버튼이 필요할경우
   // IconButton의 props를 수정하거나 별개의 컴포넌트로 구현이 필요할수도 있음*
 };
