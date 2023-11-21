@@ -6,20 +6,21 @@ import type { DocumentContext } from "next/document";
 const MyDocument = () => (
   <Html lang="en">
     <Head>
-      <link
+      {/* <link
         rel="preload"
-        href="~&/fonts/woff2/GmarketSansMedium.woff2"
+        href="/fonts/woff2/GmarketSansMedium.woff2"
         as="font"
         type="font/woff2"
         crossOrigin=""
       />
       <link
         rel="preload"
-        href="~&/fonts/woff/GmarketSansMedium.woff"
+        href="/fonts/woff/GmarketSansMedium.woff"
         as="font"
         type="font/woff"
         crossOrigin=""
-      />
+      /> */}
+      {/* TODO: 폰트 팝업 방지용 프리로드 구현 필요 */}
     </Head>
     <body>
       <Main />
