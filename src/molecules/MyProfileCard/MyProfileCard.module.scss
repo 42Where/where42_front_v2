@@ -1,4 +1,4 @@
-@import "./ProfileCard.module";
+@import "src/molecules/ProfileCard/ProfileCard.module";
 
 .my-profile-card {
   @extend .profile-card;

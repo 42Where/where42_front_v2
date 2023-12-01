@@ -1,8 +1,8 @@
 import { Size } from "@/types/enums";
 
-import styles from "./ProfileCardSkeleton.module.scss";
+import styles from "./ProfileSkeleton.module.scss";
 
-const ProfileCardSkeleton: React.FC<{ size: Size }> = ({ size }) => {
+const ProfileSkeleton: React.FC<{ size: Size }> = ({ size }) => {
   const skeletonStyle = styles["skeleton"] + " " + styles["skeleton--" + size];
   const skeletonImageStyle =
     styles["skeleton__image"] + " " + styles["skeleton__image--" + size];
@@ -22,4 +22,4 @@ const ProfileCardSkeleton: React.FC<{ size: Size }> = ({ size }) => {
   );
 };
 
-export default ProfileCardSkeleton;
+export default ProfileSkeleton;
