@@ -1,28 +1,25 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 
 import DefaultProfileImage from "&/Common/defaultProfileImageLarge.svg";
+
 import User from "@/types/User";
 import { Size } from "@/types/enums";
 
 import styles from "./ProfileImage.module.scss";
 
 type ProfileImageProps = {
-  user: User;
+  user: Pick<User, "id" | "login" | "profileImgSrc" | "location">;
   size: Size;
   onClick?: React.MouseEventHandler;
 };
 
 const ProfileImage: React.FC<ProfileImageProps> = ({
-  user: { login, profileImgSrc = DefaultProfileImage, location },
+  user: { login, profileImgSrc, location },
   size,
   onClick,
 }) => {
-  const [imageSrc, setImageSrc] = useState(profileImgSrc);
-
-  const imageErrorHandler = () => {
-    setImageSrc(DefaultProfileImage);
-  };
+  const [imageComponent, setImageComponent] = useState<React.ReactNode>(<></>);
 
   const defaultOnClick = useCallback(
     (e: React.MouseEvent) => {
@@ -45,12 +42,22 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
     " " +
     styles[`profile-image__image--${size}`];
 
-  return (
-    <div className={ProfileImageClassName} onClick={onClick ?? defaultOnClick}>
-      {location ? <div className={indicatorClassName} /> : null}
+  const imageErrorHandler = useCallback(() => {
+    setImageComponent(
+      <DefaultProfileImage
+        style={{
+          width: imageSize,
+          height: imageSize,
+        }}
+      />
+    );
+  }, [imageSize]);
+
+  useEffect(() => {
+    setImageComponent(
       <Image
         className={ImageClassName}
-        src={imageSrc}
+        src={profileImgSrc}
         width={imageSize}
         height={imageSize}
         alt={login}
@@ -59,16 +66,25 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
         unoptimized={true}
         priority={true}
       />
+    );
+  }, [profileImgSrc, imageSize, login, ImageClassName, imageErrorHandler]);
+
+  return (
+    <div className={ProfileImageClassName} onClick={onClick ?? defaultOnClick}>
+      {location ? <div className={indicatorClassName} /> : null}
+      {imageComponent}
     </div>
   );
 };
 
-export default React.memo(ProfileImage, (prevProps, nextProps) => {
-  return (
-    prevProps.user.login === nextProps.user.login &&
-    prevProps.user.profileImgSrc === nextProps.user.profileImgSrc &&
-    prevProps.user.location === nextProps.user.location &&
-    prevProps.onClick === nextProps.onClick &&
-    prevProps.size === nextProps.size
-  );
-});
+export default ProfileImage;
+
+// export default React.memo(ProfileImage, (prevProps, nextProps) => {
+//   return (
+//     prevProps.user.login === nextProps.user.login &&
+//     prevProps.user.profileImgSrc === nextProps.user.profileImgSrc &&
+//     prevProps.user.location === nextProps.user.location &&
+//     prevProps.onClick === nextProps.onClick &&
+//     prevProps.size === nextProps.size
+//   );
+// });
