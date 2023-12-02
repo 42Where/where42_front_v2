@@ -16,6 +16,7 @@ import styles from "./ProfileCard.module.scss";
 import useConfirmModal from "@/hooks/useConfirmModal";
 import useGroupStore from "@/stores/useGroupStore";
 import demoApi from "../../../test/DemoApi";
+import useGroupSelectModal from "@/hooks/useGroupSelectModal";
 
 type ProfileCardProps = {
   /**
@@ -101,12 +102,31 @@ const ProfileCardFunctionButton: React.FC<{
   user: User;
   parentGroup: Group;
 }> = ({ user, parentGroup }) => {
+  const { groups } = useGroupStore((state) => state);
   const { addUserToGroup, removeUserFromGroup, removeUserFromAllGroup } =
     useGroupStore((state) => state);
 
-  const addFriendToOtherGroupModal = {
-    // TODO: 그룹 선택하는 모달창 구현 필요
-  };
+  const addFriendToOtherGroupModal = useGroupSelectModal({
+    onOk: async (selectedGroupIds) => {
+      return demoApi(async () => {
+        await Promise.all(
+          selectedGroupIds.map(async (groupId) => {
+            addUserToGroup(user, groupId);
+          })
+        );
+      });
+    },
+    title: `${user.login}님을 추가할 그룹을 선택해주세요.`,
+    grouplist: groups.filter(
+      (group) =>
+        group.name !== "친구" &&
+        group.users.find((u) => u.id === user.id) === undefined
+    ),
+    targetUser: user,
+    // component: ,
+    okText: "추가",
+    cancelText: "취소",
+  });
 
   const removeFriendFromGroupModal = useConfirmModal({
     onOk: async () => {
@@ -139,11 +159,10 @@ const ProfileCardFunctionButton: React.FC<{
   const onAddFriendToOtherGroup = useCallback(
     (menuInfo: MenuInfo) => {
       menuInfo.domEvent.preventDefault();
-      user;
-      parentGroup;
+      addFriendToOtherGroupModal.showModal();
       // 대충 모달창 띄워서 추가할 그룹 선택하게 하는 함수
     },
-    [user, parentGroup]
+    [addFriendToOtherGroupModal]
   );
 
   const onRemoveFriendFromGroup = useCallback(
@@ -208,6 +227,7 @@ const ProfileCardFunctionButton: React.FC<{
       <Dropdown menu={menuProps} trigger={["click"]}>
         <AIcon icon={FunctionButtonIcon} size={"medium"} />
       </Dropdown>
+      {addFriendToOtherGroupModal.modal}
       {removeFriendFromGroupModal.modal}
       {removeFriendModal.modal}
     </>
