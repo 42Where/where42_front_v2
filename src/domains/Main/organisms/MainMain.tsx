@@ -31,6 +31,9 @@ function MainMain() {
           DemoGroup,
           { ...DemoGroup, id: 3, name: "4242" },
           { ...DemoGroup, id: 2, name: "친구" },
+          { id: 4, name: "테스트용 빈 그룹", users: [], isInEdit: false },
+          { id: 5, name: "테스트용 빈 그룹2", users: [], isInEdit: false },
+          { id: 6, name: "테스트용 빈 그룹3", users: [], isInEdit: false },
         ]);
       });
       // 테스트용 더미유저와 그룹을 넣어줌
