@@ -1,12 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  DemoUser,
-  DemoUserB,
-  AbsentUser,
-  NotUser,
-  JBOK,
-  MYKANG,
-} from "@/../test/DemoUser";
+
+import DemoGroup from "../../../test/DemoGroup";
 
 import FoldableGroupTable from "./FoldableGroupTable";
 
@@ -23,17 +17,16 @@ export default {
   tags: ["autodocs"],
 } as Meta;
 
-export const Default: StoryObj<typeof FoldableGroupTable> = {
+export const DefaultGroup: StoryObj<typeof FoldableGroupTable> = {
   args: {
-    groupTitle: "친구",
-    users: Array.from({ length: 5 }, () => [
-      DemoUser,
-      DemoUserB,
-      AbsentUser,
-      NotUser,
-      JBOK,
-      MYKANG,
-    ]).flat(),
+    userGroup: { ...DemoGroup, name: "친구" },
+    size: "medium",
+  },
+};
+
+export const CustomGroup: StoryObj<typeof FoldableGroupTable> = {
+  args: {
+    userGroup: DemoGroup,
     size: "medium",
   },
 };

@@ -20,20 +20,9 @@ export default {
 
 type HeaderType = StoryObj<typeof Header>;
 
-export const BasicHeader: HeaderType = {
-  args: {
-    url: "/",
-  },
-};
+// useRouter를 적용해서 임시로 주석처리
+export const BasicHeader: HeaderType = {};
 
-export const MainHeader: HeaderType = {
-  args: {
-    url: "/main",
-  },
-};
+// export const MainHeader: HeaderType = {};
 
-export const SearchPageHeader: HeaderType = {
-  args: {
-    url: "/search",
-  },
-};
+// export const SearchPageHeader: HeaderType = {};

@@ -7,6 +7,7 @@ import {
   JBOK,
   MYKANG,
 } from "@/../test/DemoUser";
+import DemoGroup from "@/../test/DemoGroup";
 
 import UserTable from "./UserTable";
 
@@ -26,21 +27,16 @@ export default {
 
 export const Default: StoryObj<typeof UserTable> = {
   args: {
-    users: Array.from({ length: 10 }, () => [
-      DemoUser,
-      DemoUserB,
-      AbsentUser,
-      NotUser,
-      JBOK,
-      MYKANG,
-    ]).flat(),
+    users: DemoGroup.users,
     size: "medium",
+    parentGroup: DemoGroup,
   },
 };
 
-export const Skeleton: StoryObj<typeof UserTable> = {
-  args: {
-    users: undefined,
-    size: "medium",
-  },
-};
+// TODO: 추가 구현 필요
+// export const Skeleton: StoryObj<typeof UserTable> = {
+//   args: {
+//     users: undefined,
+//     size: "medium",
+//   },
+// };
