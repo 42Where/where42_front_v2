@@ -5,6 +5,7 @@ type Group = {
   id: number;
   users: User[];
   isInEdit: boolean;
+  isFolded: boolean;
 };
 
 export default Group;

@@ -28,6 +28,7 @@ const DemoGroup: Group = {
     NotUser,
   ],
   isInEdit: false,
+  isFolded: true,
 };
 
 export default DemoGroup;
