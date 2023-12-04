@@ -11,12 +11,14 @@ type GroupStore = {
   addGroup: (group: Group) => void;
   removeGroup: (groupId: number) => void;
   setEditGroup: (groupId: number) => void;
+  openGroup: (groupId: number) => void;
+  closeGroup: (groupId: number) => void;
   finishEditGroup: () => void;
   setUserCmp: (userCmp: (a: User, b: User) => number) => void;
   setGroupCmp: (groupCmp: (a: Group, b: Group) => number) => void;
-  addUserToGroup: (user: User, groupId: number) => void;
-  removeUserFromGroup: (userId: number, groupId: number) => void;
-  removeUserFromAllGroup: (userId: number) => void;
+  addUserToGroup: (userList: User[], groupIdList: number[]) => void;
+  removeUserFromGroup: (userIds: number[], groupIds: number[]) => void;
+  removeUserFromAllGroup: (userIds: number[]) => void;
 };
 
 const useGroupStore = create<GroupStore>((set) => ({
@@ -31,26 +33,15 @@ const useGroupStore = create<GroupStore>((set) => ({
     }
     return a.login.localeCompare(b.login);
   },
-  groupCmp: (a, b) => {
-    if (a.name === "친구") {
-      return 1;
-    } else if (b.name === "친구") {
-      return -1;
-    }
-    return b.id - a.id;
-  },
+  groupCmp: (a, b) =>
+    a.name === "친구" ? 1 : b.name === "친구" ? -1 : b.id - a.id,
+
   setGroups: (groups) =>
     set((state) => ({ groups: groups.sort(state.groupCmp) })),
   setGroupName: (groupId, name) =>
     set((state) => ({
       groups: state.groups
-        .map((group) => {
-          if (group.id === groupId) {
-            return (group = { ...group, name });
-          } else {
-            return group;
-          }
-        })
+        .map((group) => (group.id === groupId ? { ...group, name } : group))
         .sort(state.groupCmp),
     })),
   addGroup: (group) =>
@@ -61,62 +52,60 @@ const useGroupStore = create<GroupStore>((set) => ({
     })),
   setEditGroup: (groupId) =>
     set((state) => ({
-      groups: state.groups.map((group) => {
-        if (group.id === groupId) {
-          return (group = { ...group, isInEdit: true });
-        } else if (group.isInEdit) {
-          return (group = { ...group, isInEdit: false });
-        } else {
-          return group;
-        }
-      }),
+      groups: state.groups.map((group) =>
+        group.id === groupId
+          ? { ...group, isInEdit: true, isFolded: false }
+          : { ...group, isFolded: true }
+      ),
     })),
   finishEditGroup: () =>
     set((state) => ({
-      groups: state.groups.map((group) => {
-        if (group.isInEdit) {
-          return { ...group, isInEdit: false };
-        } else {
-          return group;
-        }
-      }),
+      groups: state.groups.map((group) =>
+        group.isInEdit ? { ...group, isInEdit: false } : group
+      ),
+    })),
+  openGroup: (groupId) =>
+    set((state) => ({
+      groups: state.groups.map((group) =>
+        group.id === groupId ? { ...group, isFolded: false } : group
+      ),
+    })),
+  closeGroup: (groupId) =>
+    set((state) => ({
+      groups: state.groups.map((group) =>
+        group.id === groupId ? { ...group, isFolded: true } : group
+      ),
     })),
   setUserCmp: (userCmp) => set({ userCmp: userCmp }),
   setGroupCmp: (groupCmp) => set({ groupCmp: groupCmp }),
-  addUserToGroup: (user, groupId) =>
+  addUserToGroup: (userList, groupIdList) =>
     set((state) => ({
-      groups: state.groups.map((group) => {
-        if (group.id === groupId) {
-          return {
-            ...group,
-            users: [...group.users, user].sort(state.userCmp),
-          };
-        } else {
-          return group;
-        }
-      }),
+      groups: state.groups.map((group) =>
+        groupIdList.includes(group.id)
+          ? {
+              ...group,
+              users: [...group.users, ...userList].sort(state.userCmp),
+            }
+          : group
+      ),
     })),
-  removeUserFromGroup: (userId, groupId) =>
+  removeUserFromGroup: (userIds, groupIds) =>
     set((state) => ({
-      groups: state.groups.map((group) => {
-        if (group.id === groupId) {
-          return {
-            ...group,
-            users: group.users.filter((user) => user.id !== userId),
-          };
-        } else {
-          return group;
-        }
-      }),
+      groups: state.groups.map((group) =>
+        groupIds.includes(group.id)
+          ? {
+              ...group,
+              users: group.users.filter((user) => !userIds.includes(user.id)),
+            }
+          : group
+      ),
     })),
-  removeUserFromAllGroup: (userId) =>
+  removeUserFromAllGroup: (userIds) =>
     set((state) => ({
-      groups: state.groups.map((group) => {
-        return {
-          ...group,
-          users: group.users.filter((user) => user.id !== userId),
-        };
-      }),
+      groups: state.groups.map((group) => ({
+        ...group,
+        users: group.users.filter((user) => !userIds.includes(user.id)),
+      })),
     })),
 }));
 

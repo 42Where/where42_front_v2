@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { Modal, ModalProps, Menu, Empty } from "antd";
+import { Modal, ModalProps, Menu, MenuProps } from "antd";
 import { MenuInfo } from "rc-menu/lib/interface";
 
 import User from "@/types/User";
@@ -10,8 +10,8 @@ type GroupSelectModalProps<T, U> = {
   onCancel?: (() => void) | (() => Promise<U>);
   icon?: React.ReactNode;
   title: React.ReactNode;
-  grouplist: Group[];
-  targetUser: User;
+  groupList: Group[];
+  targetUserList: User[];
   component?: React.ReactNode;
   danger?: boolean;
   maskClosable?: boolean;
@@ -19,13 +19,13 @@ type GroupSelectModalProps<T, U> = {
   cancelText?: string;
 };
 
-const useGroupSelectModal = <T, U, V>({
+const useGroupSelectModal = <T, U>({
   onOk,
   onCancel,
   icon,
   title,
-  grouplist,
-  targetUser,
+  groupList,
+  targetUserList,
   component,
   danger = false,
   maskClosable = true,
@@ -80,6 +80,7 @@ const useGroupSelectModal = <T, U, V>({
       } finally {
         setLoading(false);
         setVisible(false);
+        setSelectedGroupIds([]);
       }
     },
     [onOk, loading, setLoading, setVisible, selectedGroupIds]
@@ -136,14 +137,25 @@ const useGroupSelectModal = <T, U, V>({
     },
     cancelButtonProps: { disabled: loading },
   };
+
+  const itemProps: MenuProps["items"] = groupList.map((group) => ({
+    key: group.id,
+    label: (
+      <>
+        {group.name} {group.users.filter((user) => user.location).length}/
+        {group.users.length}
+      </>
+    ),
+  }));
+
   return {
     modal: (
       <Modal {...modalProps}>
         <>
-          {grouplist.length === 0 ? (
+          {groupList.length === 0 ? (
             // TODO: 사용자 아이디는 볼드처리 필요
             // TODO: 추가할 그룹이 없을때 Empty를 띄울지 모달을 띄우지않고 메시지를 띄울지 결정 필요
-            <>{`${targetUser.login}님은 이미 모든 그룹에 포함되어있습니다`}</>
+            <>{`선택한 사용자들이 이미 모든 그룹에 포함되어있습니다`}</>
           ) : (
             <>
               {component}
@@ -152,17 +164,8 @@ const useGroupSelectModal = <T, U, V>({
                 onSelect={handleSelect}
                 onDeselect={handleDeselect}
                 selectedKeys={selectedGroupIds.map((id) => id.toString())}
-              >
-                {grouplist.map((group) => {
-                  return (
-                    <Menu.Item key={group.id}>
-                      {group.name}{" "}
-                      {group.users.filter((user) => user.location).length}/
-                      {group.users.length}
-                    </Menu.Item>
-                  );
-                })}
-              </Menu>
+                items={itemProps}
+              />
             </>
           )}
         </>

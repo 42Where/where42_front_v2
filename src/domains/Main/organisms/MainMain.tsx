@@ -30,10 +30,28 @@ function MainMain() {
         setGroups([
           DemoGroup,
           { ...DemoGroup, id: 3, name: "4242" },
-          { ...DemoGroup, id: 2, name: "친구" },
-          { id: 4, name: "테스트용 빈 그룹", users: [], isInEdit: false },
-          { id: 5, name: "테스트용 빈 그룹2", users: [], isInEdit: false },
-          { id: 6, name: "테스트용 빈 그룹3", users: [], isInEdit: false },
+          { ...DemoGroup, id: 2, name: "친구", isFolded: false },
+          {
+            id: 4,
+            name: "테스트용 빈 그룹",
+            users: [],
+            isInEdit: false,
+            isFolded: true,
+          },
+          {
+            id: 5,
+            name: "테스트용 빈 그룹2",
+            users: [],
+            isInEdit: false,
+            isFolded: true,
+          },
+          {
+            id: 6,
+            name: "테스트용 빈 그룹3",
+            users: [],
+            isInEdit: false,
+            isFolded: true,
+          },
         ]);
       });
       // 테스트용 더미유저와 그룹을 넣어줌

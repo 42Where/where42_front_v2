@@ -111,18 +111,18 @@ const ProfileCardFunctionButton: React.FC<{
       return demoApi(async () => {
         await Promise.all(
           selectedGroupIds.map(async (groupId) => {
-            addUserToGroup(user, groupId);
+            addUserToGroup([user], [groupId]);
           })
         );
       });
     },
     title: `${user.login}님을 추가할 그룹을 선택해주세요.`,
-    grouplist: groups.filter(
+    groupList: groups.filter(
       (group) =>
         group.name !== "친구" &&
         group.users.find((u) => u.id === user.id) === undefined
     ),
-    targetUser: user,
+    targetUserList: [user],
     // component: ,
     okText: "추가",
     cancelText: "취소",
