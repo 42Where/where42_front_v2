@@ -8,6 +8,7 @@ enum color {
   Grey0 = "#3f4135",
   Grey1 = "#7f848d",
   Grey2 = "#d9d9d9",
+  Grey3 = "#f0f0f0",
   Greywhite0 = "#fcfdff",
   Red0 = "#b20000",
   Green0 = "#00621b",
