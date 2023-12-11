@@ -1,4 +1,4 @@
-const Terms = {
+const TermsProps = {
   title: "개인정보 수집 및 이용 동의서(필수)",
   description:
     "(재)이노베이션 아카데미는 『개인정보 보호법』 제15조 등 관련 법령에 따라 서비스 이용자의 개인정보보호를 매우 중시하며, 서비스 제공에 반드시 필요한 개인정보의 수집⦁이용을 위하여 귀하의 동의를 받고자 합니다.",
@@ -34,4 +34,4 @@ const Terms = {
   },
 };
 
-export default Terms;
+export default TermsProps;

@@ -5,10 +5,10 @@ import TermData from "&/terms";
 import styles from "./Terms.module.scss";
 import Button from "../buttons/Button/Button";
 
-type TermsProps = {
-  accept: () => void;
-  reject: () => void;
-};
+// type TermsProps = {
+//   accept: () => void;
+//   reject: () => void;
+// };
 
 /**
  * @description
@@ -18,7 +18,7 @@ type TermsProps = {
  * @returns 약관 동의 컴포넌트
  * TODO: 버튼없이 보여주기만 할 수 있도록 수정해야할수도 있음
  */
-const Terms: React.FC<TermsProps> = ({ accept, reject }) => {
+const Terms: React.FC = () => {
   return (
     <div className={styles.terms}>
       <div className={styles.terms__title}>{TermData.title}</div>
