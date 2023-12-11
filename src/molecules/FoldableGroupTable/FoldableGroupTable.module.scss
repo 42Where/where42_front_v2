@@ -4,11 +4,12 @@
 .group {
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   background-color: $color-greywhite-0;
 
   &__header {
-    display: inline-flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
 
@@ -38,7 +39,7 @@
   display: none;
 }
 .unfold {
-  padding: 0 0.5rem;
+  display: flex;
 }
 // TODO: 지금은 버튼을 눌러서 펼치면 스크롤이 생기는데
 // overflow랑 height를 적절히 설정해서 스크롤이 생기지 않도록 해야 함

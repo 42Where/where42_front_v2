@@ -1,14 +1,20 @@
+@import "/styles/variables";
+@import "/styles/fonts";
+
 .mainTemplate {
-  width: 100vw;
-  padding: 0 2rem;
-
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
-
+  background-color: #f5f5f5;
   gap: 0.5rem;
+}
 
-  /* padding 을 내부 요소로 포함시킴 */
-  box-sizing: border-box;
+.wrapper {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #f5f5f5;
+  gap: 0.5rem;
+  padding-bottom: 6rem;
 }

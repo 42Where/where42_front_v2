@@ -7,19 +7,21 @@ import styles from "./MainTemplate.module.scss";
  */
 interface MainTemplateProps {
   Header: React.FC;
-  Footer?: React.FC;
+  Footer: React.FC;
   children?: ReactNode;
 }
 
 const MainTemplate: React.FC<MainTemplateProps> = ({
   Header,
-  Footer = () => <></>,
+  Footer,
   children,
 }) => {
   return (
     <>
-      <Header />
-      <div className={styles.mainTemplate}>{children}</div>
+      <div className={styles.wrapper}>
+        <Header />
+        {children}
+      </div>
       <Footer />
     </>
   );

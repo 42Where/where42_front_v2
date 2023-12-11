@@ -1,11 +1,11 @@
 import MyProfileCard from "@/molecules/MyProfileCard/MyProfileCard";
 import FoldableGroupTable from "@/molecules/FoldableGroupTable/FoldableGroupTable";
 
-// import styles from "./MainMain.module.scss"
-
 import useMyDataStore from "@/stores/useMyDataStore";
 import useGroupStore from "@/stores/useGroupStore";
 import { useEffect } from "react";
+
+import styles from "./MainMain.module.scss";
 
 // 테스트용 더미 유저, 그룹, api
 import { JBOK } from "../../../../test/DemoUser";
@@ -60,7 +60,7 @@ function MainMain() {
     }
   }, [myData, setMyData, setGroups, groups]);
   return (
-    <>
+    <div className={styles.main_content}>
       <MyProfileCard size={myData?.size ?? "medium"} />
       {groups.map((group) => {
         return (
@@ -71,7 +71,7 @@ function MainMain() {
           />
         );
       })}
-    </>
+    </div>
   );
 }
 

@@ -8,15 +8,17 @@ import UserAddIcon from "&/Icons/userAdd.svg";
 import User from "@/types/User";
 import Group from "@/types/Group";
 import { Size } from "@/types/enums";
-import ProfileImage from "@/atoms/ProfileImage/ProfileImage";
-import ProfileText from "./ProfileText";
 import AIcon from "@/atoms/AIcon/AIcon";
 
-import styles from "./ProfileCard.module.scss";
-import useConfirmModal from "@/hooks/useConfirmModal";
 import useGroupStore from "@/stores/useGroupStore";
-import demoApi from "../../../test/DemoApi";
+import useConfirmModal from "@/hooks/useConfirmModal";
 import useGroupSelectModal from "@/hooks/useGroupSelectModal";
+
+import ProfileImage from "@/atoms/ProfileImage/ProfileImage";
+import ProfileText from "./ProfileText";
+import styles from "./ProfileCard.module.scss";
+
+import demoApi from "../../../test/DemoApi";
 
 type ProfileCardProps = {
   /**
@@ -131,7 +133,7 @@ const ProfileCardFunctionButton: React.FC<{
   const removeFriendFromGroupModal = useConfirmModal({
     onOk: async () => {
       return demoApi(() => {
-        removeUserFromGroup(user.id, parentGroup.id);
+        removeUserFromGroup([user.id], [parentGroup.id]);
       });
     },
     title: "그룹에서 친구 삭제",
@@ -145,7 +147,7 @@ const ProfileCardFunctionButton: React.FC<{
   const removeFriendModal = useConfirmModal({
     onOk: async () => {
       return demoApi(() => {
-        removeUserFromAllGroup(user.id);
+        removeUserFromAllGroup([user.id]);
       });
     },
     title: "친구 삭제",
