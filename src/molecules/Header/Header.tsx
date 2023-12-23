@@ -8,9 +8,11 @@ import SignOutIcon from "&/Icons/signOut.svg";
 import AIcon from "@/atoms/AIcon/AIcon";
 
 import styles from "./Header.module.scss";
+import SearchModal from "../SearchModal/SearchModal";
 
 const Header: React.FC = () => {
   const [currentPath, setCurrentPath] = useState("");
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
   useEffect(() => {
     if (typeof window !== undefined) {
       setCurrentPath(window.location.pathname);
@@ -24,7 +26,7 @@ const Header: React.FC = () => {
     // 구현 변경이 필요할수도 있음
   };
   const SearchClickHandler = () => {
-    router.push("/search");
+    setSearchModalOpen(true);
     // TODO: 검색창으로 이동
     // 추후 검색창으로 이동이 아니라 플로트를 띄우는 방식으로 변경
   };
@@ -43,6 +45,13 @@ const Header: React.FC = () => {
           size="medium"
           key={"search"}
         />
+        <SearchModal
+          open={searchModalOpen}
+          size="medium"
+          onCancel={() => {
+            setSearchModalOpen(false);
+          }}
+        />
         <AIcon
           icon={SignOutIcon}
           onClick={SignOutClickHandler}
@@ -50,13 +59,6 @@ const Header: React.FC = () => {
           key={"signout"}
         />
       </>
-    ) : currentPath === "/search" ? (
-      <AIcon
-        icon={SignOutIcon}
-        onClick={SignOutClickHandler}
-        size="medium"
-        key={"signout"}
-      />
     ) : null;
 
   return (

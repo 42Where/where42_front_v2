@@ -38,7 +38,7 @@ type ProfileCardProps = {
    * 기능버튼 클릭시 실행할 함수입니다.
    */
   onFunctionButtonClick?: React.MouseEventHandler;
-  parentGroup: Group;
+  parentGroup?: Group;
   /**
    * 기능버튼
    * 친구가 아닐경우 친구추가 아이콘을 표시합니다.
@@ -102,7 +102,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
 const ProfileCardFunctionButton: React.FC<{
   user: User;
-  parentGroup: Group;
+  parentGroup?: Group;
 }> = ({ user, parentGroup }) => {
   const { groups } = useGroupStore((state) => state);
   const { addUserToGroup, removeUserFromGroup, removeUserFromAllGroup } =
@@ -133,12 +133,14 @@ const ProfileCardFunctionButton: React.FC<{
   const removeFriendFromGroupModal = useConfirmModal({
     onOk: async () => {
       return demoApi(() => {
-        removeUserFromGroup([user.id], [parentGroup.id]);
+        removeUserFromGroup([user.id], [parentGroup?.id ?? 0]);
       });
     },
     title: "그룹에서 친구 삭제",
     // TODO: 유저, 그룹 이름 텍스트에 볼드처리 구현 필요
-    component: `"${user.login}"님을 그룹 "${parentGroup.name}"에서 삭제하시겠습니까?`,
+    component: `"${user.login}"님을 그룹 "${
+      parentGroup?.name ?? "친구"
+    }"에서 삭제하시겠습니까?`,
     danger: true,
     okText: "삭제",
     cancelText: "취소",
@@ -185,10 +187,12 @@ const ProfileCardFunctionButton: React.FC<{
     [removeFriendModal]
   );
 
-  const menuProps: MenuProps =
-    parentGroup.name === "친구"
-      ? {
-          items: [
+  const menuProps = {
+    items:
+      parentGroup?.name ?? "친구" === "친구"
+        ? [
+            // 친구 그룹에 속한 경우
+            // 친구인 경우만 사용하므로 그룹이 주어지지 않은 경우에는 친구 그룹에 속한 경우로 간주
             {
               label: "다른 그룹에 추가하기",
               key: "addFriendToOtherGroup",
@@ -200,10 +204,9 @@ const ProfileCardFunctionButton: React.FC<{
               onClick: onRemoveFriend,
               danger: true,
             },
-          ],
-        }
-      : {
-          items: [
+          ]
+        : [
+            // 친구 그룹에 속하지 않은 경우
             {
               label: "다른 그룹에 추가하기",
               key: "addFriendToOtherGroup",
@@ -222,7 +225,7 @@ const ProfileCardFunctionButton: React.FC<{
               danger: true,
             },
           ],
-        };
+  };
 
   return (
     <>

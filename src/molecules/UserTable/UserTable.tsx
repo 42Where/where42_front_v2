@@ -11,7 +11,7 @@ type UserTableProps = {
     Icon?: React.ReactNode;
     onClick?: React.MouseEventHandler;
   })[];
-  parentGroup: Group;
+  parentGroup?: Group;
   size: Size;
 };
 
