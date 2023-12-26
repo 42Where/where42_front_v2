@@ -8,31 +8,29 @@ import FoldAngleDown from "&/Icons/foldAngleDown.svg";
 // import User from "@/types/User";
 import Group from "@/types/Group";
 import { Size } from "@/types/enums";
-import useMyDataStore from "@/stores/useMyDataStore";
+import useUserStore from "@/stores/useUserStore";
 import useGroupStore from "@/stores/useGroupStore";
 
 import AIcon from "@/atoms/AIcon/AIcon";
 import UserTable from "@/molecules/UserTable/UserTable";
 import FoldableGroupEditButton from "./FoldableGroupEditButton";
 
-import styles from "./FoldableGroupTable.module.scss";
+import styles from "./FoldableGroupTable.module.css";
+import { useSize } from "@/utils/MediaQuary";
 
 type FoldableGroupTableProps = {
   userGroup: Group;
-  size: Size;
 };
 
 const FoldableGroupTable: React.FC<FoldableGroupTableProps> = ({
   userGroup,
-  size,
 }) => {
   const { finishEditGroup, openGroup, closeGroup } = useGroupStore(
     (state) => state
   );
-  const attendanceOnly = useMyDataStore(
-    (state) => state.myData?.attendanceOnly
-  );
+  const attendanceOnly = useUserStore((state) => state.attendanceOnly);
   const [isCheckedSet, setIsCheckedSet] = useState<Set<number>>(new Set());
+  const IconSize = useSize();
 
   useEffect(() => {
     const handleEscapeKey = (event: KeyboardEvent) => {
@@ -71,7 +69,7 @@ const FoldableGroupTable: React.FC<FoldableGroupTableProps> = ({
             Icon: (
               <AIcon
                 icon={isCheckedSet.has(user.id) ? CheckIcon : UncheckIcon}
-                size={"medium"}
+                size={IconSize}
               />
             ),
             // 프로필카드 클릭시 체크박스 체크/해제
@@ -95,16 +93,16 @@ const FoldableGroupTable: React.FC<FoldableGroupTableProps> = ({
     );
 
   return (
-    <div className={styles.group}>
-      <div className={styles.group__header}>
-        <div className={styles.group__textbox}>
-          <span className={styles.group__name}>{userGroup.name}</span>
-          <span className={styles.group__count}>
+    <div className={styles.foldable_table}>
+      <div className={styles.header}>
+        <div className={styles.textbox}>
+          <span className={styles.name}>{userGroup.name}</span>
+          <span className={styles.count}>
             {userGroup.users.filter((user) => user?.isFriend ?? false).length}/
             {userGroup.users.length}
           </span>
         </div>
-        <div className={styles.group__buttonbox}>
+        <div className={styles.buttonbox}>
           <FoldableGroupEditButton
             userGroup={userGroup}
             isCheckedSet={isCheckedSet}
@@ -112,14 +110,13 @@ const FoldableGroupTable: React.FC<FoldableGroupTableProps> = ({
           />
           <AIcon
             icon={userGroup.isFolded ? FoldAngleDown : FoldAngleUp}
-            size={"medium"}
+            size={IconSize}
             onClick={foldGroup}
           />
         </div>
       </div>
-      {/* TODO: CSS로 접는것을 구현할지 리액트 조건부 렌더링으로 구현할지 논의 필요 */}
       <div className={userGroup.isFolded ? styles.fold : styles.unfold}>
-        <UserTable users={userList} parentGroup={userGroup} size={size} />
+        <UserTable users={userList} parentGroup={userGroup} />
       </div>
     </div>
   );

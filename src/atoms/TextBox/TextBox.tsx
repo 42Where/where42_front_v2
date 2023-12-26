@@ -1,6 +1,4 @@
-import { Size } from "@/types/enums";
-
-import styles from "./TextBox.module.scss";
+import styles from "./TextBox.module.css";
 
 type TextBoxProps = {
   /**
@@ -13,24 +11,19 @@ type TextBoxProps = {
    * 기본값은 false입니다.
    */
   primary?: boolean;
-  /**
-   * 컴포넌트의 크기입니다.
-   */
-  size: Size;
 };
 
-const TextBox: React.FC<TextBoxProps> = ({ text, primary, size }) => {
-  const BoxStyle =
-    styles["text-box"] +
+const TextBox: React.FC<TextBoxProps> = ({ text, primary }) => {
+  const boxStyle =
+    styles.text_wrapper +
     " " +
-    styles["text-box--" + size] +
-    (primary ? "" : " " + styles["text-box--border"]);
-  const TextStyle =
-    styles["text-box__text"] + " " + styles["text-box__text--" + size];
+    (primary ? styles.text_wrapper__primary : styles.text_wrapper__border);
+  const textStyle =
+    styles.text + " " + (primary ? styles.text__primary : styles.text__border);
 
   return (
-    <div className={BoxStyle}>
-      <div className={TextStyle}>{text}</div>
+    <div className={boxStyle}>
+      <div className={textStyle}>{text}</div>
     </div>
   );
 };

@@ -1,0 +1,45 @@
+.profile_image {
+  /* 반응형 */
+  /* 기본: 모바일 (~765) */
+  @apply w-16 h-16;
+  /* md: 태블릿 (768~1023) */
+  @apply md:w-16 md:h-16;
+  /* lg: 데스크탑 (1024~1535) */
+  @apply lg:w-24 lg:h-24;
+  /* 2xl: 데스크탑 (1536~) */
+  @apply 2xl:w-32 2xl:h-32;
+}
+
+.wrapper {
+  @apply relative rounded-full bg-grey-3;
+}
+
+.image {
+  @apply absolute rounded-full;
+  @apply object-cover object-center;
+}
+
+.indicator {
+  z-index: 1;
+  @apply absolute rounded-full;
+
+  box-shadow: inset 0px 0px 0px 2px rgb(255 181 181) /* secondary-0 */;
+}
+
+@media (min-width: 768px) {
+  .indicator {
+    box-shadow: inset 0px 0px 0px 2px rgb(255 181 181) /* secondary-0 */;
+  }
+}
+@media (min-width: 1024px) {
+  .indicator {
+    box-shadow: inset 0px 0px 0px 3px rgb(255 181 181) /* secondary-0 */;
+  }
+}
+@media (min-width: 1536px) {
+  .indicator {
+    box-shadow: inset 0px 0px 0px 4px rgb(255 181 181) /* secondary-0 */;
+  }
+}
+
+/* TODO: 모바일 반응형 구현 필요 */

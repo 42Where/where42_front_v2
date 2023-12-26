@@ -4,9 +4,8 @@ import { Modal } from "antd";
 import Logo from "&/Icons/logoC.svg";
 
 import Terms from "@/atoms/Terms/Terms";
-import TermsProps from "&/terms";
 
-import styles from "./Footer.module.scss";
+import styles from "./Footer.module.css";
 
 const Footer: React.FC = () => {
   const { useModal } = Modal;
@@ -19,36 +18,33 @@ const Footer: React.FC = () => {
       content: <Terms />,
       okText: "닫기",
       width: "85%",
+      centered: true,
+      style: {
+        padding: "0",
+      },
     });
   };
 
   return (
     <footer className={styles.footer}>
-      <div className={styles.footer__inner}>
-        <a href="https://www.where42.kr/">
-          <Logo
-            style={{
-              width: "8rem",
-              height: "2rem",
-            }}
-          />
+      <a href="https://github.com/42Where" target="_blank">
+        {/* TODO: 깃허브 프로필 꾸며야 할수도 */}
+        <Logo
+          className={styles.logo}
+          // style={{
+          //   width: "8rem",
+          //   height: "2rem",
+          // }}
+          // TODO: 로고 크기 조절 필요
+        />
+      </a>
+      <div className={styles.links}>
+        {/* TODO: 문의 구글 스프레드시트 연결 필요 */}
+        <a href="대충 슬랙 dm 링크나 구글 스프레드" target="_blank">
+          버그 제보/문의
         </a>
-        <div className={styles.footer__links}>
-          <div className={styles.footer__link}>
-            {/* TODO: 깃허브 프로필 꾸며야 할수도 */}
-            <a href="https://github.com/42Where" target="_blank">
-              About
-            </a>
-          </div>
-          <div className={styles.footer__link}>
-            {/* TODO: 문의 구글 스프레드시트 연결 필요 */}
-            <a href="대충 슬랙 dm 링크나 구글 스프레드" target="_blank">
-              Contact
-            </a>
-          </div>
-          <div onClick={onOpenTerms}>Privacy & Terms</div>
-          {context}
-        </div>
+        <div onClick={onOpenTerms}>개인정보 이용 동의서</div>
+        {context}
       </div>
     </footer>
   );

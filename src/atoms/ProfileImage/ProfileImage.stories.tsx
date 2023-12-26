@@ -23,34 +23,29 @@ export default {
 export const BasicProfileImage: StoryObj<typeof ProfileImage> = {
   args: {
     user: DemoUser,
-    size: "medium",
   },
 };
 
 export const DefaultProfileImage: StoryObj<typeof ProfileImage> = {
   args: {
     user: { ...DemoUser, profileImgSrc: "대충 비정상 링크" },
-    size: "medium",
   },
 };
 
 export const AbsentProfileImage: StoryObj<typeof ProfileImage> = {
   args: {
     user: AbsentUser,
-    size: "medium",
   },
 };
 
 export const JBOKProfileImage: StoryObj<typeof ProfileImage> = {
   args: {
     user: JBOK,
-    size: "medium",
   },
 };
 
 export const MYKANGProfileImage: StoryObj<typeof ProfileImage> = {
   args: {
     user: MYKANG,
-    size: "medium",
   },
 };

@@ -1,0 +1,28 @@
+.header {
+  /* layout */
+  @apply flex w-full justify-between items-center bg-white;
+
+  /* 반응형 기준 */
+  /* 기본: 모바일 */
+  @apply h-8 px-2;
+  /* md: 태블릿 (768+) */
+  @apply md:h-8 md:px-2;
+  /* lg: 데스크탑 (1024+) */
+  @apply lg:h-12 lg:px-4;
+  /* 2xl: 데스크탑 (1536+) */
+  @apply 2xl:h-12 2xl:px-4;
+}
+
+.buttonwrapper {
+  @apply flex items-center;
+
+  /* 반응형 기준 */
+  /* 기본: 모바일 */
+  @apply gap-3;
+  /* md: 태블릿 (768+) */
+  @apply md:gap-3;
+  /* lg: 데스크탑 (1024+) */
+  @apply lg:gap-5;
+  /* 2xl: 데스크탑 (1536+) */
+  @apply 2xl:gap-5;
+}

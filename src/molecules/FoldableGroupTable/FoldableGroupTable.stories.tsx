@@ -20,13 +20,11 @@ export default {
 export const DefaultGroup: StoryObj<typeof FoldableGroupTable> = {
   args: {
     userGroup: { ...DemoGroup, name: "친구" },
-    size: "medium",
   },
 };
 
 export const CustomGroup: StoryObj<typeof FoldableGroupTable> = {
   args: {
     userGroup: DemoGroup,
-    size: "medium",
   },
 };

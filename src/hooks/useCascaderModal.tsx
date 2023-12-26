@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { TreeSelect, Modal, ModalProps, Cascader } from "antd";
 
 import { CascaderOption } from "@/types/CascaderOption";
-import useMyDataStore from "@/stores/useMyDataStore";
+import useUserStore from "@/stores/useUserStore";
 
 type CascaderModalProps<T, U, V> = {
   onOk: ((value: string[]) => void) | ((value: string[]) => Promise<T>);

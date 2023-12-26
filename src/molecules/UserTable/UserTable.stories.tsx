@@ -28,7 +28,6 @@ export default {
 export const Default: StoryObj<typeof UserTable> = {
   args: {
     users: DemoGroup.users,
-    size: "medium",
     parentGroup: DemoGroup,
   },
 };

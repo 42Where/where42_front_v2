@@ -24,7 +24,6 @@ export default {
 export const Friend: StoryObj<typeof ProfileCard> = {
   args: {
     user: DemoUser,
-    size: "medium",
     parentGroup: DemoGroup,
   },
 };
@@ -32,7 +31,6 @@ export const Friend: StoryObj<typeof ProfileCard> = {
 export const NotFriend: StoryObj<typeof ProfileCard> = {
   args: {
     user: DemoUserB,
-    size: "medium",
     parentGroup: DemoGroup,
   },
 };
@@ -40,7 +38,6 @@ export const NotFriend: StoryObj<typeof ProfileCard> = {
 export const WithoutComment: StoryObj<typeof ProfileCard> = {
   args: {
     user: NotUser,
-    size: "medium",
     parentGroup: DemoGroup,
   },
 };
@@ -48,7 +45,6 @@ export const WithoutComment: StoryObj<typeof ProfileCard> = {
 export const CheckboxProfile: StoryObj<typeof ProfileCard> = {
   args: {
     user: DemoUser,
-    size: "medium",
     parentGroup: DemoGroup,
     children: <AIcon icon={CheckedIcon} size="medium" />,
   },
