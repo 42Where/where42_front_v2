@@ -69,8 +69,8 @@ export const SUHWPARK: User = {
   login: "suhwpark",
   profileImgSrc:
     "https://cdn.intra.42.fr/users/bfbd0304c07861187ca1e35ebc364df5/suhwpark.jpg",
-  location: "개포 어딘가",
-  comment: "",
+  location: "개포 2층 c2r3s8",
+  comment: "가나다라마바사아자차카타파하파",
   locationUsageAgreement: true,
   isFriend: true,
 };
