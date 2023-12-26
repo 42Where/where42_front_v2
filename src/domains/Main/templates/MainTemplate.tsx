@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import styles from "./MainTemplate.module.scss";
+import styles from "./MainTemplate.module.css";
 
 /**
  * MainTemplate
@@ -17,13 +17,13 @@ const MainTemplate: React.FC<MainTemplateProps> = ({
   children,
 }) => {
   return (
-    <>
-      <div className={styles.wrapper}>
-        <Header />
-        {children}
+    <div className={styles.page}>
+      <Header />
+      <div className={styles.body}>{children}</div>
+      <div className={styles.footer}>
+        <Footer />
       </div>
-      <Footer />
-    </>
+    </div>
   );
 };
 

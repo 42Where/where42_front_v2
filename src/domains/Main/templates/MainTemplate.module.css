@@ -1,0 +1,14 @@
+@import "/styles/variables";
+@import "/styles/fonts";
+
+.page {
+  @apply bg-white min-h-screen flex flex-col gap-2;
+}
+
+.body {
+  @apply flex-1 flex flex-col;
+}
+
+.footer {
+  @apply flex-none;
+}
