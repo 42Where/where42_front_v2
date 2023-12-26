@@ -1,0 +1,39 @@
+.terms {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: fit-content;
+  height: fit-content;
+
+  padding: 1.5rem;
+  gap: 1.5rem;
+}
+
+.title {
+  @apply font-bold text-b5 text-primary-0;
+}
+.sub_title {
+  @apply font-bold text-h6 text-primary-0;
+}
+.description {
+  @apply text-l2 text-primary-1;
+}
+.body {
+  display: flex;
+  padding: 0rem 0.375rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  overflow-y: auto;
+  align-self: stretch;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  align-self: stretch;
+}
