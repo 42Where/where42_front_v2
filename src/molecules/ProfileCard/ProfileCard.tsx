@@ -9,6 +9,7 @@ import User from "@/types/User";
 import Group from "@/types/Group";
 import { Size } from "@/types/enums";
 import AIcon from "@/atoms/AIcon/AIcon";
+import { useSize } from "@/utils/MediaQuary";
 
 import useGroupStore from "@/stores/useGroupStore";
 import useConfirmModal from "@/hooks/useConfirmModal";
@@ -16,7 +17,7 @@ import useGroupSelectModal from "@/hooks/useGroupSelectModal";
 
 import ProfileImage from "@/atoms/ProfileImage/ProfileImage";
 import ProfileText from "./ProfileText";
-import styles from "./ProfileCard.module.scss";
+import styles from "./ProfileCard.module.css";
 
 import demoApi from "../../../test/DemoApi";
 
@@ -26,10 +27,6 @@ type ProfileCardProps = {
    * undefined일 경우에는 스켈레톤 표시
    */
   user: User;
-  /**
-   * 컴포넌트의 크기입니다.
-   */
-  size: Size;
   /**
    * 사용자 선택 등 기능에 사용할 onClick 함수입니다.
    */
@@ -52,7 +49,6 @@ type ProfileCardProps = {
 // TODO: 체크했을때 border표시하는 기능 구현 필요
 const ProfileCard: React.FC<ProfileCardProps> = ({
   user,
-  size,
   onClick,
   parentGroup,
   children,
@@ -64,13 +60,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           e.preventDefault();
           // 자식 컴포넌트가 있을때에는 프로필 클릭 이벤트 x
         };
-
-  const profileCardStyle =
-    styles["profile-card"] + " " + styles["profile-card--" + size];
-  const ContentStyle =
-    styles["profile-card__content"] +
-    " " +
-    styles["profile-card__content--" + size];
+  const IconSize = useSize();
 
   const Icon =
     children ??
@@ -82,21 +72,18 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
         onClick={(e: React.MouseEvent) => {
           e.preventDefault();
         }}
-        size={"medium"}
+        size={IconSize}
       />
     ));
 
   return (
-    <div className={profileCardStyle} onClick={onClick}>
-      <div className={ContentStyle}>
-        <ProfileImage user={user} size={size} onClick={onProfileImageClick} />
-        <ProfileText user={user} size={size} />
+    <div className={styles.profile_card} onClick={onClick}>
+      <div className={styles.profile_content}>
+        <ProfileImage user={user} onClick={onProfileImageClick} />
+        <ProfileText user={user} />
       </div>
       {Icon}
     </div>
-    // TODO: 기능버튼 드롭다운 여는 함수 구현 필요
-    // 어떤 컴포넌트의 자식인지 구분이 필요해서 props로 받아오도록 함
-    // TODO: 친구 추가 api 연결 필요
   );
 };
 
@@ -107,6 +94,7 @@ const ProfileCardFunctionButton: React.FC<{
   const { groups } = useGroupStore((state) => state);
   const { addUserToGroup, removeUserFromGroup, removeUserFromAllGroup } =
     useGroupStore((state) => state);
+  const IconSize = useSize();
 
   const addFriendToOtherGroupModal = useGroupSelectModal({
     onOk: async (selectedGroupIds) => {
@@ -229,8 +217,8 @@ const ProfileCardFunctionButton: React.FC<{
 
   return (
     <>
-      <Dropdown menu={menuProps} trigger={["click"]}>
-        <AIcon icon={FunctionButtonIcon} size={"medium"} />
+      <Dropdown menu={menuProps} trigger={["click"]} placement="bottomRight">
+        <AIcon icon={FunctionButtonIcon} size={IconSize} />
       </Dropdown>
       {addFriendToOtherGroupModal.modal}
       {removeFriendFromGroupModal.modal}

@@ -1,0 +1,32 @@
+.profile_card {
+  @apply flex items-center justify-between;
+  @apply rounded-[1.5rem];
+  @apply bg-white;
+
+  /* 반응형 */
+  /* 기본: 모바일 (~765) */
+  @apply w-[22.5rem] h-[5.5rem] px-4;
+  /* md: 태블릿 (768+) */
+  @apply md:w-[22.5rem] md:h-[5.5rem] md:px-4;
+  /* lg: 데스크탑 (1024+) */
+  @apply lg:w-[28.5rem] lg:h-[7.5rem] lg:px-4;
+  /* 2xl: 데스크탑 (1536+) */
+  @apply 2xl:w-[36rem] 2xl:h-[9.5rem] 2xl:px-6;
+}
+
+.profile_card:hover {
+  box-shadow: 0 0 0 1px rgb(255 181 181) /* secondary-0 */ inset;
+}
+.profile_content {
+  @apply flex items-center;
+
+  /* 반응형 */
+  /* 기본: 모바일 (~765) */
+  @apply gap-3;
+  /* md: 태블릿 (768+) */
+  @apply md:gap-3;
+  /* lg: 데스크탑 (1024+) */
+  @apply lg:gap-4;
+  /* 2xl: 데스크탑 (1536+) */
+  @apply 2xl:gap-5;
+}
