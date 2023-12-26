@@ -1,11 +1,11 @@
-import MyProfileCard from "@/molecules/MyProfileCard/MyProfileCard";
+import UserProfileCard from "@/molecules/UserProfileCard/UserProfileCard";
 import FoldableGroupTable from "@/molecules/FoldableGroupTable/FoldableGroupTable";
 
-import useMyDataStore from "@/stores/useMyDataStore";
+import useMyDataStore from "@/stores/useUserStore";
 import useGroupStore from "@/stores/useGroupStore";
 import { useEffect } from "react";
 
-import styles from "./MainMain.module.scss";
+import styles from "./MainMain.module.css";
 
 // 테스트용 더미 유저, 그룹, api
 import { JBOK } from "../../../../test/DemoUser";
@@ -13,18 +13,12 @@ import DemoGroup from "../../../../test/DemoGroup";
 import demoApi from "../../../../test/DemoApi";
 
 function MainMain() {
-  const { myData, setMyData } = useMyDataStore((state) => state);
+  const { user, setUser } = useMyDataStore((state) => state);
   const { groups, setGroups } = useGroupStore((state) => state);
   useEffect(() => {
-    if (myData.id === 0) {
+    if (!user) {
       demoApi(() => {
-        setMyData({
-          ...JBOK,
-          attendanceOnly: false,
-          token: "",
-          refreshToken: "",
-          size: "medium",
-        });
+        setUser(JBOK);
       });
       demoApi(() => {
         setGroups([
@@ -58,18 +52,12 @@ function MainMain() {
       // api 호출하는것처럼 보이게 하기 위해 비동기 demoApi 함수 사용
       // TODO: 인증 완료되면 api 사용해서 갱신해놓고 루트페이지에서 바로 메인페이지로 이동
     }
-  }, [myData, setMyData, setGroups, groups]);
+  }, [user, setUser, setGroups]);
   return (
     <div className={styles.main_content}>
-      <MyProfileCard size={myData?.size ?? "medium"} />
+      <UserProfileCard />
       {groups.map((group) => {
-        return (
-          <FoldableGroupTable
-            key={group.id}
-            userGroup={group}
-            size={myData?.size ?? "medium"}
-          />
-        );
+        return <FoldableGroupTable key={group.id} userGroup={group} />;
       })}
     </div>
   );
