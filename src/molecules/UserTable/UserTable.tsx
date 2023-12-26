@@ -1,10 +1,11 @@
 import React from "react";
+
 import User from "@/types/User";
-import { Size } from "@/types/enums";
+import Group from "@/types/Group";
+
 import ProfileCard from "../ProfileCard/ProfileCard";
 
-import styles from "./UserTable.module.scss";
-import Group from "@/types/Group";
+import styles from "./UserTable.module.css";
 
 type UserTableProps = {
   users?: (User & {
@@ -12,17 +13,15 @@ type UserTableProps = {
     onClick?: React.MouseEventHandler;
   })[];
   parentGroup?: Group;
-  size: Size;
 };
 
-const UserTable: React.FC<UserTableProps> = ({ users, size, parentGroup }) => {
+const UserTable: React.FC<UserTableProps> = ({ users, parentGroup }) => {
   return (
-    <div className={styles["profile-table"]}>
+    <div className={styles.user_table}>
       {users?.map((user) => (
         <ProfileCard
           key={user.id}
           user={user}
-          size={size}
           onClick={user.onClick}
           parentGroup={parentGroup}
         >
