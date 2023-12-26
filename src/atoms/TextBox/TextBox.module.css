@@ -1,0 +1,29 @@
+.text_wrapper {
+  @apply inline-flex justify-center items-center rounded-full;
+
+  @apply h-[1.25rem] py-[0.125rem] px-[0.5rem];
+  @apply md:h-[1.25rem] md:py-[0.125rem] md:px-[0.5rem];
+  @apply lg:h-[1.5rem] lg:py-[0.125rem] lg:px-[0.625rem];
+  @apply 2xl:h-[1.75rem] 2xl:py-[0.25rem] 2xl:px-[0.75rem];
+}
+
+.text_wrapper__primary {
+  @apply bg-primary-0;
+}
+
+.text_wrapper__border {
+  box-shadow: inset 0 0 0 1px rgb(19 39 67);
+  @apply bg-white;
+}
+
+.text {
+  @apply text-b5 md:text-b5 lg:text-b4 2xl:text-b3;
+}
+
+.text__primary {
+  @apply text-white;
+}
+
+.text__border {
+  @apply text-primary-0;
+}
