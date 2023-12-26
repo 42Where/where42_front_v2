@@ -5,6 +5,7 @@ import { SearchProps } from "antd/es/input";
 import User from "@/types/User";
 import { Size } from "@/types/enums";
 import UserTable from "../UserTable/UserTable";
+import { useSize } from "@/utils/MediaQuary";
 // import useMyDataStore from "@/stores/useMyDataStore";
 
 // import styles from "./SearchModal.module.scss";
@@ -21,6 +22,7 @@ type SearchModalProps = {
 const SearchModal: React.FC<SearchModalProps> = ({ open, size, onCancel }) => {
   const [inputValue, setInputValue] = useState("");
   const [userList, setUserList] = useState<User[]>([]);
+  const Size = useSize();
   // const {
   //   myData: { id },
   // } = useMyDataStore((state) => state);
@@ -57,9 +59,9 @@ const SearchModal: React.FC<SearchModalProps> = ({ open, size, onCancel }) => {
         onChange={onChange}
         onSearch={onSearch}
         allowClear
-        size="large"
+        size={Size === "medium" ? "middle" : Size}
       />
-      <UserTable users={userList} size={size} />
+      <UserTable users={userList} />
     </Modal>
   );
 };
