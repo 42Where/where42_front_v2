@@ -10,15 +10,13 @@ type AIconProps = {
 };
 
 const AIcon: React.FC<AIconProps> = ({ icon, onClick, size = "medium" }) => {
-  const width =
+  const length =
     size === "small" ? "1rem" : size === "medium" ? "1.5rem" : "2rem";
   return (
     <Icon
+      style={{ fontSize: length }}
+      className={onClick ? "cursor-pointer" : ""}
       component={icon}
-      style={{
-        fontSize: width,
-        cursor: onClick !== undefined ? "pointer" : "default",
-      }}
       onClick={onClick}
     />
   );
