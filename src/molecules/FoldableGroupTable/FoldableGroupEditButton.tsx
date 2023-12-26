@@ -1,5 +1,5 @@
 import { MenuInfo } from "rc-menu/lib/interface";
-import React, { useCallback } from "react";
+import React, { use, useCallback } from "react";
 import { ButtonProps, Dropdown, MenuProps } from "antd";
 
 import PencilIcon from "&/Icons/pencil.svg";
@@ -8,12 +8,13 @@ import CrossIconsmall from "&/Icons/crossSmall.svg";
 import User from "@/types/User";
 import Group from "@/types/Group";
 
-import useMyDataStore from "@/stores/useMyDataStore";
+import useUserStore from "@/stores/useUserStore";
 import useGroupStore from "@/stores/useGroupStore";
 import useInputModal from "@/hooks/useInputModal";
 import useConfirmModal from "@/hooks/useConfirmModal";
 import useGroupSelectModal from "@/hooks/useGroupSelectModal";
 import useAFloatButton from "../AFloatButton/AFloatButton";
+import { useSize } from "@/utils/MediaQuary";
 
 import AIcon from "@/atoms/AIcon/AIcon";
 
@@ -39,6 +40,8 @@ const FoldableGroupEditButton: React.FC<FoldableGroupEditButtonProps> = ({
     removeUserFromAllGroup,
     removeUserFromGroup,
   } = useGroupStore((state) => state);
+
+  const IconSize = useSize();
 
   const renameGroupModal = useInputModal({
     title: "그룹 이름 변경",
@@ -80,7 +83,7 @@ const FoldableGroupEditButton: React.FC<FoldableGroupEditButtonProps> = ({
       });
     },
     title: "그룹에서 친구 삭제",
-    component: `"${isCheckedSet}"을 그룹 "${userGroup.name}"에서 삭제하시겠습니까?`,
+    component: `"${isCheckedSet.size}"명의 친구를 그룹 "${userGroup.name}"에서 삭제하시겠습니까?`,
     danger: true,
     okText: "삭제",
     cancelText: "취소",
@@ -119,7 +122,7 @@ const FoldableGroupEditButton: React.FC<FoldableGroupEditButtonProps> = ({
     ),
     targetUserList: userGroup.users.filter((user) => isCheckedSet.has(user.id)),
     title: "다른 그룹에 추가",
-    component: `"${isCheckedSet}"을 다른 그룹에 추가하시겠습니까?`,
+    component: `친구 ${isCheckedSet.size}명을 추가할 그룹을 선택해주세요`,
     okText: "추가",
     cancelText: "취소",
   });
@@ -176,12 +179,12 @@ const FoldableGroupEditButton: React.FC<FoldableGroupEditButtonProps> = ({
     items: [
       {
         key: "renameGroup",
-        label: "그룹 이름 변경",
+        label: "그룹명 변경",
         onClick: onRenameGroup,
       },
       {
         key: "editGroupUser",
-        label: "그룹 인원 수정",
+        label: "그룹 수정",
         onClick: onEditGroupUser,
       },
       {
@@ -213,19 +216,13 @@ const FoldableGroupEditButton: React.FC<FoldableGroupEditButtonProps> = ({
         },
     {
       name: "deleteFromGroup",
-      children: "그룹에서 삭제",
+      children: "삭제",
       danger: true,
       onClick: onRemoveFriendFromGroup,
     },
     {
-      name: "deleteFriends",
-      children: "친구 삭제",
-      danger: true,
-      onClick: onRemoveFriendFromAllGroup,
-    },
-    {
       name: "addToGroup",
-      children: "다른 그룹에 추가",
+      children: "그룹에 추가",
       type: "primary",
       onClick: onAddFriendToOtherGroup,
     },
@@ -238,23 +235,33 @@ const FoldableGroupEditButton: React.FC<FoldableGroupEditButtonProps> = ({
 
   const EditButton = (
     <>
+      {floatButtonWrapper}
       {userGroup.isInEdit ? (
         <AIcon
           icon={CrossIconsmall}
-          size={"medium"}
-          onClick={finishEditGroup}
+          size={IconSize}
+          onClick={() => {
+            finishEditGroup();
+            setIsCheckedSet(new Set());
+          }}
         />
       ) : (
-        <Dropdown menu={menuProps} trigger={["click"]}>
-          <AIcon icon={PencilIcon} size={"medium"} />
-        </Dropdown>
+        <div
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+        >
+          <Dropdown menu={menuProps} trigger={["click"]}>
+            <AIcon icon={PencilIcon} size={IconSize} />
+          </Dropdown>
+        </div>
       )}
       {renameGroupModal.modal}
       {removeGroupModal.modal}
       {removeFriendFromGroupModal.modal}
       {removeFriendFromAllGroupModal.modal}
       {addFriendToOtherGroupModal.modal}
-      {floatButtonWrapper}
     </>
   );
   return EditButton;
