@@ -2,6 +2,7 @@
 FROM node:alpine AS deps
 RUN apk add --no-cache libc6-compat python3 build-base
 WORKDIR /app
+
 COPY package.json package-lock.json ./
 RUN npm install
 
@@ -10,8 +11,10 @@ FROM node:alpine AS builder
 WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
+
 RUN npm run build
 RUN npm install --production
+
 RUN rm -rf ./.next/cache
 
 # Production image, copy all the files and run next
