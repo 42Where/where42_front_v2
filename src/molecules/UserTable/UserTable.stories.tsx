@@ -27,7 +27,7 @@ export default {
 
 export const Default: StoryObj<typeof UserTable> = {
   args: {
-    users: DemoGroup.users,
+    users: DemoGroup.members,
     parentGroup: DemoGroup,
   },
 };

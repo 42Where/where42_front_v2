@@ -1,46 +1,42 @@
 type User = {
   /**
-   * 인트라/백엔드에서 사용하는 고유 id입니다.
+   * 42api/백엔드에서 사용하는 고유 id
    */
-  id: number; // 사용하지 않을수도 있음
+  intraId: number;
   /**
-   * 사용자의 인트라 아이디입니다.
+   *  사용자의 인트라 아이디(api에서는 login)
    */
-  login: string;
+  intraName: string;
   /**
-   * 프로필사진의 URL입니다.
+   * 42api 프로필 사진 url
    */
-  profileImgSrc: string;
+  image: string;
   /**
-   * 사용자의 위치입니다.
+   * 사용자의 위치정보
    * 후에 api 구현에 따라서 오브젝트로 분리될 수 있음
    */
   location?: string;
   /**
-   * 사용자의 상태메시지입니다.
+   * 사용자의 상태 메세지
    */
   comment?: string;
   /**
-   * 사용자의 위치 정보 이용 동의 여부입니다.
+   * 사용자의 클러스터 출입여부
    */
-  locationUsageAgreement?: boolean;
+  inCluster: boolean;
   /**
-   * 사용자의 위치 정보 이용 동의 날자입니다.
+   * 사용자의 위치정보 이용 동의 여부
    */
-  agreedAt?: Date; // 사용하지 않을수도 있음
+  agree: boolean;
   /**
-   * 사용자의 최근 출석 날자입니다.
+   * 사영자의 기본 친구 그룹 id
    */
-  updatedAt?: Date; // 사용하지 않을수도 있음
+  defaultGroupId?: number;
   /**
-   * 나와 사용자의 관계입니다.
+   * 멤버가 아닐경우 날짜
+   * 멤버일 경우 ??
    */
-  isFriend?: boolean; // 사용하지 않을수도 있음
-  /**
-   * 사용자의 블랙홀 여부입니다.
-   */
-  blackhole?: boolean; // 사용하지 않을수도 있음
-  // 백엔드 api 구현에 따라서 로그인, 프로필사진을 제외한 정보는 다른 타입으로 분리되어 Optional이 될 수 있음
+  grade?: string;
 };
 
 export default User;

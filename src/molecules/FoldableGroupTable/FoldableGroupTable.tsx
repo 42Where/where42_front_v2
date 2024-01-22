@@ -53,13 +53,13 @@ const FoldableGroupTable: React.FC<FoldableGroupTableProps> = ({
   const foldGroup = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
-      if (userGroup.isFolded) openGroup(userGroup.id);
-      else closeGroup(userGroup.id);
+      if (userGroup.isFolded) openGroup(userGroup.groupId);
+      else closeGroup(userGroup.groupId);
     },
-    [userGroup.id, userGroup.isFolded, openGroup, closeGroup]
+    [userGroup.groupId, userGroup.isFolded, openGroup, closeGroup]
   );
 
-  const userList = userGroup.users
+  const userList = userGroup.members
     // 타입 변경하면 로직 변경 필요
     .filter((user) => (attendanceOnly ? user.location : true))
     .map((user) =>
@@ -68,7 +68,7 @@ const FoldableGroupTable: React.FC<FoldableGroupTableProps> = ({
             ...user,
             Icon: (
               <AIcon
-                icon={isCheckedSet.has(user.id) ? CheckIcon : UncheckIcon}
+                icon={isCheckedSet.has(user.intraId) ? CheckIcon : UncheckIcon}
                 size={IconSize}
               />
             ),
@@ -76,14 +76,14 @@ const FoldableGroupTable: React.FC<FoldableGroupTableProps> = ({
             // TODO: 수정중에는 프로필사진 클릭시 프로필보기로 이동하는 기능 제거 필요
             onClick: (e: React.MouseEvent) => {
               e.preventDefault();
-              if (isCheckedSet.has(user.id)) {
+              if (isCheckedSet.has(user.intraId)) {
                 setIsCheckedSet((isCheckedSet) => {
-                  isCheckedSet.delete(user.id);
+                  isCheckedSet.delete(user.intraId);
                   return new Set(isCheckedSet);
                 });
               } else {
                 setIsCheckedSet((isCheckedSet) => {
-                  isCheckedSet.add(user.id);
+                  isCheckedSet.add(user.intraId);
                   return new Set(isCheckedSet);
                 });
               }
@@ -96,10 +96,10 @@ const FoldableGroupTable: React.FC<FoldableGroupTableProps> = ({
     <div className={styles.foldable_table}>
       <div className={styles.header}>
         <div className={styles.textbox}>
-          <span className={styles.name}>{userGroup.name}</span>
+          <span className={styles.name}>{userGroup.groupName}</span>
           <span className={styles.count}>
-            {userGroup.users.filter((user) => user?.isFriend ?? false).length}/
-            {userGroup.users.length}
+            {userGroup.members.filter((user) => user.inCluster).length}/
+            {userGroup.members.length}
           </span>
         </div>
         <div className={styles.buttonbox}>

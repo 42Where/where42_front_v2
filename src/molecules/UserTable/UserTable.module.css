@@ -1,5 +1,3 @@
-@import "/styles/variables";
-
 .user_table {
   @apply flex flex-wrap justify-center w-full bg-white;
 

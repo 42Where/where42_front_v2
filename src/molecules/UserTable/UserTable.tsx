@@ -20,7 +20,7 @@ const UserTable: React.FC<UserTableProps> = ({ users, parentGroup }) => {
     <div className={styles.user_table}>
       {users?.map((user) => (
         <ProfileCard
-          key={user.id}
+          key={user.intraId}
           user={user}
           onClick={user.onClick}
           parentGroup={parentGroup}

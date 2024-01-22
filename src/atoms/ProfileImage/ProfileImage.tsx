@@ -8,12 +8,12 @@ import User from "@/types/User";
 import styles from "./ProfileImage.module.css";
 
 type ProfileImageProps = {
-  user: Pick<User, "id" | "login" | "profileImgSrc" | "location">;
+  user: Pick<User, "intraId" | "intraName" | "image" | "location">;
   onClick?: React.MouseEventHandler;
 };
 
 const ProfileImage: React.FC<ProfileImageProps> = ({
-  user: { login, profileImgSrc, location },
+  user: { intraId, intraName, image, location },
   onClick,
 }) => {
   const [imageComponent, setImageComponent] = useState<React.ReactNode>(<></>);
@@ -21,9 +21,9 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
   const defaultOnClick = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
-      window.open(`https://profile.intra.42.fr/users/${login}`, "_blank");
+      window.open(`https://profile.intra.42.fr/users/${intraName}`, "_blank");
     },
-    [login]
+    [intraName]
   );
 
   const imageErrorHandler = useCallback(() => {
@@ -34,16 +34,16 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
     setImageComponent(
       <Image
         className={styles.profile_image + " " + styles.image}
-        src={profileImgSrc}
+        src={image}
         width={128}
         height={128}
-        alt={login}
+        alt={intraName}
         placeholder="empty"
         onError={imageErrorHandler}
         priority={true}
       />
     );
-  }, [profileImgSrc, login, imageErrorHandler]);
+  }, [image, intraName, imageErrorHandler]);
 
   return (
     <div

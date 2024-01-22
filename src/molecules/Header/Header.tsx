@@ -32,6 +32,7 @@ const Header: React.FC = () => {
     setSearchModalOpen(true);
   }, []);
   const SignOutClickHandler = () => {
+    localStorage.removeItem("token");
     // TODO: 대충 로그아웃 함수 구현 필요
     // 재활용 가능성이 많은 함수이므로 다른곳에서 구현후 import해서 재사용해야할수도 있음
   };

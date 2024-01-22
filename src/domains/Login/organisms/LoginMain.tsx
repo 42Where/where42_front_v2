@@ -3,10 +3,13 @@ import Image from "next/image";
 import HelpIcon from "&/Icons/help.svg";
 import Logo from "&/BI.svg";
 import styles from "./LoginMain.module.scss";
+import { Button } from "antd";
+
+import groupApi from "@/api/groupApi";
 
 function LoginMain() {
   return (
-    <Fragment>
+    <>
       <div className={styles.help}>
         <Image src={HelpIcon} alt="help icon" />
       </div>
@@ -20,9 +23,19 @@ function LoginMain() {
           {/* Title */}
           <h1>어디있니?</h1>
         </div>
-        <button>로그인</button>
+        {/* <Button
+          onClick={async () => {
+            const response = await groupApi.getAllGroups({ intraId: 0 });
+            console.log(response);
+          }}
+        >
+          회원가입
+        </Button> */}
+        <a href="/v3/group">
+          <Button>로그인</Button>
+        </a>
       </div>
-    </Fragment>
+    </>
   );
 }
 

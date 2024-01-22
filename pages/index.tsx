@@ -1,58 +1,33 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
+import useUserStore from "@/stores/useUserStore";
+import useAMessage from "@/atoms/AMessage/AMessage";
 import { Button } from "antd";
-import useModalStore from "@/stores/useModalStore";
-import Terms from "@/atoms/Terms/Terms";
-
-import Axios from "axios";
-import type { MenuProps } from "antd";
-import { Dropdown } from "antd";
-import IconButton from "@/atoms/buttons/IconButton/IconButton";
-import PencilIcon from "&/Icons/pencil.svg";
-
-const items: MenuProps["items"] = [
-  {
-    label: "그룹에 친구 추가하기",
-    key: 0,
-  },
-  {
-    label: "그룹 수정하기",
-    key: 1,
-  },
-  {
-    label: "그룹 삭제하기",
-    key: 2,
-    danger: true,
-  },
-];
+import groupApi from "@/api/groupApi";
 
 export default function Home() {
-  const { openModal, openImportantModal, closeModal } = useModalStore();
+  const { contextHolder, axiosError } = useAMessage();
 
   return (
     <main>
-      <>
-        <Dropdown menu={{ items }} trigger={["click"]}>
-          <a onClick={(e) => e.preventDefault()}>
-            <IconButton Icon={PencilIcon} size="medium" />
-          </a>
-        </Dropdown>
-      </>
-      <>
-        <Button
-          type="primary"
-          onClick={() => {
-            Axios.get(`${process.env.NEXT_PUBLIC_DEV_API_URL}/v3/member`).then(
-              (res) => {
-                console.log(res);
-              }
-            );
-          }}
-        >
-          버튼
-        </Button>
-        <Button type="primary" danger>
-          버튼
-        </Button>
-      </>
+      <Button
+        onClick={() => {
+          axiosError(401);
+        }}
+      >
+        test
+      </Button>
+      <Button
+        onClick={() => {
+          groupApi.getAllGroups().then((res) => {
+            console.log(res);
+          });
+        }}
+      >
+        test
+      </Button>
+      {contextHolder}
       <div
         style={{
           display: "flex",

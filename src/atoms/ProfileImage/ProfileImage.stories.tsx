@@ -28,7 +28,7 @@ export const BasicProfileImage: StoryObj<typeof ProfileImage> = {
 
 export const DefaultProfileImage: StoryObj<typeof ProfileImage> = {
   args: {
-    user: { ...DemoUser, profileImgSrc: "대충 비정상 링크" },
+    user: { ...DemoUser, image: "대충 비정상 링크" },
   },
 };
 

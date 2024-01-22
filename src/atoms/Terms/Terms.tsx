@@ -44,42 +44,6 @@ const Terms: React.FC = () => {
       <div className={styles.description}>{TermData.description}</div>
       <Collapse items={items} />
     </>
-    // <div className={styles.terms}>
-    //   <div className={styles.title}>{TermData.title}</div>
-    //   <div className={styles.description}>{TermData.description}</div>
-    //   <div className={styles.body}>
-    //     <div className={styles.content}>
-    //       <div className={styles.title}>{TermData.content.purpose.title}</div>
-    //       <div className={styles.description}>
-    //         {TermData.content.purpose.content.join(", ")}
-    //       </div>
-    //     </div>
-    //     <div className={styles.content}>
-    //       <div className={styles.title}>
-    //         {TermData.content.collectInfo.title}
-    //       </div>
-    //       <div className={styles.description}>
-    //         {TermData.content.collectInfo.content.join(", ")}
-    //       </div>
-    //     </div>
-    //     <div className={styles.content}>
-    //       <div className={styles.title}>
-    //         {TermData.content.retentionPeriod.title}
-    //       </div>
-    //       <div className={styles.description}>
-    //         {TermData.content.retentionPeriod.content.join(" - ")}
-    //       </div>
-    //     </div>
-    //     <div className={styles.content}>
-    //       <div className={styles.title}>
-    //         {TermData.content.refusalAndConsequences.title}
-    //       </div>
-    //       <div className={styles.description}>
-    //         {TermData.content.refusalAndConsequences.content.join(" ")}
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 
