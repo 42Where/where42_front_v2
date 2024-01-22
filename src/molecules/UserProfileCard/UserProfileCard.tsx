@@ -19,8 +19,8 @@ import ProfileText from "@/molecules/ProfileCard/ProfileText";
 import AIcon from "@/atoms/AIcon/AIcon";
 
 import styles from "./UserProfileCard.module.css";
-
-import demoApi from "../../../test/DemoApi";
+import groupApi from "@/api/groupApi";
+import useGroupStore from "@/stores/useGroupStore";
 
 const MyProfileCard: React.FC = () => {
   const { user } = useUserStore((state) => state);
@@ -32,18 +32,18 @@ const MyProfileCard: React.FC = () => {
 
   return (
     <>
-      {user ? (
-        <div className={styles.my_profile_card}>
-          <div className={styles.content}>
-            <ProfileImage user={user} onClick={profileImageOnClick} />
-            <ProfileText user={user} />
+      {
+        user ? (
+          <div className={styles.my_profile_card}>
+            <div className={styles.content}>
+              <ProfileImage user={user} onClick={profileImageOnClick} />
+              <ProfileText user={user} />
+            </div>
+            <MyProfileCardButtons />
           </div>
-          <MyProfileCardButtons />
-        </div>
-      ) : (
-        "대충 스켈레톤"
+        ) : null
         // TODO: 스켈레톤 구현
-      )}
+      }
     </>
   );
 };
@@ -51,17 +51,14 @@ const MyProfileCard: React.FC = () => {
 const MyProfileCardButtons: React.FC = () => {
   const { user, attendanceOnly, setLocation, setComment, setAttendanceOnly } =
     useUserStore((state) => state);
+  const { addGroup } = useGroupStore((state) => state);
   const isMoBile = useIsMobile();
   const isTablet = useIsTablet();
 
   const renameModal = useInputModal({
     title: "상태메시지 수정",
     initialInputValue: user?.comment ?? "",
-    onOk: async (inputValue) => {
-      return demoApi(() => {
-        setComment(inputValue);
-      });
-    },
+    onOk: async (inputValue) => {},
     placeholder: "상태메시지를 입력하세요",
     okText: "변경",
     cancelText: "취소",
@@ -75,15 +72,7 @@ const MyProfileCardButtons: React.FC = () => {
   // TODO: 클러스터 안애 있지 않을경우 아예 안보이거나 사용하지 못하게 해야함
   const setCustomLocationModal = useCascaderModal({
     title: "수동 위치 설정",
-    onOk: async (inputValue) => {
-      return demoApi(() => {
-        setLocation(
-          inputValue.length == 4
-            ? inputValue.join(" ")
-            : inputValue.join(" ") + " 어딘가"
-        );
-      });
-    },
+    onOk: async (inputValue) => {},
     optionData: DefaultCustomLocation,
     defaultValue: user?.location?.split(" ") ?? ["개포"],
     maskClosable: false,
@@ -95,9 +84,15 @@ const MyProfileCardButtons: React.FC = () => {
     title: "새 그룹 만들기",
     initialInputValue: "",
     onOk: async (inputValue) => {
-      return demoApi(() => {
-        console.log(inputValue);
-      });
+      try {
+        const newGroup = await groupApi.createGroup({
+          groupName: inputValue,
+        });
+        addGroup(newGroup as any);
+        // 백엔드 스키마 만들어질때까지 대기
+      } catch (error) {
+        console.error(error);
+      }
     },
     placeholder: "생성할 그룹 이름을 입력해주세요",
     okText: "생성",
