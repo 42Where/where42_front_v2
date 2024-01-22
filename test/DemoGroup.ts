@@ -13,9 +13,9 @@ import {
 } from "./DemoUser";
 
 const DemoGroup: Group = {
-  name: "42seoul",
-  id: 1,
-  users: [
+  groupId: 1,
+  groupName: "42seoul",
+  members: [
     JAEYOJUN,
     JBOK,
     JNAM,

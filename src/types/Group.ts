@@ -1,9 +1,9 @@
 import User from "./User";
 
 type Group = {
-  name: string;
-  id: number;
-  users: User[];
+  groupName: string;
+  groupId: number;
+  members: User[];
   isInEdit: boolean;
   isFolded: boolean;
 };
