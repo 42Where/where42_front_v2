@@ -15,11 +15,10 @@ import useGroupStore from "@/stores/useGroupStore";
 import useConfirmModal from "@/hooks/useConfirmModal";
 import useGroupSelectModal from "@/hooks/useGroupSelectModal";
 
+import ProfileCardFunctionButton from "./ProfileCardFunctionButton";
 import ProfileImage from "@/atoms/ProfileImage/ProfileImage";
 import ProfileText from "./ProfileText";
 import styles from "./ProfileCard.module.css";
-
-import demoApi from "../../../test/DemoApi";
 
 type ProfileCardProps = {
   /**
@@ -64,7 +63,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
   const Icon =
     children ??
-    (user.isFriend ? (
+    (user.inCluster ? (
       <ProfileCardFunctionButton user={user} parentGroup={parentGroup} />
     ) : (
       <AIcon
@@ -84,146 +83,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
       </div>
       {Icon}
     </div>
-  );
-};
-
-const ProfileCardFunctionButton: React.FC<{
-  user: User;
-  parentGroup?: Group;
-}> = ({ user, parentGroup }) => {
-  const { groups } = useGroupStore((state) => state);
-  const { addUserToGroup, removeUserFromGroup, removeUserFromAllGroup } =
-    useGroupStore((state) => state);
-  const IconSize = useSize();
-
-  const addFriendToOtherGroupModal = useGroupSelectModal({
-    onOk: async (selectedGroupIds) => {
-      return demoApi(async () => {
-        await Promise.all(
-          selectedGroupIds.map(async (groupId) => {
-            addUserToGroup([user], [groupId]);
-          })
-        );
-      });
-    },
-    title: `${user.login}님을 추가할 그룹을 선택해주세요.`,
-    groupList: groups.filter(
-      (group) =>
-        group.name !== "친구" &&
-        group.users.find((u) => u.id === user.id) === undefined
-    ),
-    targetUserList: [user],
-    // component: ,
-    okText: "추가",
-    cancelText: "취소",
-  });
-
-  const removeFriendFromGroupModal = useConfirmModal({
-    onOk: async () => {
-      return demoApi(() => {
-        removeUserFromGroup([user.id], [parentGroup?.id ?? 0]);
-      });
-    },
-    title: "그룹에서 친구 삭제",
-    // TODO: 유저, 그룹 이름 텍스트에 볼드처리 구현 필요
-    component: `"${user.login}"님을 그룹 "${
-      parentGroup?.name ?? "친구"
-    }"에서 삭제하시겠습니까?`,
-    danger: true,
-    okText: "삭제",
-    cancelText: "취소",
-  });
-
-  const removeFriendModal = useConfirmModal({
-    onOk: async () => {
-      return demoApi(() => {
-        removeUserFromAllGroup([user.id]);
-      });
-    },
-    title: "친구 삭제",
-    // TODO: 유저, 그룹 이름 텍스트에 볼드처리 구현 필요
-    component: `"${user.login}"님을 모든 그룹과 친구목록에서 삭제하시겠습니까?`,
-    danger: true,
-    okText: "삭제",
-    cancelText: "취소",
-  });
-
-  const onAddFriendToOtherGroup = useCallback(
-    (menuInfo: MenuInfo) => {
-      menuInfo.domEvent.preventDefault();
-      addFriendToOtherGroupModal.showModal();
-      // 대충 모달창 띄워서 추가할 그룹 선택하게 하는 함수
-    },
-    [addFriendToOtherGroupModal]
-  );
-
-  const onRemoveFriendFromGroup = useCallback(
-    (menuInfo: MenuInfo) => {
-      menuInfo.domEvent.preventDefault();
-      removeFriendFromGroupModal.showModal();
-      // 대충 모달창 띄워서 이 그룹에서 삭제하시겠습니까? 물어보는 함수
-    },
-    [removeFriendFromGroupModal]
-  );
-
-  const onRemoveFriend = useCallback(
-    (menuInfo: MenuInfo) => {
-      menuInfo.domEvent.preventDefault();
-      removeFriendModal.showModal();
-      // 대충 모달창 띄워서 친구를 삭제하시겠습니까? 물어보는 함수
-    },
-    [removeFriendModal]
-  );
-
-  const menuProps = {
-    items:
-      parentGroup?.name ?? "친구" === "친구"
-        ? [
-            // 친구 그룹에 속한 경우
-            // 친구인 경우만 사용하므로 그룹이 주어지지 않은 경우에는 친구 그룹에 속한 경우로 간주
-            {
-              label: "다른 그룹에 추가하기",
-              key: "addFriendToOtherGroup",
-              onClick: onAddFriendToOtherGroup,
-            },
-            {
-              label: "친구 삭제하기",
-              key: "removeFriend",
-              onClick: onRemoveFriend,
-              danger: true,
-            },
-          ]
-        : [
-            // 친구 그룹에 속하지 않은 경우
-            {
-              label: "다른 그룹에 추가하기",
-              key: "addFriendToOtherGroup",
-              onClick: onAddFriendToOtherGroup,
-            },
-            {
-              label: "그룹에서 삭제하기",
-              key: "removeFriendFromGroup",
-              onClick: onRemoveFriendFromGroup,
-              danger: true,
-            },
-            {
-              label: "친구 삭제하기",
-              key: "removeFriend",
-              onClick: onRemoveFriend,
-              danger: true,
-            },
-          ],
-  };
-
-  return (
-    <>
-      <Dropdown menu={menuProps} trigger={["click"]} placement="bottomRight">
-        <AIcon icon={FunctionButtonIcon} size={IconSize} />
-      </Dropdown>
-      {addFriendToOtherGroupModal.modal}
-      {removeFriendFromGroupModal.modal}
-      {removeFriendModal.modal}
-    </>
   );
 };
 

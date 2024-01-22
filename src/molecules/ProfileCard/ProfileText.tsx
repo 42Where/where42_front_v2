@@ -19,12 +19,10 @@ const ProfileText: React.FC<ProfileTextProps> = ({ user }) => {
   return (
     <div className={styles.profile_text}>
       <div className={styles.main}>
-        <div className={styles.login}>{user.login}</div>
+        <div className={styles.login}>{user.intraName}</div>
         <TextBox text={locationText} primary={user.location !== undefined} />
       </div>
-      {user.comment === "" ? null : (
-        <div className={styles.comment}>{user.comment}</div>
-      )}
+      {user.comment && <div className={styles.comment}>{user.comment}</div>}
     </div>
   );
 };
