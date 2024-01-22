@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import DemoGroup from "../../../test/DemoGroup";
+// import DemoGroup from "../../../test/DemoGroup.ts";
 
 import FoldableGroupTable from "./FoldableGroupTable";
 
@@ -19,12 +19,12 @@ export default {
 
 export const DefaultGroup: StoryObj<typeof FoldableGroupTable> = {
   args: {
-    userGroup: { ...DemoGroup, name: "친구" },
+    // userGroup: { ...DemoGroup, name: "친구" },
   },
 };
 
 export const CustomGroup: StoryObj<typeof FoldableGroupTable> = {
   args: {
-    userGroup: DemoGroup,
+    // userGroup: DemoGroup,
   },
 };
