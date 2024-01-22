@@ -6,7 +6,7 @@ import User from "@/types/User";
 import Group from "@/types/Group";
 
 type GroupSelectModalProps<T, U> = {
-  onOk: ((value: number[]) => void) | ((value: number[]) => Promise<T>);
+  onOk: ((value: Group[]) => void) | ((value: Group[]) => Promise<T>);
   onCancel?: (() => void) | (() => Promise<U>);
   icon?: React.ReactNode;
   title: React.ReactNode;
@@ -34,32 +34,41 @@ const useGroupSelectModal = <T, U>({
 }: GroupSelectModalProps<T, U>) => {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  // const [selectedGroups, setSelectedGroups] = useState<Group[]>([]);
-  const [selectedGroupIds, setSelectedGroupIds] = useState<number[]>([]);
+  const [selectedGroups, setSelectedGroups] = useState<Group[]>([]);
+  // const [selectedGroupIds, setSelectedGroupIds] = useState<number[]>([]);
 
   useEffect(() => {
-    // setSelectedGroups([]);
-    setSelectedGroupIds([]);
+    setSelectedGroups([]);
+    // setSelectedGroupIds([]);
   }, []);
 
   const handleSelect = useCallback(
     (menuInfo: MenuInfo) => {
       menuInfo.domEvent.preventDefault();
       const selectedGroupId = parseInt(menuInfo.key as string);
-      setSelectedGroupIds([...selectedGroupIds, selectedGroupId]);
+      setSelectedGroups([
+        ...selectedGroups,
+        groupList.find((group) => group.groupId === selectedGroupId)!,
+      ]);
+      // setSelectedGroupIds([...selectedGroupIds, selectedGroupId]);
     },
-    [setSelectedGroupIds, selectedGroupIds]
+    // [setSelectedGroupIds, selectedGroupIds]
+    [selectedGroups, setSelectedGroups, groupList]
   );
 
   const handleDeselect = useCallback(
     (menuInfo: MenuInfo) => {
       menuInfo.domEvent.preventDefault();
       const selectedGroupId = parseInt(menuInfo.key as string);
-      setSelectedGroupIds(
-        selectedGroupIds.filter((id) => id !== selectedGroupId)
+      setSelectedGroups(
+        selectedGroups.filter((group) => group.groupId !== selectedGroupId)
       );
+      // setSelectedGroupIds(
+      //   selectedGroupIds.filter((id) => id !== selectedGroupId)
+      // );
     },
-    [setSelectedGroupIds, selectedGroupIds]
+    // [setSelectedGroupIds, selectedGroupIds]
+    [selectedGroups, setSelectedGroups]
   );
 
   const handleOk = useCallback(
@@ -71,7 +80,7 @@ const useGroupSelectModal = <T, U>({
 
       setLoading(true);
       try {
-        const result = onOk(selectedGroupIds);
+        const result = onOk(selectedGroups);
         if (result instanceof Promise) {
           await result;
         }
@@ -80,10 +89,12 @@ const useGroupSelectModal = <T, U>({
       } finally {
         setLoading(false);
         setVisible(false);
-        setSelectedGroupIds([]);
+        // setSelectedGroupIds([]);
+        setSelectedGroups([]);
       }
     },
-    [onOk, loading, setLoading, setVisible, selectedGroupIds]
+    // [onOk, loading, setLoading, setVisible, selectedGroupIds]
+    [onOk, loading, setLoading, setVisible, setSelectedGroups, selectedGroups]
   );
 
   const handleCancel = useCallback(
@@ -103,12 +114,14 @@ const useGroupSelectModal = <T, U>({
       } catch (e) {
         console.error(e);
       } finally {
-        setSelectedGroupIds([]);
+        // setSelectedGroupIds([]);
+        setSelectedGroups([]);
         setLoading(false);
         setVisible(false);
       }
     },
-    [onCancel, loading, setLoading, setVisible, setSelectedGroupIds]
+    // [onCancel, loading, setLoading, setVisible, setSelectedGroupIds]
+    [onCancel, loading, setLoading, setVisible, setSelectedGroups]
   );
 
   const showModal = useCallback(() => {
@@ -133,17 +146,17 @@ const useGroupSelectModal = <T, U>({
     destroyOnClose: true,
     okButtonProps: {
       danger: danger,
-      disabled: loading || selectedGroupIds.length === 0,
+      disabled: loading || selectedGroups.length === 0,
     },
     cancelButtonProps: { disabled: loading },
   };
 
   const itemProps: MenuProps["items"] = groupList.map((group) => ({
-    key: group.id,
+    key: group.groupId,
     label: (
       <>
-        {group.name} {group.users.filter((user) => user.location).length}/
-        {group.users.length}
+        {group.groupName} {group.members.filter((user) => user.location).length}
+        /{group.members.length}
       </>
     ),
   }));
@@ -163,7 +176,10 @@ const useGroupSelectModal = <T, U>({
                 multiple={true}
                 onSelect={handleSelect}
                 onDeselect={handleDeselect}
-                selectedKeys={selectedGroupIds.map((id) => id.toString())}
+                // selectedKeys={selectedGroupIds.map((id) => id.toString())}
+                selectedKeys={selectedGroups.map((group) =>
+                  group.groupId.toString()
+                )}
                 items={itemProps}
               />
             </>

@@ -7,7 +7,7 @@ type GroupStore = {
   userCmp: (a: User, b: User) => number;
   groupCmp: (a: Group, b: Group) => number;
   setGroups: (groups: Group[]) => void;
-  setGroupName: (groupId: number, name: string) => void;
+  setGroupName: (groupId: number, groupName: string) => void;
   addGroup: (group: Group) => void;
   removeGroup: (groupId: number) => void;
   setEditGroup: (groupId: number) => void;
@@ -31,29 +31,32 @@ const useGroupStore = create<GroupStore>((set) => ({
     } else if (b.location) {
       return -1;
     }
-    return a.login.localeCompare(b.login);
+    return a.intraName.localeCompare(b.intraName);
   },
-  groupCmp: (a, b) =>
-    a.name === "친구" ? 1 : b.name === "친구" ? -1 : b.id - a.id,
+  groupCmp: (a, b) => {
+    return b.groupId - a.groupId;
+  },
 
   setGroups: (groups) =>
     set((state) => ({ groups: groups.sort(state.groupCmp) })),
-  setGroupName: (groupId, name) =>
+  setGroupName: (groupId, groupName) =>
     set((state) => ({
       groups: state.groups
-        .map((group) => (group.id === groupId ? { ...group, name } : group))
+        .map((group) =>
+          group.groupId === groupId ? { ...group, groupName } : group
+        )
         .sort(state.groupCmp),
     })),
   addGroup: (group) =>
     set((state) => ({ groups: [...state.groups, group].sort(state.groupCmp) })),
   removeGroup: (groupId) =>
     set((state) => ({
-      groups: state.groups.filter((group) => group.id !== groupId),
+      groups: state.groups.filter((group) => group.groupId !== groupId),
     })),
   setEditGroup: (groupId) =>
     set((state) => ({
       groups: state.groups.map((group) =>
-        group.id === groupId
+        group.groupId === groupId
           ? { ...group, isInEdit: true, isFolded: false }
           : { ...group, isFolded: true }
       ),
@@ -67,13 +70,13 @@ const useGroupStore = create<GroupStore>((set) => ({
   openGroup: (groupId) =>
     set((state) => ({
       groups: state.groups.map((group) =>
-        group.id === groupId ? { ...group, isFolded: false } : group
+        group.groupId === groupId ? { ...group, isFolded: false } : group
       ),
     })),
   closeGroup: (groupId) =>
     set((state) => ({
       groups: state.groups.map((group) =>
-        group.id === groupId ? { ...group, isFolded: true } : group
+        group.groupId === groupId ? { ...group, isFolded: true } : group
       ),
     })),
   setUserCmp: (userCmp) => set({ userCmp: userCmp }),
@@ -81,10 +84,10 @@ const useGroupStore = create<GroupStore>((set) => ({
   addUserToGroup: (userList, groupIdList) =>
     set((state) => ({
       groups: state.groups.map((group) =>
-        groupIdList.includes(group.id)
+        groupIdList.includes(group.groupId)
           ? {
               ...group,
-              users: [...group.users, ...userList].sort(state.userCmp),
+              users: [...group.members, ...userList].sort(state.userCmp),
             }
           : group
       ),
@@ -92,10 +95,12 @@ const useGroupStore = create<GroupStore>((set) => ({
   removeUserFromGroup: (userIds, groupIds) =>
     set((state) => ({
       groups: state.groups.map((group) =>
-        groupIds.includes(group.id)
+        groupIds.includes(group.groupId)
           ? {
               ...group,
-              users: group.users.filter((user) => !userIds.includes(user.id)),
+              users: group.members.filter(
+                (user) => !userIds.includes(user.intraId)
+              ),
             }
           : group
       ),
@@ -104,7 +109,7 @@ const useGroupStore = create<GroupStore>((set) => ({
     set((state) => ({
       groups: state.groups.map((group) => ({
         ...group,
-        users: group.users.filter((user) => !userIds.includes(user.id)),
+        users: group.members.filter((user) => !userIds.includes(user.intraId)),
       })),
     })),
 }));
