@@ -5,12 +5,14 @@ import User from "@/types/User";
 export type UserStore = {
   user?: Pick<
     User,
-    | "id"
-    | "login"
-    | "profileImgSrc"
+    | "intraId"
+    | "intraName"
+    | "image"
     | "location"
     | "comment"
-    | "locationUsageAgreement"
+    | "agree"
+    | "inCluster"
+    | "defaultGroupId"
   >;
   attendanceOnly: boolean;
   token?: string;
