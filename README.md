@@ -20,6 +20,10 @@ npm install
 npm run dev
 ```
 
+## Figma
+[어디있니v2](https://www.figma.com/file/pWuXx7ClToBqM9fil3vCij/v3?type=design&node-id=345-215&mode=dev)
+
+
 ## 기술 스택
 
 - Next.js
