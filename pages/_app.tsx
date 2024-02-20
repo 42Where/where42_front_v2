@@ -45,37 +45,35 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [path, replace, token]);
 
   useEffect(() => {
-    // 쿼리스트링에서 토큰 가져오기
-    console.log(router.query);
-    const { token, intraId, agreement } = router.query;
-
-    if (intraId && agreement && token) {
-      // 토큰이 존재하면 로컬 스토리지에 저장
-      localStorage.setItem("token", token as string);
-      console.log("Token update from query string:", token);
-      setToken(token as string);
-      memberApi
-        .getMemberInfo({ intraId: Number(intraId as string) })
-        .then((res) => {
-          console.log(res);
-          setUser(res);
-        });
-      return;
-    } else if (token) {
-      const storedToken = localStorage.getItem("token");
-      if (storedToken) setToken(storedToken);
+    const accessToken = document.cookie
+      .split(";")
+      .find((cookie) => cookie.includes("accessToken"))
+      ?.split("=")[1]; // 쿠키에서 토큰 가져오기
+    if (accessToken) {
+      setToken(accessToken);
     }
-  }, [router.query, setToken, setUser]);
 
-  // useEffect(() => {
-  //   // 토큰이 존재하면 axios 헤더에 토큰 추가, 없으면 삭제
-  //   if (token) {
-  //     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  //     console.log(axios.defaults.headers.common["Authorization"]);
-  //   } else {
-  //     delete axios.defaults.headers.common["Authorization"];
-  //   }
-  // }, [token]);
+    // 쿼리스트링에서 인트라id, 동의여부 가져오기
+    const quary = router.query;
+    const intraId = parseInt(quary.intraId as string);
+    const agreement = quary.agreement as string;
+
+    if (intraId) {
+      // 인트라id로 사용자 정보 가져오기
+      memberApi
+        .getMemberInfo({ intraId })
+        .then((res) => {
+          setUser(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    // console.log("accessToken", accessToken);
+    // console.log("intraId", intraId);
+    // console.log("agreement", agreement);
+  }, [router.query, setToken, setUser]);
 
   return (
     <ConfigProvider theme={theme}>
