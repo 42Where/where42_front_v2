@@ -11,7 +11,11 @@ const axios = Axios.create({
 
 axios.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = document.cookie
+      .split(";")
+      .find((cookie) => cookie.includes("accessToken"))
+      ?.split("=")[1]; // 쿠키에서 토큰 가져오기
+    console.log(token);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -22,6 +26,11 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   (response) => {
+    // test cookie
+    const cookies = response.headers["Set-Cookie"];
+    console.log(cookies);
+
+    // end: test
     return response;
   },
   (error) => {
