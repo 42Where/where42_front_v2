@@ -4,7 +4,7 @@ const path = require("path");
 
 module.exports = {
   reactStrictMode: true,
-  swcMinify: true,
+  // swcMinify: true,
   // output: "standalone",
   compiler: {
     removeConsole: process.env.NODE_ENV !== "development",
