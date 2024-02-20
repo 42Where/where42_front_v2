@@ -20,9 +20,14 @@ export default function Home() {
       </Button>
       <Button
         onClick={() => {
-          groupApi.getAllGroups().then((res) => {
-            console.log(res);
-          });
+          groupApi
+            .getAllGroups()
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }}
       >
         test
