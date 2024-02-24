@@ -3,8 +3,9 @@ import User from "@/types/User";
 import axios from "@/utils/Axios";
 
 const authApi = {
-  getToken: async (): Promise<string> => {
-    return "";
+  getMyInfo: async (): Promise<User> => {
+    const response = await axios.get("/v3/member");
+    return response.data;
   },
 };
 

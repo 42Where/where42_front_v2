@@ -5,15 +5,45 @@ import useUserStore from "@/stores/useUserStore";
 import useAMessage from "@/atoms/AMessage/AMessage";
 import { Button } from "antd";
 import groupApi from "@/api/groupApi";
+import useGroupStore from "@/stores/useGroupStore";
+import axios, { Axios } from "axios";
 
 export default function Home() {
   const { contextHolder, axiosError } = useAMessage();
+  const { user, setUser } = useUserStore();
 
   return (
     <main>
       <Button
         onClick={() => {
-          axiosError(401);
+          // groupApi
+          //   .getAllGroups()
+          //   .then((res) => {
+          //     console.log(res);
+          //   })
+          //   .catch((err) => {
+          //     console.log(err);
+          //   });
+          try {
+            const refreshToken = document.cookie
+              .split(";")
+              .find((cookie) => cookie.includes("refreshToken"))
+              ?.split("=")[1];
+            console.log(refreshToken);
+
+            axios
+              .post("/v3/jwt/reissue", {
+                Headers: { Authorization: `Bearer ${refreshToken}` },
+              })
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          } catch (err) {
+            console.log(err);
+          }
         }}
       >
         test
@@ -21,9 +51,9 @@ export default function Home() {
       <Button
         onClick={() => {
           groupApi
-            .getAllGroups()
-            .then((res) => {
-              console.log(res);
+            .addMemberAtGroup({
+              groupId: user?.defaultGroupId as number,
+              members: [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
             })
             .catch((err) => {
               console.log(err);

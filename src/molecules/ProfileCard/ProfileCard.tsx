@@ -19,6 +19,8 @@ import ProfileCardFunctionButton from "./ProfileCardFunctionButton";
 import ProfileImage from "@/atoms/ProfileImage/ProfileImage";
 import ProfileText from "./ProfileText";
 import styles from "./ProfileCard.module.css";
+import groupApi from "@/api/groupApi";
+import useUserStore from "@/stores/useUserStore";
 
 type ProfileCardProps = {
   /**
@@ -60,16 +62,24 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           // 자식 컴포넌트가 있을때에는 프로필 클릭 이벤트 x
         };
   const IconSize = useSize();
+  const defultGroupId = useUserStore((state) => state.user?.defaultGroupId);
+  const defaultGroup = useGroupStore((state) =>
+    state.groups.find((group) => group.groupId === defultGroupId)
+  );
 
   const Icon =
     children ??
-    (user.inCluster ? (
+    (defaultGroup?.members.find((member) => member.intraId === user.intraId) ? (
       <ProfileCardFunctionButton user={user} parentGroup={parentGroup} />
     ) : (
       <AIcon
         icon={UserAddIcon}
         onClick={(e: React.MouseEvent) => {
           e.preventDefault();
+          groupApi.addMemberAtGroup({
+            groupId: defultGroupId ?? 0,
+            members: [user.intraId],
+          });
         }}
         size={IconSize}
       />

@@ -20,7 +20,7 @@ const ProfileText: React.FC<ProfileTextProps> = ({ user }) => {
     <div className={styles.profile_text}>
       <div className={styles.main}>
         <div className={styles.login}>{user.intraName}</div>
-        <TextBox text={locationText} primary={user.location !== undefined} />
+        <TextBox text={locationText} primary={locationText !== "퇴근"} />
       </div>
       {user.comment && <div className={styles.comment}>{user.comment}</div>}
     </div>

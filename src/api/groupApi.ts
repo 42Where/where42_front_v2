@@ -4,7 +4,7 @@ import axios from "@/utils/Axios";
 
 const groupApi = {
   /**
-   * 그룹id로 그룹원을 조회합니다.
+   * 그룹id로 그룹원 조회
    * @param groupId
    * @returns User[]
    */
@@ -19,7 +19,7 @@ const groupApi = {
     return response.data;
   },
   /**
-   * 그룹id와 유저 id리스트로 그룹원을 삭제합니다. - 기본그룹에서도 사용 가능
+   * 그룹id와 유저id 리스트로 그룹원 삭제 - 기본그룹에서도 사용 가능
    * @param groupId: number
    * @param userIds: number[]
    * @returns User
@@ -38,39 +38,20 @@ const groupApi = {
     return response.data;
   },
   /**
-   * 기본그룹id로 기본그룹에 사용자를 추가합니다.
-   * 인자 왜필요한지 백엔드에 문의 필요
-   * @param groupId
-   */
-  addMemberAtDefaultGroup: async ({
-    defaultGroupId,
-    intraId,
-  }: {
-    defaultGroupId: number;
-    defaultGroupName: string;
-    intraId: number;
-  }): Promise<number> => {
-    const response = await axios.post("/v3/group/groupmember", {
-      groupId: defaultGroupId,
-      intraId,
-    });
-    return response.status;
-  },
-  /**
-   * 그룹id와 유저id로 기본 그룹이 아닌 그룹에 사용자를 추가합니다.
+   * 그룹id와 유저id 리스트로 그룹에 사용자 추가
    * @param groupId
    * @param intraId
    */
   addMemberAtGroup: async ({
     groupId,
-    intraId,
+    members,
   }: {
     groupId: number;
-    intraId: number;
+    members: number[];
   }): Promise<number> => {
     const response = await axios.post("/v3/group/groupmember/members", {
       groupId,
-      intraId,
+      members,
     });
     return response.status;
   },
@@ -94,7 +75,7 @@ const groupApi = {
     groupName: string;
   }): Promise<{ groupId: number; groupName: string }> => {
     const response = await axios.post("/v3/group", {
-      params: { groupName },
+      groupName: groupName,
     });
     return response.data;
   },
@@ -112,7 +93,8 @@ const groupApi = {
     groupName: string;
   }): Promise<{ groupId: number; groupName: string }> => {
     const response = await axios.post("/v3/group/name", {
-      params: { groupId, groupName },
+      groupId,
+      groupName,
     });
     return response.data;
   },

@@ -13,7 +13,7 @@ type ProfileImageProps = {
 };
 
 const ProfileImage: React.FC<ProfileImageProps> = ({
-  user: { intraId, intraName, image, location },
+  user: { intraName, image, location },
   onClick,
 }) => {
   const [imageComponent, setImageComponent] = useState<React.ReactNode>(<></>);
@@ -32,9 +32,10 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
 
   useEffect(() => {
     setImageComponent(
+      // TODO: image에 null이 들어올 경우에 이미지 사이즈 깨지는것 수정
       <Image
         className={styles.profile_image + " " + styles.image}
-        src={image}
+        src={image ?? DefaultProfileImage}
         width={128}
         height={128}
         alt={intraName}

@@ -88,7 +88,6 @@ const MyProfileCardButtons: React.FC = () => {
         const newGroup = await groupApi.createGroup({
           groupName: inputValue,
         });
-        addGroup(newGroup as any);
         // 백엔드 스키마 만들어질때까지 대기
       } catch (error) {
         console.error(error);

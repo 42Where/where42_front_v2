@@ -11,13 +11,17 @@ const axios = Axios.create({
 
 axios.interceptors.request.use(
   (config) => {
-    const token = document.cookie
+    const accessToken = document.cookie
       .split(";")
       .find((cookie) => cookie.includes("accessToken"))
-      ?.split("=")[1]; // 쿠키에서 토큰 가져오기
-    console.log(token);
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      ?.split("=")[1];
+    // const accessToken = localStorage.getItem("accessToken");
+    // console.log("accessToken", accessToken);
+
+    // console.log("access", accessToken);
+    // console.log("refresh", refreshToken);
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   },
@@ -26,20 +30,46 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   (response) => {
-    // test cookie
-    const cookies = response.headers["Set-Cookie"];
-    console.log(cookies);
-
-    // end: test
+    console.log(response.config.url, response.config.data, response.status);
     return response;
   },
   (error) => {
-    // console.log(error);
-    error.response && console.log(error.response.status);
-    // const { status } = error.response;
     if (error.response && error.response.status === 401) {
-      console.log("401!!!!!!!!!!!!!!");
-      localStorage.removeItem("token");
+      // const refreshToken = document.cookie
+      //   .split(";")
+      //   .find((cookie) => cookie.includes("refreshToken"))
+      //   ?.split("=")[1];
+      // if (refreshToken) {
+      //   localStorage.setItem("accessToken", refreshToken);
+      // }
+      // axios
+      //   .post("/v3/jwt/reissue")
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      // axios
+      //   .post("/v3/jwt/reissue", {
+      //     Headers: { Authorization: `Bearer ${refreshToken}` },
+      //   })
+      //   .then((res) => {
+      //     console.log(res);
+      //     // document.cookie = `accessToken=${res.data.accessToken}`;
+      //   })
+      //   .catch((err) => {});
+      // axios
+      //   .post("/v3/jwt/reissue", {
+      //     refreshToken: document.cookie
+      //       .split(";")
+      //       .find((cookie) => cookie.includes("refreshToken"))
+      //       ?.split("=")[1],
+      //   })
+      //   .then((res) => {
+      //     console.log(res);
+      //     // document.cookie = `accessToken=${res.data.accessToken}`;
+      //   });
     }
     return Promise.reject(error);
   }
