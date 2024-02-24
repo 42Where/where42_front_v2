@@ -17,6 +17,12 @@ const memberApi = {
   deleteAccount: async (): Promise<void> => {
     const response = await axios.delete("/v3/member");
   },
+  searchMember: async ({ keyWord }: { keyWord: string }): Promise<User[]> => {
+    const response = await axios.get("/v3/search", {
+      params: { keyWord },
+    });
+    return response.data;
+  },
 };
 
 export default memberApi;
