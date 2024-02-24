@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { Input, Modal } from "antd";
 import { SearchProps } from "antd/es/input";
 
@@ -6,7 +6,9 @@ import User from "@/types/User";
 import { Size } from "@/types/enums";
 import UserTable from "../UserTable/UserTable";
 import { useSize } from "@/utils/MediaQuary";
-// import useMyDataStore from "@/stores/useMyDataStore";
+import memberApi from "@/api/memberApi";
+import groupApi from "@/api/groupApi";
+import useMyDataStore from "@/stores/useUserStore";
 
 // import styles from "./SearchModal.module.scss";
 
@@ -23,22 +25,29 @@ const SearchModal: React.FC<SearchModalProps> = ({ open, size, onCancel }) => {
   const [inputValue, setInputValue] = useState("");
   const [userList, setUserList] = useState<User[]>([]);
   const Size = useSize();
+
+  const { user } = useMyDataStore();
+
   // const {
   //   myData: { id },
   // } = useMyDataStore((state) => state);
 
   const onSearch: SearchProps["onSearch"] = (v, e) => {
     e?.preventDefault();
-    // Axios.get("/v3/search", { params: { intraId: id, keyWord: v } })
-    //   .then((res) => {
-    //     // setUserList(res.data);
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // TODO: 임시 구현
-    // api 호출 후에 setUserList로 상태 업데이트 구현 필요
+    console.log(v);
+    memberApi
+      .searchMember({ keyWord: v })
+      .then((data) => {
+        console.log(data);
+        // 임시로 모두 그룹에 추가
+        groupApi.addMemberAtGroup({
+          groupId: user?.defaultGroupId as number,
+          members: data.map((user) => user.intraId),
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();

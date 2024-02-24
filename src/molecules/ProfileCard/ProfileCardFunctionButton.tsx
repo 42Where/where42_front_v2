@@ -32,7 +32,7 @@ const ProfileCardFunctionButton: React.FC<{
           selectedGroups.map((group) =>
             groupApi.addMemberAtGroup({
               groupId: group.groupId,
-              intraId: user.intraId,
+              members: [user.intraId],
             })
           )
         );

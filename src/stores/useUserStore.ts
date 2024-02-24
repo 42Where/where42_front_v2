@@ -15,7 +15,7 @@ export type UserStore = {
     | "defaultGroupId"
   >;
   attendanceOnly: boolean;
-  token?: string;
+  accessToken?: string;
   refreshToken?: string;
   /**
    * 일단 넣어두긴 했는데 당장은 사용하지 않음
@@ -24,7 +24,8 @@ export type UserStore = {
   setUser: (user: User) => void;
   setLocation: (location: string) => void;
   setComment: (comment: string) => void;
-  setToken: (token: string) => void;
+  setAccessToken: (token: string) => void;
+  setRefreshToken: (token: string) => void;
   setAttendanceOnly: (attendanceOnly: boolean) => void;
 };
 
@@ -42,10 +43,16 @@ const useUserStore = create<UserStore>((set) => ({
       user: state.user ? { ...state.user, comment } : state.user,
     }));
   },
-  setToken: (token) => {
+  setAccessToken: (token) => {
     set((state) => ({
       ...state,
-      token,
+      accessToken: token,
+    }));
+  },
+  setRefreshToken: (token) => {
+    set((state) => ({
+      ...state,
+      refreshToken: token,
     }));
   },
   setAttendanceOnly: (attendanceOnly) =>

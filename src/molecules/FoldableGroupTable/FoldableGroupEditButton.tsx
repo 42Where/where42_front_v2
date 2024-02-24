@@ -127,7 +127,7 @@ const FoldableGroupEditButton: React.FC<FoldableGroupEditButtonProps> = ({
             Array.from(isCheckedSet).map((userId) =>
               groupApi.addMemberAtGroup({
                 groupId: group.groupId,
-                intraId: userId,
+                members: [userId],
               })
             )
           )

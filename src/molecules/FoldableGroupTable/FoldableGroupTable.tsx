@@ -61,7 +61,9 @@ const FoldableGroupTable: React.FC<FoldableGroupTableProps> = ({
 
   const userList = userGroup.members
     // 타입 변경하면 로직 변경 필요
-    .filter((user) => (attendanceOnly ? user.location : true))
+    .filter((user) =>
+      attendanceOnly ? user.location : user.location !== "퇴근"
+    )
     .map((user) =>
       userGroup.isInEdit
         ? {
