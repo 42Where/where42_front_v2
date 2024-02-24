@@ -10,7 +10,7 @@ type User = {
   /**
    * 42api 프로필 사진 url
    */
-  image: string;
+  image?: string;
   /**
    * 사용자의 위치정보
    * 후에 api 구현에 따라서 오브젝트로 분리될 수 있음
