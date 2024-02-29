@@ -1,7 +1,7 @@
-import MainMain from "@/domains/Main/organisms/MainMain";
-import MainTemplate from "@/domains/Main/templates/MainTemplate";
-import Header from "@/molecules/Header/Header";
-import Footer from "@/molecules/Footer/Footer";
+import MainMain from '@/domains/Main/organisms/MainMain';
+import MainTemplate from '@/domains/Main/templates/MainTemplate';
+import Header from '@/molecules/Header/Header';
+import Footer from '@/molecules/Footer/Footer';
 
 const MainPage = () => {
   return (
