@@ -1,4 +1,4 @@
-import axios from "@/utils/Axios";
+import axios from '@/lib/Axios';
 
 const locationApi = {
   setCustomLocation: async ({
@@ -6,8 +6,8 @@ const locationApi = {
   }: {
     location: string;
   }): Promise<void> => {
-    const response = await axios.post("/v3/location/custom", {
-      location,
+    const response = await axios.post('/v3/location/custom', {
+      customLocation: location,
     });
   },
 };

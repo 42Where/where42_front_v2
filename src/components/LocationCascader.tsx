@@ -1,10 +1,13 @@
-export type CascaderOption = {
+import React from 'react';
+import { Cascader } from 'antd';
+
+interface CascaderOption {
   label: string;
   value: string;
   children?: CascaderOption[];
-};
+}
 
-export const DefaultCustomLocation: CascaderOption[] = [
+const DefaultCustomLocation: CascaderOption[] = [
   {
     label: '개포',
     value: '개포',
@@ -117,5 +120,17 @@ export const DefaultCustomLocation: CascaderOption[] = [
     ],
   },
 ];
+const onChange = (value: (string | number)[]) => {
+  console.log(value);
+};
 
-export default CascaderOption;
+const LocationCascader: React.FC = () => (
+  <Cascader
+    options={DefaultCustomLocation}
+    onChange={onChange}
+    placeholder='Please select'
+    className='z-[1001]'
+  />
+);
+
+export default LocationCascader;
