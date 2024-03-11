@@ -64,11 +64,12 @@ export default function ProfileCard({
               {user.intraName}
             </h3>
             <Button
-              className={`rounded-full ${
+              className={`rounded-full md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l font-gsansMd
+              ${
                 user.location
-                  ? 'bg-[#132743]'
-                  : 'bg-white hover:bg-white text-[#132743] border-2 border-[#132743]'
-              } md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l font-gsansMd`}
+                  ? 'bg-[#132743] text-white'
+                  : 'bg-white hover:bg-white  border-2 border-[#132743]'
+              }`}
             >
               {user.location ? user.location : '퇴근'}
             </Button>
