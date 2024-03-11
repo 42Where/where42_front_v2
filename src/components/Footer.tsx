@@ -52,7 +52,7 @@ export default function Footer() {
               제공에 반드시 필요한 개인정보의 수집⦁이용을 위하여 귀하의 동의를
               받고자 합니다.
             </DialogHeader>
-            <Accordion type='single' collapsible className='w-full'>
+            <Accordion type='multiple' className='w-full'>
               <AccordionItem value='item-1'>
                 <AccordionTrigger>
                   개인정보의 수집 및 이용 목적

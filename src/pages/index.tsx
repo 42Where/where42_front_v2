@@ -13,6 +13,7 @@ import {
   useGroupsStore,
   useAddedMembersStore,
 } from '@/lib/stores';
+import AgreementModal from '@/components/modals/AgreementModal';
 
 export default function Home() {
   const router = useRouter();
@@ -48,6 +49,7 @@ export default function Home() {
   }, [setAddedMembers]);
   return (
     <main className='flex flex-col justify-center gap-3 lg:gap-4 px-2 md:px-10 pb-24'>
+      <AgreementModal />
       <Header />
       {user ? <MyProfileCard user={user} /> : <ProfileSkeleton />}
       {groups ? <Groups groups={groups} /> : null}
