@@ -15,6 +15,17 @@ export default function SearchedCard({ member }: { member: User }) {
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
   const { groups, setGroups } = useGroupsStore();
   const [isAlreadyAdded, setIsAlreadyAdded] = React.useState(false);
+
+  const [location, setLocation] = React.useState<string>('');
+  React.useEffect(() => {
+    if (member.location) {
+      setLocation(member.location);
+    } else if (member.inCluster && !member.location) {
+      setLocation('개포');
+    } else {
+      setLocation('퇴근');
+    }
+  }, []);
   React.useEffect(() => {
     addedMembers.forEach((addedMember) => {
       if (addedMember === member.intraId) setIsAlreadyAdded(true);
@@ -37,13 +48,14 @@ export default function SearchedCard({ member }: { member: User }) {
               {member.intraName}
             </h3>
             <Button
-              className={`rounded-full ${
-                member.location
-                  ? 'bg-[#132743]'
-                  : 'bg-white hover:bg-white text-[#132743] border-2 border-[#132743]'
-              } md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l font-gsansMd`}
+              className={`rounded-full md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l font-gsansMd
+              ${
+                member.inCluster || member.location
+                  ? 'bg-[#132743] text-white'
+                  : 'bg-white hover:bg-white  border-2 border-[#132743]'
+              }`}
             >
-              {member.location ? member.location : '퇴근'}
+              {location}
             </Button>
           </div>
           <p className='font-gsansMd text-[#4A6282] text-xl'>

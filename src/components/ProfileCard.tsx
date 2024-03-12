@@ -19,12 +19,17 @@ export default function ProfileCard({
   group: Group;
 }) {
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
-  const [isPinkBorder, setIsPinkBorder] = React.useState(false); // 분홍색 테두리 상태
 
-  // 로케이션 정보에 따라 분홍색 또는 회색 테두리 설정
+  const [location, setLocation] = React.useState<string>('');
   React.useEffect(() => {
-    setIsPinkBorder(user.location !== null); // 유저의 로케이션이 있는지 여부에 따라 분홍색 테두리 설정
-  }, [user.location]);
+    if (user.location) {
+      setLocation(user.location);
+    } else if (user.inCluster && !user.location) {
+      setLocation('개포');
+    } else {
+      setLocation('퇴근');
+    }
+  }, []);
 
   return (
     <div
@@ -47,7 +52,7 @@ export default function ProfileCard({
       <div className='flex flex-row items-center gap-4 md:gap-6'>
         <Avatar
           className={`size-16 md:size-28 ${
-            isPinkBorder ? 'border-[#FFB5B5]' : ''
+            user.inCluster || user.location ? 'border-[#FFB5B5]' : ''
           } border-4 hover:border-[#bfb5ff]`}
           onClick={() => {
             if (!isEdit) {
@@ -66,12 +71,12 @@ export default function ProfileCard({
             <Button
               className={`rounded-full md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l font-gsansMd
               ${
-                user.location
+                user.inCluster || user.location
                   ? 'bg-[#132743] text-white'
                   : 'bg-white hover:bg-white  border-2 border-[#132743]'
               }`}
             >
-              {user.location ? user.location : '퇴근'}
+              {location}
             </Button>
           </div>
           <p className='font-gsansMd text-[#4A6282] text-l lg:text-xl'>

@@ -22,11 +22,13 @@ export default function Groups({ groups }: { groups: Group[] }) {
   const { setGroups } = useGroupsStore();
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
   const { checked } = useCheckedStore();
+  const sortedGroups = [...groups].sort((a, b) => b.groupId - a.groupId);
+
   return (
     <div>
       <Divider />
       <Accordion type='multiple'>
-        {groups.map((group) => (
+        {sortedGroups.map((group) => (
           <AccordionItem
             key={group.groupId}
             value={group.groupName}

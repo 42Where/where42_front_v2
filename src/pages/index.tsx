@@ -24,29 +24,39 @@ export default function Home() {
     const accessToken = Cookies.get('accessToken');
     if (!accessToken) router.push('/login');
     else {
-      let userIntraId;
+      let userIntraId: number;
+      let userDefaultGroupId: number | undefined;
       authApi
         .getMyInfo()
         .then((res) => {
           setUser(res);
           userIntraId = res.intraId;
+          userDefaultGroupId = res.defaultGroupId;
         })
-        .catch((err) => console.log(err));
-      groupApi.getAllGroups().then((res) => {
-        setGroups(res);
-        const allMemberIds = res.flatMap((group) =>
-          group.members.map((member) => member.intraId)
-        );
-        res.forEach((group) => {
-          group.members.forEach((member) => {
-            console.table(member);
+        .catch((err) => console.log(err))
+        .then(() => {
+          groupApi.getAllGroups().then((res) => {
+            res.map((group) => {
+              if (group.groupId === userDefaultGroupId) {
+                group.groupName = '친구 목록';
+                console.log(group.groupName);
+              }
+            });
+            setGroups(res);
+            const allMemberIds = res.flatMap((group) =>
+              group.members.map((member) => member.intraId)
+            );
+            res.forEach((group) => {
+              group.members.forEach((member) => {
+                // console.table(member);
+              });
+            });
+            allMemberIds.push(userIntraId);
+            setAddedMembers(allMemberIds);
           });
         });
-        allMemberIds.push(userIntraId);
-        setAddedMembers(allMemberIds);
-      });
     }
-  }, [setAddedMembers]);
+  }, []);
   return (
     <main className='flex flex-col justify-center gap-3 lg:gap-4 px-2 md:px-10 pb-24'>
       <AgreementModal />
