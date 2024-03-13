@@ -1,12 +1,5 @@
-import React from 'react';
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import React, { useEffect } from 'react';
+import { Button } from './ui/button';
 
 interface CascaderOption {
   label: string;
@@ -126,48 +119,111 @@ const DefaultCustomLocation: CascaderOption = {
   ],
 };
 
-export default function LocationCascader() {
+function CascaderColumn({
+  item,
+  optionList,
+  setOptionList,
+}: {
+  item: CascaderOption;
+  optionList: CascaderOption[];
+  setOptionList: React.Dispatch<React.SetStateAction<CascaderOption[]>>;
+}) {
+  const [selected, setSelected] = React.useState<string>('');
+  return (
+    <span className='flex flex-col border rounded-r-lg' key={item.value}>
+      {item.children?.map(
+        (child) =>
+          child.label && (
+            <SingleCascader
+              key={child.value}
+              prevVal={item.value}
+              data={child}
+              optionList={optionList}
+              setOptionList={setOptionList}
+              selected={selected === child.value}
+              setSelected={setSelected}
+            />
+          )
+      )}
+    </span>
+  );
+}
+
+function SingleCascader({
+  prevVal,
+  data,
+  optionList,
+  setOptionList,
+  selected,
+  setSelected,
+}: {
+  prevVal: string;
+  data: CascaderOption;
+  optionList: CascaderOption[];
+  setOptionList: React.Dispatch<React.SetStateAction<CascaderOption[]>>;
+  selected: boolean;
+  setSelected: React.Dispatch<React.SetStateAction<string>>;
+}) {
+  return (
+    <Button
+      className={`rounded-lg w-32 ${
+        selected
+          ? 'bg-[#132743] text-white hover:bg-gray-700'
+          : 'bg-white border-2 border-[#132743] text-[#132743] hover:bg-gray-200'
+      } border-0 border-[#132743] py-1 px-3 text-xl font-gsansMd gap-2`}
+      onClick={() => {
+        if (selected) {
+          setSelected('');
+          const temp = optionList.slice(0);
+          const idx = temp.findIndex((item) => item.value === prevVal);
+          temp.splice(idx + 1);
+          setOptionList(temp);
+          return;
+        }
+        const temp = optionList.slice(0);
+        const idx = temp.findIndex((item) => item.value === prevVal);
+        if (idx !== temp.length - 1) {
+          temp.splice(idx + 1);
+        }
+        temp.push(data);
+        setOptionList(temp);
+        setSelected(data.value);
+      }}
+    >
+      {data.label}
+    </Button>
+  );
+}
+
+export default function LocationCascader({
+  setSeatValue,
+}: {
+  setSeatValue: React.Dispatch<React.SetStateAction<string>>;
+}) {
   const data = DefaultCustomLocation;
   const [optionList, setOptionList] = React.useState<CascaderOption[]>([data]);
-
-  function SingleCascader({ data }: { data: CascaderOption }) {
-    return (
-      <Select
-        onValueChange={(val) => {
-          console.log('child val: ', val);
-          if (data.children) {
-            data.children.forEach((child) => {
-              if (child.value === val) {
-                const temp = optionList.slice(0);
-                const idx = temp.findIndex((item) => item.value === data.value);
-                if (idx !== temp.length - 1) {
-                  temp.splice(idx + 1);
-                }
-                temp.push(child);
-                setOptionList(temp);
-                console.log('temp: ', temp);
-              }
-            });
-          }
-        }}
-      >
-        <SelectTrigger className='w-32'>{data.value}</SelectTrigger>
-        <SelectContent side='bottom'>
-          {data.children?.map((child) => (
-            <SelectItem key={child.value} value={child.value}>
-              {child.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    );
-  }
+  const result = optionList.map((item) => item.label).join(' / ');
+  React.useEffect(() => {
+    setSeatValue(result);
+  }, [result, setSeatValue]);
 
   return (
-    <div className='flex flex-row'>
-      {optionList.map((item) => (
-        <SingleCascader key={item.label} data={item} />
-      ))}
-    </div>
+    <>
+      <p>{result}</p>
+      <div className='flex flex-row'>
+        {optionList.map(
+          (item) =>
+            item.children &&
+            item.children.length > 1 && (
+              <CascaderColumn
+                key={item.value}
+                item={item}
+                optionList={optionList}
+                setOptionList={setOptionList}
+              />
+            )
+        )}
+      </div>
+    </>
   );
 }
