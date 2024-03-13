@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useUserStore } from '@/lib/stores';
 import locationApi from '@/api/locationApi';
+import LocationCascader from '../LocationCascader';
 
 export default function MySettingModal() {
   const [isMessage, setIsMessage] = React.useState<boolean>(false);
@@ -144,10 +145,10 @@ export default function MySettingModal() {
           </DialogHeader>
         </DialogContent>
       ) : (
-        <DialogContent className='transition-all ease-out duration-500 max-w-[425px]'>
+        <DialogContent className='transition-all ease-out duration-500 max-w-[425px] min-h-[300px]'>
           <DialogHeader className='gap-2'>
             <DialogTitle>수동 자리 설정</DialogTitle>
-            <div className='flex flex-row items-center gap-2 p-2  w-full border border-gray-400 rounded-xl shadow-lg'>
+            <div className='flex flex-row items-center gap-2 p-2 w-full border border-gray-400 rounded-xl shadow-lg'>
               <form
                 className='flex flex-row items-center gap-2 w-full'
                 ref={formRef}
@@ -193,6 +194,7 @@ export default function MySettingModal() {
             <p className='text-l font-gsansMd text-[#132743]'>
               {resultMessage}
             </p>
+            <LocationCascader />
           </DialogHeader>
         </DialogContent>
       )}
