@@ -119,36 +119,6 @@ const DefaultCustomLocation: CascaderOption = {
   ],
 };
 
-function CascaderColumn({
-  item,
-  optionList,
-  setOptionList,
-}: {
-  item: CascaderOption;
-  optionList: CascaderOption[];
-  setOptionList: React.Dispatch<React.SetStateAction<CascaderOption[]>>;
-}) {
-  const [selected, setSelected] = React.useState<string>('');
-  return (
-    <span className='flex flex-col border rounded-r-lg' key={item.value}>
-      {item.children?.map(
-        (child) =>
-          child.label && (
-            <SingleCascader
-              key={child.value}
-              prevVal={item.value}
-              data={child}
-              optionList={optionList}
-              setOptionList={setOptionList}
-              selected={selected === child.value}
-              setSelected={setSelected}
-            />
-          )
-      )}
-    </span>
-  );
-}
-
 function SingleCascader({
   prevVal,
   data,
@@ -195,6 +165,36 @@ function SingleCascader({
   );
 }
 
+function CascaderColumn({
+  item,
+  optionList,
+  setOptionList,
+}: {
+  item: CascaderOption;
+  optionList: CascaderOption[];
+  setOptionList: React.Dispatch<React.SetStateAction<CascaderOption[]>>;
+}) {
+  const [selected, setSelected] = React.useState<string>('');
+  return (
+    <span className='flex flex-col border rounded-r-lg' key={item.value}>
+      {item.children?.map(
+        (child) =>
+          child.label && (
+            <SingleCascader
+              key={child.value}
+              prevVal={item.value}
+              data={child}
+              optionList={optionList}
+              setOptionList={setOptionList}
+              selected={selected === child.value}
+              setSelected={setSelected}
+            />
+          )
+      )}
+    </span>
+  );
+}
+
 export default function LocationCascader({
   setSeatValue,
 }: {
@@ -202,14 +202,14 @@ export default function LocationCascader({
 }) {
   const data = DefaultCustomLocation;
   const [optionList, setOptionList] = React.useState<CascaderOption[]>([data]);
-  const result = optionList.map((item) => item.label).join(' / ');
+  const result = optionList.map((item) => item.label).join(' ');
   React.useEffect(() => {
     setSeatValue(result);
   }, [result, setSeatValue]);
 
   return (
     <>
-      <p>{result}</p>
+      <p className='text-xl font-gsansMd text-[#4A6282]'>{result}</p>
       <div className='flex flex-row'>
         {optionList.map(
           (item) =>
