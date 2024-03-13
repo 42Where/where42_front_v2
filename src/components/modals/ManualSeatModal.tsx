@@ -17,7 +17,7 @@ export default function ManualSeatModal() {
   const { user, setUser } = useUserStore();
   const [resultMessage, setResultMessage] = React.useState<string>('');
   const [seatValue, setSeatValue] = React.useState<string>('');
-
+  if (!user) return null;
   return (
     <Dialog
       onOpenChange={(open) => {

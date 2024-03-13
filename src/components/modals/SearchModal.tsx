@@ -81,7 +81,7 @@ export default function SearchModal() {
               }
               try {
                 SearchInputSchema.parse(inputValue); // Zod를 사용하여 입력값 검사
-              } catch (error) {
+              } catch (error: any) {
                 const errors = JSON.parse(error.message);
                 setResultMessage(errors[0].message);
                 return;
