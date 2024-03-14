@@ -4,6 +4,9 @@ sudo docker ps -a -q --filter "name=app" | grep -q . && docker stop app && docke
 # 기존 이미지 삭제
 sudo docker rmi where42/where42_frontend_v2:latest
 
+# Docker 시스템 정리 - 사용하지 않는 모든 컨테이너, 네트워크, 이미지, 빌드 캐시 정리
+sudo docker system prune -f
+
 sudo echo $PASSWORD | docker login -u $USERNAME --password-stdin
 # 도커허브 이미지 pull
 sudo docker pull where42/where42_frontend_v2:latest
