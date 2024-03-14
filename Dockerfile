@@ -3,16 +3,15 @@ FROM node:alpine AS deps
 RUN apk add --no-cache libc6-compat python3 build-base
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm install --frozen-lockfile
+RUN npm install
 
 # Rebuild the source code only when needed
 FROM node:alpine AS builder
 WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
-RUN npm build
-RUN npm install --production
-RUN rm -rf ./.next/cache
+RUN npm run build
+# npm install --production과 캐시 제거 단계 삭제
 
 # Production image, copy all the files and run next
 FROM node:alpine AS runner
