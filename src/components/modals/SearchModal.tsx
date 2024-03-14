@@ -50,7 +50,7 @@ export default function SearchModal() {
           tabIndex={0}
         >
           <Image
-            src='/icons/search.svg'
+            src='/Icons/search.svg'
             alt='search'
             width={40}
             height={40}
@@ -67,7 +67,7 @@ export default function SearchModal() {
           <DialogTitle>카뎃 검색</DialogTitle>
         </DialogHeader>
         <div className='flex flex-row items-center gap-2 p-2  w-full border border-gray-400 rounded-xl shadow-lg'>
-          <Image src='/icons/search.svg' width={20} height={20} alt='search' />
+          <Image src='/Icons/search.svg' width={20} height={20} alt='search' />
           <form
             className='flex flex-row items-center gap-2 w-full'
             ref={formRef}

@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <header className='flex flex-row justify-between items-center p-2 pb-0 md:p-4'>
       <Image
-        src='/icons/logoC.svg'
+        src='/Icons/logoC.svg'
         alt='logo'
         width={200}
         height={100}
@@ -28,7 +28,7 @@ export default function Header() {
           }}
         >
           <Image
-            src='/icons/signOut.svg'
+            src='/Icons/signOut.svg'
             alt='search'
             width={40}
             height={40}

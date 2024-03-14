@@ -23,7 +23,7 @@ export default function Footer() {
     >
       <Link href='https://github.com/42Where'>
         <Image
-          src='/icons/logoC.svg'
+          src='/Icons/logoC.svg'
           alt='logo'
           width={120}
           height={120}

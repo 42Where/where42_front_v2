@@ -49,7 +49,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
             ?.isInEdit ? (
             <div className='absolute size-10 rounded-lg flex justify-center items-center right-[50px] md:right-[64px] top-[8px] md:top-[16px] hover:bg-gray-200'>
               <Image
-                src='/icons/pencil.svg'
+                src='/Icons/pencil.svg'
                 alt='pencil'
                 width={24}
                 height={24}

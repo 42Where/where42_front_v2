@@ -36,7 +36,7 @@ export default function UserSettingModal({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Image
-            src='/icons/functionButton.svg'
+            src='/Icons/functionButton.svg'
             alt='function'
             width={30}
             height={30}

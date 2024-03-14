@@ -41,7 +41,7 @@ export default function NewGroupModal() {
           text-l lg:text-xl text-[#132743] font-gsansMd hover:bg-gray-200 gap-2 w-30 h-8 lg:w-30 lg:h-10'
         >
           <Image
-            src='/icons/newGroup.svg'
+            src='/Icons/newGroup.svg'
             alt='newGroup'
             width={20}
             height={20}

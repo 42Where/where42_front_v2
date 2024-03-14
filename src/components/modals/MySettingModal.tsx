@@ -51,7 +51,7 @@ export default function MySettingModal() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Image
-            src='/icons/setting.svg'
+            src='/Icons/setting.svg'
             alt='setting'
             width={60}
             height={60}
