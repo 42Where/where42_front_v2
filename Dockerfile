@@ -11,7 +11,7 @@ WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN npm build
-RUN npm install --frozen-lockfile --production
+RUN npm install --production
 RUN rm -rf ./.next/cache
 
 # Production image, copy all the files and run next
