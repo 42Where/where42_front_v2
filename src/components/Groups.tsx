@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Accordion,
   AccordionContent,
@@ -17,26 +17,21 @@ import GroupSettingModal from './modals/GroupSettingModal';
 import { Button } from './ui/button';
 import GroupDeleteModal from './modals/GroupDeleteModal';
 import GroupAddModal from './modals/GroupAddModal';
+import CardSkeleton from './CardSkeleton';
 
 export default function Groups({ groups }: { groups: Group[] }) {
   const { setGroups } = useGroupsStore();
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
   const { checked } = useCheckedStore();
-  const [sortedGroups, setSortedGroups] = React.useState<Group[]>([]);
-  const [defaultValues, setDefaultValues] = React.useState<string[]>([]);
-  useEffect(() => {
-    const values = sortedGroups.map((group) => group.groupName);
-    setDefaultValues(values);
-  }, [sortedGroups]);
-  useEffect(() => {
-    const temp = [...groups].sort((a, b) => b.groupId - a.groupId);
-    setSortedGroups(temp);
-  }, [groups]);
+  const sortedGroups = [...groups].sort((a, b) => b.groupId - a.groupId);
+  const defaultValues = sortedGroups.map((group) => group.groupName);
 
   return (
     <div>
       <Divider />
-      {sortedGroups.length && defaultValues.length && (
+      {!sortedGroups.length && !defaultValues.length ? (
+        <CardSkeleton />
+      ) : (
         <Accordion type='multiple' defaultValue={defaultValues}>
           {sortedGroups.map(
             (group) => (
@@ -58,8 +53,8 @@ export default function Groups({ groups }: { groups: Group[] }) {
                       <div className='flex flex-row gap-1 md:gap-2'>
                         <Button
                           className='rounded-full bg-white border-2 border-[#132743]
-                  md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l
-                  py-1  text-[#132743] font-gsansMd hover:bg-gray-200 gap-2'
+                md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l
+                py-1  text-[#132743] font-gsansMd hover:bg-gray-200 gap-2'
                           onClick={() => {
                             const temp = checkedUsers;
                             if (temp.length === group.members.length) {
@@ -76,8 +71,8 @@ export default function Groups({ groups }: { groups: Group[] }) {
                         </Button>
                         <Button
                           className='rounded-full border-2 border-[#132743]
-                  md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l text-white
-                font-gsansMd gap-2'
+                md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l text-white
+              font-gsansMd gap-2'
                           onClick={() => {
                             const temp = groups;
                             const myGroup = temp.find(
