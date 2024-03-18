@@ -1,5 +1,4 @@
 import React from 'react';
-import { X } from 'lucide-react';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import {
   Dialog,
@@ -41,9 +40,11 @@ export default function ManualSeatModal() {
           {user.location ? user.location : '퇴근'}
         </Button>
       </DialogTrigger>
-      <DialogContent className='transition-all ease-out duration-500 max-w-[550px] min-h-[300px]'>
-        <DialogHeader className='gap-2'>
-          <DialogTitle>수동 자리 설정</DialogTitle>
+      {user.inCluster ? (
+        <DialogContent className='transition-all ease-out duration-500 max-w-[550px] min-h-[300px]'>
+          <DialogHeader className='gap-2'>
+            <DialogTitle>수동 자리 설정</DialogTitle>
+          </DialogHeader>
           <p className='text-l font-gsansMd text-[#132743]'>{resultMessage}</p>
           <LocationCascader setSeatValue={setSeatValue} />
           <div className='flex flex-row items-center justify-between'>
@@ -76,8 +77,17 @@ export default function ManualSeatModal() {
               </DialogClose>
             </div>
           </div>
-        </DialogHeader>
-      </DialogContent>
+        </DialogContent>
+      ) : (
+        <DialogContent
+          className='transition-all ease-out duration-500 max-w-[550px]
+        min-h-[300px] flex flex-col items-center justify-center'
+        >
+          <p className='text-center text-xl font-gsansMd text-[#4A6282]'>
+            수동 위치 설정은 클러스터 안에 있을 때만 가능해요 😢
+          </p>
+        </DialogContent>
+      )}
     </Dialog>
   );
 }
