@@ -42,22 +42,20 @@ export default function SearchedCard({ member }: { member: User }) {
           <AvatarImage src={member.image} />
           <AvatarFallback />
         </Avatar>
-        <div className='flex flex-col items-start gap-2'>
-          <div className='flex flex-row items-center gap-2'>
-            <h3 className='text-l md:text-xl font-gsansLg text-[#132743]'>
-              {member.intraName}
-            </h3>
-            <Button
-              className={`rounded-full md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l font-gsansMd
+        <div className='flex flex-col items-start gap-1'>
+          <Button
+            className={`rounded-full md:h-6 px-2 md:px-3 text-l font-gsansMd
               ${
                 member.inCluster || member.location
                   ? 'bg-[#132743] text-white'
                   : 'bg-white hover:bg-white  border-2 border-[#132743]'
               }`}
-            >
-              {location}
-            </Button>
-          </div>
+          >
+            {location}
+          </Button>
+          <h3 className='text-l md:text-xl font-gsansLg text-[#132743]'>
+            {member.intraName}
+          </h3>
           <p className='font-gsansMd text-[#4A6282] text-xl'>
             {member.comment}
           </p>

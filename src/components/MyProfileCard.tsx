@@ -22,12 +22,10 @@ export default function MyProfileCard({ user }: { user: User }) {
           <AvatarFallback />
         </Avatar>
         <div className='flex flex-col items-start gap-2'>
-          <div className='flex flex-row items-center gap-2 lg:gap-4'>
-            <h3 className='text-xl lg:text-3xl font-gsansLg text-[#132743]'>
-              {user.intraName}
-            </h3>
-            <ManualSeatModal />
-          </div>
+          <ManualSeatModal />
+          <h3 className='text-xl lg:text-3xl font-gsansLg text-[#132743]'>
+            {user.intraName}
+          </h3>
           <p className='font-gsansMd text-[#4A6282] text-l lg:text-xl'>
             {user.comment}
           </p>

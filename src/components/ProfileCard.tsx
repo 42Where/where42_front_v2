@@ -64,21 +64,19 @@ export default function ProfileCard({
           <AvatarFallback />
         </Avatar>
         <div className='flex flex-col items-start gap-2'>
-          <div className='flex flex-row items-center gap-2'>
-            <h3 className='text-l md:text-3xl font-gsansLg text-[#132743]'>
-              {user.intraName}
-            </h3>
-            <Button
-              className={`rounded-full md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l font-gsansMd
+          <Button
+            className={`rounded-full md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l font-gsansMd
               ${
                 user.inCluster || user.location
                   ? 'bg-[#132743] text-white'
                   : 'bg-white hover:bg-white  border-2 border-[#132743]'
               }`}
-            >
-              {location}
-            </Button>
-          </div>
+          >
+            {location}
+          </Button>
+          <h3 className='text-l md:text-3xl font-gsansLg text-[#132743]'>
+            {user.intraName}
+          </h3>
           <p className='font-gsansMd text-[#4A6282] text-l lg:text-xl'>
             {user.comment}
           </p>
