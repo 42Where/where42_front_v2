@@ -42,10 +42,14 @@ axios.interceptors.response.use(
         console.log('심지어 여기도 왔음');
         try {
           console.log('세상에나 여기도 왔음');
-          const res = await authApi.reissueToken(refreshToken);
-          console.log('결과는?: ', res);
-          // Cookies.set('accessToken', res.refreshToken);
-          console.log('Refreshed token successfully!');
+          try {
+            const res = await authApi.reissueToken(refreshToken);
+            console.log('결과는?: ', res);
+            // Cookies.set('accessToken', res.refreshToken);
+            console.log('Refreshed token successfully!');
+          } catch (err) {
+            console.error('Failed to refresh token:', err);
+          }
           // const accessToken = res.data.accessToken;
           // const originalRequest = error.config;
           // originalRequest.headers.Authorization = `Bearer ${accessToken}`;
