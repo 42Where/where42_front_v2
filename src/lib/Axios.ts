@@ -24,29 +24,29 @@ axios.interceptors.response.use(
   async (response) => {
     console.log(response.config.url, response.config.data, response.status);
     return response;
-  },
-  async (error) => {
-    if (error.response && error.response.status === 401) {
-      const prevAccessToken = Cookies.get('accessToken');
-      const refreshToken = Cookies.get('refreshToken');
-      if (refreshToken) {
-        try {
-          const res = await axios.post('/v3/jwt/reissue', { refreshToken });
-          console.log(res);
-          console.log(res.data);
-          Cookies.set('accessToken', res.data.accessToken);
-          console.log('Refreshed token successfully!');
-          const accessToken = res.data.accessToken;
-          const originalRequest = error.config;
-          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-          // return await axios(originalRequest);
-        } catch (err) {
-          console.error('Failed to refresh token:', err);
-        }
-      }
-    }
-    return Promise.reject(error);
   }
+  // async (error) => {
+  //   if (error.response && error.response.status === 401) {
+  //     const prevAccessToken = Cookies.get('accessToken');
+  //     const refreshToken = Cookies.get('refreshToken');
+  //     if (refreshToken) {
+  //       try {
+  //         const res = await axios.post('/v3/jwt/reissue', { refreshToken });
+  //         console.log(res);
+  //         console.log(res.data);
+  //         Cookies.set('accessToken', res.data.accessToken);
+  //         console.log('Refreshed token successfully!');
+  //         const accessToken = res.data.accessToken;
+  //         const originalRequest = error.config;
+  //         originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+  //         return await axios(originalRequest);
+  //       } catch (err) {
+  //         console.error('Failed to refresh token:', err);
+  //       }
+  //     }
+  //   }
+  //   return Promise.reject(error);
+  // }
 );
 
 export default axios;
