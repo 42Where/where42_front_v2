@@ -27,6 +27,9 @@ axios.interceptors.response.use(
     return response;
   },
   async (error) => {
+    console.log('에러 났음');
+    console.log(error.response);
+    console.log(error.response.status);
     const router = useRouter();
     if (error.response && error.response.status === 401) {
       const prevAccessToken = Cookies.get('accessToken');
