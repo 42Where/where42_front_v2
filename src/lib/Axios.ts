@@ -1,6 +1,5 @@
 import Axios from 'axios';
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/router';
 
 const axios = Axios.create({
   baseURL: undefined,
@@ -30,8 +29,10 @@ axios.interceptors.response.use(
     console.log('에러 났음');
     console.log(error.response);
     console.log(error.response.status);
-    const router = useRouter();
-    if (error.response && error.response.status === 401) {
+    console.log('type: ', typeof error.response.status);
+    console.log('type: ', typeof 401);
+    console.log('res: ', error.response.status == 401);
+    if (error.response && error.response.status == 401) {
       console.log('여기도 왔음');
       const prevAccessToken = Cookies.get('accessToken');
       const refreshToken = Cookies.get('refreshToken');
