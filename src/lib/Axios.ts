@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import Cookies from 'js-cookie';
+import authApi from '@/api/authApi';
 
 const axios = Axios.create({
   baseURL: undefined,
@@ -32,6 +33,7 @@ axios.interceptors.response.use(
     console.log('type: ', typeof error.response.status);
     console.log('type: ', typeof 401);
     console.log('res: ', error.response.status == 401);
+    // 야 여기서 라우터 쓰면 안되나봐
     if (error.response && error.response.status == 401) {
       console.log('여기도 왔음');
       const prevAccessToken = Cookies.get('accessToken');
@@ -40,10 +42,9 @@ axios.interceptors.response.use(
         console.log('심지어 여기도 왔음');
         try {
           console.log('세상에나 여기도 왔음');
-          const res = await axios.post('/v3/jwt/reissue', { refreshToken });
-          console.log(res);
-          console.log(res.data);
-          Cookies.set('accessToken', res.data.accessToken);
+          const res = await authApi.reissueToken(refreshToken);
+          console.log('결과는?: ', res);
+          // Cookies.set('accessToken', res.refreshToken);
           console.log('Refreshed token successfully!');
           // const accessToken = res.data.accessToken;
           // const originalRequest = error.config;
