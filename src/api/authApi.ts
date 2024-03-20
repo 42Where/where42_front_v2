@@ -13,7 +13,7 @@ const authApi = {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: `Bearer ${refreshToken}`,
+        // Authorization: `Bearer ${refreshToken}`,
       },
     });
     const response = await tokenAxios.post('/v3/jwt/reissue');
