@@ -32,10 +32,13 @@ axios.interceptors.response.use(
     console.log(error.response.status);
     const router = useRouter();
     if (error.response && error.response.status === 401) {
+      console.log('여기도 왔음');
       const prevAccessToken = Cookies.get('accessToken');
       const refreshToken = Cookies.get('refreshToken');
       if (refreshToken) {
+        console.log('심지어 여기도 왔음');
         try {
+          console.log('세상에나 여기도 왔음');
           const res = await axios.post('/v3/jwt/reissue', { refreshToken });
           console.log(res);
           console.log(res.data);
@@ -49,10 +52,11 @@ axios.interceptors.response.use(
           console.error('Failed to refresh token:', err);
         }
       } else {
+        console.error('야 이거 왜 안되는거야');
         console.log('No refresh token');
         Cookies.remove('accessToken');
         Cookies.remove('refreshToken');
-        router.push('/login');
+        // router.push('/login');
       }
     }
     return Promise.reject(error);
