@@ -34,27 +34,28 @@ axios.interceptors.response.use(
     console.log('type: ', typeof 401);
     console.log('res: ', error.response.status == 401);
     // 야 여기서 라우터 쓰면 안되나봐
-    if (error.response && error.response.status == 401) {
+    if (
+      error.response &&
+      error.response.status == 401 &&
+      !error.config.__isRetryRequest
+    ) {
       console.log('여기도 왔음');
       const prevAccessToken = Cookies.get('accessToken');
       const refreshToken = Cookies.get('refreshToken');
       if (refreshToken) {
+        error.config.__isRetryRequest = true;
         console.log('심지어 여기도 왔음');
         try {
           console.log('세상에나 여기도 왔음');
-          try {
-            const res = await authApi.reissueToken(refreshToken);
-            console.log('결과는?: ', res);
-            // Cookies.set('accessToken', res.refreshToken);
-            console.log('Refreshed token successfully!');
-          } catch (err) {
-            console.error('Failed to refresh token:', err);
-          }
+          const res = await authApi.reissueToken(refreshToken);
+          console.log('결과는?: ', res);
+          // Cookies.set('accessToken', res.refreshToken);
+          console.log('Refreshed token successfully!');
+        } catch (err) {
           // const accessToken = res.data.accessToken;
           // const originalRequest = error.config;
           // originalRequest.headers.Authorization = `Bearer ${accessToken}`;
           // return await axios(originalRequest);
-        } catch (err) {
           console.error('Failed to refresh token:', err);
         }
       } else {
