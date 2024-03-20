@@ -26,7 +26,10 @@ export default function Home() {
   React.useEffect(() => {
     console.log(intraId, agreement);
     if (agreement && agreement === 'false') setShowModal(true);
-  }, [intraId, agreement]);
+    if (router.query.intraId || router.query.agreement) {
+      router.replace(router.pathname, router.pathname, { shallow: true });
+    }
+  }, [intraId, agreement, router]);
   React.useEffect(() => {
     const accessToken = Cookies.get('accessToken');
     if (!accessToken) router.push('/login');

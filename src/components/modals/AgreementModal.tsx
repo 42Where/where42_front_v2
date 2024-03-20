@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useRouter } from 'next/router';
 
 import {
   Dialog,
@@ -22,6 +23,7 @@ export default function AgreementModal({
   showModal: boolean;
   setShowModal: (show: boolean) => void;
 }) {
+  const router = useRouter();
   return (
     <Dialog open={showModal}>
       <DialogContent className='max-w-[800px] font-gsansMd text-[#132743E0] gap-2'>
@@ -83,7 +85,10 @@ export default function AgreementModal({
               동의
             </Button>
             <Button
-              onClick={() => setShowModal(false)}
+              onClick={() => {
+                setShowModal(false);
+                router.push('/login');
+              }}
               variant={'destructive'}
               size={'lg'}
               className='text-xl'
