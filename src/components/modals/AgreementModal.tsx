@@ -15,22 +15,13 @@ import {
 import { Button } from '../ui/button';
 import groupApi from '@/api/groupApi';
 
-export default function AgreementModal() {
-  const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    const visited = localStorage.getItem('visited');
-    if (!visited) {
-      setShowModal(true);
-      localStorage.setItem('visited', 'true');
-    }
-  }, []);
-
-  const closeModal = () => {
-    setShowModal(false);
-    localStorage.setItem('modalClosed', 'true');
-  };
-
+export default function AgreementModal({
+  showModal,
+  setShowModal,
+}: {
+  showModal: boolean;
+  setShowModal: (show: boolean) => void;
+}) {
   return (
     <Dialog open={showModal}>
       <DialogContent className='max-w-[800px] font-gsansMd text-[#132743E0] gap-2'>
@@ -84,7 +75,7 @@ export default function AgreementModal() {
             <Button
               onClick={() => {
                 groupApi.agreeJoin();
-                closeModal();
+                setShowModal(false);
               }}
               size={'lg'}
               className='text-xl'
@@ -92,7 +83,7 @@ export default function AgreementModal() {
               동의
             </Button>
             <Button
-              onClick={closeModal}
+              onClick={() => setShowModal(false)}
               variant={'destructive'}
               size={'lg'}
               className='text-xl'
