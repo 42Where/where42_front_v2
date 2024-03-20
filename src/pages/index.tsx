@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React from 'react';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
@@ -34,8 +35,6 @@ export default function Home() {
     const accessToken = Cookies.get('accessToken');
     if (!accessToken) router.push('/login');
     else {
-      let userIntraId: number;
-      let userDefaultGroupId: number | undefined;
       authApi
         .getMyInfo()
         .then((res) => {
