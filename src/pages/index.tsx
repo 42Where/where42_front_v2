@@ -35,6 +35,8 @@ export default function Home() {
     const accessToken = Cookies.get('accessToken');
     if (!accessToken) router.push('/login');
     else {
+      let userIntraId: number;
+      let userDefaultGroupId: number | undefined;
       authApi
         .getMyInfo()
         .then((res) => {
