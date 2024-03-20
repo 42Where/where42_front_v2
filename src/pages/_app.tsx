@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Toaster />
       <Head>
         <title>Where42</title>
-        <link rel='icon' href='/icons/logo.svg' />
+        <link rel='icon' href='/Icons/logo.svg' />
       </Head>
       <Component {...pageProps} />
     </>
