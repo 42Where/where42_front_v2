@@ -4,6 +4,7 @@ import axios from '@/lib/Axios';
 const authApi = {
   getMyInfo: async (): Promise<User> => {
     const response = await axios.get('/v3/member');
+    console.table(response);
     return response.data;
   },
 };

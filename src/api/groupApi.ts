@@ -77,6 +77,7 @@ const groupApi = {
     const response = await axios.post('/v3/group', {
       groupName,
     });
+    console.table(response.data);
     return response.data;
   },
   /**
