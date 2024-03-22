@@ -122,6 +122,7 @@ export default function SearchModal() {
               onChange={(e) => setSearchValue(e.target.value)}
             />
           </form>
+          <input type='search' placeholder='test' className='w-full' />
           {searchValue && (
             <X
               className='size-6'

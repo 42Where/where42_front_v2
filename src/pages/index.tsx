@@ -71,6 +71,7 @@ export default function Home() {
     <main className='flex flex-col justify-center gap-3 lg:gap-4 px-2 md:px-10 pb-24'>
       <AgreementModal showModal={showModal} setShowModal={setShowModal} />
       <Header />
+      <input type='search' placeholder='test' className='w-full' />
       {user ? <MyProfileCard user={user} /> : <ProfileSkeleton />}
       {groups ? <Groups groups={groups} /> : null}
       <Footer />

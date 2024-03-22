@@ -15,6 +15,8 @@ axios.interceptors.request.use(
     const accessToken = Cookies.get('accessToken');
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
+    } else {
+      config.headers.Authorization = 'Bearer NONE';
     }
     return config;
   },
