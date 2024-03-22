@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-input[type='search'] {
-  -webkit-appearance: none !important;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -67,6 +63,12 @@ input[type='search'] {
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
+  }
+}
+
+@layer base {
+  input[type='search'] {
+    -webkit-appearance: none !important;
   }
 }
 
