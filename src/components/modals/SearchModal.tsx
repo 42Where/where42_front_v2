@@ -116,6 +116,7 @@ export default function SearchModal() {
           >
             <input
               ref={inputRef}
+              type='search'
               className='w-full bg-transparent outline-none placeholder:text-gray-500 dark:text-gray-700 text-l font-gsansMd text-[#132743]'
               placeholder='검색할 카뎃의 아이디를 입력해주세요'
               onChange={(e) => setSearchValue(e.target.value)}
