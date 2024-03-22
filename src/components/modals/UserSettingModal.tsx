@@ -57,7 +57,22 @@ export default function UserSettingModal({
           </DialogTrigger>
           <DropdownMenuItem
             className='text-xl'
-            onClick={() => setCheckedUsers([targUser])}
+            onClick={() => {
+              setCheckedUsers([targUser]);
+              const temp = groups;
+              const tempGroup = temp.find(
+                (g) => g.groupId === targGroup.groupId
+              );
+              if (tempGroup) {
+                tempGroup.isInEdit = true;
+                temp.map((g) => {
+                  const buf = g;
+                  if (g.groupId !== targGroup.groupId) buf.isInEdit = false;
+                  return buf;
+                });
+                setGroups(temp);
+              }
+            }}
           >
             유저 선택하기
           </DropdownMenuItem>
