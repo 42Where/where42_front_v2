@@ -18,6 +18,7 @@ import { Button } from '../ui/button';
 import groupApi from '@/api/groupApi';
 import User from '@/types/User';
 import Group from '@/types/Group';
+import { useCheckedUsersStore } from '@/lib/stores';
 
 export default function UserSettingModal({
   targUser,
@@ -31,6 +32,8 @@ export default function UserSettingModal({
   const { groups, setGroups } = useGroupsStore();
   const [checkedGroups, setCheckedGroups] = React.useState<number[]>([]);
   const targGroupId = targGroup.groupId;
+  const { setCheckedUsers } = useCheckedUsersStore();
+
   return (
     <Dialog>
       <DropdownMenu>
@@ -50,6 +53,11 @@ export default function UserSettingModal({
           <DialogTrigger asChild onClick={() => setIsDelete(false)}>
             <DropdownMenuItem className='text-xl'>
               다른 그룹에 추가하기
+            </DropdownMenuItem>
+          </DialogTrigger>
+          <DialogTrigger asChild onClick={() => setCheckedUsers([targUser])}>
+            <DropdownMenuItem className='text-xl'>
+              유저 선택하기
             </DropdownMenuItem>
           </DialogTrigger>
           <DialogTrigger asChild onClick={() => setIsDelete(true)}>
