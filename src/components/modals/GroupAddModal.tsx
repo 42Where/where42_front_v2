@@ -28,7 +28,7 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
           className='rounded-full bg-white border-2 border-[#132743]
           md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l  text-[#132743] font-gsansMd hover:bg-gray-200 gap-2'
         >
-          그룹에 추가
+          다른 그룹에 추가
         </Button>
       </DialogTrigger>
       <DialogContent className='transition-all ease-out duration-500 font-gsansMd text-[#132743]'>
