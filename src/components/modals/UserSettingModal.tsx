@@ -55,11 +55,12 @@ export default function UserSettingModal({
               다른 그룹에 추가하기
             </DropdownMenuItem>
           </DialogTrigger>
-          <DialogTrigger asChild onClick={() => setCheckedUsers([targUser])}>
-            <DropdownMenuItem className='text-xl'>
-              유저 선택하기
-            </DropdownMenuItem>
-          </DialogTrigger>
+          <DropdownMenuItem
+            className='text-xl'
+            onClick={() => setCheckedUsers([targUser])}
+          >
+            유저 선택하기
+          </DropdownMenuItem>
           <DialogTrigger asChild onClick={() => setIsDelete(true)}>
             <DropdownMenuItem className='text-xl text-red-700'>
               그룹에서 삭제하기
