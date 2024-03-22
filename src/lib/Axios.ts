@@ -31,7 +31,10 @@ axios.interceptors.response.use(
   async (error) => {
     console.log(error.response);
     console.log(error.response.status);
-    if (error.response && error.response.status == 401) {
+    if (
+      error.response &&
+      (error.response.status == 401 || error.response.status == 500)
+    ) {
       const refreshToken = Cookies.get('refreshToken');
       if (refreshToken) {
         try {
