@@ -98,7 +98,8 @@ export default function Groups({ groups }: { groups: Group[] }) {
                       {checked
                         ? group.members.map(
                             (member) =>
-                              member.location && (
+                              member.inCluster ||
+                              (member.location && (
                                 <ProfileCard
                                   key={member.intraId}
                                   user={member}
@@ -106,7 +107,7 @@ export default function Groups({ groups }: { groups: Group[] }) {
                                   isCheck={checkedUsers.includes(member)}
                                   group={group}
                                 />
-                              )
+                              ))
                           )
                         : group.members.map((member) => (
                             <ProfileCard
