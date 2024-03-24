@@ -39,7 +39,7 @@ export default function Groups({ groups }: { groups: Group[] }) {
               (
                 <AccordionItem
                   key={group.groupId}
-                  value={group.groupName}
+                  value={group.groupId.toString()}
                   className='overflow-hidden transition-all duration-500 ease-in-out relative'
                 >
                   {group.isInEdit && (

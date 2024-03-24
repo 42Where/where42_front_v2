@@ -31,9 +31,6 @@ export default function Home() {
     }
   }, [intraId, agreement, router]);
   React.useEffect(() => {
-    // const accessToken = Cookies.get('accessToken');
-    // if (!accessToken) router.push('/login');
-    // else {
     let userIntraId: number;
     let userDefaultGroupId: number | undefined;
     authApi
@@ -56,16 +53,10 @@ export default function Home() {
           const allMemberIds = res.flatMap((group) =>
             group.members.map((member) => member.intraId)
           );
-          res.forEach((group) => {
-            group.members.forEach((member) => {
-              // console.table(member);
-            });
-          });
           allMemberIds.push(userIntraId);
           setAddedMembers(allMemberIds);
         });
       });
-    // }
   }, []);
   return (
     <main className='flex flex-col justify-center gap-3 lg:gap-4 px-2 md:px-10 pb-24'>
