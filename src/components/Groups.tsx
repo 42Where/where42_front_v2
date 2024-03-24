@@ -124,8 +124,9 @@ export default function Groups({ groups }: { groups: Group[] }) {
                       </p>
                     ) : (
                       checked &&
-                      group.members.filter((member) => member.location)
-                        .length === 0 && (
+                      group.members.filter(
+                        (member) => member.location || member.inCluster
+                      ).length === 0 && (
                         <p className='text-center text-xl font-gsansMd text-[#4A6282]'>
                           아무도 없어요.. 😢
                         </p>
