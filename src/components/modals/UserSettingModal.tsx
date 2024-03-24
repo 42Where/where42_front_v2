@@ -19,6 +19,7 @@ import groupApi from '@/api/groupApi';
 import User from '@/types/User';
 import Group from '@/types/Group';
 import { useCheckedUsersStore } from '@/lib/stores';
+import { useAddedMembersStore } from '@/lib/stores';
 
 export default function UserSettingModal({
   targUser,
@@ -33,6 +34,7 @@ export default function UserSettingModal({
   const [checkedGroups, setCheckedGroups] = React.useState<number[]>([]);
   const targGroupId = targGroup.groupId;
   const { setCheckedUsers } = useCheckedUsersStore();
+  const { addedMembers, setAddedMembers } = useAddedMembersStore();
 
   return (
     <Dialog>
@@ -207,6 +209,10 @@ export default function UserSettingModal({
                       });
                       setGroups(temp);
                     }
+                    const buf = addedMembers.filter(
+                      (addedMember) => addedMember !== targUser.intraId
+                    );
+                    setAddedMembers(buf);
                     groupApi.removeMembersFromGroup({
                       groupId: targGroupId,
                       members: [targUser.intraId],
