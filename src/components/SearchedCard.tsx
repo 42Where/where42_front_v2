@@ -9,23 +9,14 @@ import {
   useAddedMembersStore,
   useGroupsStore,
 } from '@/lib/stores';
+import LocationBtn from './LocationBtn';
 
 export default function SearchedCard({ member }: { member: User }) {
   const { user } = useUserStore();
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
   const { groups, setGroups } = useGroupsStore();
   const [isAlreadyAdded, setIsAlreadyAdded] = React.useState(false);
-
-  const [location, setLocation] = React.useState<string>('');
-  React.useEffect(() => {
-    if (member.location) {
-      setLocation(member.location);
-    } else if (member.inCluster && !member.location) {
-      setLocation('개포');
-    } else {
-      setLocation('퇴근');
-    }
-  }, []);
+  console.table(member);
   React.useEffect(() => {
     addedMembers.forEach((addedMember) => {
       if (addedMember === member.intraId) setIsAlreadyAdded(true);
@@ -43,16 +34,7 @@ export default function SearchedCard({ member }: { member: User }) {
           <AvatarFallback />
         </Avatar>
         <div className='flex flex-col items-start gap-1'>
-          <Button
-            className={`rounded-full md:h-6 px-2 md:px-3 text-l font-gsansMd
-              ${
-                member.inCluster || member.location
-                  ? 'bg-[#132743] text-white'
-                  : 'bg-white hover:bg-white  border-2 border-[#132743]'
-              }`}
-          >
-            {location}
-          </Button>
+          <LocationBtn user={member} searchedUser={member} />
           <h3 className='text-l md:text-xl font-gsansLg text-[#132743]'>
             {member.intraName}
           </h3>

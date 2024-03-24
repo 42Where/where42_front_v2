@@ -6,6 +6,7 @@ import { useCheckedUsersStore } from '@/lib/stores';
 import { Checkbox } from './ui/checkbox';
 import UserSettingModal from './modals/UserSettingModal';
 import Group from '@/types/Group';
+import LocationBtn from './LocationBtn';
 
 export default function ProfileCard({
   user,
@@ -19,18 +20,6 @@ export default function ProfileCard({
   group: Group;
 }) {
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
-
-  const [location, setLocation] = React.useState<string>('');
-  React.useEffect(() => {
-    if (user.location) {
-      setLocation(user.location);
-    } else if (user.inCluster && !user.location) {
-      setLocation('개포');
-    } else {
-      setLocation('퇴근');
-    }
-  }, []);
-
   return (
     <div
       className='flex flex-row justify-between p-4 md:p-6 rounded-2xl border-2 hover:border-[#FFB5B5] items-center'
@@ -64,16 +53,7 @@ export default function ProfileCard({
           <AvatarFallback />
         </Avatar>
         <div className='flex flex-col items-start gap-2'>
-          <Button
-            className={`rounded-full md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l font-gsansMd
-              ${
-                user.inCluster || user.location
-                  ? 'bg-[#132743] text-white'
-                  : 'bg-white hover:bg-white  border-2 border-[#132743]'
-              }`}
-          >
-            {location}
-          </Button>
+          <LocationBtn user={user} />
           <h3 className='text-l md:text-3xl font-gsansLg text-[#132743]'>
             {user.intraName}
           </h3>

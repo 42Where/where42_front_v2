@@ -11,6 +11,7 @@ import locationApi from '@/api/locationApi';
 import { Button } from '../ui/button';
 import LocationCascader from '../LocationCascader';
 import { DialogClose } from '@/components/ui/dialog';
+import LocationBtn from '../LocationBtn';
 
 export default function ManualSeatModal() {
   const { user, setUser } = useUserStore();
@@ -29,16 +30,8 @@ export default function ManualSeatModal() {
         }
       }}
     >
-      <DialogTrigger asChild>
-        <Button
-          className={`rounded-full ${
-            user.location
-              ? 'bg-[#132743]'
-              : 'bg-white hover:bg-white text-[#132743] border-2 border-[#132743]'
-          } h-6 md:h-8 px-2 md:px-3 md:text-xl font-gsansMd`}
-        >
-          {user.location ? user.location : '퇴근'}
-        </Button>
+      <DialogTrigger>
+        <LocationBtn user={user} />
       </DialogTrigger>
       {user.inCluster ? (
         <DialogContent className='transition-all ease-out duration-500 max-w-[550px] min-h-[300px]'>
