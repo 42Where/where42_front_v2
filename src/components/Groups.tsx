@@ -24,7 +24,7 @@ export default function Groups({ groups }: { groups: Group[] }) {
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
   const { checked } = useCheckedStore();
   const sortedGroups = [...groups].sort((a, b) => b.groupId - a.groupId);
-  const defaultValues = sortedGroups.map((group) => group.groupName);
+  const defaultValues = sortedGroups.map((group) => group.groupId.toString());
 
   return (
     <div>
