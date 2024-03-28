@@ -144,7 +144,7 @@ export default function SearchModal() {
               </div>
             </ScrollArea>
           ) : (
-            <div className='grid grid-flow-row md:grid-cols-2 gap-2'>
+            <div className='w-full grid grid-flow-row md:grid-cols-2 gap-2'>
               {searchedUsers?.map((searchedMember) => (
                 <SearchedCard
                   key={searchedMember.intraId}
