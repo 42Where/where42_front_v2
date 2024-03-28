@@ -94,7 +94,7 @@ export default function Groups({ groups }: { groups: Group[] }) {
                     {group.groupName}
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className='grid lg:grid-cols-2 2xl:grid-cols-3 grid-flow-row gap-4'>
+                    <div className='grid lg:grid-cols-2 air:grid-cols-3 3xl:grid-cols-4 grid-flow-row gap-4'>
                       {checked
                         ? group.members.map(
                             (member) =>
