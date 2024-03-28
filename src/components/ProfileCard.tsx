@@ -1,6 +1,5 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
 import User from '@/types/User';
 import { useCheckedUsersStore } from '@/lib/stores';
 import { Checkbox } from './ui/checkbox';
@@ -40,7 +39,7 @@ export default function ProfileCard({
     >
       <div className='flex flex-row items-center gap-4 md:gap-6'>
         <Avatar
-          className={`size-16 md:size-28 ${
+          className={`size-20 md:size-28 ${
             user.inCluster || user.location ? 'border-[#FFB5B5]' : ''
           } border-4 hover:border-[#bfb5ff]`}
           onClick={() => {
@@ -52,9 +51,9 @@ export default function ProfileCard({
           <AvatarImage src={user.image} />
           <AvatarFallback />
         </Avatar>
-        <div className='flex flex-col items-start gap-2'>
+        <div className='flex flex-col items-start gap-1 md:gap-2'>
           <LocationBtn user={user} />
-          <h3 className='text-l md:text-3xl font-gsansLg text-[#132743]'>
+          <h3 className='text-xl md:text-3xl font-gsansLg text-[#132743]'>
             {user.intraName}
           </h3>
           <p className='font-gsansMd text-[#4A6282] text-l lg:text-xl'>

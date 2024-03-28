@@ -6,7 +6,7 @@ const SingleCardSkeleton = () => {
 
 export default function CardSkeleton() {
   return (
-    <div className='pt-20 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 grid-flow-row gap-4'>
+    <div className='pt-20 grid lg:grid-cols-2 air:grid-cols-3 3xl:grid-cols-4 grid-flow-row gap-4'>
       <SingleCardSkeleton />
       <SingleCardSkeleton />
       <SingleCardSkeleton />
