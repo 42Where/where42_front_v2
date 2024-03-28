@@ -59,7 +59,7 @@ export default function SearchModal() {
         </div>
       </DialogTrigger>
       <DialogContent
-        className={`transition-all ease-out duration-500 ${
+        className={`flex flex-col items-center transition-all ease-out duration-500 ${
           searchedUsers?.length ? 'max-w-[800px]' : 'max-w-[425px]'
         }`}
       >
