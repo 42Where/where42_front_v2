@@ -133,7 +133,7 @@ export default function SearchModal() {
         </div>
         {searchedUsers?.length ? (
           searchedUsers?.length > 4 ? (
-            <ScrollArea className='h-[200px] md:h-[600px] w-[320px] md:w-[740px] rounded-md'>
+            <ScrollArea className='h-[200px] md:h-[600px] w-full rounded-md'>
               <div className='grid grid-flow-row md:grid-cols-2 gap-2'>
                 {searchedUsers?.map((searchedMember) => (
                   <SearchedCard
