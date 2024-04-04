@@ -39,7 +39,7 @@ export default function Footer() {
         </Link>
         <Dialog>
           <DialogTrigger asChild>
-            <p className='rounded-lg hover:bg-gray-200 hover:underline text-xs md:text-lg'>
+            <p className='cursor-pointer rounded-lg hover:bg-gray-200 hover:underline text-xs md:text-lg'>
               개인정보 이용 동의서
             </p>
           </DialogTrigger>
