@@ -1,5 +1,4 @@
-import React from 'react';
-import Cookies from 'js-cookie';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '@/components/Header';
 import MyProfileCard from '@/components/MyProfileCard';
@@ -21,18 +20,17 @@ export default function Home() {
   const { groups, setGroups } = useGroupsStore();
   const { setAddedMembers } = useAddedMembersStore();
   const { intraId, agreement } = router.query;
-  const [showModal, setShowModal] = React.useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  React.useEffect(() => {
-    console.log(intraId, agreement);
+  useEffect(() => {
     if (agreement && agreement === 'false') setShowModal(true);
-    if (router.query.intraId || router.query.agreement) {
+    if (router.query.intraId || router.query.agreement)
       router.replace(router.pathname, router.pathname, { shallow: true });
-    }
   }, [intraId, agreement, router]);
-  React.useEffect(() => {
+
+  useEffect(() => {
     let userIntraId: number;
-    let userDefaultGroupId: number | undefined;
+    let userDefaultGroupId: number;
     authApi
       .getMyInfo()
       .then((res) => {
@@ -40,14 +38,12 @@ export default function Home() {
         userIntraId = res.intraId;
         userDefaultGroupId = res.defaultGroupId;
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
       .then(() => {
         groupApi.getAllGroups().then((res) => {
           res.map((group) => {
-            if (group.groupId === userDefaultGroupId) {
+            if (group.groupId === userDefaultGroupId)
               group.groupName = '친구 목록';
-              console.log(group.groupName);
-            }
           });
           setGroups(res);
           const allMemberIds = res.flatMap((group) =>
@@ -58,6 +54,7 @@ export default function Home() {
         });
       });
   }, []);
+
   return (
     <main className='flex flex-col justify-center gap-3 lg:gap-4 px-2 md:px-10 pb-24'>
       <AgreementModal showModal={showModal} setShowModal={setShowModal} />

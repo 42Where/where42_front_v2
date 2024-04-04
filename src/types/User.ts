@@ -29,9 +29,9 @@ type User = {
    */
   agree: boolean;
   /**
-   * 사영자의 기본 친구 그룹 id
+   * 사용자의 기본 친구 그룹 id
    */
-  defaultGroupId?: number;
+  defaultGroupId: number;
   /**
    * 멤버가 아닐경우 날짜
    * 멤버일 경우 ??

@@ -32,10 +32,11 @@ export default function Footer() {
         />
       </Link>
       <span className='flex flex-col gap-2 items-center justify-center font-gsansMd text-[#3F4145]'>
-        {/* TODO: 버그 제보 구글 스프레드 시트같은걸로 보내야함 */}
-        <p className='rounded-lg hover:bg-gray-200 hover:underline text-xs md:text-lg'>
-          버그 제보/문의
-        </p>
+        <Link href='https://forms.gle/VbjaSrZRPjuqVyuz9'>
+          <p className='rounded-lg hover:bg-gray-200 hover:underline text-xs md:text-lg'>
+            버그 제보/문의
+          </p>
+        </Link>
         <Dialog>
           <DialogTrigger asChild>
             <p className='rounded-lg hover:bg-gray-200 hover:underline text-xs md:text-lg'>
