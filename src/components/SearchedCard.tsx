@@ -22,7 +22,7 @@ export default function SearchedCard({ member }: { member: User }) {
     });
   }, [addedMembers]);
   return (
-    <div className='flex flex-row justify-between p-2 rounded-2xl border-2'>
+    <div className='flex flex-row justify-between items-center p-2 rounded-2xl border-2'>
       <div className='flex flex-row items-center gap-1 md:gap-2'>
         <Avatar
           className={`size-14 border-[${
