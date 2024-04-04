@@ -86,7 +86,7 @@ export default function MySettingModal() {
                 onSubmit={async (e) => {
                   e.preventDefault();
                   const inputValue = inputRef.current?.value;
-                  if (!inputValue) return;
+                  if (inputValue == undefined) return;
                   if (inputValue.length > 15) {
                     setResultMessage('15자 이하로 입력해주세요.');
                     return;
