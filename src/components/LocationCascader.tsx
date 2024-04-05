@@ -144,7 +144,6 @@ function SingleCascader({
       onClick={() => {
         if (selected) {
           setSelected('');
-          if (!data.children) return;
           const temp = optionList.slice(0);
           const idx = temp.findIndex((item) => item.value === prevVal);
           temp.splice(idx + 1);
@@ -152,7 +151,6 @@ function SingleCascader({
           return;
         }
         setSelected(data.value);
-        if (!data.children) return;
         const temp = optionList.slice(0);
         const idx = temp.findIndex((item) => item.value === prevVal);
         if (idx !== temp.length - 1) temp.splice(idx + 1);
@@ -182,7 +180,11 @@ function CascaderColumn({
   React.useEffect(() => {
     if (optionList.length === 1) setRounded('rounded-lg');
     else if (index === 0) setRounded('rounded-l-lg');
-    else if (index === optionList.length - 1) setRounded('rounded-r-lg');
+    else if (
+      index === optionList.length - 1 ||
+      !optionList[optionList.length - 1].children
+    )
+      setRounded('rounded-r-lg');
     else setRounded('rounded-none');
   }, [optionList]);
 
