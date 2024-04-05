@@ -52,6 +52,22 @@ export default function CustomLocationContent({
           >
             설정
           </Button>
+          <Button
+            onClick={() => {
+              setResultMessage('삭제 되었습니다.');
+              locationApi
+                .deleteCustomLocation()
+                .then(() => setUser({ ...user, location: '' }))
+                .catch((error) => {
+                  console.error(error);
+                  setResultMessage(
+                    '삭제 중 오류가 발생했습니다. 다시 시도해 주세요.'
+                  );
+                });
+            }}
+          >
+            자리 초기화
+          </Button>
           <DialogClose asChild>
             <Button variant='destructive'>취소</Button>
           </DialogClose>

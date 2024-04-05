@@ -10,6 +10,9 @@ const locationApi = {
       customLocation: location,
     });
   },
+  deleteCustomLocation: async (): Promise<void> => {
+    await axios.delete('/v3/location/custom');
+  },
 };
 
 export default locationApi;
