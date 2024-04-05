@@ -22,7 +22,7 @@ export default function CustomLocationContent({
   const [locationValue, setLocationValue] = React.useState<string>('');
 
   if (!user) return null;
-  return !user.inCluster ? (
+  return user.inCluster ? (
     <DialogContent className='transition-all ease-out duration-500 max-w-[550px] min-h-[400px]'>
       <DialogHeader className='gap-2'>
         <DialogTitle>수동 자리 설정</DialogTitle>
