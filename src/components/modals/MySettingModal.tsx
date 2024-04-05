@@ -90,13 +90,22 @@ export default function MySettingModal() {
                   formRef.current?.reset();
                   setSearchValue('');
                   setResultMessage('설정 되었습니다.');
+                  if (inputValue === user?.comment) return;
+                  else if (inputValue === '') {
+                    memberApi
+                      .deleteComment()
+                      .then(() => setUser({ ...user, comment: '' }))
+                      .catch((error) => {
+                        console.error(error);
+                        setResultMessage(
+                          '설정 중 오류가 발생했습니다. 다시 시도해 주세요.'
+                        );
+                      });
+                    return;
+                  }
                   memberApi
                     .updateComment({ comment: inputValue })
-                    .then(() => {
-                      const temp = user;
-                      if (temp) temp.comment = inputValue;
-                      setUser(temp);
-                    })
+                    .then(() => setUser({ ...user, comment: inputValue }))
                     .catch((error) => {
                       console.error(error);
                       setResultMessage(
