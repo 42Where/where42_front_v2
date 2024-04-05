@@ -15,14 +15,14 @@ export default function LoginPage() {
         />
       </div>
       <div className='w-full sm:w-1/2 bg-white'>
-        <Image
+        {/* <Image
           src='/Icons/help.svg'
           alt='help'
           width={80}
           height={80}
           priority
           className='absolute top-2 right-2 size-10 sm:top-4 sm:right-4 sm:size-16'
-        />
+        /> */}
         <div className='flex flex-col min-h-[50vh] justify-center items-center gap-8 sm:gap-12 h-full'>
           <Image
             src='/Icons/logo.svg'
