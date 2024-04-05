@@ -6,7 +6,7 @@ import User from '@/types/User';
 import { useCheckedStore } from '@/lib/stores';
 import NewGroupModal from './modals/NewGroupModal';
 import MySettingModal from './modals/MySettingModal';
-import ManualSeatModal from './modals/ManualSeatModal';
+import CustomLocationModal from './modals/CustomLocationModal';
 
 export default function MyProfileCard({ user }: { user: User }) {
   const { checked, setChecked } = useCheckedStore();
@@ -22,7 +22,7 @@ export default function MyProfileCard({ user }: { user: User }) {
           <AvatarFallback />
         </Avatar>
         <div className='flex flex-col items-start gap-2'>
-          <ManualSeatModal />
+          <CustomLocationModal />
           <h3 className='text-xl lg:text-3xl font-gsansLg text-[#132743]'>
             {user.intraName}
           </h3>

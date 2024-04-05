@@ -26,7 +26,7 @@ export default function LocationBtn({
     } else {
       setLocation('퇴근');
     }
-  }, []);
+  }, [user, searchedUser]);
   return (
     <Button
       className={`rounded-full ${

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button } from './ui/button';
 
 interface CascaderOption {
@@ -136,28 +136,28 @@ function SingleCascader({
 }) {
   return (
     <Button
-      className={`rounded-lg w-32 ${
+      className={`rounded-lg w-24 md:w-32 py-1 px-3 text-base md:text-xl font-gsansMd gap-2 ${
         selected
           ? 'bg-[#132743] text-white hover:bg-gray-700'
           : 'bg-white border-2 border-[#132743] text-[#132743] hover:bg-gray-200'
-      } border-0 border-[#132743] py-1 px-3 text-xl font-gsansMd gap-2`}
+      } border-0 border-[#132743]`}
       onClick={() => {
         if (selected) {
           setSelected('');
+          if (!data.children) return;
           const temp = optionList.slice(0);
           const idx = temp.findIndex((item) => item.value === prevVal);
           temp.splice(idx + 1);
           setOptionList(temp);
           return;
         }
+        setSelected(data.value);
+        if (!data.children) return;
         const temp = optionList.slice(0);
         const idx = temp.findIndex((item) => item.value === prevVal);
-        if (idx !== temp.length - 1) {
-          temp.splice(idx + 1);
-        }
+        if (idx !== temp.length - 1) temp.splice(idx + 1);
         temp.push(data);
         setOptionList(temp);
-        setSelected(data.value);
       }}
     >
       {data.label}
@@ -169,14 +169,25 @@ function CascaderColumn({
   item,
   optionList,
   setOptionList,
+  index,
 }: {
   item: CascaderOption;
   optionList: CascaderOption[];
   setOptionList: React.Dispatch<React.SetStateAction<CascaderOption[]>>;
+  index: number;
 }) {
   const [selected, setSelected] = React.useState<string>('');
+  const [rounded, setRounded] = React.useState<string>('rounded-lg');
+
+  React.useEffect(() => {
+    if (optionList.length === 1) setRounded('rounded-lg');
+    else if (index === 0) setRounded('rounded-l-lg');
+    else if (index === optionList.length - 1) setRounded('rounded-r-lg');
+    else setRounded('rounded-none');
+  }, [optionList]);
+
   return (
-    <span className='flex flex-col border rounded-r-lg' key={item.value}>
+    <span className={`flex flex-col border ${rounded}`} key={item.value}>
       {item.children?.map(
         (child) =>
           child.label && (
@@ -196,23 +207,22 @@ function CascaderColumn({
 }
 
 export default function LocationCascader({
-  setSeatValue,
+  setLocationValue,
 }: {
-  setSeatValue: React.Dispatch<React.SetStateAction<string>>;
+  setLocationValue: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const data = DefaultCustomLocation;
   const [optionList, setOptionList] = React.useState<CascaderOption[]>([data]);
   const result = optionList.map((item) => item.label).join(' ');
   React.useEffect(() => {
-    setSeatValue(result);
-  }, [result, setSeatValue]);
-
+    setLocationValue(result);
+  }, [result]);
   return (
-    <>
+    <div className='flex flex-col gap-4'>
       <p className='text-xl font-gsansMd text-[#4A6282]'>{result}</p>
       <div className='flex flex-row'>
         {optionList.map(
-          (item) =>
+          (item, index) =>
             item.children &&
             item.children.length > 1 && (
               <CascaderColumn
@@ -220,10 +230,11 @@ export default function LocationCascader({
                 item={item}
                 optionList={optionList}
                 setOptionList={setOptionList}
+                index={index}
               />
             )
         )}
       </div>
-    </>
+    </div>
   );
 }

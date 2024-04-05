@@ -25,7 +25,7 @@ export default function SearchedCard({ member }: { member: User }) {
     <div className='flex flex-row justify-between items-center p-2 rounded-2xl border-2'>
       <div className='flex flex-row items-center gap-1 md:gap-2'>
         <Avatar
-          className={`size-14 border-[${
+          className={`size-16 md:size-20 border-[${
             member.location ? '#FFB5B5' : '#7F848D'
           }] border-4`}
         >
@@ -34,10 +34,10 @@ export default function SearchedCard({ member }: { member: User }) {
         </Avatar>
         <div className='flex flex-col items-start gap-1'>
           <LocationBtn user={member} searchedUser={member} />
-          <h3 className='text-l md:text-xl font-gsansLg text-[#132743]'>
+          <h3 className='text-xl md:text-2xl font-gsansLg text-[#132743]'>
             {member.intraName}
           </h3>
-          <p className='font-gsansMd text-[#4A6282] text-xl'>
+          <p className='font-gsansMd text-[#4A6282] text-sm md:text-xl'>
             {member.comment}
           </p>
         </div>
