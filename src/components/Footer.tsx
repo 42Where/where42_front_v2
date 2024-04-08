@@ -19,7 +19,7 @@ export default function Footer() {
   return (
     <footer
       className='flex flex-row justify-center items-center w-full p-2 gap-2 md:p-4 md:gap-4
-      border bottom-0 left-0 fixed bg-[#F6F7F9]'
+      border bottom-0 left-0 relative bg-[#F6F7F9]'
     >
       <Link href='https://github.com/42Where'>
         <Image

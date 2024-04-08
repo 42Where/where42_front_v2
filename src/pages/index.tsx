@@ -56,12 +56,14 @@ export default function Home() {
   }, []);
 
   return (
-    <main className='flex flex-col justify-center gap-3 lg:gap-4 px-2 md:px-10 pb-24'>
-      <AgreementModal showModal={showModal} setShowModal={setShowModal} />
-      <Header />
-      {user ? <MyProfileCard user={user} /> : <ProfileSkeleton />}
-      {groups ? <Groups groups={groups} /> : null}
+    <>
+      <main className='flex flex-col h-full w-full justify-start gap-3 lg:gap-4 px-2 md:px-10 min-h-screen'>
+        <AgreementModal showModal={showModal} setShowModal={setShowModal} />
+        <Header />
+        {user ? <MyProfileCard user={user} /> : <ProfileSkeleton />}
+        {groups ? <Groups groups={groups} /> : null}
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }
