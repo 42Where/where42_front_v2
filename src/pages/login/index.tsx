@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import LoginBtn from '@/components/LoginBtn';
 
 export default function LoginPage() {
   return (
@@ -38,20 +39,12 @@ export default function LoginPage() {
             </h3>
             <h1 className='text-4xl sm:text-6xl font-gsansLg'>어디있니?</h1>
           </span>
-          <Link href='/v3/group' className='hidden sm:block'>
-            <Button className='rounded-full bg-[#132743]' size='xlg'>
-              L O G I N
-            </Button>
-          </Link>
+          <LoginBtn />
         </div>
       </div>
       <div className='relative w-full min-h-[50vh] sm:hidden flex flex-col items-center justify-center'>
         <Image src='/bottom.png' alt='bottom' layout='fill' />
-        <Link href='/v3/group' className='absolute z-auto'>
-          <Button className='rounded-full bg-[#4A6282]' size='xlg'>
-            L O G I N
-          </Button>
-        </Link>
+        <LoginBtn isMobile={true} />
       </div>
     </main>
   );

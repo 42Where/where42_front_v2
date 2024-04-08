@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import LoginBtn from '@/components/LoginBtn';
 
 export default function LoginFailPage() {
   return (
@@ -43,20 +42,12 @@ export default function LoginFailPage() {
               오류가 계속 반복될 경우 관리자에게 문의해주세요.
             </h3>
           </span>
-          <Link href='/v3/group' className='hidden sm:block'>
-            <Button className='rounded-full bg-[#132743]' size='xlg'>
-              L O G I N
-            </Button>
-          </Link>
+          <LoginBtn />
         </div>
       </div>
       <div className='relative w-full min-h-[50vh] sm:hidden flex flex-col items-center justify-center'>
         <Image src='/bottom.png' alt='bottom' layout='fill' />
-        <Link href='/v3/group' className='absolute z-auto'>
-          <Button className='rounded-full bg-[#4A6282]' size='xlg'>
-            L O G I N
-          </Button>
-        </Link>
+        <LoginBtn isMobile={true} />
       </div>
     </main>
   );
