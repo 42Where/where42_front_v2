@@ -37,7 +37,7 @@ export default function SearchedCard({ member }: { member: User }) {
           <h3 className='text-xl md:text-2xl font-gsansLg text-[#132743]'>
             {member.intraName}
           </h3>
-          <p className='font-gsansMd text-[#4A6282] text-sm md:text-xl'>
+          <p className='font-gsansMd text-[#4A6282] text-sm md:text-md'>
             {member.comment}
           </p>
         </div>
