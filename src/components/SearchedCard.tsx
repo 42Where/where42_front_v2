@@ -20,7 +20,9 @@ export default function SearchedCard({ member }: { member: User }) {
 
   React.useEffect(() => {
     addedMembers.forEach((addedMember) => {
-      if (addedMember === member.intraId) setIsAlreadyAdded(true);
+      if (addedMember === member.intraId) {
+        setIsAlreadyAdded(true);
+      }
     });
   }, [addedMembers]);
 
