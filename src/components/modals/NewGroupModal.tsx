@@ -22,6 +22,7 @@ import {
 import { useGroupsStore } from '@/lib/stores';
 import groupApi from '@/api/groupApi';
 import Group from '@/types/Group';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function NewGroupModal() {
   const { groups, setGroups } = useGroupsStore();
@@ -30,6 +31,8 @@ export default function NewGroupModal() {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [searchValue, setSearchValue] = React.useState<string>('');
   const [isDuplicated, setIsDuplicated] = React.useState<boolean>(false);
+  const { toast } = useToast();
+
   return (
     <Dialog
       onOpenChange={(open) => {
@@ -149,6 +152,9 @@ export default function NewGroupModal() {
                     temp.push(newGroup);
                     setGroups(temp);
                   })
+                  .then(() =>
+                    toast({ title: `'${inputValue}' 그룹이 생성되었습니다.` })
+                  )
                   .catch((error) => {
                     console.error(error);
                     setResultMessage(

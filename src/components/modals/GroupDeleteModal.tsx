@@ -14,11 +14,14 @@ import {
   useGroupsStore,
   useUserStore,
 } from '@/lib/stores';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
   const { checkedUsers } = useCheckedUsersStore();
   const { groups, setGroups } = useGroupsStore();
   const { user } = useUserStore();
+  const { toast } = useToast();
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -73,10 +76,12 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
                   const checkedUsersId = checkedUsers.map(
                     (user) => user.intraId
                   );
-                  groupApi.removeMembersFromGroup({
-                    groupId: curGroup.groupId,
-                    members: checkedUsersId,
-                  });
+                  groupApi
+                    .removeMembersFromGroup({
+                      groupId: curGroup.groupId,
+                      members: checkedUsersId,
+                    })
+                    .then(() => toast({ title: '삭제되었습니다.' }));
                 }}
               >
                 삭제

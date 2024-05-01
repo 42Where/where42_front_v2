@@ -9,18 +9,21 @@ import {
   useGroupsStore,
 } from '@/lib/stores';
 import LocationBtn from './LocationBtn';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function SearchedCard({ member }: { member: User }) {
   const { user } = useUserStore();
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
   const { groups, setGroups } = useGroupsStore();
   const [isAlreadyAdded, setIsAlreadyAdded] = React.useState(false);
-  console.table(member);
+  const { toast } = useToast();
+
   React.useEffect(() => {
     addedMembers.forEach((addedMember) => {
       if (addedMember === member.intraId) setIsAlreadyAdded(true);
     });
   }, [addedMembers]);
+
   return (
     <div className='flex flex-row justify-between items-center p-2 rounded-2xl border-2'>
       <div className='flex flex-row items-center gap-1 md:gap-2'>
@@ -48,10 +51,6 @@ export default function SearchedCard({ member }: { member: User }) {
           role='button'
           tabIndex={0}
           onClick={() => {
-            groupApi.addMemberAtGroup({
-              groupId: user?.defaultGroupId as number,
-              members: [member.intraId],
-            });
             setAddedMembers([...addedMembers, member.intraId]);
             const updatedGroups = groups.map((group) => {
               if (group.groupId === user?.defaultGroupId) {
@@ -64,6 +63,16 @@ export default function SearchedCard({ member }: { member: User }) {
             });
             setGroups(updatedGroups);
             setIsAlreadyAdded(true);
+            groupApi
+              .addMemberAtGroup({
+                groupId: user?.defaultGroupId as number,
+                members: [member.intraId],
+              })
+              .then(() => {
+                toast({
+                  title: `'${member.intraName}'님을 친구 목록에 추가했습니다.`,
+                });
+              });
           }}
         >
           <Image

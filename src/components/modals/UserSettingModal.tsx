@@ -20,6 +20,8 @@ import User from '@/types/User';
 import Group from '@/types/Group';
 import { useCheckedUsersStore } from '@/lib/stores';
 import { useAddedMembersStore } from '@/lib/stores';
+import { useToast } from '@/components/ui/use-toast';
+import { title } from 'process';
 
 export default function UserSettingModal({
   targUser,
@@ -35,6 +37,7 @@ export default function UserSettingModal({
   const targGroupId = targGroup.groupId;
   const { setCheckedUsers } = useCheckedUsersStore();
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
+  const { toast } = useToast();
 
   return (
     <Dialog>
@@ -146,7 +149,8 @@ export default function UserSettingModal({
                             ];
                             setGroups(temp);
                           }
-                        });
+                        })
+                        .then(() => toast({ title: '그룹에 추가되었습니다.' }));
                     });
                   }}
                 >
@@ -213,10 +217,12 @@ export default function UserSettingModal({
                       (addedMember) => addedMember !== targUser.intraId
                     );
                     setAddedMembers(buf);
-                    groupApi.removeMembersFromGroup({
-                      groupId: targGroupId,
-                      members: [targUser.intraId],
-                    });
+                    groupApi
+                      .removeMembersFromGroup({
+                        groupId: targGroupId,
+                        members: [targUser.intraId],
+                      })
+                      .then(() => toast({ title: '그룹에서 삭제되었습니다.' }));
                   }}
                 >
                   삭제

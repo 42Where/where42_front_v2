@@ -16,8 +16,9 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import { useGroupsStore, useUserStore } from '@/lib/stores';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import Group from '@/types/Group';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
   const [isDelete, setIsDelete] = React.useState<boolean>(false);
@@ -27,6 +28,8 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
   const formRef = React.useRef<HTMLFormElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [groupName, setGroupName] = React.useState<string>('');
+  const { toast } = useToast();
+
   return (
     <Dialog
       onOpenChange={(open) => {
@@ -138,7 +141,12 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
                           (group) => group.groupId !== curGroup.groupId
                         );
                         setGroups(temp);
-                      });
+                      })
+                      .then(() =>
+                        toast({
+                          title: `'${curGroup.groupName}' 그룹이 삭제되었습니다.`,
+                        })
+                      );
                   }}
                 >
                   삭제
