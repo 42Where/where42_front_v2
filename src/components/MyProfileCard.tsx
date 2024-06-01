@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -9,6 +9,14 @@ import MySettingModal from './modals/MySettingModal';
 import CustomLocationModal from './modals/CustomLocationModal';
 
 export default function MyProfileCard({ user }: { user: User }) {
+  useEffect(() => {
+    console.log(localStorage.getItem('checked'));
+    if (localStorage.getItem('checked') === 'true') {
+      setChecked(true);
+    } else {
+      setChecked(false);
+    }
+  }, []);
   const { checked, setChecked } = useCheckedStore();
   return (
     <div className='flex flex-row justify-between items-center pb-12 lg:px-8 pt-0 relative'>
@@ -37,11 +45,10 @@ export default function MyProfileCard({ user }: { user: User }) {
           className='gap-1 p-2 lg:p-4 lg:gap-2 rounded-full
            bg-white border-2 border-[#132743]
            text-l lg:text-xl text-[#132743] font-gsansMd hover:bg-gray-200 w-40 h-8 lg:w-52 lg:h-10'
-          onClick={() => setChecked(!checked)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              setChecked(!checked);
-            }
+          onClick={() => {
+            setChecked(!checked);
+            localStorage.setItem('checked', JSON.stringify(!checked));
+            console.log(localStorage.getItem('checked'));
           }}
         >
           <Checkbox checked={checked} className='size-4 border-2' size={12} />

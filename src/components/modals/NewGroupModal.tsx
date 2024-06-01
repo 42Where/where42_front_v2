@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -23,27 +23,42 @@ import { useGroupsStore } from '@/lib/stores';
 import groupApi from '@/api/groupApi';
 import Group from '@/types/Group';
 import { useToast } from '@/components/ui/use-toast';
+import User from '@/types/User';
+import SearchedCard from '@/components/SearchedCard';
 
 export default function NewGroupModal() {
   const { groups, setGroups } = useGroupsStore();
-  const [resultMessage, setResultMessage] = React.useState<string>('');
   const formRef = React.useRef<HTMLFormElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [searchValue, setSearchValue] = React.useState<string>('');
   const [isDuplicated, setIsDuplicated] = React.useState<boolean>(false);
+  const [isAddingUser, setIsAddingUser] = React.useState<boolean>(false);
+  const [searchedUsers, setSearchedUsers] = React.useState<User[]>([]);
+  const [selectedUsers, setSelectedUsers] = React.useState<User[]>([]);
+  const [groupId, setGroupId] = React.useState<number>(0);
   const { toast } = useToast();
+
+  useEffect(() => {
+    console.log(groups);
+    if (groups[0]) setSearchedUsers(groups[0].members);
+  }, [isAddingUser, groups]);
+
+  useEffect(() => {
+    if (groups[0])
+      setSearchedUsers(
+        groups[0].members.filter((user) => user.intraName.includes(searchValue))
+      );
+  }, [searchValue]);
 
   return (
     <Dialog
       onOpenChange={(open) => {
         if (!open) {
           setTimeout(() => {
-            setResultMessage('');
             formRef.current?.reset();
             setSearchValue('');
           }, 100);
         } else {
-          setResultMessage('');
           formRef.current?.reset();
           setSearchValue('');
         }
@@ -63,8 +78,8 @@ export default function NewGroupModal() {
           새 그룹
         </Button>
       </DialogTrigger>
-      <DialogContent className='transition-all ease-out duration-500 max-w-[425px]'>
-        <DialogHeader className='gap-2'>
+      <DialogContent className='transition-all ease-out duration-500 max-w-[800px]'>
+        <DialogHeader className='flex flex-col w-full gap-2 items-center justify-center'>
           <AlertDialog open={isDuplicated}>
             <AlertDialogContent className='transition-all ease-out duration-500 max-w-[425px] font-gsansMd text-[#132743]'>
               <AlertDialogHeader>
@@ -93,7 +108,6 @@ export default function NewGroupModal() {
                 <AlertDialogAction
                   onClick={() => {
                     setSearchValue('');
-                    setResultMessage('설정 되었습니다.');
                     groupApi
                       .createGroup({ groupName: searchValue })
                       .then((res) => {
@@ -111,9 +125,6 @@ export default function NewGroupModal() {
                       .then(() => setIsDuplicated(false))
                       .catch((error) => {
                         console.error(error);
-                        setResultMessage(
-                          '설정 중 오류가 발생했습니다. 다시 시도해 주세요.'
-                        );
                       });
                   }}
                 >
@@ -123,64 +134,170 @@ export default function NewGroupModal() {
             </AlertDialogContent>
           </AlertDialog>
           <DialogTitle>새로운 그룹 생성</DialogTitle>
-          <div className='flex flex-row items-center gap-2 p-2  w-full border border-gray-400 rounded-xl shadow-lg'>
-            <form
-              className='flex flex-row items-center gap-2 w-full'
-              ref={formRef}
-              onSubmit={async (e) => {
-                e.preventDefault();
-                const inputValue = inputRef.current?.value;
-                if (!inputValue) return;
-                formRef.current?.reset();
-                if (groups.some((group) => group.groupName === inputValue)) {
-                  setIsDuplicated(true);
-                  return;
-                }
-                setSearchValue('');
-                setResultMessage('설정 되었습니다.');
-                groupApi
-                  .createGroup({ groupName: inputValue })
-                  .then((res) => {
-                    const newGroup = {
-                      groupId: res.groupId,
-                      groupName: res.groupName,
-                      members: [],
-                      isFolded: false,
-                      isInEdit: false,
-                    } as Group;
-                    const temp = groups;
-                    temp.push(newGroup);
-                    setGroups(temp);
-                  })
-                  .then(() =>
-                    toast({ title: `'${inputValue}' 그룹이 생성되었습니다.` })
-                  )
-                  .catch((error) => {
-                    console.error(error);
-                    setResultMessage(
-                      '설정 중 오류가 발생했습니다. 다시 시도해 주세요.'
-                    );
-                  });
-              }}
-            >
-              <input
-                ref={inputRef}
-                className='w-full bg-transparent outline-none placeholder:text-gray-500 dark:text-gray-700 text-l font-gsansMd text-[#132743]'
-                placeholder='생성할 그룹의 이름을 입력하세요.'
-                onChange={(e) => setSearchValue(e.target.value)}
-              />
-            </form>
-            {searchValue && (
-              <X
-                className='size-6'
+          {isAddingUser ? (
+            <div className='flex flex-col w-full items-center justify-center gap-4'>
+              {selectedUsers.length > 0 && (
+                <div className='flex flex-row gap-2 overflow-x-scroll w-[300px] md:w-[700px]'>
+                  {selectedUsers.map((selectedUser) => (
+                    <div
+                      key={selectedUser.intraId}
+                      className='flex flex-row items-center gap-2 p-2 border border-gray-400 rounded-xl shadow-lg'
+                    >
+                      <p className='text-l font-gsansMd text-[#132743]'>
+                        {selectedUser.intraName}
+                      </p>
+                      <X
+                        className='size-6 cursor-pointer'
+                        onClick={() => {
+                          setSelectedUsers(
+                            selectedUsers.filter(
+                              (selected) => selected !== selectedUser
+                            )
+                          );
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              <div className='flex flex-row items-center gap-2 p-2  w-full border border-gray-400 rounded-xl shadow-lg'>
+                <Image
+                  src='/Icons/search.svg'
+                  width={20}
+                  height={20}
+                  alt='search'
+                />
+                <input
+                  ref={inputRef}
+                  className='w-full bg-transparent outline-none placeholder:text-gray-500 dark:text-gray-700 text-l font-gsansMd text-[#132743]'
+                  placeholder='새 그룹에 추가할 친구를 검색하세요.'
+                  onChange={(e) => setSearchValue(e.target.value)}
+                />
+                {searchValue && (
+                  <X
+                    className='size-6'
+                    onClick={() => {
+                      formRef.current?.reset();
+                      setSearchValue('');
+                    }}
+                  />
+                )}
+              </div>
+              <div className='h-[200px] md:h-[600px] w-full rounded-md overflow-scroll'>
+                <div className='grid grid-flow-row md:grid-cols-2 gap-2'>
+                  {searchedUsers?.map((searchedMember) => (
+                    <SearchedCard
+                      key={searchedMember.intraId}
+                      member={searchedMember}
+                      onClick={() => {
+                        if (
+                          selectedUsers.some(
+                            (selectedUser) =>
+                              selectedUser.intraId === searchedMember.intraId
+                          )
+                        )
+                          return;
+                        setSelectedUsers([...selectedUsers, searchedMember]);
+                      }}
+                      isAddingUser={true}
+                    />
+                  ))}
+                </div>
+              </div>
+              <Button
+                className='rounded-full text-l lg:text-xl font-gsansMd hover:bg-gray-200 gap-2 w-30 h-8 lg:w-30 lg:h-10'
                 onClick={() => {
-                  formRef.current?.reset();
-                  setSearchValue('');
+                  setIsAddingUser(false);
+                  groupApi
+                    .addMemberAtGroup({
+                      groupId,
+                      members: selectedUsers.map((user) => user.intraId),
+                    })
+                    .then(() => {
+                      toast({
+                        title: '그룹에 친구를 성공적으로 추가했습니다.',
+                      });
+                    })
+                    .catch((error) => {
+                      console.error(error);
+                    });
+                  setGroups(
+                    groups.map((group) => {
+                      if (group.groupId === groupId) {
+                        return {
+                          ...group,
+                          members: [...group.members, ...selectedUsers],
+                        };
+                      }
+                      return group;
+                    })
+                  );
                 }}
-              />
-            )}
-          </div>
-          <p className='text-l font-gsansMd text-[#132743]'>{resultMessage}</p>
+                variant={'outline'}
+              >
+                추가하기
+              </Button>
+            </div>
+          ) : (
+            <div className='flex flex-row items-center gap-2 p-2  w-full border border-gray-400 rounded-xl shadow-lg'>
+              <form
+                className='flex flex-row items-center gap-2 w-full'
+                ref={formRef}
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const inputValue = inputRef.current?.value;
+                  if (!inputValue) return;
+                  formRef.current?.reset();
+                  if (groups.some((group) => group.groupName === inputValue)) {
+                    setIsDuplicated(true);
+                    return;
+                  }
+                  setSearchValue('');
+                  groupApi
+                    .createGroup({ groupName: inputValue })
+                    .then((res) => {
+                      const newGroup = {
+                        groupId: res.groupId,
+                        groupName: res.groupName,
+                        members: [],
+                        isFolded: false,
+                        isInEdit: false,
+                      } as Group;
+                      setGroupId(res.groupId);
+                      console.log('GROUP ID:', groupId);
+                      const temp = groups;
+                      temp.push(newGroup);
+                      setGroups(temp);
+                    })
+                    .then(() =>
+                      toast({
+                        title: `'${inputValue}' 그룹이 생성되었습니다.`,
+                      })
+                    )
+                    .then(() => setIsAddingUser(true))
+                    .catch((error) => {
+                      console.error(error);
+                    });
+                }}
+              >
+                <input
+                  ref={inputRef}
+                  className='w-full bg-transparent outline-none placeholder:text-gray-500 dark:text-gray-700 text-l font-gsansMd text-[#132743]'
+                  placeholder='생성할 그룹의 이름을 입력하세요.'
+                  onChange={(e) => setSearchValue(e.target.value)}
+                />
+              </form>
+              {searchValue && (
+                <X
+                  className='size-6'
+                  onClick={() => {
+                    formRef.current?.reset();
+                    setSearchValue('');
+                  }}
+                />
+              )}
+            </div>
+          )}
         </DialogHeader>
       </DialogContent>
     </Dialog>

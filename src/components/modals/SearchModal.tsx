@@ -13,7 +13,6 @@ import {
 import memberApi from '@/api/memberApi';
 import { useUserStore } from '@/lib/stores';
 import User from '@/types/User';
-import { ScrollArea } from '@/components/ui/scroll-area';
 
 const SearchInputSchema = z.string().regex(/^[a-zA-Z0-9-]*$/, {
   message: '영어, 숫자, -만 입력 가능합니다.',
@@ -133,7 +132,7 @@ export default function SearchModal() {
         </div>
         {searchedUsers?.length ? (
           searchedUsers?.length > 4 ? (
-            <ScrollArea className='h-[200px] md:h-[600px] w-full rounded-md'>
+            <div className='h-[200px] md:h-[600px] w-full rounded-md overflow-scroll'>
               <div className='grid grid-flow-row md:grid-cols-2 gap-2'>
                 {searchedUsers?.map((searchedMember) => (
                   <SearchedCard
@@ -142,7 +141,7 @@ export default function SearchModal() {
                   />
                 ))}
               </div>
-            </ScrollArea>
+            </div>
           ) : (
             <div className='w-full grid grid-flow-row md:grid-cols-2 gap-2'>
               {searchedUsers?.map((searchedMember) => (

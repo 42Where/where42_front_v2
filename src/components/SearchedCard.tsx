@@ -11,7 +11,15 @@ import {
 import LocationBtn from './LocationBtn';
 import { useToast } from '@/components/ui/use-toast';
 
-export default function SearchedCard({ member }: { member: User }) {
+export default function SearchedCard({
+  member,
+  onClick,
+  isAddingUser,
+}: {
+  member: User;
+  onClick?: () => void;
+  isAddingUser?: boolean;
+}) {
   const { user } = useUserStore();
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
   const { groups, setGroups } = useGroupsStore();
@@ -27,7 +35,13 @@ export default function SearchedCard({ member }: { member: User }) {
   }, [addedMembers]);
 
   return (
-    <div className='flex flex-row justify-between items-center p-2 rounded-2xl border-2'>
+    <div
+      className={`flex flex-row justify-between items-center p-2 rounded-2xl border-2 ${
+        isAddingUser &&
+        'cursor-pointer hover:border-[#FFB5B5] transition-transform transform active:scale-95'
+      }`}
+      onClick={() => onClick && onClick()}
+    >
       <div className='flex flex-row items-center gap-1 md:gap-2'>
         <Avatar
           className={`size-16 md:size-20 border-[${
