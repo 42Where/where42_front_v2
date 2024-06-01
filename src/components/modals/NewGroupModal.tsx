@@ -135,7 +135,7 @@ export default function NewGroupModal() {
           </AlertDialog>
           <DialogTitle>새로운 그룹 생성</DialogTitle>
           {isAddingUser ? (
-            <div className='flex flex-col w-full items-center justify-center gap-4'>
+            <div className='flex flex-col w-full items-center justify-center gap-4 overflow-scroll'>
               {selectedUsers.length > 0 && (
                 <div className='flex flex-row gap-2 overflow-x-scroll w-[300px] md:w-[700px]'>
                   {selectedUsers.map((selectedUser) => (
@@ -160,7 +160,7 @@ export default function NewGroupModal() {
                   ))}
                 </div>
               )}
-              <div className='flex flex-row items-center gap-2 p-2  w-full border border-gray-400 rounded-xl shadow-lg'>
+              <div className='flex flex-row items-center gap-2 p-2 w-full border border-gray-400 rounded-xl shadow-lg'>
                 <Image
                   src='/Icons/search.svg'
                   width={20}
@@ -183,7 +183,7 @@ export default function NewGroupModal() {
                   />
                 )}
               </div>
-              <div className='h-[200px] md:h-[600px] w-full rounded-md overflow-scroll'>
+              <div className='h-[300px] md:h-[500px] w-full rounded-md overflow-scroll'>
                 <div className='grid grid-flow-row md:grid-cols-2 gap-2'>
                   {searchedUsers?.map((searchedMember) => (
                     <SearchedCard
