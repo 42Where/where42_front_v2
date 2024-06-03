@@ -40,7 +40,7 @@ export default function ProfileCard({
       <div className='flex flex-row items-center gap-4 md:gap-6'>
         <Avatar
           className={`size-20 md:size-28 ${
-            user.inCluster || user.location ? 'border-[#FFB5B5]' : ''
+            user.inOrOut || user.location ? 'border-[#FFB5B5]' : ''
           } border-4 hover:border-[#bfb5ff]`}
           onClick={() => {
             if (!isEdit) {

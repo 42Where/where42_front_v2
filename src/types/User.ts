@@ -23,6 +23,7 @@ type User = {
   /**
    * 사용자의 클러스터 출입여부
    */
+  inOrOut: boolean;
   inCluster: boolean;
   /**
    * 사용자의 위치정보 이용 동의 여부

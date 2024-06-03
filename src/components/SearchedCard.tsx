@@ -77,6 +77,7 @@ export default function SearchedCard({
               }
               return group;
             });
+            console.log('MEMBER: ', member);
             setGroups(updatedGroups);
             setIsAlreadyAdded(true);
             groupApi

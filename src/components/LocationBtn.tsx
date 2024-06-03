@@ -21,11 +21,12 @@ export default function LocationBtn({
       }
     } else if (user.location) {
       setLocation(user.location);
-    } else if (user.inCluster) {
+    } else if (user.inCluster || user.inOrOut) {
       setLocation('개포');
     } else {
       setLocation('퇴근');
     }
+    console.log('CARD_USER: ', user, location);
   }, [user, searchedUser]);
   return (
     <Button

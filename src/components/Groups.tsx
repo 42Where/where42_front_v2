@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Accordion,
   AccordionContent,
@@ -25,7 +25,6 @@ export default function Groups({ groups }: { groups: Group[] }) {
   const { checked } = useCheckedStore();
   const sortedGroups = [...groups].sort((a, b) => a.groupId - b.groupId);
   const defaultValues = sortedGroups.map((group) => group.groupId.toString());
-
   return (
     <div>
       <Divider />
@@ -91,14 +90,29 @@ export default function Groups({ groups }: { groups: Group[] }) {
                   )}
                   <GroupSettingModal curGroup={group} />
                   <AccordionTrigger className='px-6 text-l md:text-2xl p-2 md:p-4 font-gsansMd text-[#132743]'>
-                    {group.groupName}
+                    <span className='flex flex-row gap-6 items-center justify-start'>
+                      {group.groupName}
+                      <p className='text-xl md:text-2xl'>
+                        {
+                          group.members.filter(
+                            (member) =>
+                              member.location ||
+                              member.inCluster ||
+                              member.inOrOut
+                          ).length
+                        }
+                        /{group.members.length}
+                      </p>
+                    </span>
                   </AccordionTrigger>
                   <AccordionContent>
                     <div className='grid lg:grid-cols-2 air:grid-cols-3 3xl:grid-cols-4 grid-flow-row gap-4'>
                       {checked
                         ? group.members.map(
                             (member) =>
-                              (member.inCluster || member.location) && (
+                              (member.inCluster ||
+                                member.location ||
+                                member.inOrOut) && (
                                 <ProfileCard
                                   key={member.intraId}
                                   user={member}
@@ -125,7 +139,8 @@ export default function Groups({ groups }: { groups: Group[] }) {
                     ) : (
                       checked &&
                       group.members.filter(
-                        (member) => member.location || member.inCluster
+                        (member) =>
+                          member.location || member.inCluster || member.inOrOut
                       ).length === 0 && (
                         <p className='text-center text-xl font-gsansMd text-[#4A6282]'>
                           아무도 없어요.. 😢
