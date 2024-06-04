@@ -14,7 +14,7 @@ export default function LocationBtn({
     if (searchedUser) {
       if (searchedUser.location) {
         setLocation(searchedUser.location);
-      } else if (searchedUser.inOrOut) {
+      } else if (searchedUser.inOrOut || searchedUser.inCluster) {
         setLocation('개포');
       } else {
         setLocation('퇴근');
