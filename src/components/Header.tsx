@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import SearchModal from './modals/SearchModal';
+import SearchModal from './Modals/SearchModal';
 
 export default function Header() {
   const router = useRouter();

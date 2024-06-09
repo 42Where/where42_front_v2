@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '@/components/Header';
-import MyProfileCard from '@/components/MyProfileCard';
+import MyProfileCard from '@/components/Cards/MyProfileCard';
 import Groups from '@/components/Groups';
 import Footer from '@/components/Footer';
 import authApi from '@/api/authApi';
 import groupApi from '@/api/groupApi';
-import ProfileSkeleton from '@/components/ProfileSkeleton';
+import ProfileSkeleton from '@/components/Utils/ProfileSkeleton';
 import {
   useUserStore,
   useGroupsStore,
   useAddedMembersStore,
 } from '@/lib/stores';
-import AgreementModal from '@/components/modals/AgreementModal';
+import AgreementModal from '@/components/Modals/AgreementModal';
 
 export default function Home() {
   const router = useRouter();

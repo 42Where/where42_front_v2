@@ -8,7 +8,7 @@ import {
   useAddedMembersStore,
   useGroupsStore,
 } from '@/lib/stores';
-import LocationBtn from './LocationBtn';
+import LocationBtn from '../Buttons/LocationBtn';
 import { useToast } from '@/components/ui/use-toast';
 
 export default function SearchedCard({

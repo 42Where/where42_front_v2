@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Skeleton } from './ui/skeleton';
+import { Skeleton } from '../ui/skeleton';
 
 const SingleCardSkeleton = () => {
   return <Skeleton className='h-[164px] w-full rounded-lg' />;

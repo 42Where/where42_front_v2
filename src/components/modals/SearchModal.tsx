@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { z } from 'zod';
-import SearchedCard from '@/components/SearchedCard';
+import SearchedCard from '@/components/Cards/SearchedCard';
 import {
   Dialog,
   DialogContent,

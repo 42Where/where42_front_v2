@@ -16,7 +16,7 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import { useUserStore } from '@/lib/stores';
-import CustomLocationContent from '../CustomLocationContent';
+import CustomLocationContent from '../Utils/CustomLocationContent';
 
 export default function MySettingModal() {
   const [isMessage, setIsMessage] = React.useState<boolean>(false);

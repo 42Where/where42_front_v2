@@ -1,4 +1,4 @@
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import React from 'react';
 import User from '@/types/User';
 
@@ -26,7 +26,6 @@ export default function LocationBtn({
     } else {
       setLocation('퇴근');
     }
-    console.log('CARD_USER: ', user, location);
   }, [user, searchedUser]);
   return (
     <Button

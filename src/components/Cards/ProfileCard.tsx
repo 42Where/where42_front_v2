@@ -2,10 +2,10 @@ import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import User from '@/types/User';
 import { useCheckedUsersStore } from '@/lib/stores';
-import { Checkbox } from './ui/checkbox';
-import UserSettingModal from './modals/UserSettingModal';
+import { Checkbox } from '../ui/checkbox';
+import UserSettingModal from '../Modals/UserSettingModal';
 import Group from '@/types/Group';
-import LocationBtn from './LocationBtn';
+import LocationBtn from '../Buttons/LocationBtn';
 
 export default function ProfileCard({
   user,
