@@ -42,11 +42,13 @@ export default function SearchedCard({
       }`}
       onClick={() => onClick && onClick()}
     >
-      <div className='flex flex-row items-center gap-1 md:gap-2'>
+      <div className='flex flex-row items-center gap-4 md:gap-4'>
         <Avatar
-          className={`size-16 md:size-20 border-[${
-            member.location ? '#FFB5B5' : '#7F848D'
-          }] border-4`}
+          className={`size-16 md:size-20 ${
+            member.location || member.inCluster || member.inOrOut
+              ? 'border-[#FFB5B5]'
+              : ''
+          } border-4`}
         >
           <AvatarImage src={member.image} />
           <AvatarFallback />
@@ -97,7 +99,7 @@ export default function SearchedCard({
             alt='userAdd'
             width={30}
             height={30}
-            className='rounded-lg hover:bg-gray-200'
+            className='hover:bg-gray-200'
           />
         </div>
       )}

@@ -20,7 +20,7 @@ export default function MyProfileCard({ user }: { user: User }) {
   const { checked, setChecked } = useCheckedStore();
   return (
     <div className='flex flex-row justify-between items-center pb-12 lg:px-8 pt-0 relative'>
-      <div className='flex flex-row items-center gap-2 lg:gap-6'>
+      <div className='flex flex-row items-center gap-4 lg:gap-6'>
         <Avatar
           className={`size-24 lg:size-28 border-[${
             user.location ? '#FFB5B5' : '#7F848D'
