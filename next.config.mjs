@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   reactStrictMode: true,
+  images: {
+    unoptimized: true,
+  },
   async headers() {
     return [
       {
@@ -17,14 +21,14 @@ const nextConfig = {
       },
     ];
   },
-  async rewrites() {
-    return [
-      {
-        source: '/v3/:path*',
-        destination: `${process.env.NEXT_PUBLIC_DEV_API_URL}/v3/:path*`,
-      },
-    ];
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/v3/:path*',
+  //       destination: `${process.env.NEXT_PUBLIC_DEV_API_URL}/v3/:path*`,
+  //     },
+  //   ];
+  // },
 };
 
 export default nextConfig;
