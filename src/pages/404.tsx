@@ -1,8 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
-import LoginBtn from '@/components/Buttons/LoginBtn';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
-export default function LoginPage() {
+export default function NotFoundPage() {
   return (
     <main className='min-h-[100vh] w-full flex flex-col sm:flex-row text-[#132743]'>
       <div className='sm:relative sm:w-1/2 pt-8 sm:min-h-[50vh]'>
@@ -24,17 +25,19 @@ export default function LoginPage() {
             className='size-28 sm:size-32'
           />
           <span className='flex flex-col gap-4 items-center'>
-            <h3 className='text-l sm:text-2xl font-gsansMd'>
-              42Seoul 위치 정보 검색 서비스
+            <h3 className='text-2xl sm:text-3xl font-gsansLg'>
+              이 페이지는 존재하지 않습니다.
             </h3>
-            <h1 className='text-4xl sm:text-6xl font-gsansLg'>어디있니?</h1>
           </span>
-          <LoginBtn />
+          <Link href='/'>
+            <Button className={`${'bg-[#132743]'} rounded-full `} size='xlg'>
+              메인으로 돌아가기
+            </Button>
+          </Link>
         </div>
       </div>
       <div className='relative w-full min-h-[50vh] sm:hidden flex flex-col items-center justify-center'>
         <Image src='/bottom.png' alt='bottom' layout='fill' />
-        <LoginBtn isMobile={true} />
       </div>
     </main>
   );
