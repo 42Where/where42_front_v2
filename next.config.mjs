@@ -5,22 +5,22 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  async headers() {
-    return [
-      {
-        source: '/v3/:path*',
-        headers: [
-          { key: 'Access-Control-Allow-Credentials', value: 'true' },
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: '*',
-          },
-          // 클라이언트 도메인으로 변경
-          // 다른 필요한 헤더들 추가
-        ],
-      },
-    ];
-  },
+  // async headers() {
+  //   return [
+  //     {
+  //       source: '/v3/:path*',
+  //       headers: [
+  //         { key: 'Access-Control-Allow-Credentials', value: 'true' },
+  //         {
+  //           key: 'Access-Control-Allow-Origin',
+  //           value: '*',
+  //         },
+  //         // 클라이언트 도메인으로 변경
+  //         // 다른 필요한 헤더들 추가
+  //       ],
+  //     },
+  //   ];
+  // },
   // async rewrites() {
   //   return [
   //     {
