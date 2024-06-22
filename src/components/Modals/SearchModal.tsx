@@ -106,6 +106,13 @@ export default function SearchModal() {
                 })
                 .catch((error) => {
                   console.error(error);
+                  if (error.response?.status === 500) {
+                    setResultMessage(
+                      '서버 에러가 발생했습니다. 관리자에게 문의해주세요'
+                    );
+                    setSearchedUsers([]);
+                    return;
+                  }
                   setResultMessage(
                     '검색 중 오류가 발생했습니다. 다시 시도해주세요'
                   );

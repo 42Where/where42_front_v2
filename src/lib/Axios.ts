@@ -31,10 +31,7 @@ axios.interceptors.response.use(
   async (error) => {
     console.log(error.response);
     console.log(error.response.status);
-    if (
-      error.response &&
-      (error.response.status == 401 || error.response.status == 500)
-    ) {
+    if (error.response && error.response.status == 401) {
       const refreshToken = Cookies.get('refreshToken');
       if (refreshToken) {
         try {
@@ -57,6 +54,8 @@ axios.interceptors.response.use(
         Cookies.remove('refreshToken');
         window.location.href = '/login';
       }
+    } else if (error.response && error.response.status == 500) {
+      return Promise.reject(error);
     }
     return Promise.reject(error);
   }
