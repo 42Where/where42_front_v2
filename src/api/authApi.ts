@@ -4,7 +4,7 @@ import Axios from 'axios';
 
 const authApi = {
   getMyInfo: async (): Promise<User> => {
-    const response = await axios.get('/v3/member');
+    const response = await axios.get('/v3/member/');
     return response.data;
   },
   reissueToken: async (refreshToken: string): Promise<any> => {
