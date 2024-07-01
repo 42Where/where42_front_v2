@@ -3,7 +3,7 @@ import axios from '@/lib/Axios';
 
 const memberApi = {
   getMemberInfo: async ({ intraId }: { intraId: number }): Promise<User> => {
-    const response = await axios.get('/v3/member', {
+    const response = await axios.get('/v3/member/', {
       params: { intraId },
     });
     return response.data;
