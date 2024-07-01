@@ -61,7 +61,7 @@ const groupApi = {
    * 임시로 any를 사용하였지만 백엔드에서 타입 정의 후 수정 필요
    */
   getAllGroups: async (): Promise<Group[]> => {
-    const response = await axios.get('/v3/group');
+    const response = await axios.get('/v3/group/');
     return response.data;
   },
   /**
