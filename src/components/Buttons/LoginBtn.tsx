@@ -7,7 +7,7 @@ export default function LoginBtn({ isMobile }: { isMobile?: boolean }) {
 
   return !isClicked ? (
     <Link
-      href='/v3/group/'
+      href={`${process.env.NEXT_PUBLIC_DEV_API_URL}/v3/group/`}
       className={`${isMobile ? 'absolute z-auto' : 'hidden sm:block'}`}
       onClick={() => setIsClicked(true)}
     >
