@@ -57,8 +57,9 @@ axios.interceptors.response.use(
         Cookies.remove('refreshToken');
         window.location.href = '/login';
       }
-    } else if (error.response && error.response.status == 500) {
-      return Promise.reject(error);
+    } else if (error.response && error.response.status == 403) {
+      console.log('Forbidden');
+      window.location.href = '/login';
     }
     return Promise.reject(error);
   }
