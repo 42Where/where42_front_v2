@@ -8,15 +8,17 @@ const authApi = {
     return response.data;
   },
   reissueToken: async (refreshToken: string): Promise<any> => {
+    console.log('reissueToken in authApi!');
     const tokenAxios = Axios.create({
-      baseURL: undefined,
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
         Authorization: `Bearer ${refreshToken}`,
       },
     });
-    const response = await tokenAxios.post('/v3/jwt/reissue');
+    const response = await tokenAxios.post(
+      `${process.env.NEXT_PUBLIC_DEV_API_URL}/v3/jwt/reissue`
+    );
     return response.data;
   },
 };

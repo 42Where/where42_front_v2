@@ -2,10 +2,8 @@ import Axios from 'axios';
 import Cookies from 'js-cookie';
 import authApi from '@/api/authApi';
 
-const baseURL = process.env.NEXT_PUBLIC_DEV_API_URL;
-
 const axios = Axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_DEV_API_URL}`,
+  baseURL: process.env.NEXT_PUBLIC_DEV_API_URL,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -34,10 +32,7 @@ axios.interceptors.response.use(
   async (error) => {
     console.log(error.response);
     console.log(error.response.status);
-    if (
-      (error.response && error.response.status == 401) ||
-      error.response.status == 403
-    ) {
+    if (error.response && error.response.status == 401) {
       const refreshToken = Cookies.get('refreshToken');
       if (refreshToken) {
         try {
