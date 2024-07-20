@@ -1,4 +1,4 @@
-import axios from '@/lib/Axios';
+import { axios } from '@/lib/Axios';
 import Group from '@/types/Group';
 import User from '@/types/User';
 

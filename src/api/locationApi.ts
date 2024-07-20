@@ -1,4 +1,4 @@
-import axios from '@/lib/Axios';
+import { axios } from '@/lib/Axios';
 
 const locationApi = {
   setCustomLocation: async ({

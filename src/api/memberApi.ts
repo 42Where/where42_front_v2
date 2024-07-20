@@ -1,5 +1,5 @@
 import User from '@/types/User';
-import axios from '@/lib/Axios';
+import { axios } from '@/lib/Axios';
 
 const memberApi = {
   getMemberInfo: async ({ intraId }: { intraId: number }): Promise<User> => {

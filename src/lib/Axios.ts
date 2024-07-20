@@ -2,7 +2,17 @@ import Axios from 'axios';
 import Cookies from 'js-cookie';
 import authApi from '@/api/authApi';
 
-const axios = Axios.create({
+export const tokenAxios = Axios.create({
+  baseURL: process.env.NEXT_PUBLIC_DEV_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    Authorization: `Bearer ${Cookies.get('refreshToken')}`,
+  },
+  withCredentials: true,
+});
+
+export const axios = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_DEV_API_URL,
   headers: {
     'Content-Type': 'application/json',
@@ -61,5 +71,3 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-export default axios;
