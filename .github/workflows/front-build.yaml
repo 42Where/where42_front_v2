@@ -1,0 +1,68 @@
+name: Front Deployment
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: next build and deploy
+    # runner가 실행될 환경을 지정합니다.
+    runs-on: ubuntu-latest
+
+    # name은 단계별로 실행되는 액션들의 설명을 담은 것으로, 나중에 github action에서 workflow에 표시됩니다.
+    # uses 키워드로 Action을 불러올 수 있습니다.
+    steps:
+      # 레포지토리에 접근하여 CI서버로 코드를 내려받는 과정입니다.
+      - name: checkout Github Action
+        uses: actions/checkout@v3
+
+      # workflow가 실행될 때 필요한 파일 중에서 거의 바뀌지 않는 파일들을 GitHub의 캐시에 올려놓고 CI 서버로 내려받습니다.
+      # 프로젝트에서 자주 바뀌지 않는 수많은 패키지를 매번 다운받아 올리면 시간도 오래걸리고 네트워크 대역폭을 많이 사용하게됩니다.
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+      - uses: actions/cache@v3
+        id: npm-cache
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # npm 패키지들을 설치합니다.
+      - name: install npm dependencies
+        run: npm install
+
+      # Next.js 애플리케이션을 빌드합니다.
+      - name: Build Next.js application
+        run: npm run build
+
+      # aws에 접근하기 위한 권한을 받아옵니다.
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY_ID }}
+          aws-region: ap-northeast-2
+
+      # S3에 build 파일을 올립니다.
+      - name: Upload to S3
+        env:
+          BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_NAME}}
+        run: |
+          aws s3 sync \
+            .next s3://$BUCKET_NAME/.next \
+            --delete
+
+      # cloudfront로 배포되는 파일은 기본설정 상 24시간동안 캐시가 유지됩니다.
+      # 배포 후 S3에는 최신 정적리소스가 올라가있지만 엣지로케이션엔 이전 파일이 올라가있는 상태라는 의미입니다.
+      # 바로 변화가 반영되길 바란다면 invalidation을 해주면 됩니다.
+      - name: CloudFront Invalidation
+        env:
+          CLOUD_FRONT_ID: ${{ secrets.AWS_CLOUDFRONT_ID}}
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id $CLOUD_FRONT_ID --paths "/*"
