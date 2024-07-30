@@ -7,9 +7,18 @@ export const tokenAxios = Axios.create({
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
-    Authorization: `Bearer ${Cookies.get('refreshToken')}`,
   },
   withCredentials: true,
+});
+
+tokenAxios.interceptors.response.use((config) => {
+  const refreshToken = Cookies.get('refreshToken');
+  if (refreshToken) {
+    config.headers.Authorization = `Bearer ${refreshToken}`;
+  } else {
+    config.headers.Authorization;
+  }
+  return config;
 });
 
 export const axios = Axios.create({
@@ -46,7 +55,7 @@ axios.interceptors.response.use(
       const refreshToken = Cookies.get('refreshToken');
       if (refreshToken) {
         try {
-          const res = await authApi.reissueToken(refreshToken);
+          const res = await authApi.reissueToken();
           Cookies.set('accessToken', res.accessToken);
           console.log('Refreshed token successfully!');
           const accessToken = res.accessToken;
