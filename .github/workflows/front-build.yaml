@@ -1,7 +1,7 @@
 name: Front Deployment
 
 on:
-  pull_request:
+  push:
     branches:
       - master
 
@@ -54,7 +54,7 @@ jobs:
           BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_NAME}}
         run: |
           aws s3 sync \
-            .next s3://$BUCKET_NAME/.next \
+            ./out s3://$BUCKET_NAME \
             --delete
 
       # cloudfront로 배포되는 파일은 기본설정 상 24시간동안 캐시가 유지됩니다.
