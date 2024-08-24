@@ -11,16 +11,6 @@ export const tokenAxios = Axios.create({
   withCredentials: true,
 });
 
-tokenAxios.interceptors.response.use((config) => {
-  const refreshToken = Cookies.get('refreshToken');
-  if (refreshToken) {
-    config.headers.Authorization = `Bearer ${refreshToken}`;
-  } else {
-    config.headers.Authorization;
-  }
-  return config;
-});
-
 export const axios = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_DEV_API_URL,
   headers: {
@@ -52,24 +42,15 @@ axios.interceptors.response.use(
     console.log(error.response);
     console.log(error.response.status);
     if (error.response && error.response.status == 401) {
-      const refreshToken = Cookies.get('refreshToken');
-      if (refreshToken) {
-        try {
-          const res = await authApi.reissueToken();
-          Cookies.set('accessToken', res.accessToken);
-          console.log('Refreshed token successfully!');
-          const accessToken = res.accessToken;
-          const originalRequest = error.config;
-          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-          return await axios(originalRequest);
-        } catch (err) {
-          console.error('Failed to refresh token:', err);
-          Cookies.remove('accessToken');
-          Cookies.remove('refreshToken');
-          window.location.href = '/login';
-        }
-      } else {
-        console.log('No refresh token');
+      try {
+        const res = await authApi.reissueToken();
+        console.log('Refreshed token successfully!');
+        const accessToken = res.accessToken;
+        const originalRequest = error.config;
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+        return await axios(originalRequest);
+      } catch (err) {
+        console.error('Failed to refresh token:', err);
         Cookies.remove('accessToken');
         Cookies.remove('refreshToken');
         window.location.href = '/login';
