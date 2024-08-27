@@ -13,6 +13,7 @@ import {
   useAddedMembersStore,
 } from '@/lib/stores';
 import AgreementModal from '@/components/Modals/AgreementModal';
+import Cookies from 'js-cookie';
 
 export default function Home() {
   const router = useRouter();
@@ -23,6 +24,7 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    console.log('refreshToken: :', Cookies.get('refreshToken'));
     if (agreement && agreement === 'false') setShowModal(true);
     if (router.query.intraId || router.query.agreement)
       router.replace(router.pathname, router.pathname, { shallow: true });
