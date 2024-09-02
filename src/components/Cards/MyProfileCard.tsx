@@ -10,7 +10,6 @@ import CustomLocationModal from '../Modals/CustomLocationModal';
 
 export default function MyProfileCard({ user }: { user: User }) {
   useEffect(() => {
-    console.log(localStorage.getItem('checked'));
     if (localStorage.getItem('checked') === 'true') {
       setChecked(true);
     } else {
@@ -48,7 +47,6 @@ export default function MyProfileCard({ user }: { user: User }) {
           onClick={() => {
             setChecked(!checked);
             localStorage.setItem('checked', JSON.stringify(!checked));
-            console.log(localStorage.getItem('checked'));
           }}
         >
           <Checkbox checked={checked} className='size-4 border-2' size={12} />

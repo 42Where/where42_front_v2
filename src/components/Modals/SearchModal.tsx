@@ -99,10 +99,7 @@ export default function SearchModal() {
                 .then((data) => {
                   if (data.length > 0) {
                     setSearchedUsers(data);
-                  } else {
-                    console.log(data.length);
-                    setResultMessage('검색 결과가 없습니다.');
-                  }
+                  } else setResultMessage('검색 결과가 없습니다.');
                 })
                 .catch((error) => {
                   console.error(error);

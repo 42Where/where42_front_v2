@@ -7,7 +7,6 @@ import CustomLocationContent from '../Utils/CustomLocationContent';
 
 export default function CustomLocationModal() {
   const { user } = useUserStore();
-  console.log(user);
   const [resultMessage, setResultMessage] = React.useState<string>('');
   if (!user) return null;
   return (
