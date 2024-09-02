@@ -39,7 +39,6 @@ export default function NewGroupModal() {
   const { toast } = useToast();
 
   useEffect(() => {
-    console.log(groups);
     if (groups[0]) setSearchedUsers(groups[0].members);
   }, [isAddingUser, groups]);
 
@@ -55,12 +54,16 @@ export default function NewGroupModal() {
       onOpenChange={(open) => {
         if (!open) {
           setTimeout(() => {
+            setSelectedUsers([]);
             formRef.current?.reset();
             setSearchValue('');
+            console.log('CLOSED', selectedUsers);
           }, 100);
         } else {
+          setSelectedUsers([]);
           formRef.current?.reset();
           setSearchValue('');
+          console.log('OPEN', selectedUsers);
         }
       }}
     >
@@ -264,7 +267,6 @@ export default function NewGroupModal() {
                         isInEdit: false,
                       } as Group;
                       setGroupId(res.groupId);
-                      console.log('GROUP ID:', groupId);
                       const temp = groups;
                       temp.push(newGroup);
                       setGroups(temp);
