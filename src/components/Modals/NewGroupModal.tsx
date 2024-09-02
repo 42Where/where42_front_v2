@@ -124,6 +124,7 @@ export default function NewGroupModal() {
                         const temp = groups;
                         temp.push(newGroup);
                         setGroups(temp);
+                        setSelectedUsers([]);
                       })
                       .then(() => setIsDuplicated(false))
                       .catch((error) => {
@@ -270,6 +271,7 @@ export default function NewGroupModal() {
                       const temp = groups;
                       temp.push(newGroup);
                       setGroups(temp);
+                      setSelectedUsers([]);
                     })
                     .then(() =>
                       toast({
