@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import ProfilePic from '@/components/ProfilePic';
 import User from '@/types/User';
 import { useCheckedUsersStore } from '@/lib/stores';
 import { Checkbox } from '../ui/checkbox';
@@ -38,21 +38,7 @@ export default function ProfileCard({
       }}
     >
       <div className='flex flex-row items-center gap-4 md:gap-6'>
-        <Avatar
-          className={`size-20 md:size-28 ${
-            user.inOrOut || user.location || user.inCluster
-              ? 'border-[#FFB5B5]'
-              : ''
-          } border-4 hover:border-[#bfb5ff]`}
-          onClick={() => {
-            if (!isEdit) {
-              window.open(`https://profile.intra.42.fr/users/${user.intraId}`);
-            }
-          }}
-        >
-          <AvatarImage src={user.image} />
-          <AvatarFallback />
-        </Avatar>
+        <ProfilePic user={user} type='userCard' />
         <div className='flex flex-col items-start gap-1 md:gap-2'>
           <LocationBtn user={user} />
           <h3 className='text-xl md:text-3xl font-gsansLg text-[#132743]'>

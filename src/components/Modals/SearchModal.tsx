@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { X } from 'lucide-react';
 import { z } from 'zod';
 import SearchedCard from '@/components/Cards/SearchedCard';
+import SearchBtn from '@/components/Buttons/SearchBtn';
 import {
   Dialog,
   DialogContent,
@@ -43,19 +44,7 @@ export default function SearchModal() {
       }}
     >
       <DialogTrigger asChild>
-        <div
-          className='size-10 lg:size-14 rounded-lg flex justify-center items-center hover:bg-gray-200'
-          role='button'
-          tabIndex={0}
-        >
-          <Image
-            src='/Icons/search.svg'
-            alt='search'
-            width={40}
-            height={40}
-            className='rounded-lg hover:bg-gray-200 lg:size-[40px] size-[30px]'
-          />
-        </div>
+        <SearchBtn />
       </DialogTrigger>
       <DialogContent
         className={`flex flex-col items-center transition-all ease-out duration-500 ${
