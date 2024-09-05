@@ -48,7 +48,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
       }}
     >
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+        <DropdownMenuTrigger>
           <GroupSettingBtn groups={groups} curGroup={curGroup} />
         </DropdownMenuTrigger>
         <DropdownMenuContent
