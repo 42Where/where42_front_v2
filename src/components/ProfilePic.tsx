@@ -39,7 +39,7 @@ export default function ProfilePic({
         </TooltipTrigger>
         <TooltipContent>
           <p className='font-gsansMd text-[#4A6282] text-l lg:text-xl'>
-            '인트라 프로필 방문'
+            인트라 프로필 방문
           </p>
         </TooltipContent>
       </Tooltip>
