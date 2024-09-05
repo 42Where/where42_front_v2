@@ -43,7 +43,7 @@ export default function SearchModal() {
         }
       }}
     >
-      <DialogTrigger asChild>
+      <DialogTrigger>
         <SearchBtn />
       </DialogTrigger>
       <DialogContent

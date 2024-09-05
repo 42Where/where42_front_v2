@@ -46,7 +46,7 @@ export default function MySettingModal() {
       }}
     >
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+        <DropdownMenuTrigger>
           <SettingBtn />
         </DropdownMenuTrigger>
         <DropdownMenuContent
