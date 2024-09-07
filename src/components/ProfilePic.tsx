@@ -25,11 +25,11 @@ export default function ProfilePic({
             className={`${type === 'searchedCard' && 'size-16 md:size-20'}
             ${type === 'myProfile' && 'size-24 lg:size-28'}
             ${type === 'userCard' && 'size-20 md:size-28'}
-            border-[${
+            ${
               user.inOrOut || user.location || user.inCluster
-                ? '#FFB5B5'
-                : '#7F848D'
-            }] border-4 hover:border-[#bfb5ff]`}
+                ? 'border-[#FFB5B5]'
+                : ''
+            } border-4 hover:border-[#bfb5ff]`}
             onClick={() =>
               window.open(`https://profile.intra.42.fr/users/${user.intraId}`)
             }
