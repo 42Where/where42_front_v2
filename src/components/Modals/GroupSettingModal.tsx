@@ -20,6 +20,12 @@ import { Button } from '@/components/ui/button';
 import Group from '@/types/Group';
 import { useToast } from '@/components/ui/use-toast';
 import GroupSettingBtn from '@/components/Buttons/GroupSettingBtn';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
   const [isDelete, setIsDelete] = React.useState<boolean>(false);
@@ -48,9 +54,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
       }}
     >
       <DropdownMenu>
-        <DropdownMenuTrigger>
-          <GroupSettingBtn groups={groups} curGroup={curGroup} />
-        </DropdownMenuTrigger>
+        <GroupSettingBtn groups={groups} curGroup={curGroup} />
         <DropdownMenuContent
           side='bottom'
           className='font-gsansMd min-w-50 text-[#132743]'
