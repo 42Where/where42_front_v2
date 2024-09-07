@@ -18,7 +18,7 @@ export default function GroupSettingBtn({
     ?.isInEdit ? (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger asChild>
+        <TooltipTrigger>
           <div className='absolute size-10 rounded-lg flex justify-center items-center right-[50px] md:right-[64px] top-[8px] md:top-[16px] hover:bg-gray-200'>
             <Image
               src='/Icons/pencil.svg'
@@ -30,7 +30,7 @@ export default function GroupSettingBtn({
         </TooltipTrigger>
         <TooltipContent>
           <p className='font-gsansMd text-[#4A6282] text-l lg:text-xl'>
-            그룹 수정
+            그룹 설정
           </p>
         </TooltipContent>
       </Tooltip>

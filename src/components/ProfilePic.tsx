@@ -16,6 +16,7 @@ export default function ProfilePic({
   user: User;
   type: ProfilePicType;
 }) {
+  console.log('ProfilePic: ', user);
   return (
     <TooltipProvider>
       <Tooltip>
