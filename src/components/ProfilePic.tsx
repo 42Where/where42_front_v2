@@ -29,7 +29,7 @@ export default function ProfilePic({
               user.inOrOut || user.location || user.inCluster
                 ? 'border-[#FFB5B5]'
                 : ''
-            } border-4 hover:border-[#bfb5ff]`}
+            } border-4 hover:border-[#bfb5ff] cursor-pointer`}
             onClick={() =>
               window.open(`https://profile.intra.42.fr/users/${user.intraId}`)
             }
