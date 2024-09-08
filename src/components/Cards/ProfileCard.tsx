@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfilePic from '@/components/ProfilePic';
-import User from '@/types/User';
+import { User } from '@/types/User';
 import { useCheckedUsersStore } from '@/lib/stores';
 import { Checkbox } from '../ui/checkbox';
 import UserSettingModal from '../Modals/UserSettingModal';
@@ -21,9 +21,9 @@ export default function ProfileCard({
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
   return (
     <div
-      className='flex flex-row justify-between p-4 md:p-6 rounded-2xl border-2 hover:border-[#FFB5B5] items-center'
-      role='button'
-      tabIndex={0}
+      className={`flex flex-row justify-between p-4 md:p-6 rounded-2xl border-2 hover:border-[#FFB5B5] items-center ${
+        isEdit && 'cursor-pointer'
+      }`}
       onClick={() => {
         if (isEdit) {
           const temp = checkedUsers;

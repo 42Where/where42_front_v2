@@ -22,7 +22,7 @@ export default function CustomLocationModal() {
       }}
     >
       <DialogTrigger>
-        <LocationBtn user={user} />
+        <LocationBtn user={user} isMyProfile />
       </DialogTrigger>
       <CustomLocationContent
         resultMessage={resultMessage}

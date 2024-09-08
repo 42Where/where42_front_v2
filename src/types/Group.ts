@@ -1,4 +1,4 @@
-import User from './User';
+import { User } from './User';
 
 type Group = {
   groupName: string;

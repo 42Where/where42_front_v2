@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import memberApi from '@/api/memberApi';
 import { useUserStore } from '@/lib/stores';
-import User from '@/types/User';
+import { SearchedUser } from '@/types/User';
 
 const SearchInputSchema = z.string().regex(/^[a-zA-Z0-9-]*$/, {
   message: '영어, 숫자, -만 입력 가능합니다.',
@@ -21,7 +21,7 @@ const SearchInputSchema = z.string().regex(/^[a-zA-Z0-9-]*$/, {
 export default function SearchModal() {
   const { user } = useUserStore();
   const [resultMessage, setResultMessage] = React.useState<string>('');
-  const [searchedUsers, setSearchedUsers] = React.useState<User[]>([]);
+  const [searchedUsers, setSearchedUsers] = React.useState<SearchedUser[]>([]);
   const formRef = React.useRef<HTMLFormElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [searchValue, setSearchValue] = React.useState<string>('');

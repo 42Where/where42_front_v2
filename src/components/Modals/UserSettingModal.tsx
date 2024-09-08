@@ -16,7 +16,7 @@ import {
 import { useGroupsStore, useUserStore } from '@/lib/stores';
 import { Button } from '../ui/button';
 import groupApi from '@/api/groupApi';
-import User from '@/types/User';
+import { User } from '@/types/User';
 import Group from '@/types/Group';
 import { useCheckedUsersStore } from '@/lib/stores';
 import { useAddedMembersStore } from '@/lib/stores';
@@ -42,7 +42,7 @@ export default function UserSettingModal({
   return (
     <Dialog>
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+        <DropdownMenuTrigger asChild className='cursor-pointer'>
           <Image
             src='/Icons/functionButton.svg'
             alt='function'

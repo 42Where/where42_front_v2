@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import User from '@/types/User';
+import { SearchedUser } from '@/types/User';
 import groupApi from '@/api/groupApi';
 import {
   useUserStore,
@@ -16,7 +16,7 @@ export default function SearchedCard({
   onClick,
   isAddingUser,
 }: {
-  member: User;
+  member: SearchedUser;
   onClick?: () => void;
   isAddingUser?: boolean;
 }) {
@@ -45,7 +45,7 @@ export default function SearchedCard({
       <div className='flex flex-row items-center gap-4 md:gap-4'>
         <ProfilePic user={member} type='searchedCard' />
         <div className='flex flex-col items-start gap-1'>
-          <LocationBtn user={member} searchedUser={member} />
+          <LocationBtn user={member} />
           <h3 className='text-xl md:text-2xl font-gsansLg text-[#132743]'>
             {member.intraName}
           </h3>

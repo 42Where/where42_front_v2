@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
-import User from '@/types/User';
+import { User } from '@/types/User';
 import { useCheckedStore } from '@/lib/stores';
 import NewGroupModal from '../Modals/NewGroupModal';
 import MySettingModal from '../Modals/MySettingModal';
@@ -20,7 +20,7 @@ export default function MyProfileCard({ user }: { user: User }) {
   return (
     <div className='flex flex-row justify-between items-center pb-12 lg:px-8 pt-0 relative'>
       <div className='flex flex-row items-center gap-4 lg:gap-6'>
-        <ProfilePic user={user} type='myProfile' />
+        <ProfilePic user={user} type='myCard' />
         <div className='flex flex-col items-start gap-2'>
           <CustomLocationModal />
           <h3 className='text-xl lg:text-3xl font-gsansLg text-[#132743]'>
