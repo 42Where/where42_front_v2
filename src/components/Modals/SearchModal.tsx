@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { X } from 'lucide-react';
 import { z } from 'zod';
 import SearchedCard from '@/components/Cards/SearchedCard';
+import SearchBtn from '@/components/Buttons/SearchBtn';
 import {
   Dialog,
   DialogContent,
@@ -12,7 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import memberApi from '@/api/memberApi';
 import { useUserStore } from '@/lib/stores';
-import User from '@/types/User';
+import { SearchedUser } from '@/types/User';
 
 const SearchInputSchema = z.string().regex(/^[a-zA-Z0-9-]*$/, {
   message: '영어, 숫자, -만 입력 가능합니다.',
@@ -20,7 +21,7 @@ const SearchInputSchema = z.string().regex(/^[a-zA-Z0-9-]*$/, {
 export default function SearchModal() {
   const { user } = useUserStore();
   const [resultMessage, setResultMessage] = React.useState<string>('');
-  const [searchedUsers, setSearchedUsers] = React.useState<User[]>([]);
+  const [searchedUsers, setSearchedUsers] = React.useState<SearchedUser[]>([]);
   const formRef = React.useRef<HTMLFormElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [searchValue, setSearchValue] = React.useState<string>('');
@@ -42,20 +43,8 @@ export default function SearchModal() {
         }
       }}
     >
-      <DialogTrigger asChild>
-        <div
-          className='size-10 lg:size-14 rounded-lg flex justify-center items-center hover:bg-gray-200'
-          role='button'
-          tabIndex={0}
-        >
-          <Image
-            src='/Icons/search.svg'
-            alt='search'
-            width={40}
-            height={40}
-            className='rounded-lg hover:bg-gray-200 lg:size-[40px] size-[30px]'
-          />
-        </div>
+      <DialogTrigger>
+        <SearchBtn />
       </DialogTrigger>
       <DialogContent
         className={`flex flex-col items-center transition-all ease-out duration-500 ${

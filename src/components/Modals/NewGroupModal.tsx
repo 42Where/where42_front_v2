@@ -23,7 +23,7 @@ import { useGroupsStore } from '@/lib/stores';
 import groupApi from '@/api/groupApi';
 import Group from '@/types/Group';
 import { useToast } from '@/components/ui/use-toast';
-import User from '@/types/User';
+import { SearchedUser, User } from '@/types/User';
 import SearchedCard from '@/components/Cards/SearchedCard';
 
 export default function NewGroupModal() {
@@ -57,13 +57,11 @@ export default function NewGroupModal() {
             setSelectedUsers([]);
             formRef.current?.reset();
             setSearchValue('');
-            console.log('CLOSED', selectedUsers);
           }, 100);
         } else {
           setSelectedUsers([]);
           formRef.current?.reset();
           setSearchValue('');
-          console.log('OPEN', selectedUsers);
         }
       }}
     >
@@ -192,7 +190,7 @@ export default function NewGroupModal() {
                   {searchedUsers?.map((searchedMember) => (
                     <SearchedCard
                       key={searchedMember.intraId}
-                      member={searchedMember}
+                      member={searchedMember as SearchedUser}
                       onClick={() => {
                         if (
                           selectedUsers.some(

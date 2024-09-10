@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import User from '@/types/User';
+import { SearchedUser } from '@/types/User';
 import groupApi from '@/api/groupApi';
 import {
   useUserStore,
@@ -10,13 +9,14 @@ import {
 } from '@/lib/stores';
 import LocationBtn from '../Buttons/LocationBtn';
 import { useToast } from '@/components/ui/use-toast';
+import ProfilePic from '@/components/ProfilePic';
 
 export default function SearchedCard({
   member,
   onClick,
   isAddingUser,
 }: {
-  member: User;
+  member: SearchedUser;
   onClick?: () => void;
   isAddingUser?: boolean;
 }) {
@@ -43,18 +43,9 @@ export default function SearchedCard({
       onClick={() => onClick && onClick()}
     >
       <div className='flex flex-row items-center gap-4 md:gap-4'>
-        <Avatar
-          className={`size-16 md:size-20 ${
-            member.location || member.inCluster || member.inOrOut
-              ? 'border-[#FFB5B5]'
-              : ''
-          } border-4`}
-        >
-          <AvatarImage src={member.image} />
-          <AvatarFallback />
-        </Avatar>
+        <ProfilePic user={member} type='searchedCard' />
         <div className='flex flex-col items-start gap-1'>
-          <LocationBtn user={member} searchedUser={member} />
+          <LocationBtn user={member} />
           <h3 className='text-xl md:text-2xl font-gsansLg text-[#132743]'>
             {member.intraName}
           </h3>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { X } from 'lucide-react';
 import { DialogTrigger } from '@radix-ui/react-dialog';
-import Image from 'next/image';
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 import {
   Dialog,
@@ -16,7 +15,8 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import { useUserStore } from '@/lib/stores';
-import CustomLocationContent from '../Utils/CustomLocationContent';
+import CustomLocationContent from '@/components/Utils/CustomLocationContent';
+import SettingBtn from '@/components/Buttons/MySettingBtn';
 
 export default function MySettingModal() {
   const [isMessage, setIsMessage] = React.useState<boolean>(false);
@@ -46,14 +46,8 @@ export default function MySettingModal() {
       }}
     >
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Image
-            src='/Icons/setting.svg'
-            alt='setting'
-            width={60}
-            height={60}
-            className='rounded-lg hover:bg-gray-200 lg:size-[60px] size-[50px]'
-          />
+        <DropdownMenuTrigger>
+          <SettingBtn />
         </DropdownMenuTrigger>
         <DropdownMenuContent
           side='left'

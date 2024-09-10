@@ -19,6 +19,13 @@ import { useGroupsStore, useUserStore } from '@/lib/stores';
 import { Button } from '@/components/ui/button';
 import Group from '@/types/Group';
 import { useToast } from '@/components/ui/use-toast';
+import GroupSettingBtn from '@/components/Buttons/GroupSettingBtn';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
   const [isDelete, setIsDelete] = React.useState<boolean>(false);
@@ -47,21 +54,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
       }}
     >
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          {!groups.find((group) => group.groupId === curGroup.groupId)
-            ?.isInEdit ? (
-            <div className='absolute size-10 rounded-lg flex justify-center items-center right-[50px] md:right-[64px] top-[8px] md:top-[16px] hover:bg-gray-200'>
-              <Image
-                src='/Icons/pencil.svg'
-                alt='pencil'
-                width={24}
-                height={24}
-              />
-            </div>
-          ) : (
-            <div />
-          )}
-        </DropdownMenuTrigger>
+        <GroupSettingBtn groups={groups} curGroup={curGroup} />
         <DropdownMenuContent
           side='bottom'
           className='font-gsansMd min-w-50 text-[#132743]'

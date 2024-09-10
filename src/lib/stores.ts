@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import User from '@/types/User';
+import { User } from '@/types/User';
 import Group from '@/types/Group';
 
 type UserStore = {

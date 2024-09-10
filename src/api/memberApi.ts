@@ -1,4 +1,4 @@
-import User from '@/types/User';
+import { User, SearchedUser } from '@/types/User';
 import { axios } from '@/lib/Axios';
 
 const memberApi = {
@@ -18,7 +18,11 @@ const memberApi = {
   deleteAccount: async (): Promise<void> => {
     await axios.delete('/v3/member');
   },
-  searchMember: async ({ keyWord }: { keyWord: string }): Promise<User[]> => {
+  searchMember: async ({
+    keyWord,
+  }: {
+    keyWord: string;
+  }): Promise<SearchedUser[]> => {
     const response = await axios.get('/v3/search', {
       params: { keyWord },
     });

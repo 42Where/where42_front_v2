@@ -1,6 +1,6 @@
 import React from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import User from '@/types/User';
+import ProfilePic from '@/components/ProfilePic';
+import { User } from '@/types/User';
 import { useCheckedUsersStore } from '@/lib/stores';
 import { Checkbox } from '../ui/checkbox';
 import UserSettingModal from '../Modals/UserSettingModal';
@@ -21,9 +21,9 @@ export default function ProfileCard({
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
   return (
     <div
-      className='flex flex-row justify-between p-4 md:p-6 rounded-2xl border-2 hover:border-[#FFB5B5] items-center'
-      role='button'
-      tabIndex={0}
+      className={`flex flex-row justify-between p-4 md:p-6 rounded-2xl border-2 hover:border-[#FFB5B5] items-center ${
+        isEdit && 'cursor-pointer'
+      }`}
       onClick={() => {
         if (isEdit) {
           const temp = checkedUsers;
@@ -38,21 +38,7 @@ export default function ProfileCard({
       }}
     >
       <div className='flex flex-row items-center gap-4 md:gap-6'>
-        <Avatar
-          className={`size-20 md:size-28 ${
-            user.inOrOut || user.location || user.inCluster
-              ? 'border-[#FFB5B5]'
-              : ''
-          } border-4 hover:border-[#bfb5ff]`}
-          onClick={() => {
-            if (!isEdit) {
-              window.open(`https://profile.intra.42.fr/users/${user.intraId}`);
-            }
-          }}
-        >
-          <AvatarImage src={user.image} />
-          <AvatarFallback />
-        </Avatar>
+        <ProfilePic user={user} type='userCard' />
         <div className='flex flex-col items-start gap-1 md:gap-2'>
           <LocationBtn user={user} />
           <h3 className='text-xl md:text-3xl font-gsansLg text-[#132743]'>

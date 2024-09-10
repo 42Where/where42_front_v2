@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import SearchModal from './Modals/SearchModal';
+import SearchModal from '@/components/Modals/SearchModal';
+import LogoutBtn from '@/components/Buttons/LogoutBtn';
 
 export default function Header() {
   const router = useRouter();
@@ -17,24 +17,7 @@ export default function Header() {
       />
       <div className='flex flex-row gap-2'>
         <SearchModal />
-        <div
-          className='size-10 lg:size-14 rounded-lg flex justify-center items-center hover:bg-gray-200'
-          role='button'
-          tabIndex={0}
-          onClick={() => {
-            Cookies.remove('accessToken');
-            Cookies.remove('refreshToken');
-            router.push('/login');
-          }}
-        >
-          <Image
-            src='/Icons/signOut.svg'
-            alt='search'
-            width={40}
-            height={40}
-            className='rounded-lg hover:bg-gray-200 lg:size-[40px] size-[30px]'
-          />
-        </div>
+        <LogoutBtn />
       </div>
     </header>
   );
