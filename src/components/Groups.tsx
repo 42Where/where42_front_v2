@@ -92,8 +92,7 @@ export default function Groups({ groups }: { groups: Group[] }) {
                   <p className='text-xl md:text-2xl'>
                     {
                       group.members.filter(
-                        (member) =>
-                          member.location || member.inCluster || member.inOrOut
+                        (member) => member.location || member.inCluster
                       ).length
                     }
                     /{group.members.length}
@@ -105,9 +104,7 @@ export default function Groups({ groups }: { groups: Group[] }) {
                   {checked
                     ? group.members.map(
                         (member) =>
-                          (member.inCluster ||
-                            member.location ||
-                            member.inOrOut) && (
+                          (member.inCluster || member.location) && (
                             <ProfileCard
                               key={member.intraId}
                               user={member}
@@ -134,8 +131,7 @@ export default function Groups({ groups }: { groups: Group[] }) {
                 ) : (
                   checked &&
                   group.members.filter(
-                    (member) =>
-                      member.location || member.inCluster || member.inOrOut
+                    (member) => member.location || member.inCluster
                   ).length === 0 && (
                     <p className='text-center text-xl font-gsansMd text-[#4A6282]'>
                       아무도 없어요.. 😢

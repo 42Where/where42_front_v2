@@ -22,6 +22,7 @@ export default function CustomLocationModal() {
       }}
     >
       <DialogTrigger>
+        {/* 20240910: Nested button warning can happen in dev mode, but nothing is wrong on production mode. Relax. */}
         <LocationBtn user={user} isMyProfile />
       </DialogTrigger>
       <CustomLocationContent
