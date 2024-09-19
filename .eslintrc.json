@@ -1,3 +1,17 @@
 {
-  "extends": ["next/core-web-vitals"]
+  "extends": [
+    "prettier",
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:storybook/recommended"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "error"
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
 }
