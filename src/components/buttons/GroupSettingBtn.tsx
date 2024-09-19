@@ -22,7 +22,7 @@ export default function GroupSettingBtn({
         <Tooltip>
           <TooltipTrigger>
             <Image
-              src='/Icons/pencil.svg'
+              src='/image/pencil.svg'
               alt='pencil'
               width={24}
               height={24}

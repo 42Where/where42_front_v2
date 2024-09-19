@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <header className='flex flex-row justify-between items-center p-2 pb-0 md:p-4'>
       <Image
-        src='/Icons/logoC.svg'
+        src='/image/logo/logoC.svg'
         alt='logo'
         width={200}
         height={100}

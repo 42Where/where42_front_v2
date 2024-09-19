@@ -71,7 +71,7 @@ export default function NewGroupModal() {
           text-l lg:text-xl text-[#132743] font-gsansMd hover:bg-gray-200 gap-2 w-30 h-8 lg:w-30 lg:h-10'
         >
           <Image
-            src='/Icons/newGroup.svg'
+            src='/image/newGroup.svg'
             alt='newGroup'
             width={20}
             height={20}
@@ -164,7 +164,7 @@ export default function NewGroupModal() {
               )}
               <div className='flex flex-row items-center gap-2 p-2 w-full border border-gray-400 rounded-xl shadow-lg'>
                 <Image
-                  src='/Icons/search.svg'
+                  src='/image/search.svg'
                   width={20}
                   height={20}
                   alt='search'

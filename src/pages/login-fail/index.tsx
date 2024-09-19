@@ -7,7 +7,7 @@ export default function LoginFailPage() {
     <main className='min-h-[100vh] w-full flex flex-col sm:flex-row text-[#132743]'>
       <div className='sm:relative sm:w-1/2 pt-8 sm:min-h-[50vh]'>
         <Image
-          src='/Icons/left.png'
+          src='/image/fill/left.png'
           alt='left'
           layout='fill'
           className='hidden sm:block'
@@ -24,7 +24,7 @@ export default function LoginFailPage() {
         /> */}
         <div className='flex flex-col min-h-[50vh] justify-center items-center gap-8 sm:gap-8 h-full'>
           <Image
-            src='/Icons/logo.svg'
+            src='/image/logo/logo.svg'
             alt='logo'
             width={100}
             height={100}
@@ -46,7 +46,7 @@ export default function LoginFailPage() {
         </div>
       </div>
       <div className='relative w-full min-h-[50vh] sm:hidden flex flex-col items-center justify-center'>
-        <Image src='/Icons/bottom.png' alt='bottom' layout='fill' />
+        <Image src='/image/fill/bottom.png' alt='bottom' layout='fill' />
         <LoginBtn isMobile={true} />
       </div>
     </main>

@@ -17,7 +17,7 @@ export default function SearchBtn() {
             tabIndex={0}
           >
             <Image
-              src='/Icons/search.svg'
+              src='/image/search.svg'
               alt='search'
               width={40}
               height={40}

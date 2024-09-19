@@ -12,7 +12,7 @@ export default function MySettingBtn() {
       <Tooltip>
         <TooltipTrigger asChild>
           <Image
-            src='/Icons/setting.svg'
+            src='/image/setting.svg'
             alt='setting'
             width={60}
             height={60}

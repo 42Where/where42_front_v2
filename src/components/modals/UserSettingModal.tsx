@@ -44,7 +44,7 @@ export default function UserSettingModal({
       <DropdownMenu>
         <DropdownMenuTrigger asChild className='cursor-pointer'>
           <Image
-            src='/Icons/functionButton.svg'
+            src='/image/functionButton.svg'
             alt='function'
             width={30}
             height={30}

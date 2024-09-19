@@ -85,7 +85,7 @@ export default function SearchedCard({
           }}
         >
           <Image
-            src='/Icons/userAdd.svg'
+            src='/image/user/userAdd.svg'
             alt='userAdd'
             width={30}
             height={30}

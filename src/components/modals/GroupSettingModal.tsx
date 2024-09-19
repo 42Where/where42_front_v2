@@ -1,8 +1,6 @@
 import React from 'react';
 import { X } from 'lucide-react';
 import { DialogTrigger } from '@radix-ui/react-dialog';
-import Image from 'next/image';
-import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 import {
   Dialog,
   DialogContent,
@@ -20,12 +18,6 @@ import { Button } from '@/components/ui/button';
 import Group from '@/types/Group';
 import { useToast } from '@/components/ui/use-toast';
 import GroupSettingBtn from '@/components/buttons/GroupSettingBtn';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
 
 export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
   const [isDelete, setIsDelete] = React.useState<boolean>(false);

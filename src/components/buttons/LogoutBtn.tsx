@@ -25,7 +25,7 @@ export default function LogoutBtn() {
             }}
           >
             <Image
-              src='/Icons/signOut.svg'
+              src='/image/signOut.svg'
               alt='search'
               width={40}
               height={40}
