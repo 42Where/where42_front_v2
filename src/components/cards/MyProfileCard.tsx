@@ -23,9 +23,9 @@ export default function MyProfileCard({ user }: { user: User }) {
         <ProfilePic user={user} type="myCard" />
         <div className="flex flex-col items-start gap-2">
           <CustomLocationModal />
-          <h3 className="font-gsansLg text-xl text-[#132743] lg:text-3xl">
+          <h2 className="text-xl text-[#132743] lg:text-3xl">
             {user.intraName}
-          </h3>
+          </h2>
           <p className=" text-l  lg:text-xl">{user.comment}</p>
         </div>
       </div>

@@ -28,8 +28,10 @@ export default function AgreementModal({
     <Dialog open={showModal}>
       <DialogContent className="max-w-[800px]  gap-2 text-[#132743E0]">
         <DialogHeader className="text-m  ">
-          <DialogTitle className="text-l font-gsansLg text-[#132743]">
-            개인정보 수집 및 이용 동의서(필수)
+          <DialogTitle>
+            <h2 className="text-l  text-[#132743]">
+              개인정보 수집 및 이용 동의서(필수)
+            </h2>
           </DialogTitle>
           (재)이노베이션 아카데미는 『개인정보 보호법』 제15조 등 관련 법령에
           따라 서비스 이용자의 개인정보보호를 매우 중시하며, 서비스 제공에

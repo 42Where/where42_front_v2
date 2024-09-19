@@ -32,9 +32,7 @@ export default function LoginFailPage() {
             className="size-28 sm:size-32"
           />
           <span className="flex flex-col items-center gap-4">
-            <h1 className="font-gsansLg text-4xl sm:text-6xl">
-              로그인에 실패했습니다.😢
-            </h1>
+            <h1 className=" text-4xl sm:text-6xl">로그인에 실패했습니다.😢</h1>
             <h3 className="text-l sm:text-2xl ">
               아래 버튼을 눌러 다시 시도해주세요.
             </h3>

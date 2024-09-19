@@ -97,17 +97,14 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
           <>
             <DialogTitle>그룹 삭제</DialogTitle>
             <span className=" inline">
-              <p
-                className="font-gsansLg"
-                style={{ display: "inline", margin: "0" }}
-              >
+              <h3 style={{ display: "inline", margin: "0" }}>
                 &quot;{" "}
                 {
                   groups.find((group) => group.groupId === curGroup.groupId)
                     ?.groupName
                 }
                 &quot;{" "}
-              </p>
+              </h3>
               그룹을 삭제하시겠습니까?
             </span>
             <div className="flex flex-row items-center justify-between">

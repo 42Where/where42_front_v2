@@ -162,20 +162,14 @@ export default function UserSettingModal({
       ) : (
         <DialogContent className="max-w-[425px]  text-[#132743] transition-all duration-500 ease-out">
           <DialogTitle>그룹 삭제</DialogTitle>
-          <span className="inline ">
-            <p
-              className="font-gsansLg"
-              style={{ display: "inline", margin: "0" }}
-            >
+          <span className="inline">
+            <h3 style={{ display: "inline", margin: "0" }}>
               &quot;{targUser.intraName}&quot;
-            </p>
+            </h3>
             <p style={{ display: "inline", margin: "0" }}>님을</p>
-            <p
-              className="font-gsansLg"
-              style={{ display: "inline", margin: "0" }}
-            >
+            <h3 style={{ display: "inline", margin: "0" }}>
               &quot;{targGroup.groupName}&quot;{" "}
-            </p>
+            </h3>
             그룹으로부터 삭제하시겠습니까?
           </span>
           {targGroup.groupId === user?.defaultGroupId && (

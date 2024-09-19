@@ -46,9 +46,9 @@ export default function SearchedCard({
         <ProfilePic user={member} type="searchedCard" />
         <div className="flex flex-col items-start gap-1">
           <LocationBtn user={member} />
-          <h3 className="font-gsansLg text-xl text-[#132743] md:text-2xl">
+          <h2 className=" text-xl text-[#132743] md:text-2xl">
             {member.intraName}
-          </h3>
+          </h2>
           <p className=" md:text-md text-sm ">{member.comment}</p>
         </div>
       </div>

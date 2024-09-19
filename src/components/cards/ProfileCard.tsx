@@ -41,9 +41,9 @@ export default function ProfileCard({
         <ProfilePic user={user} type="userCard" />
         <div className="flex flex-col items-start gap-1 md:gap-2">
           <LocationBtn user={user} />
-          <h3 className="font-gsansLg text-xl text-[#132743] md:text-3xl">
+          <h2 className=" text-xl text-[#132743] md:text-3xl">
             {user.intraName}
-          </h3>
+          </h2>
           <p className=" text-l  lg:text-xl">{user.comment}</p>
         </div>
       </div>

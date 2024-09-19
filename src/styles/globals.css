@@ -6,21 +6,23 @@
   input[type="search"] {
     -webkit-appearance: none !important;
   }
-  * {
-    @apply border-border;
-  }
   html {
     font-family: "GmarketSansMd";
     @apply bg-background;
     @apply text-[#4A6282];
-  }
-  h1 {
-    font-family: "GmarketSansLg";
+    @apply border-border;
   }
   body {
     height: 100%;
     margin: 0;
     padding: 0;
+  }
+  h1 {
+    font-family: "GmarketSansLg";
+  }
+
+  h2 {
+    font-family: "GmarketSansLg";
   }
   :root {
     --background: 0 0% 100%;

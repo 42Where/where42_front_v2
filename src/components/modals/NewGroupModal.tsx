@@ -89,13 +89,10 @@ export default function NewGroupModal() {
                 <AlertDialogTitle>중복 그룹 확인</AlertDialogTitle>
                 <AlertDialogDescription>
                   현재
-                  <p
-                    className="font-gsansLg"
-                    style={{ display: "inline", margin: "0" }}
-                  >
+                  <h3 style={{ display: "inline", margin: "0" }}>
                     &quot; {searchValue}
                     &quot;{" "}
-                  </p>
+                  </h3>
                   그룹이 이미 존재합니다. 같은 이름의 그룹을 생성하시겠습니까?
                 </AlertDialogDescription>
               </AlertDialogHeader>
