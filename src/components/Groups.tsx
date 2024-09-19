@@ -5,19 +5,19 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import Divider from '@/components/Utils/Divider';
-import ProfileCard from '@/components/Cards/ProfileCard';
+import Divider from '@/components/utils/Divider';
+import ProfileCard from '@/components/cards/ProfileCard';
 import Group from '@/types/Group';
 import {
   useCheckedStore,
   useCheckedUsersStore,
   useGroupsStore,
 } from '@/lib/stores';
-import GroupSettingModal from './Modals/GroupSettingModal';
+import GroupSettingModal from './modals/GroupSettingModal';
 import { Button } from './ui/button';
-import GroupDeleteModal from './Modals/GroupDeleteModal';
-import GroupAddModal from './Modals/GroupAddModal';
-import CardSkeleton from './Utils/CardSkeleton';
+import GroupDeleteModal from './modals/GroupDeleteModal';
+import GroupAddModal from './modals/GroupAddModal';
+import CardSkeleton from './utils/CardSkeleton';
 
 export default function Groups({ groups }: { groups: Group[] }) {
   const { setGroups } = useGroupsStore();

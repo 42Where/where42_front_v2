@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import LoginBtn from '@/components/Buttons/LoginBtn';
+import LoginBtn from '@/components/buttons/LoginBtn';
 
 export default function LoginFailPage() {
   return (

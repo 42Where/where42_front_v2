@@ -19,7 +19,7 @@ import { useGroupsStore, useUserStore } from '@/lib/stores';
 import { Button } from '@/components/ui/button';
 import Group from '@/types/Group';
 import { useToast } from '@/components/ui/use-toast';
-import GroupSettingBtn from '@/components/Buttons/GroupSettingBtn';
+import GroupSettingBtn from '@/components/buttons/GroupSettingBtn';
 import {
   Tooltip,
   TooltipContent,

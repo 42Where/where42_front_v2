@@ -7,7 +7,7 @@ import {
   useAddedMembersStore,
   useGroupsStore,
 } from '@/lib/stores';
-import LocationBtn from '../Buttons/LocationBtn';
+import LocationBtn from '../buttons/LocationBtn';
 import { useToast } from '@/components/ui/use-toast';
 import ProfilePic from '@/components/ProfilePic';
 

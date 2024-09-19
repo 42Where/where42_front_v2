@@ -1,8 +1,8 @@
 import React from 'react';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { useUserStore } from '@/lib/stores';
-import LocationBtn from '../Buttons/LocationBtn';
-import CustomLocationContent from '../Utils/CustomLocationContent';
+import LocationBtn from '../buttons/LocationBtn';
+import CustomLocationContent from '../utils/CustomLocationContent';
 
 export default function CustomLocationModal() {
   const { user } = useUserStore();

@@ -24,7 +24,7 @@ import groupApi from '@/api/groupApi';
 import Group from '@/types/Group';
 import { useToast } from '@/components/ui/use-toast';
 import { SearchedUser, User } from '@/types/User';
-import SearchedCard from '@/components/Cards/SearchedCard';
+import SearchedCard from '@/components/cards/SearchedCard';
 
 export default function NewGroupModal() {
   const { groups, setGroups } = useGroupsStore();

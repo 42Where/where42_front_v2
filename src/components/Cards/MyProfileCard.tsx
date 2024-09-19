@@ -3,9 +3,9 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { User } from '@/types/User';
 import { useCheckedStore } from '@/lib/stores';
-import NewGroupModal from '../Modals/NewGroupModal';
-import MySettingModal from '../Modals/MySettingModal';
-import CustomLocationModal from '../Modals/CustomLocationModal';
+import NewGroupModal from '../modals/NewGroupModal';
+import MySettingModal from '../modals/MySettingModal';
+import CustomLocationModal from '../modals/CustomLocationModal';
 import ProfilePic from '@/components/ProfilePic';
 
 export default function MyProfileCard({ user }: { user: User }) {

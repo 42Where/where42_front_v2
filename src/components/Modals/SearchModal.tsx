@@ -2,8 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { z } from 'zod';
-import SearchedCard from '@/components/Cards/SearchedCard';
-import SearchBtn from '@/components/Buttons/SearchBtn';
+import SearchedCard from '@/components/cards/SearchedCard';
+import SearchBtn from '@/components/buttons/SearchBtn';
 import {
   Dialog,
   DialogContent,
