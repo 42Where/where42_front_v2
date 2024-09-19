@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { X } from 'lucide-react';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
+import React, { useEffect } from "react";
+import { X } from "lucide-react";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,26 +11,26 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
+} from "@/components/ui/alert-dialog";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { useGroupsStore } from '@/lib/stores';
-import groupApi from '@/api/groupApi';
-import Group from '@/types/Group';
-import { useToast } from '@/components/ui/use-toast';
-import { SearchedUser, User } from '@/types/User';
-import SearchedCard from '@/components/cards/SearchedCard';
+} from "@/components/ui/dialog";
+import { useGroupsStore } from "@/lib/stores";
+import groupApi from "@/api/groupApi";
+import Group from "@/types/Group";
+import { useToast } from "@/components/ui/use-toast";
+import { SearchedUser, User } from "@/types/User";
+import SearchedCard from "@/components/cards/SearchedCard";
 
 export default function NewGroupModal() {
   const { groups, setGroups } = useGroupsStore();
   const formRef = React.useRef<HTMLFormElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const [searchValue, setSearchValue] = React.useState<string>('');
+  const [searchValue, setSearchValue] = React.useState<string>("");
   const [isDuplicated, setIsDuplicated] = React.useState<boolean>(false);
   const [isAddingUser, setIsAddingUser] = React.useState<boolean>(false);
   const [searchedUsers, setSearchedUsers] = React.useState<User[]>([]);
@@ -45,7 +45,9 @@ export default function NewGroupModal() {
   useEffect(() => {
     if (groups[0])
       setSearchedUsers(
-        groups[0].members.filter((user) => user.intraName.includes(searchValue))
+        groups[0].members.filter((user) =>
+          user.intraName.includes(searchValue),
+        ),
       );
   }, [searchValue]);
 
@@ -56,43 +58,43 @@ export default function NewGroupModal() {
           setTimeout(() => {
             setSelectedUsers([]);
             formRef.current?.reset();
-            setSearchValue('');
+            setSearchValue("");
           }, 100);
         } else {
           setSelectedUsers([]);
           formRef.current?.reset();
-          setSearchValue('');
+          setSearchValue("");
         }
       }}
     >
       <DialogTrigger>
         <Button
-          className='rounded-full bg-white border-2 border-[#132743] py-1 px-3
-          text-l lg:text-xl text-[#132743] font-gsansMd hover:bg-gray-200 gap-2 w-30 h-8 lg:w-30 lg:h-10'
+          className="text-l w-30 lg:w-30 h-8 gap-2 rounded-full
+          border-2 border-[#132743] bg-white  px-3 py-1 text-[#132743] hover:bg-gray-200 lg:h-10 lg:text-xl"
         >
           <Image
-            src='/image/newGroup.svg'
-            alt='newGroup'
+            src="/image/newGroup.svg"
+            alt="newGroup"
             width={20}
             height={20}
           />
           새 그룹
         </Button>
       </DialogTrigger>
-      <DialogContent className='transition-all ease-out duration-500 max-w-[800px]'>
-        <DialogHeader className='flex flex-col w-full gap-2 items-center justify-center'>
+      <DialogContent className="max-w-[800px] transition-all duration-500 ease-out">
+        <DialogHeader className="flex w-full flex-col items-center justify-center gap-2">
           <AlertDialog open={isDuplicated}>
-            <AlertDialogContent className='transition-all ease-out duration-500 max-w-[425px] font-gsansMd text-[#132743]'>
+            <AlertDialogContent className="max-w-[425px] text-[#132743] transition-all duration-500  ease-out">
               <AlertDialogHeader>
                 <AlertDialogTitle>중복 그룹 확인</AlertDialogTitle>
                 <AlertDialogDescription>
                   현재
                   <p
-                    className='font-gsansLg'
-                    style={{ display: 'inline', margin: '0' }}
+                    className="font-gsansLg"
+                    style={{ display: "inline", margin: "0" }}
                   >
                     &quot; {searchValue}
-                    &quot;{' '}
+                    &quot;{" "}
                   </p>
                   그룹이 이미 존재합니다. 같은 이름의 그룹을 생성하시겠습니까?
                 </AlertDialogDescription>
@@ -100,7 +102,7 @@ export default function NewGroupModal() {
               <AlertDialogFooter>
                 <AlertDialogCancel
                   onClick={() => {
-                    setSearchValue('');
+                    setSearchValue("");
                     setIsDuplicated(false);
                   }}
                 >
@@ -108,7 +110,7 @@ export default function NewGroupModal() {
                 </AlertDialogCancel>
                 <AlertDialogAction
                   onClick={() => {
-                    setSearchValue('');
+                    setSearchValue("");
                     groupApi
                       .createGroup({ groupName: searchValue })
                       .then((res) => {
@@ -137,24 +139,24 @@ export default function NewGroupModal() {
           </AlertDialog>
           <DialogTitle>새로운 그룹 생성</DialogTitle>
           {isAddingUser ? (
-            <div className='flex flex-col w-full items-center justify-center gap-4 overflow-scroll'>
+            <div className="flex w-full flex-col items-center justify-center gap-4 overflow-scroll">
               {selectedUsers.length > 0 && (
-                <div className='flex flex-row gap-2 overflow-x-scroll w-[300px] md:w-[700px]'>
+                <div className="flex w-[300px] flex-row gap-2 overflow-x-scroll md:w-[700px]">
                   {selectedUsers.map((selectedUser) => (
                     <div
                       key={selectedUser.intraId}
-                      className='flex flex-row items-center gap-2 p-2 border border-gray-400 rounded-xl shadow-lg'
+                      className="flex flex-row items-center gap-2 rounded-xl border border-gray-400 p-2 shadow-lg"
                     >
-                      <p className='text-l font-gsansMd text-[#132743]'>
+                      <p className="text-l  text-[#132743]">
                         {selectedUser.intraName}
                       </p>
                       <X
-                        className='size-6 cursor-pointer'
+                        className="size-6 cursor-pointer"
                         onClick={() => {
                           setSelectedUsers(
                             selectedUsers.filter(
-                              (selected) => selected !== selectedUser
-                            )
+                              (selected) => selected !== selectedUser,
+                            ),
                           );
                         }}
                       />
@@ -162,31 +164,31 @@ export default function NewGroupModal() {
                   ))}
                 </div>
               )}
-              <div className='flex flex-row items-center gap-2 p-2 w-full border border-gray-400 rounded-xl shadow-lg'>
+              <div className="flex w-full flex-row items-center gap-2 rounded-xl border border-gray-400 p-2 shadow-lg">
                 <Image
-                  src='/image/search.svg'
+                  src="/image/search.svg"
                   width={20}
                   height={20}
-                  alt='search'
+                  alt="search"
                 />
                 <input
                   ref={inputRef}
-                  className='w-full bg-transparent outline-none placeholder:text-gray-500 dark:text-gray-700 text-l font-gsansMd text-[#132743]'
-                  placeholder='새 그룹에 추가할 친구를 검색하세요.'
+                  className="text-l w-full bg-transparent text-[#132743] outline-none placeholder:text-gray-500  dark:text-gray-700"
+                  placeholder="새 그룹에 추가할 친구를 검색하세요."
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
                 {searchValue && (
                   <X
-                    className='size-6'
+                    className="size-6"
                     onClick={() => {
                       formRef.current?.reset();
-                      setSearchValue('');
+                      setSearchValue("");
                     }}
                   />
                 )}
               </div>
-              <div className='h-[300px] md:h-[500px] w-full rounded-md overflow-scroll'>
-                <div className='grid grid-flow-row md:grid-cols-2 gap-2'>
+              <div className="h-[300px] w-full overflow-scroll rounded-md md:h-[500px]">
+                <div className="grid grid-flow-row gap-2 md:grid-cols-2">
                   {searchedUsers?.map((searchedMember) => (
                     <SearchedCard
                       key={searchedMember.intraId}
@@ -195,7 +197,7 @@ export default function NewGroupModal() {
                         if (
                           selectedUsers.some(
                             (selectedUser) =>
-                              selectedUser.intraId === searchedMember.intraId
+                              selectedUser.intraId === searchedMember.intraId,
                           )
                         )
                           return;
@@ -207,7 +209,7 @@ export default function NewGroupModal() {
                 </div>
               </div>
               <Button
-                className='rounded-full text-l lg:text-xl font-gsansMd hover:bg-gray-200 gap-2 w-30 h-8 lg:w-30 lg:h-10'
+                className="text-l w-30 lg:w-30  h-8 gap-2 rounded-full hover:bg-gray-200 lg:h-10 lg:text-xl"
                 onClick={() => {
                   setIsAddingUser(false);
                   groupApi
@@ -217,7 +219,7 @@ export default function NewGroupModal() {
                     })
                     .then(() => {
                       toast({
-                        title: '그룹에 친구를 성공적으로 추가했습니다.',
+                        title: "그룹에 친구를 성공적으로 추가했습니다.",
                       });
                     })
                     .catch((error) => {
@@ -232,18 +234,18 @@ export default function NewGroupModal() {
                         };
                       }
                       return group;
-                    })
+                    }),
                   );
                 }}
-                variant={'outline'}
+                variant={"outline"}
               >
                 추가하기
               </Button>
             </div>
           ) : (
-            <div className='flex flex-row items-center gap-2 p-2  w-full border border-gray-400 rounded-xl shadow-lg'>
+            <div className="flex w-full flex-row items-center gap-2  rounded-xl border border-gray-400 p-2 shadow-lg">
               <form
-                className='flex flex-row items-center gap-2 w-full'
+                className="flex w-full flex-row items-center gap-2"
                 ref={formRef}
                 onSubmit={async (e) => {
                   e.preventDefault();
@@ -254,7 +256,7 @@ export default function NewGroupModal() {
                     setIsDuplicated(true);
                     return;
                   }
-                  setSearchValue('');
+                  setSearchValue("");
                   groupApi
                     .createGroup({ groupName: inputValue })
                     .then((res) => {
@@ -274,7 +276,7 @@ export default function NewGroupModal() {
                     .then(() =>
                       toast({
                         title: `'${inputValue}' 그룹이 생성되었습니다.`,
-                      })
+                      }),
                     )
                     .then(() => setIsAddingUser(true))
                     .catch((error) => {
@@ -284,17 +286,17 @@ export default function NewGroupModal() {
               >
                 <input
                   ref={inputRef}
-                  className='w-full bg-transparent outline-none placeholder:text-gray-500 dark:text-gray-700 text-l font-gsansMd text-[#132743]'
-                  placeholder='생성할 그룹의 이름을 입력하세요.'
+                  className="text-l w-full bg-transparent text-[#132743] outline-none placeholder:text-gray-500  dark:text-gray-700"
+                  placeholder="생성할 그룹의 이름을 입력하세요."
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
               </form>
               {searchValue && (
                 <X
-                  className='size-6'
+                  className="size-6"
                   onClick={() => {
                     formRef.current?.reset();
-                    setSearchValue('');
+                    setSearchValue("");
                   }}
                 />
               )}

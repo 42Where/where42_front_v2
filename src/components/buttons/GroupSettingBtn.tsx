@@ -1,12 +1,12 @@
-import Group from '@/types/Group';
-import Image from 'next/image';
+import Group from "@/types/Group";
+import Image from "next/image";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+} from "@/components/ui/tooltip";
+import { DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 export default function GroupSettingBtn({
   curGroup,
@@ -17,21 +17,19 @@ export default function GroupSettingBtn({
 }) {
   return !groups.find((group) => group.groupId === curGroup.groupId)
     ?.isInEdit ? (
-    <DropdownMenuTrigger className='absolute size-10 rounded-lg flex justify-center items-center right-[50px] md:right-[64px] top-[8px] md:top-[16px] hover:bg-gray-200'>
+    <DropdownMenuTrigger className="absolute right-[50px] top-[8px] flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 md:right-[64px] md:top-[16px]">
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>
             <Image
-              src='/image/pencil.svg'
-              alt='pencil'
+              src="/image/pencil.svg"
+              alt="pencil"
               width={24}
               height={24}
             />
           </TooltipTrigger>
           <TooltipContent>
-            <p className='font-gsansMd text-[#4A6282] text-l lg:text-xl'>
-              그룹 설정
-            </p>
+            <p className=" text-l  lg:text-xl">그룹 설정</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>

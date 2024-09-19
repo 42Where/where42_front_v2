@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 import {
   Dialog,
   DialogContent,
   DialogClose,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Button } from '../ui/button';
-import groupApi from '@/api/groupApi';
-import Group from '@/types/Group';
+} from "@/components/ui/dialog";
+import { Button } from "../ui/button";
+import groupApi from "@/api/groupApi";
+import Group from "@/types/Group";
 import {
   useCheckedUsersStore,
   useGroupsStore,
   useUserStore,
-} from '@/lib/stores';
+} from "@/lib/stores";
 
 export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
   const { user } = useUserStore();
@@ -25,15 +25,15 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className='rounded-full bg-white border-2 border-[#132743]
-          md:h-8 h-6 px-2 md:px-3 lg:text-xl text-l  text-[#132743] font-gsansMd hover:bg-gray-200 gap-2'
+          className="text-l h-6 gap-2 rounded-full
+          border-2 border-[#132743] bg-white px-2 text-[#132743] hover:bg-gray-200  md:h-8  md:px-3 lg:text-xl"
         >
           다른 그룹에 추가
         </Button>
       </DialogTrigger>
-      <DialogContent className='transition-all ease-out duration-500 font-gsansMd text-[#132743]'>
+      <DialogContent className="text-[#132743] transition-all duration-500  ease-out">
         <DialogTitle>추가할 그룹을 선택하세요</DialogTitle>
-        <div className='flex flex-col gap-2'>
+        <div className="flex flex-col gap-2">
           {groups.map(
             (g) =>
               g.groupId !== user?.defaultGroupId && (
@@ -41,13 +41,15 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
                   key={g.groupId}
                   className={`rounded-2xl ${
                     checkedGroups.includes(g.groupId)
-                      ? 'bg-[#132743] text-white hover:bg-gray-500'
-                      : 'bg-white border-2 border-[#132743] text-[#132743] hover:bg-gray-200'
-                  } border-0 border-[#132743] py-1 px-3 text-xl font-gsansMd gap-2`}
+                      ? "bg-[#132743] text-white hover:bg-gray-500"
+                      : "border-2 border-[#132743] bg-white text-[#132743] hover:bg-gray-200"
+                  } gap-2 border-0 border-[#132743] px-3 py-1  text-xl`}
                   onClick={() => {
                     if (checkedGroups.includes(g.groupId)) {
                       setCheckedGroups(
-                        checkedGroups.filter((groupId) => groupId !== g.groupId)
+                        checkedGroups.filter(
+                          (groupId) => groupId !== g.groupId,
+                        ),
                       );
                     } else {
                       setCheckedGroups([...checkedGroups, g.groupId]);
@@ -56,19 +58,19 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
                 >
                   {g.groupName}
                 </Button>
-              )
+              ),
           )}
         </div>
-        <div className='flex flex-row items-center justify-between'>
+        <div className="flex flex-row items-center justify-between">
           <div />
-          <div className='flex flex-row gap-2'>
+          <div className="flex flex-row gap-2">
             <DialogClose asChild>
               <Button
                 onClick={() => {
                   checkedGroups.forEach((groupId) => {
                     const temp = groups;
                     const myGroup = temp.find(
-                      (g) => g.groupId === curGroup.groupId
+                      (g) => g.groupId === curGroup.groupId,
                     );
                     if (myGroup) {
                       myGroup.isInEdit = false;
@@ -104,7 +106,7 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
               </Button>
             </DialogClose>
             <DialogClose asChild>
-              <Button className='bg-[#132743]'>취소</Button>
+              <Button className="bg-[#132743]">취소</Button>
             </DialogClose>
           </div>
         </div>

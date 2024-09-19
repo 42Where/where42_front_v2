@@ -1,20 +1,20 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+import React from "react";
+import { useRouter } from "next/router";
 
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from '@/components/ui/accordion';
-import { Button } from '../ui/button';
-import groupApi from '@/api/groupApi';
+} from "@/components/ui/accordion";
+import { Button } from "../ui/button";
+import groupApi from "@/api/groupApi";
 
 export default function AgreementModal({
   showModal,
@@ -26,9 +26,9 @@ export default function AgreementModal({
   const router = useRouter();
   return (
     <Dialog open={showModal}>
-      <DialogContent className='max-w-[800px] font-gsansMd text-[#132743E0] gap-2'>
-        <DialogHeader className='text-m font-gsansMd text-[#4A6282]'>
-          <DialogTitle className='text-l font-gsansLg text-[#132743]'>
+      <DialogContent className="max-w-[800px]  gap-2 text-[#132743E0]">
+        <DialogHeader className="text-m  ">
+          <DialogTitle className="text-l font-gsansLg text-[#132743]">
             개인정보 수집 및 이용 동의서(필수)
           </DialogTitle>
           (재)이노베이션 아카데미는 『개인정보 보호법』 제15조 등 관련 법령에
@@ -36,14 +36,14 @@ export default function AgreementModal({
           반드시 필요한 개인정보의 수집⦁이용을 위하여 귀하의 동의를 받고자
           합니다.
         </DialogHeader>
-        <Accordion type='multiple' className='w-full'>
-          <AccordionItem value='item-1'>
+        <Accordion type="multiple" className="w-full">
+          <AccordionItem value="item-1">
             <AccordionTrigger>개인정보의 수집 및 이용 목적</AccordionTrigger>
             <AccordionContent>
               어디있니 현재 위치 확인 서비스 제공
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value='item-2'>
+          <AccordionItem value="item-2">
             <AccordionTrigger>수집하는 개인정보 항목</AccordionTrigger>
             <AccordionContent>
               <span>
@@ -54,13 +54,13 @@ export default function AgreementModal({
               </span>
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value='item-3'>
+          <AccordionItem value="item-3">
             <AccordionTrigger>개인정보의 보유 및 이용기간</AccordionTrigger>
             <AccordionContent>
               3년, 보유기간 경과 및 보유목적 달성 시 지체 없이 파기합니다
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value='item-4'>
+          <AccordionItem value="item-4">
             <AccordionTrigger>
               동의 거부 권리 및 동의 거부에 따른 불이익 내용 또는 제한사항
             </AccordionTrigger>
@@ -71,27 +71,27 @@ export default function AgreementModal({
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-        <div className='flex flex-row items-center justify-between'>
+        <div className="flex flex-row items-center justify-between">
           <div />
-          <div className='flex flex-row gap-2'>
+          <div className="flex flex-row gap-2">
             <Button
               onClick={() => {
                 groupApi.agreeJoin();
                 setShowModal(false);
               }}
-              size={'lg'}
-              className='text-xl'
+              size={"lg"}
+              className="text-xl"
             >
               동의
             </Button>
             <Button
               onClick={() => {
                 setShowModal(false);
-                router.push('/login');
+                router.push("/login");
               }}
-              variant={'destructive'}
-              size={'lg'}
-              className='text-xl'
+              variant={"destructive"}
+              size={"lg"}
+              className="text-xl"
             >
               거절
             </Button>

@@ -1,12 +1,12 @@
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+import Image from "next/image";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
+} from "@/components/ui/tooltip";
 
 export default function LogoutBtn() {
   const router = useRouter();
@@ -15,28 +15,26 @@ export default function LogoutBtn() {
       <Tooltip>
         <TooltipTrigger asChild>
           <div
-            className='size-10 lg:size-14 rounded-lg flex justify-center items-center hover:bg-gray-200'
-            role='button'
+            className="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 lg:size-14"
+            role="button"
             tabIndex={0}
             onClick={() => {
-              Cookies.remove('accessToken');
-              Cookies.remove('refreshToken');
-              router.push('/login');
+              Cookies.remove("accessToken");
+              Cookies.remove("refreshToken");
+              router.push("/login");
             }}
           >
             <Image
-              src='/image/signOut.svg'
-              alt='search'
+              src="/image/signOut.svg"
+              alt="search"
               width={40}
               height={40}
-              className='rounded-lg hover:bg-gray-200 lg:size-[40px] size-[30px]'
+              className="size-[30px] rounded-lg hover:bg-gray-200 lg:size-[40px]"
             />
           </div>
         </TooltipTrigger>
         <TooltipContent>
-          <p className='font-gsansMd text-[#4A6282] text-l lg:text-xl'>
-            로그아웃
-          </p>
+          <p className=" text-l  lg:text-xl">로그아웃</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

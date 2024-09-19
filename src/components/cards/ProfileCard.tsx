@@ -1,11 +1,11 @@
-import React from 'react';
-import ProfilePic from '@/components/ProfilePic';
-import { User } from '@/types/User';
-import { useCheckedUsersStore } from '@/lib/stores';
-import { Checkbox } from '../ui/checkbox';
-import UserSettingModal from '../modals/UserSettingModal';
-import Group from '@/types/Group';
-import LocationBtn from '../buttons/LocationBtn';
+import React from "react";
+import ProfilePic from "@/components/ProfilePic";
+import { User } from "@/types/User";
+import { useCheckedUsersStore } from "@/lib/stores";
+import { Checkbox } from "../ui/checkbox";
+import UserSettingModal from "../modals/UserSettingModal";
+import Group from "@/types/Group";
+import LocationBtn from "../buttons/LocationBtn";
 
 export default function ProfileCard({
   user,
@@ -21,8 +21,8 @@ export default function ProfileCard({
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
   return (
     <div
-      className={`flex flex-row justify-between p-4 md:p-6 rounded-2xl border-2 hover:border-[#FFB5B5] items-center ${
-        isEdit && 'cursor-pointer'
+      className={`flex flex-row items-center justify-between rounded-2xl border-2 p-4 hover:border-[#FFB5B5] md:p-6 ${
+        isEdit && "cursor-pointer"
       }`}
       onClick={() => {
         if (isEdit) {
@@ -37,20 +37,18 @@ export default function ProfileCard({
         }
       }}
     >
-      <div className='flex flex-row items-center gap-4 md:gap-6'>
-        <ProfilePic user={user} type='userCard' />
-        <div className='flex flex-col items-start gap-1 md:gap-2'>
+      <div className="flex flex-row items-center gap-4 md:gap-6">
+        <ProfilePic user={user} type="userCard" />
+        <div className="flex flex-col items-start gap-1 md:gap-2">
           <LocationBtn user={user} />
-          <h3 className='text-xl md:text-3xl font-gsansLg text-[#132743]'>
+          <h3 className="font-gsansLg text-xl text-[#132743] md:text-3xl">
             {user.intraName}
           </h3>
-          <p className='font-gsansMd text-[#4A6282] text-l lg:text-xl'>
-            {user.comment}
-          </p>
+          <p className=" text-l  lg:text-xl">{user.comment}</p>
         </div>
       </div>
       {isEdit ? (
-        <Checkbox className='size-8 border-4 rounded-lg' checked={isCheck} />
+        <Checkbox className="size-8 rounded-lg border-4" checked={isCheck} />
       ) : (
         <UserSettingModal targUser={user} targGroup={group} />
       )}

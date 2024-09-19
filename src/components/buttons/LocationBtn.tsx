@@ -1,12 +1,12 @@
-import { Button } from '../ui/button';
-import React from 'react';
-import { User, SearchedUser } from '@/types/User';
+import { Button } from "../ui/button";
+import React from "react";
+import { User, SearchedUser } from "@/types/User";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
+} from "@/components/ui/tooltip";
 
 export default function LocationBtn({
   user,
@@ -15,17 +15,17 @@ export default function LocationBtn({
   user: SearchedUser | User;
   isMyProfile?: boolean;
 }) {
-  const [location, setLocation] = React.useState<string>('');
+  const [location, setLocation] = React.useState<string>("");
   React.useEffect(() => {
-    if ('location' in user && user.location) {
+    if ("location" in user && user.location) {
       setLocation(user.location);
     } else if (
-      ('inCluster' in user && user.inCluster) ||
-      ('inOrOut' in user && user.inOrOut)
+      ("inCluster" in user && user.inCluster) ||
+      ("inOrOut" in user && user.inOrOut)
     ) {
-      setLocation('개포');
+      setLocation("개포");
     } else {
-      setLocation('퇴근');
+      setLocation("퇴근");
     }
   }, [user]);
   return (
@@ -34,21 +34,19 @@ export default function LocationBtn({
         <TooltipTrigger asChild>
           <Button
             className={`rounded-full
-            ${!isMyProfile && 'cursor-default'}
+            ${!isMyProfile && "cursor-default"}
             ${
-              location !== '퇴근'
-                ? 'bg-[#132743]'
-                : 'bg-white hover:bg-white text-[#132743] border-2 border-[#132743]'
-            } h-6 md:h-8 px-2 md:px-3 md:text-xl font-gsansMd`}
+              location !== "퇴근"
+                ? "bg-[#132743]"
+                : "border-2 border-[#132743] bg-white text-[#132743] hover:bg-white"
+            } h-6 px-2 md:h-8 md:px-3 md:text-xl `}
           >
             {location}
           </Button>
         </TooltipTrigger>
         {isMyProfile && (
           <TooltipContent>
-            <p className='font-gsansMd text-[#4A6282] text-l lg:text-xl'>
-              내 위치 변경
-            </p>
+            <p className=" text-l  lg:text-xl">내 위치 변경</p>
           </TooltipContent>
         )}
       </Tooltip>
