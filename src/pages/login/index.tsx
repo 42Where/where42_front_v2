@@ -1,39 +1,39 @@
-import React from 'react';
-import Image from 'next/image';
-import LoginBtn from '@/components/Buttons/LoginBtn';
+import React from "react";
+import Image from "next/image";
+import LoginBtn from "@/components/buttons/LoginBtn";
 
 export default function LoginPage() {
   return (
-    <main className='min-h-[100vh] w-full flex flex-col sm:flex-row text-[#132743]'>
-      <div className='sm:relative sm:w-1/2 pt-8 sm:min-h-[50vh]'>
+    <main className="text-darkblue flex min-h-[100vh] w-full flex-col sm:flex-row">
+      <div className="pt-8 sm:relative sm:min-h-[50vh] sm:w-1/2">
         <Image
-          src='/Icons/left.png'
-          alt='left'
-          layout='fill'
-          className='hidden sm:block'
+          src="/image/fill/left.png"
+          alt="left"
+          layout="fill"
+          className="hidden sm:block"
         />
       </div>
-      <div className='w-full sm:w-1/2 bg-white'>
-        <div className='flex flex-col min-h-[50vh] justify-center items-center gap-8 sm:gap-12 h-full'>
+      <div className="w-full bg-white sm:w-1/2">
+        <div className="flex h-full min-h-[50vh] flex-col items-center justify-center gap-8 sm:gap-12">
           <Image
-            src='/Icons/logo.svg'
-            alt='logo'
+            src="/image/logo/logo.svg"
+            alt="logo"
             width={100}
             height={100}
             priority
-            className='size-28 sm:size-32'
+            className="size-28 sm:size-32"
           />
-          <span className='flex flex-col gap-4 items-center'>
-            <h3 className='text-l sm:text-2xl font-gsansMd'>
+          <span className="flex flex-col items-center gap-4">
+            <h3 className="text-l sm:text-2xl">
               42Seoul 위치 정보 검색 서비스
             </h3>
-            <h1 className='text-4xl sm:text-6xl font-gsansLg'>어디있니?</h1>
+            <h1 className="text-4xl sm:text-6xl">어디있니?</h1>
           </span>
           <LoginBtn />
         </div>
       </div>
-      <div className='relative w-full min-h-[50vh] sm:hidden flex flex-col items-center justify-center'>
-        <Image src='/Icons/bottom.png' alt='bottom' layout='fill' />
+      <div className="relative flex min-h-[50vh] w-full flex-col items-center justify-center sm:hidden">
+        <Image src="/image/fill/bottom.png" alt="bottom" layout="fill" />
         <LoginBtn isMobile={true} />
       </div>
     </main>

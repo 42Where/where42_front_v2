@@ -3,11 +3,24 @@
 @tailwind utilities;
 
 @layer base {
-  html,
+  input[type="search"] {
+    -webkit-appearance: none !important;
+  }
+  html {
+    font-family: "GmarketSansMd";
+    @apply text-[#4A6282];
+  }
   body {
     height: 100%;
     margin: 0;
     padding: 0;
+  }
+  h1 {
+    font-family: "GmarketSansLg";
+  }
+
+  h2 {
+    font-family: "GmarketSansLg";
   }
   :root {
     --background: 0 0% 100%;
@@ -37,6 +50,7 @@
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 240 10% 3.9%;
+    --darkblue: 215 56%, 17%;
 
     --radius: 0.5rem;
   }
@@ -72,21 +86,6 @@
   }
 }
 
-@layer base {
-  input[type='search'] {
-    -webkit-appearance: none !important;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
 /* 반응형 기준 */
 /* 기본: 모바일 */
 /* md: 태블릿 (768+) */
@@ -94,24 +93,25 @@
 /* 2xl: 데스크탑 (1536+) */
 
 @font-face {
-  font-family: 'GmarketSans';
-  src: url('/fonts/woff2/GmarketSansLight.woff2');
+  font-family: "GmarketSans";
+  src: url("/fonts/woff2/GmarketSansLight.woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap; /* 폰트 로딩 퍼포먼스를 개선하기 위함 */
 }
 
 @font-face {
-  font-family: 'GmarketSansMd';
-  src: url('/fonts/woff2/GmarketSansMedium.woff2');
+  font-family: "GmarketSansMd";
+  src: url("/fonts/woff2/GmarketSansMedium.woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
+  color: #4a6282;
 }
 
 @font-face {
-  font-family: 'GmarketSansLg';
-  src: url('/fonts/woff2/GmarketSansBold.woff2');
+  font-family: "GmarketSansLg";
+  src: url("/fonts/woff2/GmarketSansBold.woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;

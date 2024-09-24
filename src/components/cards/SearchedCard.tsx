@@ -1,15 +1,15 @@
-import React from 'react';
-import Image from 'next/image';
-import { SearchedUser } from '@/types/User';
-import groupApi from '@/api/groupApi';
+import React from "react";
+import Image from "next/image";
+import { SearchedUser } from "@/types/User";
+import groupApi from "@/api/groupApi";
 import {
   useUserStore,
   useAddedMembersStore,
   useGroupsStore,
-} from '@/lib/stores';
-import LocationBtn from '../Buttons/LocationBtn';
-import { useToast } from '@/components/ui/use-toast';
-import ProfilePic from '@/components/ProfilePic';
+} from "@/lib/stores";
+import LocationBtn from "../buttons/LocationBtn";
+import { useToast } from "@/components/ui/use-toast";
+import ProfilePic from "@/components/ProfilePic";
 
 export default function SearchedCard({
   member,
@@ -36,28 +36,26 @@ export default function SearchedCard({
 
   return (
     <div
-      className={`flex flex-row justify-between items-center p-2 rounded-2xl border-2 ${
+      className={`flex flex-row items-center justify-between rounded-2xl border-2 p-2 ${
         isAddingUser &&
-        'cursor-pointer hover:border-[#FFB5B5] transition-transform transform active:scale-95'
+        "transform cursor-pointer transition-transform hover:border-[#FFB5B5] active:scale-95"
       }`}
       onClick={() => onClick && onClick()}
     >
-      <div className='flex flex-row items-center gap-4 md:gap-4'>
-        <ProfilePic user={member} type='searchedCard' />
-        <div className='flex flex-col items-start gap-1'>
+      <div className="flex flex-row items-center gap-4 md:gap-4">
+        <ProfilePic user={member} type="searchedCard" />
+        <div className="flex flex-col items-start gap-1">
           <LocationBtn user={member} />
-          <h3 className='text-xl md:text-2xl font-gsansLg text-[#132743]'>
+          <h2 className=" text-darkblue text-xl md:text-2xl">
             {member.intraName}
-          </h3>
-          <p className='font-gsansMd text-[#4A6282] text-sm md:text-md'>
-            {member.comment}
-          </p>
+          </h2>
+          <p className=" md:text-md text-sm ">{member.comment}</p>
         </div>
       </div>
       {isAlreadyAdded ? null : (
         <div
-          className='size-14 rounded-lg flex justify-center items-center right-[110px] hover:bg-gray-200'
-          role='button'
+          className="right-[110px] flex size-14 items-center justify-center rounded-lg hover:bg-gray-200"
+          role="button"
           tabIndex={0}
           onClick={() => {
             setAddedMembers([...addedMembers, member.intraId]);
@@ -85,11 +83,11 @@ export default function SearchedCard({
           }}
         >
           <Image
-            src='/Icons/userAdd.svg'
-            alt='userAdd'
+            src="/image/user/userAdd.svg"
+            alt="userAdd"
             width={30}
             height={30}
-            className='hover:bg-gray-200'
+            className="hover:bg-gray-200"
           />
         </div>
       )}

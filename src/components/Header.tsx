@@ -1,15 +1,15 @@
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import SearchModal from '@/components/Modals/SearchModal';
-import LogoutBtn from '@/components/Buttons/LogoutBtn';
+import SearchModal from '@/components/modals/SearchModal';
+import LogoutBtn from '@/components/buttons/LogoutBtn';
 
 export default function Header() {
   const router = useRouter();
   return (
     <header className='flex flex-row justify-between items-center p-2 pb-0 md:p-4'>
       <Image
-        src='/Icons/logoC.svg'
+        src='/image/logo/logoC.svg'
         alt='logo'
         width={200}
         height={100}
