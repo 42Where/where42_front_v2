@@ -69,8 +69,8 @@ export default function NewGroupModal() {
     >
       <DialogTrigger>
         <Button
-          className="text-l w-30 lg:w-30 h-8 gap-2 rounded-full
-          border-2 border-[#132743] bg-white  px-3 py-1 text-[#132743] hover:bg-gray-200 lg:h-10 lg:text-xl"
+          className="text-l w-30 lg:w-30 border-darkblue text-darkblue h-8
+          gap-2 rounded-full border-2  bg-white px-3 py-1 hover:bg-gray-200 lg:h-10 lg:text-xl"
         >
           <Image
             src="/image/newGroup.svg"
@@ -84,7 +84,7 @@ export default function NewGroupModal() {
       <DialogContent className="max-w-[800px] transition-all duration-500 ease-out">
         <DialogHeader className="flex w-full flex-col items-center justify-center gap-2">
           <AlertDialog open={isDuplicated}>
-            <AlertDialogContent className="max-w-[425px] text-[#132743] transition-all duration-500  ease-out">
+            <AlertDialogContent className="text-darkblue max-w-[425px] transition-all duration-500  ease-out">
               <AlertDialogHeader>
                 <AlertDialogTitle>중복 그룹 확인</AlertDialogTitle>
                 <AlertDialogDescription>
@@ -144,7 +144,7 @@ export default function NewGroupModal() {
                       key={selectedUser.intraId}
                       className="flex flex-row items-center gap-2 rounded-xl border border-gray-400 p-2 shadow-lg"
                     >
-                      <p className="text-l  text-[#132743]">
+                      <p className="text-l  text-darkblue">
                         {selectedUser.intraName}
                       </p>
                       <X
@@ -170,7 +170,7 @@ export default function NewGroupModal() {
                 />
                 <input
                   ref={inputRef}
-                  className="text-l w-full bg-transparent text-[#132743] outline-none placeholder:text-gray-500  dark:text-gray-700"
+                  className="text-l text-darkblue w-full bg-transparent outline-none placeholder:text-gray-500  dark:text-gray-700"
                   placeholder="새 그룹에 추가할 친구를 검색하세요."
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
@@ -283,7 +283,7 @@ export default function NewGroupModal() {
               >
                 <input
                   ref={inputRef}
-                  className="text-l w-full bg-transparent text-[#132743] outline-none placeholder:text-gray-500  dark:text-gray-700"
+                  className="text-l text-darkblue w-full bg-transparent outline-none placeholder:text-gray-500  dark:text-gray-700"
                   placeholder="생성할 그룹의 이름을 입력하세요."
                   onChange={(e) => setSearchValue(e.target.value)}
                 />

@@ -26,10 +26,10 @@ export default function AgreementModal({
   const router = useRouter();
   return (
     <Dialog open={showModal}>
-      <DialogContent className="max-w-[800px]  gap-2 text-[#132743E0]">
+      <DialogContent className="text-darkblue  max-w-[800px] gap-2">
         <DialogHeader className="text-m  ">
           <DialogTitle>
-            <h2 className="text-l  text-[#132743]">
+            <h2 className="text-l  text-darkblue">
               개인정보 수집 및 이용 동의서(필수)
             </h2>
           </DialogTitle>

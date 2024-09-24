@@ -23,7 +23,7 @@ export default function MyProfileCard({ user }: { user: User }) {
         <ProfilePic user={user} type="myCard" />
         <div className="flex flex-col items-start gap-2">
           <CustomLocationModal />
-          <h2 className="text-xl text-[#132743] lg:text-3xl">
+          <h2 className="text-darkblue text-xl lg:text-3xl">
             {user.intraName}
           </h2>
           <p className=" text-l  lg:text-xl">{user.comment}</p>
@@ -32,9 +32,9 @@ export default function MyProfileCard({ user }: { user: User }) {
       <MySettingModal />
       <div className="absolute bottom-0 right-0 flex flex-row justify-center gap-2 lg:right-10">
         <Button
-          className="text-l h-8 w-40 gap-1 rounded-full
-           border-2 border-[#132743] bg-white
-           p-2 text-[#132743] hover:bg-gray-200  lg:h-10 lg:w-52 lg:gap-2 lg:p-4 lg:text-xl"
+          className="text-l border-darkblue text-darkblue h-8 w-40
+           gap-1 rounded-full border-2
+           bg-white p-2 hover:bg-gray-200  lg:h-10 lg:w-52 lg:gap-2 lg:p-4 lg:text-xl"
           onClick={() => {
             setChecked(!checked);
             localStorage.setItem("checked", JSON.stringify(!checked));

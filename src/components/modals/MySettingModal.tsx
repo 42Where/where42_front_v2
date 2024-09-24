@@ -49,7 +49,7 @@ export default function MySettingModal() {
         <DropdownMenuTrigger>
           <SettingBtn />
         </DropdownMenuTrigger>
-        <DropdownMenuContent side="left" className=" min-w-50 text-[#132743]">
+        <DropdownMenuContent side="left" className=" min-w-50 text-darkblue">
           <DialogTrigger asChild onClick={() => setIsMessage(true)}>
             <DropdownMenuItem className="text-xl">
               상태 메시지 수정
@@ -107,7 +107,7 @@ export default function MySettingModal() {
               >
                 <input
                   ref={inputRef}
-                  className="text-l w-full bg-transparent text-[#132743] outline-none placeholder:text-gray-500  dark:text-gray-700"
+                  className="text-l text-darkblue w-full bg-transparent outline-none placeholder:text-gray-500  dark:text-gray-700"
                   placeholder="상태 메시지를 입력해주세요"
                   onChange={(e) => setSearchValue(e.target.value)}
                   value={searchValue}
@@ -116,7 +116,7 @@ export default function MySettingModal() {
               {searchValue && (
                 <>
                   <p
-                    className={`text-l  text-[#132743] ${
+                    className={`text-l  text-darkblue ${
                       searchValue.length > 15 ? "text-red-500" : "text-gray-400"
                     }`}
                   >
@@ -132,7 +132,7 @@ export default function MySettingModal() {
                 </>
               )}
             </div>
-            <p className="text-l  text-[#132743]">{resultMessage}</p>
+            <p className="text-l  text-darkblue">{resultMessage}</p>
           </DialogHeader>
         </DialogContent>
       ) : (

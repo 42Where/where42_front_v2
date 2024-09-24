@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export default function NotFoundPage() {
   return (
-    <main className="flex min-h-[100vh] w-full flex-col text-[#132743] sm:flex-row">
+    <main className="text-darkblue flex min-h-[100vh] w-full flex-col sm:flex-row">
       <div className="pt-8 sm:relative sm:min-h-[50vh] sm:w-1/2">
         <Image
           src="/image/fill/left.png"
@@ -30,7 +30,7 @@ export default function NotFoundPage() {
             </h2>
           </span>
           <Link href="/">
-            <Button className={`${"bg-[#132743]"} rounded-full `} size="xlg">
+            <Button className={`${"bg-darkblue"} rounded-full `} size="xlg">
               메인으로 돌아가기
             </Button>
           </Link>

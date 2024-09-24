@@ -32,7 +32,7 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
           삭제
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[425px] text-[#132743] transition-all duration-500  ease-out">
+      <DialogContent className="text-darkblue max-w-[425px] transition-all duration-500  ease-out">
         <DialogTitle>그룹 삭제</DialogTitle>
         <p className="">선택한 카뎃들을 삭제하시겠습니까?</p>
         {curGroup.groupId === user?.defaultGroupId && (
@@ -88,7 +88,7 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
               </Button>
             </DialogClose>
             <DialogClose asChild>
-              <Button className="bg-[#132743]">취소</Button>
+              <Button className="bg-darkblue">취소</Button>
             </DialogClose>
           </div>
         </div>

@@ -31,7 +31,7 @@ export default function Footer() {
         w-[80px] md:w-[120px]"
         />
       </Link>
-      <span className="flex flex-col items-center justify-center gap-2  text-[#3F4145]">
+      <span className="text-darkblue flex flex-col items-center justify-center  gap-2">
         <Link href="https://forms.gle/VbjaSrZRPjuqVyuz9">
           <p className="rounded-lg text-xs hover:bg-gray-200 hover:underline md:text-lg">
             버그 제보/문의
@@ -43,12 +43,10 @@ export default function Footer() {
               개인정보 이용 동의서
             </p>
           </DialogTrigger>
-          <DialogContent className="max-w-[800px] gap-2  text-[#132743E0]">
+          <DialogContent className="text-darkblue max-w-[800px]  gap-2">
             <DialogHeader className="text-m  ">
               <DialogTitle>
-                <h2 className="text-l  text-[#132743]">
-                  개인정보 수집 및 이용 동의서(필수)
-                </h2>
+                <h2 className="text-l">개인정보 수집 및 이용 동의서(필수)</h2>
               </DialogTitle>
               (재)이노베이션 아카데미는 『개인정보 보호법』 제15조 등 관련
               법령에 따라 서비스 이용자의 개인정보보호를 매우 중시하며, 서비스

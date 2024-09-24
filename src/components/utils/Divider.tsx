@@ -1,5 +1,5 @@
-import React from 'react';
+import React from "react";
 
 export default function Divider() {
-  return <hr className='border-[#132743] border-[1px] w-full' />;
+  return <hr className="border-darkblue w-full border-[1px]" />;
 }

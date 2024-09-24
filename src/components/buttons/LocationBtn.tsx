@@ -37,8 +37,8 @@ export default function LocationBtn({
             ${!isMyProfile && "cursor-default"}
             ${
               location !== "퇴근"
-                ? "bg-[#132743]"
-                : "border-2 border-[#132743] bg-white text-[#132743] hover:bg-white"
+                ? "bg-darkblue"
+                : "border-darkblue text-darkblue border-2 bg-white hover:bg-white"
             } h-6 px-2 md:h-8 md:px-3 md:text-xl `}
           >
             {location}

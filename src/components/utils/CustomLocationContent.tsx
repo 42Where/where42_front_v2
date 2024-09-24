@@ -27,7 +27,7 @@ export default function CustomLocationContent({
       <DialogHeader className="gap-2">
         <DialogTitle>수동 자리 설정</DialogTitle>
       </DialogHeader>
-      <p className="text-l  text-[#132743]">{resultMessage}</p>
+      <p className="text-l  text-darkblue">{resultMessage}</p>
       <ScrollArea className="h-[350px] w-full">
         <LocationCascader setLocationValue={setLocationValue} />
         <ScrollBar orientation="horizontal" />
@@ -36,7 +36,7 @@ export default function CustomLocationContent({
         <div />
         <div className="flex flex-row gap-2">
           <Button
-            className="bg-[#132743]"
+            className="bg-darkblue"
             onClick={() => {
               setResultMessage("설정 되었습니다.");
               locationApi

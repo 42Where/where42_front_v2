@@ -47,7 +47,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
     >
       <DropdownMenu>
         <GroupSettingBtn groups={groups} curGroup={curGroup} />
-        <DropdownMenuContent side="bottom" className=" min-w-50 text-[#132743]">
+        <DropdownMenuContent side="bottom" className=" min-w-50 text-darkblue">
           {curGroup.members.length > 0 && (
             <DropdownMenuItem
               className="text-xl"
@@ -92,7 +92,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
           )}
         </DropdownMenuContent>
       </DropdownMenu>
-      <DialogContent className="max-w-[425px] text-[#132743] transition-all duration-500  ease-out">
+      <DialogContent className="text-darkblue max-w-[425px] transition-all duration-500  ease-out">
         {isDelete ? (
           <>
             <DialogTitle>그룹 삭제</DialogTitle>
@@ -131,7 +131,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
                   삭제
                 </Button>
                 <DialogClose asChild>
-                  <Button className="bg-[#132743]">취소</Button>
+                  <Button className="bg-darkblue">취소</Button>
                 </DialogClose>
               </div>
             </div>
@@ -173,7 +173,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
               >
                 <input
                   ref={inputRef}
-                  className="text-l w-full bg-transparent text-[#132743] outline-none placeholder:text-gray-500  dark:text-gray-700"
+                  className="text-l text-darkblue w-full bg-transparent outline-none placeholder:text-gray-500  dark:text-gray-700"
                   placeholder="새로운 그룹명을 입력해주세요"
                   onChange={(e) => setGroupName(e.target.value)}
                 />
@@ -188,7 +188,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
                 />
               )}
             </div>
-            <p className="text-l  text-[#132743]">{resultMessage}</p>
+            <p className="text-l  text-darkblue">{resultMessage}</p>
           </>
         )}
       </DialogContent>

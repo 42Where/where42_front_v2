@@ -138,9 +138,9 @@ function SingleCascader({
     <Button
       className={`w-24 gap-2 rounded-lg px-3 py-1 text-base md:w-32  md:text-xl ${
         selected
-          ? "bg-[#132743] text-white hover:bg-gray-700"
-          : "border-2 border-[#132743] bg-white text-[#132743] hover:bg-gray-200"
-      } border-0 border-[#132743]`}
+          ? "bg-darkblue text-white hover:bg-gray-700"
+          : "border-darkblue text-darkblue border-2 bg-white hover:bg-gray-200"
+      } border-darkblue border-0`}
       onClick={() => {
         if (selected) {
           setSelected("");

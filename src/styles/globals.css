@@ -8,9 +8,7 @@
   }
   html {
     font-family: "GmarketSansMd";
-    @apply bg-background;
     @apply text-[#4A6282];
-    @apply border-border;
   }
   body {
     height: 100%;
@@ -52,6 +50,7 @@
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 240 10% 3.9%;
+    --darkblue: 215 56%, 17%;
 
     --radius: 0.5rem;
   }
