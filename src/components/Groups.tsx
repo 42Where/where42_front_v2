@@ -39,7 +39,7 @@ export default function Groups({ groups }: { groups: Group[] }) {
               className="relative overflow-hidden transition-all duration-500 ease-in-out"
             >
               {group.isInEdit && (
-                <div className="absolute right-[50px] top-[4px] flex flex-col items-center justify-center gap-1 border md:right-[80px] md:top-[16px] md:flex-row md:gap-2">
+                <div className="absolute right-[50px] top-[4px] flex flex-col items-center justify-center gap-1 md:right-[80px] md:top-[16px] md:flex-row md:gap-2">
                   {checkedUsers.length > 0 && (
                     <div className="flex flex-row gap-1 md:gap-2">
                       <GroupDeleteModal curGroup={group} />
@@ -48,8 +48,8 @@ export default function Groups({ groups }: { groups: Group[] }) {
                   )}
                   <div className="flex flex-row gap-1 md:gap-2">
                     <Button
-                      className="text-l border-darkblue text-darkblue h-6
-                gap-2 rounded-full border-2 bg-white px-2 py-1
+                      className="text-l h-6 gap-2 rounded-full
+                border-2 border-darkblue bg-white px-2 py-1 text-darkblue
                 hover:bg-gray-200  md:h-8  md:px-3 lg:text-xl"
                       onClick={() => {
                         const temp = checkedUsers;
@@ -66,8 +66,8 @@ export default function Groups({ groups }: { groups: Group[] }) {
                       전체 선택
                     </Button>
                     <Button
-                      className="text-l border-darkblue h-6
-                gap-2 rounded-full border-2 px-2 text-white md:h-8 md:px-3
+                      className="text-l h-6 gap-2
+                rounded-full border-2 border-darkblue px-2 text-white md:h-8 md:px-3
                lg:text-xl"
                       onClick={() => {
                         const temp = groups;
@@ -86,7 +86,7 @@ export default function Groups({ groups }: { groups: Group[] }) {
                 </div>
               )}
               <GroupSettingModal curGroup={group} />
-              <AccordionTrigger className="text-l text-darkblue p-2 px-6 md:p-4  md:text-2xl">
+              <AccordionTrigger className="text-l p-2 px-6 text-darkblue md:p-4  md:text-2xl">
                 <span className="flex flex-row items-center justify-start gap-6">
                   {group.groupName}
                   <p className="text-xl md:text-2xl">

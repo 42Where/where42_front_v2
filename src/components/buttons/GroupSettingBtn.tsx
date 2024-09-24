@@ -29,7 +29,7 @@ export default function GroupSettingBtn({
             />
           </TooltipTrigger>
           <TooltipContent>
-            <p className=" text-l  lg:text-xl">그룹 설정</p>
+            <p className="text-l lg:text-xl">그룹 설정</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>

@@ -25,8 +25,8 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className="text-l border-darkblue text-darkblue h-6
-          gap-2 rounded-full border-2 bg-white px-2 hover:bg-gray-200  md:h-8  md:px-3 lg:text-xl"
+          className="text-l h-6 gap-2 rounded-full
+          border-2 border-darkblue bg-white px-2 text-darkblue hover:bg-gray-200  md:h-8  md:px-3 lg:text-xl"
         >
           다른 그룹에 추가
         </Button>
@@ -42,8 +42,8 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
                   className={`rounded-2xl ${
                     checkedGroups.includes(g.groupId)
                       ? "bg-darkblue text-white hover:bg-gray-500"
-                      : "border-darkblue text-darkblue border-2 bg-white hover:bg-gray-200"
-                  } border-darkblue gap-2 border-0 px-3 py-1  text-xl`}
+                      : "border-2 border-darkblue bg-white text-darkblue hover:bg-gray-200"
+                  } gap-2 border-0 border-darkblue px-3 py-1  text-xl`}
                   onClick={() => {
                     if (checkedGroups.includes(g.groupId)) {
                       setCheckedGroups(

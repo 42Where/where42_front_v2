@@ -14,6 +14,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import RepoLink from "./utils/RepoLink";
 
 export default function Footer() {
   return (
@@ -21,17 +22,8 @@ export default function Footer() {
       className="relative bottom-0 left-0 flex w-full flex-row items-center justify-center gap-2
       border bg-[#F6F7F9] p-2 md:gap-4 md:p-4"
     >
-      <Link href="https://github.com/42Where">
-        <Image
-          src="image/logo/logoC.svg"
-          alt="logo"
-          width={120}
-          height={120}
-          className="
-        w-[80px] md:w-[120px]"
-        />
-      </Link>
-      <span className="text-darkblue flex flex-col items-center justify-center  gap-2">
+      <RepoLink />
+      <span className="flex flex-col items-center justify-center gap-2  text-darkblue">
         <Link href="https://forms.gle/VbjaSrZRPjuqVyuz9">
           <p className="rounded-lg text-xs hover:bg-gray-200 hover:underline md:text-lg">
             버그 제보/문의
@@ -43,7 +35,7 @@ export default function Footer() {
               개인정보 이용 동의서
             </p>
           </DialogTrigger>
-          <DialogContent className="text-darkblue max-w-[800px]  gap-2">
+          <DialogContent className="max-w-[800px] gap-2  text-darkblue">
             <DialogHeader className="text-m  ">
               <DialogTitle>
                 <h2 className="text-l">개인정보 수집 및 이용 동의서(필수)</h2>
