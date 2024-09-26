@@ -33,9 +33,7 @@ export default function LogoutBtn() {
             />
           </div>
         </TooltipTrigger>
-        <TooltipContent>
-          <p className=" text-l  lg:text-xl">로그아웃</p>
-        </TooltipContent>
+        <TooltipContent>로그아웃</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );
