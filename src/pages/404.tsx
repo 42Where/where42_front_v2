@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export default function NotFoundPage() {
   return (
-    <main className="text-darkblue flex min-h-[100vh] w-full flex-col sm:flex-row">
+    <main className="flex min-h-[100vh] w-full flex-col text-darkblue sm:flex-row">
       <div className="pt-8 sm:relative sm:min-h-[50vh] sm:w-1/2">
         <Image
           src="/image/fill/left.png"
@@ -17,7 +17,7 @@ export default function NotFoundPage() {
       <div className="w-full bg-white sm:w-1/2">
         <div className="flex h-full min-h-[50vh] flex-col items-center justify-center gap-8 sm:gap-12">
           <Image
-            src="/image/fill/logo.svg"
+            src="/image/logo/logo.svg"
             alt="logo"
             width={100}
             height={100}
