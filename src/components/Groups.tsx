@@ -93,7 +93,7 @@ export default function Groups({ groups }: { groups: Group[] }) {
                 </div>
               )}
               <GroupSettingModal curGroup={group} />
-              <AccordionTrigger className="text-l p-2 px-6 text-darkblue md:p-4  md:text-2xl">
+              <AccordionTrigger className="text-l p-2 text-darkblue md:p-4 md:text-2xl">
                 <span className="flex flex-row items-center justify-start gap-6">
                   {group.groupName}
                   <p className="text-xl md:text-2xl">
