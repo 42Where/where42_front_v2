@@ -59,6 +59,7 @@ export default function NewGroupModal() {
             setSelectedUsers([]);
             formRef.current?.reset();
             setSearchValue("");
+            setIsAddingUser(false);
           }, 100);
         } else {
           setSelectedUsers([]);
@@ -69,8 +70,8 @@ export default function NewGroupModal() {
     >
       <DialogTrigger>
         <Button
-          className="text-l w-30 lg:w-30 border-darkblue text-darkblue h-8
-          gap-2 rounded-full border-2  bg-white px-3 py-1 hover:bg-gray-200 lg:h-10 lg:text-xl"
+          className="text-l w-30 lg:w-30 h-8 gap-2 rounded-full
+          border-2 border-darkblue bg-white  px-3 py-1 text-darkblue hover:bg-gray-200 lg:h-10 lg:text-xl"
         >
           <Image
             src="/image/newGroup.svg"
@@ -84,7 +85,7 @@ export default function NewGroupModal() {
       <DialogContent className="max-w-[800px] transition-all duration-500 ease-out">
         <DialogHeader className="flex w-full flex-col items-center justify-center gap-2">
           <AlertDialog open={isDuplicated}>
-            <AlertDialogContent className="text-darkblue max-w-[425px] transition-all duration-500  ease-out">
+            <AlertDialogContent className="max-w-[425px] text-darkblue transition-all duration-500  ease-out">
               <AlertDialogHeader>
                 <AlertDialogTitle>중복 그룹 확인</AlertDialogTitle>
                 <AlertDialogDescription>
@@ -136,9 +137,9 @@ export default function NewGroupModal() {
           </AlertDialog>
           <DialogTitle>새로운 그룹 생성</DialogTitle>
           {isAddingUser ? (
-            <div className="flex w-full flex-col items-center justify-center gap-4 overflow-scroll">
+            <div className="flex w-full flex-col items-center justify-center gap-4">
               {selectedUsers.length > 0 && (
-                <div className="flex w-[300px] flex-row gap-2 overflow-x-scroll md:w-[700px]">
+                <div className="flex w-[300px] flex-row gap-2 overflow-auto md:w-[700px]">
                   {selectedUsers.map((selectedUser) => (
                     <div
                       key={selectedUser.intraId}
@@ -170,7 +171,7 @@ export default function NewGroupModal() {
                 />
                 <input
                   ref={inputRef}
-                  className="text-l text-darkblue w-full bg-transparent outline-none placeholder:text-gray-500  dark:text-gray-700"
+                  className="text-l w-full bg-transparent text-darkblue outline-none placeholder:text-gray-500  dark:text-gray-700"
                   placeholder="새 그룹에 추가할 친구를 검색하세요."
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
@@ -184,7 +185,7 @@ export default function NewGroupModal() {
                   />
                 )}
               </div>
-              <div className="h-[300px] w-full overflow-scroll rounded-md md:h-[500px]">
+              <div className="h-[300px] w-full overflow-auto rounded-md md:h-[500px]">
                 <div className="grid grid-flow-row gap-2 md:grid-cols-2">
                   {searchedUsers?.map((searchedMember) => (
                     <SearchedCard
@@ -196,9 +197,15 @@ export default function NewGroupModal() {
                             (selectedUser) =>
                               selectedUser.intraId === searchedMember.intraId,
                           )
-                        )
-                          return;
-                        setSelectedUsers([...selectedUsers, searchedMember]);
+                        ) {
+                          setSelectedUsers(
+                            selectedUsers.filter(
+                              (selectedUser) =>
+                                selectedUser.intraId !== searchedMember.intraId,
+                            ),
+                          );
+                        } else
+                          setSelectedUsers([...selectedUsers, searchedMember]);
                       }}
                       isAddingUser={true}
                     />
@@ -283,7 +290,7 @@ export default function NewGroupModal() {
               >
                 <input
                   ref={inputRef}
-                  className="text-l text-darkblue w-full bg-transparent outline-none placeholder:text-gray-500  dark:text-gray-700"
+                  className="text-l w-full bg-transparent text-darkblue outline-none placeholder:text-gray-500  dark:text-gray-700"
                   placeholder="생성할 그룹의 이름을 입력하세요."
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
