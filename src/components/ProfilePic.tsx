@@ -38,9 +38,7 @@ export default function ProfilePic({
           </Avatar>
         </TooltipTrigger>
         {type !== "searchedCard" && (
-          <TooltipContent>
-            <p className="text-l lg:text-xl">인트라 프로필 방문</p>
-          </TooltipContent>
+          <TooltipContent>인트라 프로필 방문</TooltipContent>
         )}
       </Tooltip>
     </TooltipProvider>

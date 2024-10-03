@@ -23,9 +23,7 @@ export default function RepoLink() {
             />
           </Link>
         </TooltipTrigger>
-        <TooltipContent>
-          <p className="text-l lg:text-xl">깃허브 레포지토리 방문</p>
-        </TooltipContent>
+        <TooltipContent>깃허브 레포지토리 방문</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -24,7 +23,15 @@ export default function Groups({ groups }: { groups: Group[] }) {
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
   const { checked } = useCheckedStore();
   const sortedGroups = [...groups].sort((a, b) => a.groupId - b.groupId);
+  const defaultGroup = sortedGroups.find(
+    (group) => group.groupName === "친구 목록",
+  );
+  if (defaultGroup) {
+    sortedGroups.splice(sortedGroups.indexOf(defaultGroup), 1);
+    sortedGroups.push(defaultGroup);
+  }
   const defaultValues = sortedGroups.map((group) => group.groupId.toString());
+
   return (
     <div>
       <Divider />
@@ -86,7 +93,7 @@ export default function Groups({ groups }: { groups: Group[] }) {
                 </div>
               )}
               <GroupSettingModal curGroup={group} />
-              <AccordionTrigger className="text-l p-2 px-6 text-darkblue md:p-4  md:text-2xl">
+              <AccordionTrigger className="text-l p-2 text-darkblue md:p-4 md:text-2xl">
                 <span className="flex flex-row items-center justify-start gap-6">
                   {group.groupName}
                   <p className="text-xl md:text-2xl">

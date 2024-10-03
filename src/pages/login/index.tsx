@@ -4,7 +4,7 @@ import LoginBtn from "@/components/buttons/LoginBtn";
 
 export default function LoginPage() {
   return (
-    <main className="text-darkblue flex min-h-[100vh] w-full flex-col sm:flex-row">
+    <main className="flex min-h-[100vh] w-full flex-col text-darkblue sm:flex-row">
       <div className="pt-8 sm:relative sm:min-h-[50vh] sm:w-1/2">
         <Image
           src="/image/fill/left.png"

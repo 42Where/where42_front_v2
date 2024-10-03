@@ -25,9 +25,7 @@ export default function SearchBtn() {
             />
           </div>
         </TooltipTrigger>
-        <TooltipContent>
-          <p className=" text-l  lg:text-xl">유저 검색</p>
-        </TooltipContent>
+        <TooltipContent>유저 검색</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

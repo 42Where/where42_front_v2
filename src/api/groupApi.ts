@@ -1,6 +1,6 @@
-import { axios } from '@/lib/Axios';
-import Group from '@/types/Group';
-import { User } from '@/types/User';
+import { axios } from "@/lib/Axios";
+import Group from "@/types/Group";
+import { User } from "@/types/User";
 
 const groupApi = {
   /**
@@ -13,7 +13,7 @@ const groupApi = {
   }: {
     groupId: number;
   }): Promise<User[]> => {
-    const response = await axios.get('/v3/group/groupmember', {
+    const response = await axios.get("/v3/group/groupmember", {
       params: { groupId },
     });
     return response.data;
@@ -31,7 +31,7 @@ const groupApi = {
     groupId: number;
     members: number[];
   }): Promise<number[]> => {
-    const response = await axios.put('/v3/group/groupmember', {
+    const response = await axios.put("/v3/group/groupmember", {
       groupId,
       members,
     });
@@ -49,7 +49,7 @@ const groupApi = {
     groupId: number;
     members: number[];
   }): Promise<number> => {
-    const response = await axios.post('/v3/group/groupmember/members', {
+    const response = await axios.post("/v3/group/groupmember/members", {
       groupId,
       members,
     });
@@ -61,7 +61,7 @@ const groupApi = {
    * 임시로 any를 사용하였지만 백엔드에서 타입 정의 후 수정 필요
    */
   getAllGroups: async (): Promise<Group[]> => {
-    const response = await axios.get('/v3/group');
+    const response = await axios.get("/v3/group");
     return response.data;
   },
   /**
@@ -74,7 +74,7 @@ const groupApi = {
   }: {
     groupName: string;
   }): Promise<{ groupId: number; groupName: string }> => {
-    const response = await axios.post('/v3/group', {
+    const response = await axios.post("/v3/group", {
       groupName,
     });
     console.table(response.data);
@@ -93,7 +93,7 @@ const groupApi = {
     groupId: number;
     groupName: string;
   }): Promise<{ groupId: number; groupName: string }> => {
-    const response = await axios.post('/v3/group/name', {
+    const response = await axios.post("/v3/group/name", {
       groupId,
       groupName,
     });
@@ -109,7 +109,7 @@ const groupApi = {
   }: {
     groupId: number;
   }): Promise<{ groupId: number }> => {
-    const response = await axios.delete('/v3/group', { params: { groupId } });
+    const response = await axios.delete("/v3/group", { params: { groupId } });
     return response.data;
   },
 
@@ -126,7 +126,7 @@ const groupApi = {
     groupId: number;
     userNames: string[];
   }): Promise<number> => {
-    const response = await axios.post('/v3/group/groupmember', {
+    const response = await axios.post("/v3/group/groupmember", {
       groupId,
       members: userNames,
     });
@@ -134,7 +134,7 @@ const groupApi = {
   },
 
   agreeJoin: async (): Promise<number> => {
-    const response = await axios.post('/v3/join');
+    const response = await axios.post("/v3/join");
     return response.status;
   },
 };

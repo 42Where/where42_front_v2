@@ -19,9 +19,7 @@ export default function MySettingBtn() {
             className="size-[50px] cursor-pointer rounded-lg hover:bg-gray-200 lg:size-[60px]"
           />
         </TooltipTrigger>
-        <TooltipContent>
-          <p className=" text-l  lg:text-xl">내 정보 설정</p>
-        </TooltipContent>
+        <TooltipContent>내 정보 설정</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

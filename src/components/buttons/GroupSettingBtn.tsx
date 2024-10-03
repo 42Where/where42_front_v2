@@ -28,9 +28,7 @@ export default function GroupSettingBtn({
               height={24}
             />
           </TooltipTrigger>
-          <TooltipContent>
-            <p className="text-l lg:text-xl">그룹 설정</p>
-          </TooltipContent>
+          <TooltipContent>그룹 설정</TooltipContent>
         </Tooltip>
       </TooltipProvider>
     </DropdownMenuTrigger>
