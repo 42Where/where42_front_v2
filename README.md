@@ -26,9 +26,9 @@ npm run dev
 
 ## 기술 스택
 
-- Next.js
-- React
-- Zustand
 - TypeScript
-- SASS
-- Storybook
+- TailwindCSS
+- React
+- Next.js
+- Zustand
+- Axios
