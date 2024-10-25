@@ -18,7 +18,6 @@ import GroupDeleteModal from "./modals/GroupDeleteModal";
 import GroupAddModal from "./modals/GroupAddModal";
 import CardSkeleton from "./utils/CardSkeleton";
 import { useEffect, useState } from "react";
-import { set } from "zod";
 
 export default function Groups({ groups }: { groups: Group[] }) {
   const { setGroups } = useGroupsStore();
