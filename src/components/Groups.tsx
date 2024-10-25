@@ -17,6 +17,8 @@ import { Button } from "./ui/button";
 import GroupDeleteModal from "./modals/GroupDeleteModal";
 import GroupAddModal from "./modals/GroupAddModal";
 import CardSkeleton from "./utils/CardSkeleton";
+import { useEffect, useState } from "react";
+import { set } from "zod";
 
 export default function Groups({ groups }: { groups: Group[] }) {
   const { setGroups } = useGroupsStore();
@@ -31,6 +33,24 @@ export default function Groups({ groups }: { groups: Group[] }) {
     sortedGroups.push(defaultGroup);
   }
   const defaultValues = sortedGroups.map((group) => group.groupId.toString());
+  const [value, setValue] = useState<string[]>([]);
+  useEffect(() => {
+    let raw_data = localStorage.getItem("groupToggle");
+    let lst = raw_data?.split(",");
+    console.log(lst);
+    lst?.forEach((item) => {
+      if (item) {
+        setValue((prev) => [...prev, item]);
+        console.log(value);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("groupToggle") !== value.join(",")) {
+      localStorage.setItem("groupToggle", value.join(","));
+    }
+  }, [value]);
 
   return (
     <div>
@@ -38,7 +58,14 @@ export default function Groups({ groups }: { groups: Group[] }) {
       {!sortedGroups.length && !defaultValues.length ? (
         <CardSkeleton />
       ) : (
-        <Accordion type="multiple" defaultValue={defaultValues}>
+        <Accordion
+          type="multiple"
+          value={value}
+          onValueChange={(value) => {
+            setValue(value);
+            console.log(value);
+          }}
+        >
           {sortedGroups.map((group) => (
             <AccordionItem
               key={group.groupId}
