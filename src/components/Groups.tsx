@@ -33,11 +33,10 @@ export default function Groups({ groups }: { groups: Group[] }) {
   }
   const defaultValues = sortedGroups.map((group) => group.groupId.toString());
   const [value, setValue] = useState<string[]>([]);
+
   useEffect(() => {
-    let raw_data = localStorage.getItem("groupToggle");
-    let lst = raw_data?.split(",");
-    console.log(lst);
-    lst?.forEach((item) => {
+    const toggleLst = localStorage.getItem("groupToggle")?.split(",");
+    toggleLst?.forEach((item) => {
       if (item) {
         setValue((prev) => [...prev, item]);
         console.log(value);
