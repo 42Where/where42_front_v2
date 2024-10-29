@@ -3,6 +3,7 @@
     "prettier",
     "airbnb",
     "airbnb-typescript",
+    "plugin:storybook/recommended",
     "plugin:storybook/recommended"
   ],
   "plugins": [

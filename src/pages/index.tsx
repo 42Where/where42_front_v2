@@ -13,6 +13,7 @@ import {
   useAddedMembersStore,
 } from "@/lib/stores";
 import AgreementModal from "@/components/modals/AgreementModal";
+import GroupOrderSetting from "@/components/utils/GroupOrderSetting";
 
 export default function Home() {
   const router = useRouter();

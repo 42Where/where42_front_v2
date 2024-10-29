@@ -60,6 +60,11 @@ export default function MySettingModal() {
               수동 위치 설정
             </DropdownMenuItem>
           </DialogTrigger>
+          <DialogTrigger>
+            <DropdownMenuItem className="text-xl">
+              그룹 순서 조정
+            </DropdownMenuItem>
+          </DialogTrigger>
         </DropdownMenuContent>
       </DropdownMenu>
       {isMessage ? (
@@ -107,7 +112,7 @@ export default function MySettingModal() {
               >
                 <input
                   ref={inputRef}
-                  className="text-l text-darkblue w-full bg-transparent outline-none placeholder:text-gray-500  dark:text-gray-700"
+                  className="text-l w-full bg-transparent text-darkblue outline-none placeholder:text-gray-500  dark:text-gray-700"
                   placeholder="상태 메시지를 입력해주세요"
                   onChange={(e) => setSearchValue(e.target.value)}
                   value={searchValue}
