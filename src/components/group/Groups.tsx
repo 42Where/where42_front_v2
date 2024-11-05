@@ -14,6 +14,7 @@ import { useState } from "react";
 import GroupCardContainer from "@/components/group/GroupCardContainer";
 
 export default function Groups({ groups }: { groups: Group[] }) {
+  // TODO: 소티드 그룹 로직 개선, 출근 토글시 블로킹인지 무거운 작업인지 멈칫 함 -> 확인할 것
   const [sortedGroups, setSortedGroups] = useState(
     [...groups].sort((a, b) => a.groupId - b.groupId),
   );
