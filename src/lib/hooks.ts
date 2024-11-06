@@ -7,7 +7,7 @@ import {
   useAddedMembersStore,
 } from "@/lib/stores";
 
-export function useGroupSet() {
+export function useInfoSet() {
   const { setUser } = useUserStore();
   const { setGroups } = useGroupsStore();
   const { setAddedMembers } = useAddedMembersStore();
@@ -29,7 +29,15 @@ export function useGroupSet() {
             if (group.groupId === userDefaultGroupId)
               group.groupName = "친구 목록";
           });
-          setGroups(res);
+          const sortedGroup = [...res].sort((a, b) => a.groupId - b.groupId);
+          const defaultGroup = sortedGroup.find(
+            (group) => group.groupName === "친구 목록",
+          );
+          if (defaultGroup) {
+            sortedGroup.splice(sortedGroup.indexOf(defaultGroup), 1);
+            sortedGroup.push(defaultGroup);
+          }
+          setGroups(sortedGroup);
           const allMemberIds = res.flatMap((group) =>
             group.members.map((member) => member.intraId),
           );

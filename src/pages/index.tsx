@@ -7,7 +7,8 @@ import Footer from "@/components/Footer";
 import ProfileSkeleton from "@/components/utils/ProfileSkeleton";
 import { useUserStore, useGroupsStore } from "@/lib/stores";
 import AgreementModal from "@/components/modals/AgreementModal";
-import { useGroupSet } from "@/lib/hooks";
+import { useInfoSet } from "@/lib/hooks";
+import Divider from "@/components/utils/Divider";
 
 export default function Home() {
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function Home() {
   const { groups } = useGroupsStore();
   const { intraId, agreement } = router.query;
   const [showModal, setShowModal] = useState(false);
-  useGroupSet();
+  useInfoSet();
 
   useEffect(() => {
     if (agreement && agreement === "false") setShowModal(true);
@@ -25,11 +26,12 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex h-full min-h-screen w-full flex-col justify-start gap-3 px-2 md:px-10 lg:gap-4">
+      <main className="flex h-full min-h-screen w-full flex-col justify-start px-2 md:px-10">
         <AgreementModal showModal={showModal} setShowModal={setShowModal} />
         <Header />
         {user ? <MyProfileCard user={user} /> : <ProfileSkeleton />}
-        {groups ? <Groups groups={groups} /> : null}
+        <Divider />
+        {groups && <Groups groups={groups} />}
       </main>
       <Footer />
     </>
