@@ -2,10 +2,10 @@ import React from "react";
 import ProfilePic from "@/components/ProfilePic";
 import { User } from "@/types/User";
 import { useCheckedUsersStore } from "@/lib/stores";
-import { Checkbox } from "../ui/checkbox";
-import UserSettingModal from "../modals/UserSettingModal";
+import { Checkbox } from "@/components/ui/checkbox";
+import UserSettingModal from "@/components/modals/UserSettingModal";
 import Group from "@/types/Group";
-import LocationBtn from "../buttons/LocationBtn";
+import LocationBtn from "@/components/buttons/LocationBtn";
 
 export default function ProfileCard({
   user,
@@ -26,7 +26,7 @@ export default function ProfileCard({
       }`}
       onClick={() => {
         if (isEdit) {
-          const temp = checkedUsers;
+          const temp = [...checkedUsers];
           if (isCheck) {
             temp.splice(temp.indexOf(user), 1);
             setCheckedUsers(temp);
@@ -41,7 +41,7 @@ export default function ProfileCard({
         <ProfilePic user={user} type="userCard" />
         <div className="flex flex-col items-start gap-1 md:gap-2">
           <LocationBtn user={user} />
-          <h2 className=" text-darkblue text-xl md:text-3xl">
+          <h2 className=" text-xl text-darkblue md:text-3xl">
             {user.intraName}
           </h2>
           <p className=" text-l  lg:text-xl">{user.comment}</p>

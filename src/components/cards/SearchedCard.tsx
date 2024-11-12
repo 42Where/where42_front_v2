@@ -7,7 +7,7 @@ import {
   useAddedMembersStore,
   useGroupsStore,
 } from "@/lib/stores";
-import LocationBtn from "../buttons/LocationBtn";
+import LocationBtn from "@/components/buttons/LocationBtn";
 import { useToast } from "@/components/ui/use-toast";
 import ProfilePic from "@/components/ProfilePic";
 
@@ -46,7 +46,7 @@ export default function SearchedCard({
         <ProfilePic user={member} type="searchedCard" />
         <div className="flex flex-col items-start gap-1">
           <LocationBtn user={member} />
-          <h2 className=" text-darkblue text-xl md:text-2xl">
+          <h2 className=" text-xl text-darkblue md:text-2xl">
             {member.intraName}
           </h2>
           <p className=" md:text-md text-sm ">{member.comment}</p>

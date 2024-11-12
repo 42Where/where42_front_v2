@@ -14,7 +14,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { useGroupsStore, useUserStore } from "@/lib/stores";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import groupApi from "@/api/groupApi";
 import { User } from "@/types/User";
 import Group from "@/types/Group";
@@ -96,8 +96,8 @@ export default function UserSettingModal({
                     className={`rounded-2xl ${
                       checkedGroups.includes(g.groupId)
                         ? "bg-darkblue text-white hover:bg-gray-500"
-                        : "border-darkblue text-darkblue border-2 bg-white hover:bg-gray-200"
-                    } border-darkblue gap-2 border-0 px-3 py-1  text-xl`}
+                        : "border-2 border-darkblue bg-white text-darkblue hover:bg-gray-200"
+                    } gap-2 border-0 border-darkblue px-3 py-1  text-xl`}
                     onClick={() => {
                       if (checkedGroups.includes(g.groupId)) {
                         setCheckedGroups(
@@ -160,7 +160,7 @@ export default function UserSettingModal({
           </div>
         </DialogContent>
       ) : (
-        <DialogContent className="text-darkblue  max-w-[425px] transition-all duration-500 ease-out">
+        <DialogContent className="max-w-[425px]  text-darkblue transition-all duration-500 ease-out">
           <DialogTitle>그룹 삭제</DialogTitle>
           <span className="inline">
             <h3 style={{ display: "inline", margin: "0" }}>

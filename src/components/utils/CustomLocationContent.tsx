@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { useUserStore } from "@/lib/stores";
 import LocationCascader from "./LocationCascader";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import locationApi from "@/api/locationApi";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 

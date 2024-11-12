@@ -1,22 +1,22 @@
-import React from 'react';
-import { Dialog, DialogTrigger } from '@/components/ui/dialog';
-import { useUserStore } from '@/lib/stores';
-import LocationBtn from '../buttons/LocationBtn';
-import CustomLocationContent from '../utils/CustomLocationContent';
+import React from "react";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { useUserStore } from "@/lib/stores";
+import LocationBtn from "@/components/buttons/LocationBtn";
+import CustomLocationContent from "@/components/utils/CustomLocationContent";
 
 export default function CustomLocationModal() {
   const { user } = useUserStore();
-  const [resultMessage, setResultMessage] = React.useState<string>('');
+  const [resultMessage, setResultMessage] = React.useState<string>("");
   if (!user) return null;
   return (
     <Dialog
       onOpenChange={(open) => {
         if (!open) {
           setTimeout(() => {
-            setResultMessage('');
+            setResultMessage("");
           }, 100);
         } else {
-          setResultMessage('');
+          setResultMessage("");
         }
       }}
     >

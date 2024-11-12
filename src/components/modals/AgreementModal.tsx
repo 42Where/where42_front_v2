@@ -13,7 +13,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import groupApi from "@/api/groupApi";
 
 export default function AgreementModal({
@@ -26,7 +26,7 @@ export default function AgreementModal({
   const router = useRouter();
   return (
     <Dialog open={showModal}>
-      <DialogContent className="text-darkblue  max-w-[800px] gap-2">
+      <DialogContent className="max-w-[800px]  gap-2 text-darkblue">
         <DialogHeader className="text-m  ">
           <DialogTitle>
             <h2 className="text-l  text-darkblue">

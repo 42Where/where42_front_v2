@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 interface CascaderOption {
   label: string;
@@ -139,8 +139,8 @@ function SingleCascader({
       className={`w-24 gap-2 rounded-lg px-3 py-1 text-base md:w-32  md:text-xl ${
         selected
           ? "bg-darkblue text-white hover:bg-gray-700"
-          : "border-darkblue text-darkblue border-2 bg-white hover:bg-gray-200"
-      } border-darkblue border-0`}
+          : "border-2 border-darkblue bg-white text-darkblue hover:bg-gray-200"
+      } border-0 border-darkblue`}
       onClick={() => {
         if (selected) {
           setSelected("");

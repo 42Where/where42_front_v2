@@ -1,4 +1,4 @@
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import React from "react";
 import { User, SearchedUser } from "@/types/User";
 import {
