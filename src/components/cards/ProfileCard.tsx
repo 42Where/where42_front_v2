@@ -27,13 +27,9 @@ export default function ProfileCard({
       onClick={() => {
         if (isEdit) {
           const temp = [...checkedUsers];
-          if (isCheck) {
-            temp.splice(temp.indexOf(user), 1);
-            setCheckedUsers(temp);
-          } else {
-            temp.push(user);
-            setCheckedUsers(temp);
-          }
+          if (isCheck) temp.splice(temp.indexOf(user), 1);
+          else temp.push(user);
+          setCheckedUsers(temp);
         }
       }}
     >
