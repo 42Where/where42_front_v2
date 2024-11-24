@@ -7,7 +7,8 @@
     -webkit-appearance: none !important;
   }
   html {
-    font-family: "GmarketSansMd";
+    font-family: GmarketSansMd, sans-serif;
+
     @apply text-[#4A6282];
   }
   body {
@@ -16,11 +17,11 @@
     padding: 0;
   }
   h1 {
-    font-family: "GmarketSansLg";
+    font-family: GmarketSansLg, serif;
   }
 
   h2 {
-    font-family: "GmarketSansLg";
+    font-family: GmarketSansLg, serif;
   }
   :root {
     --background: 0 0% 100%;
@@ -93,7 +94,7 @@
 /* 2xl: 데스크탑 (1536+) */
 
 @font-face {
-  font-family: "GmarketSans";
+  font-family: GmarketSans;
   src: url("/fonts/woff2/GmarketSansLight.woff2");
   font-weight: 300;
   font-style: normal;
@@ -101,7 +102,7 @@
 }
 
 @font-face {
-  font-family: "GmarketSansMd";
+  font-family: GmarketSansMd;
   src: url("/fonts/woff2/GmarketSansMedium.woff2");
   font-weight: 500;
   font-style: normal;
@@ -110,7 +111,7 @@
 }
 
 @font-face {
-  font-family: "GmarketSansLg";
+  font-family: GmarketSansLg;
   src: url("/fonts/woff2/GmarketSansBold.woff2");
   font-weight: 700;
   font-style: normal;
