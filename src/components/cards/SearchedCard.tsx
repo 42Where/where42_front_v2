@@ -15,15 +15,6 @@ export default function SearchedCard({
   isAddingUser?: boolean;
 }) {
   const { addedMembers } = useAddedMembersStore();
-  const [isAlreadyAdded, setIsAlreadyAdded] = useState(false);
-
-  useEffect(() => {
-    addedMembers.forEach((addedMember) => {
-      if (addedMember === member.intraId) {
-        setIsAlreadyAdded(true);
-      }
-    });
-  }, [addedMembers]);
 
   return (
     <div
@@ -43,9 +34,7 @@ export default function SearchedCard({
           <p className=" md:text-md text-sm ">{member.comment}</p>
         </div>
       </div>
-      {!isAlreadyAdded && (
-        <FriendAddBtn member={member} setIsAlreadyAdded={setIsAlreadyAdded} />
-      )}
+      {!(member.intraId in addedMembers) && <FriendAddBtn member={member} />}
     </div>
   );
 }

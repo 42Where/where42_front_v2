@@ -9,13 +9,7 @@ import {
 } from "@/lib/stores";
 import { useToast } from "@/components/ui/use-toast";
 
-export default function FriendAddBtn({
-  member,
-  setIsAlreadyAdded,
-}: {
-  member: SearchedUser;
-  setIsAlreadyAdded: Dispatch<SetStateAction<boolean>>;
-}) {
+export default function FriendAddBtn({ member }: { member: SearchedUser }) {
   const { user } = useUserStore();
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
   const { groups, setGroups } = useGroupsStore();
@@ -38,7 +32,6 @@ export default function FriendAddBtn({
           return group;
         });
         setGroups(updatedGroups);
-        setIsAlreadyAdded(true);
         groupApi
           .addMemberAtGroup({
             groupId: user?.defaultGroupId as number,

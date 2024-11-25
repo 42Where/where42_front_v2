@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import React from "react";
+import { useEffect, useState } from "react";
 import { User, SearchedUser } from "@/types/User";
 import {
   Tooltip,
@@ -15,8 +15,8 @@ export default function LocationBtn({
   user: SearchedUser | User;
   isMyProfile?: boolean;
 }) {
-  const [location, setLocation] = React.useState<string>("");
-  React.useEffect(() => {
+  const [location, setLocation] = useState<string>("");
+  useEffect(() => {
     if ("location" in user && user.location) {
       setLocation(user.location);
     } else if (

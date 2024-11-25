@@ -27,7 +27,7 @@ export default function ProfilePic({
               user.location || user.inCluster ? "border-[#FFB5B5]" : ""
             } border-4 hover:border-[#bfb5ff]`}
             onClick={() => {
-              if (type !== "searchedCard")
+              type !== "searchedCard" &&
                 window.open(
                   `https://profile.intra.42.fr/users/${user.intraId}`,
                 );
