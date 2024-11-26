@@ -14,11 +14,10 @@ export default function SearchedCard({
   isAddingUser?: boolean;
 }) {
   const { addedMembers } = useAddedMembersStore();
-
   return (
     <button
       type="button"
-      className={`flex flex-row items-center justify-between rounded-2xl border-2 p-2 ${
+      className={`flex flex-row items-center justify-between rounded-2xl border-2 p-2 cursor-default ${
         isAddingUser &&
         'transform cursor-pointer transition-transform hover:border-[#FFB5B5] active:scale-95'
       }`}
@@ -34,7 +33,9 @@ export default function SearchedCard({
           <p className=" md:text-md text-sm ">{member.comment}</p>
         </div>
       </div>
-      {!(member.intraId in addedMembers) && <FriendAddBtn member={member} />}
+      {!addedMembers.find(
+        (a) => a === member.intraId,
+      ) && <FriendAddBtn member={member} />}
     </button>
   );
 }
