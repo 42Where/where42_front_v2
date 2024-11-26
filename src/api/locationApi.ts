@@ -6,7 +6,7 @@ const locationApi = {
   }: {
     location: string;
   }): Promise<void> => {
-    const response = await axios.post('/v3/location/custom', {
+    await axios.post('/v3/location/custom', {
       customLocation: location,
     });
   },

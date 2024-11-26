@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
-import { SearchedUser } from "@/types/User";
-import { useAddedMembersStore } from "@/lib/stores";
-import LocationBtn from "@/components/buttons/LocationBtn";
-import ProfilePic from "@/components/ProfilePic";
-import FriendAddBtn from "@/components/buttons/FriendAddBtn";
+import { SearchedUser } from '@/types/User';
+import { useAddedMembersStore } from '@/lib/stores';
+import LocationBtn from '@/components/buttons/LocationBtn';
+import ProfilePic from '@/components/ProfilePic';
+import FriendAddBtn from '@/components/buttons/FriendAddBtn';
 
 export default function SearchedCard({
   member,
@@ -17,10 +16,11 @@ export default function SearchedCard({
   const { addedMembers } = useAddedMembersStore();
 
   return (
-    <div
+    <button
+      type="button"
       className={`flex flex-row items-center justify-between rounded-2xl border-2 p-2 ${
         isAddingUser &&
-        "transform cursor-pointer transition-transform hover:border-[#FFB5B5] active:scale-95"
+        'transform cursor-pointer transition-transform hover:border-[#FFB5B5] active:scale-95'
       }`}
       onClick={() => onClick && onClick()}
     >
@@ -35,6 +35,6 @@ export default function SearchedCard({
         </div>
       </div>
       {!(member.intraId in addedMembers) && <FriendAddBtn member={member} />}
-    </div>
+    </button>
   );
 }

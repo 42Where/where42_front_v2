@@ -1,13 +1,12 @@
-import { Dispatch, SetStateAction } from "react";
-import Image from "next/image";
-import { SearchedUser } from "@/types/User";
-import groupApi from "@/api/groupApi";
+import Image from 'next/image';
+import { SearchedUser } from '@/types/User';
+import groupApi from '@/api/groupApi';
 import {
   useUserStore,
   useAddedMembersStore,
   useGroupsStore,
-} from "@/lib/stores";
-import { useToast } from "@/components/ui/use-toast";
+} from '@/lib/stores';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function FriendAddBtn({ member }: { member: SearchedUser }) {
   const { user } = useUserStore();
@@ -16,10 +15,9 @@ export default function FriendAddBtn({ member }: { member: SearchedUser }) {
   const { toast } = useToast();
 
   return (
-    <div
+    <button
+      type="submit"
       className="right-[110px] flex size-14 items-center justify-center rounded-lg hover:bg-gray-200"
-      role="button"
-      tabIndex={0}
       onClick={() => {
         setAddedMembers([...addedMembers, member.intraId]);
         const updatedGroups = groups.map((group) => {
@@ -51,6 +49,6 @@ export default function FriendAddBtn({ member }: { member: SearchedUser }) {
         height={30}
         className="hover:bg-gray-200"
       />
-    </div>
+    </button>
   );
 }

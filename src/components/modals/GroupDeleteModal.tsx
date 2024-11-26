@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 import {
   Dialog,
   DialogContent,
   DialogClose,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import groupApi from "@/api/groupApi";
-import Group from "@/types/Group";
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import groupApi from '@/api/groupApi';
+import Group from '@/types/Group';
 import {
   useCheckedUsersStore,
   useGroupsStore,
   useUserStore,
-} from "@/lib/stores";
-import { useToast } from "@/components/ui/use-toast";
+} from '@/lib/stores';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
   const { checkedUsers } = useCheckedUsersStore();
@@ -26,7 +26,7 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className="text-l h-6 gap-2 rounded-full  
+          className="text-l h-6 gap-2 rounded-full
           border-2 border-red-700 bg-white px-2 text-red-700 hover:bg-gray-200 md:h-8 md:px-3 lg:text-xl"
         >
           삭제
@@ -67,21 +67,25 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
                   if (curGroup.groupId === user?.defaultGroupId) {
                     temp = groups;
                     temp.forEach((g) => {
-                      g.members = g.members.filter(
-                        (member) => !checkedUsers.includes(member),
-                      );
+                      const updatedGroup = {
+                        ...g,
+                        members: g.members.filter(
+                          (member) => !checkedUsers.includes(member),
+                        ),
+                      };
+                      return updatedGroup;
                     });
                     setGroups(temp);
                   }
                   const checkedUsersId = checkedUsers.map(
-                    (user) => user.intraId,
+                    (u) => u.intraId,
                   );
                   groupApi
                     .removeMembersFromGroup({
                       groupId: curGroup.groupId,
                       members: checkedUsersId,
                     })
-                    .then(() => toast({ title: "삭제되었습니다." }));
+                    .then(() => toast({ title: '삭제되었습니다.' }));
                 }}
               >
                 삭제

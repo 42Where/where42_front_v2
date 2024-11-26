@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
-import { User, SearchedUser } from "@/types/User";
+import { Button } from '@/components/ui/button';
+import { useEffect, useState } from 'react';
+import { User, SearchedUser } from '@/types/User';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 
 export default function LocationBtn({
   user,
@@ -15,17 +15,17 @@ export default function LocationBtn({
   user: SearchedUser | User;
   isMyProfile?: boolean;
 }) {
-  const [location, setLocation] = useState<string>("");
+  const [location, setLocation] = useState<string>('');
   useEffect(() => {
-    if ("location" in user && user.location) {
+    if ('location' in user && user.location) {
       setLocation(user.location);
     } else if (
-      ("inCluster" in user && user.inCluster) ||
-      ("inOrOut" in user && user.inOrOut)
+      ('inCluster' in user && user.inCluster) ||
+      ('inOrOut' in user && user.inOrOut)
     ) {
-      setLocation("개포");
+      setLocation('개포');
     } else {
-      setLocation("퇴근");
+      setLocation('퇴근');
     }
   }, [user]);
   return (
@@ -34,11 +34,11 @@ export default function LocationBtn({
         <TooltipTrigger asChild>
           <Button
             className={`rounded-full
-            ${!isMyProfile && "cursor-default"}
+            ${!isMyProfile && 'cursor-default'}
             ${
-              location !== "퇴근"
-                ? "bg-darkblue"
-                : "border-2 border-darkblue bg-white text-darkblue hover:bg-white"
+              location !== '퇴근'
+                ? 'bg-darkblue'
+                : 'border-2 border-darkblue bg-white text-darkblue hover:bg-white'
             } h-6 px-2 md:h-8 md:px-3 md:text-xl `}
           >
             {location}

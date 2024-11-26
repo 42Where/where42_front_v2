@@ -1,11 +1,11 @@
-import React from "react";
-import ProfilePic from "@/components/ProfilePic";
-import { User } from "@/types/User";
-import { useCheckedUsersStore } from "@/lib/stores";
-import { Checkbox } from "@/components/ui/checkbox";
-import UserSettingModal from "@/components/modals/UserSettingModal";
-import Group from "@/types/Group";
-import LocationBtn from "@/components/buttons/LocationBtn";
+import React from 'react';
+import ProfilePic from '@/components/ProfilePic';
+import { User } from '@/types/User';
+import { useCheckedUsersStore } from '@/lib/stores';
+import { Checkbox } from '@/components/ui/checkbox';
+import UserSettingModal from '@/components/modals/UserSettingModal';
+import Group from '@/types/Group';
+import LocationBtn from '@/components/buttons/LocationBtn';
 
 export default function ProfileCard({
   user,
@@ -20,9 +20,10 @@ export default function ProfileCard({
 }) {
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
   return (
-    <div
+    <button
+      type="button"
       className={`flex flex-row items-center justify-between rounded-2xl border-2 p-4 hover:border-[#FFB5B5] md:p-6 ${
-        isEdit && "cursor-pointer"
+        isEdit && 'cursor-pointer'
       }`}
       onClick={() => {
         if (isEdit) {
@@ -48,6 +49,6 @@ export default function ProfileCard({
       ) : (
         <UserSettingModal targUser={user} targGroup={group} />
       )}
-    </div>
+    </button>
   );
 }

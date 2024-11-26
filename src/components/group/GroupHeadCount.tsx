@@ -1,4 +1,4 @@
-import Group from "@/types/Group";
+import Group from '@/types/Group';
 
 export default function GroupHeadCount({ curGroup }: { curGroup: Group }) {
   return (
@@ -10,7 +10,8 @@ export default function GroupHeadCount({ curGroup }: { curGroup: Group }) {
             (member) => member.location || member.inCluster,
           ).length
         }
-        /{curGroup.members.length}
+        /
+        {curGroup.members.length}
       </p>
     </span>
   );

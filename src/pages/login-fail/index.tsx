@@ -1,10 +1,10 @@
-import React from "react";
-import Image from "next/image";
-import LoginBtn from "@/components/buttons/LoginBtn";
+import React from 'react';
+import Image from 'next/image';
+import LoginBtn from '@/components/buttons/LoginBtn';
 
 export default function LoginFailPage() {
   return (
-    <main className="text-darkblue flex min-h-[100vh] w-full flex-col sm:flex-row">
+    <main className="flex min-h-[100vh] w-full flex-col text-darkblue sm:flex-row">
       <div className="pt-8 sm:relative sm:min-h-[50vh] sm:w-1/2">
         <Image
           src="/image/fill/left.png"
@@ -37,7 +37,7 @@ export default function LoginFailPage() {
       </div>
       <div className="relative flex min-h-[50vh] w-full flex-col items-center justify-center sm:hidden">
         <Image src="/image/fill/bottom.png" alt="bottom" layout="fill" />
-        <LoginBtn isMobile={true} />
+        <LoginBtn isMobile />
       </div>
     </main>
   );

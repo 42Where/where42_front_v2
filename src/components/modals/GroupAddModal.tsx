@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 import {
   Dialog,
   DialogContent,
   DialogClose,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import groupApi from "@/api/groupApi";
-import Group from "@/types/Group";
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import groupApi from '@/api/groupApi';
+import Group from '@/types/Group';
 import {
   useCheckedUsersStore,
   useGroupsStore,
   useUserStore,
-} from "@/lib/stores";
+} from '@/lib/stores';
 
 export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
   const { user } = useUserStore();
@@ -41,8 +41,8 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
                   key={g.groupId}
                   className={`rounded-2xl ${
                     checkedGroups.includes(g.groupId)
-                      ? "bg-darkblue text-white hover:bg-gray-500"
-                      : "border-2 border-darkblue bg-white text-darkblue hover:bg-gray-200"
+                      ? 'bg-darkblue text-white hover:bg-gray-500'
+                      : 'border-2 border-darkblue bg-white text-darkblue hover:bg-gray-200'
                   } gap-2 border-0 border-darkblue px-3 py-1  text-xl`}
                   onClick={() => {
                     if (checkedGroups.includes(g.groupId)) {

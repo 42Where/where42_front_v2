@@ -1,15 +1,28 @@
 {
+  "plugins": [
+    "import",
+    "jsx-a11y",
+    "react",
+    "react-hooks"
+  ],
   "extends": [
-    "prettier",
+    "plugin:import/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "airbnb",
     "airbnb-typescript",
-    "plugin:storybook/recommended"
+    "next"
   ],
-  "plugins": ["prettier"],
-  "rules": {
-    "prettier/prettier": "error"
-  },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": "tsconfig.json"
+  },
+  "rules": {
+    "object-curly-newline": ["off"],
+    "react/jsx-props-no-spreading": ["off"],
+    "implicit-arrow-linebreak": ["off"],
+    "operator-linebreak": ["off"],
+    "react/require-default-props": "off"
   }
 }

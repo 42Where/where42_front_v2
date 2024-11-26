@@ -1,26 +1,29 @@
-import React from "react";
-import { DialogTrigger } from "@radix-ui/react-dialog";
-import Image from "next/image";
-import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import React from 'react';
+import { DialogTrigger } from '@radix-ui/react-dialog';
+import Image from 'next/image';
+import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogClose,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import { useGroupsStore, useUserStore } from "@/lib/stores";
-import { Button } from "@/components/ui/button";
-import groupApi from "@/api/groupApi";
-import { User } from "@/types/User";
-import Group from "@/types/Group";
-import { useCheckedUsersStore } from "@/lib/stores";
-import { useAddedMembersStore } from "@/lib/stores";
-import { useToast } from "@/components/ui/use-toast";
+} from '@/components/ui/dropdown-menu';
+import {
+  useGroupsStore,
+  useUserStore,
+  useCheckedUsersStore,
+  useAddedMembersStore,
+} from '@/lib/stores';
+import { Button } from '@/components/ui/button';
+import groupApi from '@/api/groupApi';
+import { User } from '@/types/User';
+import Group from '@/types/Group';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function UserSettingModal({
   targUser,
@@ -95,8 +98,8 @@ export default function UserSettingModal({
                     key={g.groupId}
                     className={`rounded-2xl ${
                       checkedGroups.includes(g.groupId)
-                        ? "bg-darkblue text-white hover:bg-gray-500"
-                        : "border-2 border-darkblue bg-white text-darkblue hover:bg-gray-200"
+                        ? 'bg-darkblue text-white hover:bg-gray-500'
+                        : 'border-2 border-darkblue bg-white text-darkblue hover:bg-gray-200'
                     } gap-2 border-0 border-darkblue px-3 py-1  text-xl`}
                     onClick={() => {
                       if (checkedGroups.includes(g.groupId)) {
@@ -146,7 +149,7 @@ export default function UserSettingModal({
                             setGroups(temp);
                           }
                         })
-                        .then(() => toast({ title: "그룹에 추가되었습니다." }));
+                        .then(() => toast({ title: '그룹에 추가되었습니다.' }));
                     });
                   }}
                 >
@@ -163,12 +166,17 @@ export default function UserSettingModal({
         <DialogContent className="max-w-[425px]  text-darkblue transition-all duration-500 ease-out">
           <DialogTitle>그룹 삭제</DialogTitle>
           <span className="inline">
-            <h3 style={{ display: "inline", margin: "0" }}>
-              &quot;{targUser.intraName}&quot;
+            <h3 style={{ display: 'inline', margin: '0' }}>
+              &quot;
+              {targUser.intraName}
+              &quot;
             </h3>
-            <p style={{ display: "inline", margin: "0" }}>님을</p>
-            <h3 style={{ display: "inline", margin: "0" }}>
-              &quot;{targGroup.groupName}&quot;{" "}
+            <p style={{ display: 'inline', margin: '0' }}>님을</p>
+            <h3 style={{ display: 'inline', margin: '0' }}>
+              &quot;
+              {targGroup.groupName}
+              &quot;
+              {' '}
             </h3>
             그룹으로부터 삭제하시겠습니까?
           </span>
@@ -197,9 +205,13 @@ export default function UserSettingModal({
                     if (targGroupId === user?.defaultGroupId) {
                       temp = groups;
                       temp.forEach((g) => {
-                        g.members = g.members.filter(
-                          (member) => member.intraId !== targUser.intraId,
-                        );
+                        const updatedGroup = {
+                          ...g,
+                          members: g.members.filter(
+                            (member) => member.intraId !== targUser.intraId,
+                          ),
+                        };
+                        return updatedGroup;
                       });
                       setGroups(temp);
                     }
@@ -212,7 +224,7 @@ export default function UserSettingModal({
                         groupId: targGroupId,
                         members: [targUser.intraId],
                       })
-                      .then(() => toast({ title: "그룹에서 삭제되었습니다." }));
+                      .then(() => toast({ title: '그룹에서 삭제되었습니다.' }));
                   }}
                 >
                   삭제

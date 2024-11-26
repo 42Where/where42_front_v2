@@ -1,4 +1,5 @@
 {
   "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindPreserveWhitespace": true
+  "tailwindPreserveWhitespace": true,
+  "singleQuote": true
 }

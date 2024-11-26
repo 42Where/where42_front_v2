@@ -1,45 +1,45 @@
-import React from "react";
-import Image from "next/image";
-import { X } from "lucide-react";
-import { z } from "zod";
-import SearchedCard from "@/components/cards/SearchedCard";
-import SearchBtn from "@/components/buttons/SearchBtn";
+import React from 'react';
+import Image from 'next/image';
+import { X } from 'lucide-react';
+import { z } from 'zod';
+import SearchedCard from '@/components/cards/SearchedCard';
+import SearchBtn from '@/components/buttons/SearchBtn';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import memberApi from "@/api/memberApi";
-import { useUserStore } from "@/lib/stores";
-import { SearchedUser } from "@/types/User";
+} from '@/components/ui/dialog';
+import memberApi from '@/api/memberApi';
+import { useUserStore } from '@/lib/stores';
+import { SearchedUser } from '@/types/User';
 
 const SearchInputSchema = z.string().regex(/^[a-zA-Z0-9-]*$/, {
-  message: "영어, 숫자, -만 입력 가능합니다.",
+  message: '영어, 숫자, -만 입력 가능합니다.',
 });
 export default function SearchModal() {
   const { user } = useUserStore();
-  const [resultMessage, setResultMessage] = React.useState<string>("");
+  const [resultMessage, setResultMessage] = React.useState<string>('');
   const [searchedUsers, setSearchedUsers] = React.useState<SearchedUser[]>([]);
   const formRef = React.useRef<HTMLFormElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const [searchValue, setSearchValue] = React.useState<string>("");
+  const [searchValue, setSearchValue] = React.useState<string>('');
   return (
     <Dialog
       onOpenChange={(open) => {
         if (!open) {
           setTimeout(() => {
             setSearchedUsers([]);
-            setResultMessage("");
+            setResultMessage('');
             formRef.current?.reset();
-            setSearchValue("");
+            setSearchValue('');
           }, 100);
         } else {
           setSearchedUsers([]);
-          setResultMessage("");
+          setResultMessage('');
           formRef.current?.reset();
-          setSearchValue("");
+          setSearchValue('');
         }
       }}
     >
@@ -48,7 +48,7 @@ export default function SearchModal() {
       </DialogTrigger>
       <DialogContent
         className={`flex flex-col items-center transition-all duration-500 ease-out ${
-          searchedUsers?.length ? "max-w-[800px]" : "max-w-[425px]"
+          searchedUsers?.length ? 'max-w-[800px]' : 'max-w-[425px]'
         }`}
       >
         <DialogHeader className="gap-2">
@@ -64,7 +64,7 @@ export default function SearchModal() {
               const inputValue = inputRef.current?.value;
               setSearchedUsers([]);
               if (!inputValue || inputValue.length < 3) {
-                setResultMessage("3글자 이상 입력해주세요.");
+                setResultMessage('3글자 이상 입력해주세요.');
                 return;
               }
               try {
@@ -75,32 +75,32 @@ export default function SearchModal() {
                 return;
               }
               formRef.current?.reset();
-              setSearchValue("");
+              setSearchValue('');
               if (inputValue === user?.intraName) {
                 setResultMessage(
-                  "나는 우주를 여행하는 당신의 영원한 친구입니다.",
+                  '나는 우주를 여행하는 당신의 영원한 친구입니다.',
                 );
                 return;
               }
-              setResultMessage("검색중입니다...");
+              setResultMessage('검색중입니다...');
               memberApi
                 .searchMember({ keyWord: inputValue })
                 .then((data) => {
                   if (data.length > 0) {
                     setSearchedUsers(data);
-                  } else setResultMessage("검색 결과가 없습니다.");
+                  } else setResultMessage('검색 결과가 없습니다.');
                 })
                 .catch((error) => {
                   console.error(error);
                   if (error.response?.status === 500) {
                     setResultMessage(
-                      "서버 에러가 발생했습니다. 관리자에게 문의해주세요",
+                      '서버 에러가 발생했습니다. 관리자에게 문의해주세요',
                     );
                     setSearchedUsers([]);
                     return;
                   }
                   setResultMessage(
-                    "검색 중 오류가 발생했습니다. 다시 시도해주세요",
+                    '검색 중 오류가 발생했습니다. 다시 시도해주세요',
                   );
                   setSearchedUsers([]);
                 });
@@ -108,7 +108,7 @@ export default function SearchModal() {
           >
             <input
               ref={inputRef}
-              className="text-l text-darkblue w-full bg-transparent outline-none placeholder:text-gray-500  dark:text-gray-700"
+              className="text-l w-full bg-transparent text-darkblue outline-none placeholder:text-gray-500  dark:text-gray-700"
               placeholder="검색할 카뎃의 아이디를 입력해주세요"
               onChange={(e) => setSearchValue(e.target.value)}
             />
@@ -118,11 +118,13 @@ export default function SearchModal() {
               className="size-6"
               onClick={() => {
                 formRef.current?.reset();
-                setSearchValue("");
+                setSearchValue('');
               }}
             />
           )}
         </div>
+        {/* TODO: make this ternary into HOC */}
+        {/* eslint-disable-next-line no-nested-ternary */}
         {searchedUsers?.length ? (
           searchedUsers?.length > 4 ? (
             <div className="h-[200px] w-full overflow-scroll rounded-md md:h-[600px]">

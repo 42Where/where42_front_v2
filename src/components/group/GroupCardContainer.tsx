@@ -1,6 +1,6 @@
-import ProfileCard from "@/components/cards/ProfileCard";
-import { useCheckedStore, useCheckedUsersStore } from "@/lib/stores";
-import Group from "@/types/Group";
+import ProfileCard from '@/components/cards/ProfileCard';
+import { useCheckedStore, useCheckedUsersStore } from '@/lib/stores';
+import Group from '@/types/Group';
 
 export default function GroupCardContainer({ curGroup }: { curGroup: Group }) {
   const { checked } = useCheckedStore();
@@ -25,7 +25,7 @@ export default function GroupCardContainer({ curGroup }: { curGroup: Group }) {
       {(curGroup.members.length === 0 ||
         (checked &&
           !curGroup.members.filter((member) => member.inCluster).length)) && (
-        <p className="text-center text-xl  ">아무도 없어요.. 😢</p>
+          <p className="text-center text-xl">아무도 없어요.. 😢</p>
       )}
     </>
   );

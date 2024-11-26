@@ -1,10 +1,10 @@
-import Image from "next/image";
+import Image from 'next/image';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 
 export default function SearchBtn() {
   return (

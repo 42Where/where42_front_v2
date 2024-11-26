@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { X } from "lucide-react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import React, { useEffect } from 'react';
+import { X } from 'lucide-react';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,26 +11,26 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+} from '@/components/ui/alert-dialog';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { useGroupsStore } from "@/lib/stores";
-import groupApi from "@/api/groupApi";
-import Group from "@/types/Group";
-import { useToast } from "@/components/ui/use-toast";
-import { SearchedUser, User } from "@/types/User";
-import SearchedCard from "@/components/cards/SearchedCard";
+} from '@/components/ui/dialog';
+import { useGroupsStore } from '@/lib/stores';
+import groupApi from '@/api/groupApi';
+import Group from '@/types/Group';
+import { useToast } from '@/components/ui/use-toast';
+import { SearchedUser, User } from '@/types/User';
+import SearchedCard from '@/components/cards/SearchedCard';
 
 export default function NewGroupModal() {
   const { groups, setGroups } = useGroupsStore();
   const formRef = React.useRef<HTMLFormElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const [searchValue, setSearchValue] = React.useState<string>("");
+  const [searchValue, setSearchValue] = React.useState<string>('');
   const [isDuplicated, setIsDuplicated] = React.useState<boolean>(false);
   const [isAddingUser, setIsAddingUser] = React.useState<boolean>(false);
   const [searchedUsers, setSearchedUsers] = React.useState<User[]>([]);
@@ -43,12 +43,12 @@ export default function NewGroupModal() {
   }, [isAddingUser, groups]);
 
   useEffect(() => {
-    if (groups[0])
+    if (groups[0]) {
       setSearchedUsers(
         groups[0].members.filter((user) =>
-          user.intraName.includes(searchValue),
-        ),
+          user.intraName.includes(searchValue)),
       );
+    }
   }, [searchValue]);
 
   return (
@@ -58,13 +58,13 @@ export default function NewGroupModal() {
           setTimeout(() => {
             setSelectedUsers([]);
             formRef.current?.reset();
-            setSearchValue("");
+            setSearchValue('');
             setIsAddingUser(false);
           }, 100);
         } else {
           setSelectedUsers([]);
           formRef.current?.reset();
-          setSearchValue("");
+          setSearchValue('');
         }
       }}
     >
@@ -90,9 +90,12 @@ export default function NewGroupModal() {
                 <AlertDialogTitle>중복 그룹 확인</AlertDialogTitle>
                 <AlertDialogDescription>
                   현재
-                  <h3 style={{ display: "inline", margin: "0" }}>
-                    &quot; {searchValue}
-                    &quot;{" "}
+                  <h3 style={{ display: 'inline', margin: '0' }}>
+                    &quot;
+                    {' '}
+                    {searchValue}
+                    &quot;
+                    {' '}
                   </h3>
                   그룹이 이미 존재합니다. 같은 이름의 그룹을 생성하시겠습니까?
                 </AlertDialogDescription>
@@ -100,7 +103,7 @@ export default function NewGroupModal() {
               <AlertDialogFooter>
                 <AlertDialogCancel
                   onClick={() => {
-                    setSearchValue("");
+                    setSearchValue('');
                     setIsDuplicated(false);
                   }}
                 >
@@ -108,7 +111,7 @@ export default function NewGroupModal() {
                 </AlertDialogCancel>
                 <AlertDialogAction
                   onClick={() => {
-                    setSearchValue("");
+                    setSearchValue('');
                     groupApi
                       .createGroup({ groupName: searchValue })
                       .then((res) => {
@@ -180,7 +183,7 @@ export default function NewGroupModal() {
                     className="size-6"
                     onClick={() => {
                       formRef.current?.reset();
-                      setSearchValue("");
+                      setSearchValue('');
                     }}
                   />
                 )}
@@ -204,10 +207,9 @@ export default function NewGroupModal() {
                                 selectedUser.intraId !== searchedMember.intraId,
                             ),
                           );
-                        } else
-                          setSelectedUsers([...selectedUsers, searchedMember]);
+                        } else setSelectedUsers([...selectedUsers, searchedMember]);
                       }}
-                      isAddingUser={true}
+                      isAddingUser
                     />
                   ))}
                 </div>
@@ -223,7 +225,7 @@ export default function NewGroupModal() {
                     })
                     .then(() => {
                       toast({
-                        title: "그룹에 친구를 성공적으로 추가했습니다.",
+                        title: '그룹에 친구를 성공적으로 추가했습니다.',
                       });
                     })
                     .catch((error) => {
@@ -241,7 +243,7 @@ export default function NewGroupModal() {
                     }),
                   );
                 }}
-                variant={"outline"}
+                variant="outline"
               >
                 추가하기
               </Button>
@@ -260,7 +262,7 @@ export default function NewGroupModal() {
                     setIsDuplicated(true);
                     return;
                   }
-                  setSearchValue("");
+                  setSearchValue('');
                   groupApi
                     .createGroup({ groupName: inputValue })
                     .then((res) => {
@@ -280,8 +282,7 @@ export default function NewGroupModal() {
                     .then(() =>
                       toast({
                         title: `'${inputValue}' 그룹이 생성되었습니다.`,
-                      }),
-                    )
+                      }))
                     .then(() => setIsAddingUser(true))
                     .catch((error) => {
                       console.error(error);
@@ -300,7 +301,7 @@ export default function NewGroupModal() {
                   className="size-6"
                   onClick={() => {
                     formRef.current?.reset();
-                    setSearchValue("");
+                    setSearchValue('');
                   }}
                 />
               )}

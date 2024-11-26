@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 import {
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogClose,
-} from "@/components/ui/dialog";
-import { useUserStore } from "@/lib/stores";
-import LocationCascader from "./LocationCascader";
-import { Button } from "@/components/ui/button";
-import locationApi from "@/api/locationApi";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+} from '@/components/ui/dialog';
+import { useUserStore } from '@/lib/stores';
+import { Button } from '@/components/ui/button';
+import locationApi from '@/api/locationApi';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import LocationCascader from './LocationCascader';
 
 export default function CustomLocationContent({
   resultMessage,
@@ -19,7 +19,7 @@ export default function CustomLocationContent({
   setResultMessage: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const { user, setUser } = useUserStore();
-  const [locationValue, setLocationValue] = React.useState<string>("");
+  const [locationValue, setLocationValue] = React.useState<string>('');
 
   if (!user) return null;
   return user.inCluster ? (
@@ -38,14 +38,14 @@ export default function CustomLocationContent({
           <Button
             className="bg-darkblue"
             onClick={() => {
-              setResultMessage("설정 되었습니다.");
+              setResultMessage('설정 되었습니다.');
               locationApi
                 .setCustomLocation({ location: locationValue })
                 .then(() => setUser({ ...user, location: locationValue }))
                 .catch((error) => {
                   console.error(error);
                   setResultMessage(
-                    "설정 중 오류가 발생했습니다. 다시 시도해 주세요.",
+                    '설정 중 오류가 발생했습니다. 다시 시도해 주세요.',
                   );
                 });
             }}
@@ -54,14 +54,14 @@ export default function CustomLocationContent({
           </Button>
           <Button
             onClick={() => {
-              setResultMessage("삭제 되었습니다.");
+              setResultMessage('삭제 되었습니다.');
               locationApi
                 .deleteCustomLocation()
-                .then(() => setUser({ ...user, location: "" }))
+                .then(() => setUser({ ...user, location: '' }))
                 .catch((error) => {
                   console.error(error);
                   setResultMessage(
-                    "삭제 중 오류가 발생했습니다. 다시 시도해 주세요.",
+                    '삭제 중 오류가 발생했습니다. 다시 시도해 주세요.',
                   );
                 });
             }}

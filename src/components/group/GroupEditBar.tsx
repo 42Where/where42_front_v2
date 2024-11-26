@@ -1,8 +1,8 @@
-import Group from "@/types/Group";
-import { useCheckedUsersStore, useGroupsStore } from "@/lib/stores";
-import { Button } from "@/components/ui/button";
-import GroupDeleteModal from "@/components/modals/GroupDeleteModal";
-import GroupAddModal from "@/components/modals/GroupAddModal";
+import Group from '@/types/Group';
+import { useCheckedUsersStore, useGroupsStore } from '@/lib/stores';
+import { Button } from '@/components/ui/button';
+import GroupDeleteModal from '@/components/modals/GroupDeleteModal';
+import GroupAddModal from '@/components/modals/GroupAddModal';
 
 export default function GroupEditBar({
   groups,
@@ -26,10 +26,10 @@ export default function GroupEditBar({
           className="text-l h-6 gap-2 rounded-full border-2 border-darkblue bg-white
            px-2 py-1 text-darkblue hover:bg-gray-200 md:h-8 md:px-3 lg:text-xl"
           onClick={() => {
-            if (checkedUsers.length !== curGroup.members.length)
-              // curGroup.members.map((member) => temp.push(member));
+            if (checkedUsers.length !== curGroup.members.length) {
+            // curGroup.members.map((member) => temp.push(member));
               setCheckedUsers(curGroup.members.slice());
-            else setCheckedUsers([]);
+            } else setCheckedUsers([]);
           }}
         >
           전체 선택
@@ -42,7 +42,8 @@ export default function GroupEditBar({
               groups.map((g) => {
                 if (g.groupId === curGroup.groupId) {
                   return { ...curGroup, isInEdit: false };
-                } else return g;
+                }
+                return g;
               }),
             );
           }}

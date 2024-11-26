@@ -1,32 +1,32 @@
-import React from "react";
-import { X } from "lucide-react";
-import { DialogTrigger } from "@radix-ui/react-dialog";
+import React from 'react';
+import { X } from 'lucide-react';
+import { DialogTrigger } from '@radix-ui/react-dialog';
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogClose,
-} from "@/components/ui/dialog";
-import groupApi from "@/api/groupApi";
+} from '@/components/ui/dialog';
+import groupApi from '@/api/groupApi';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import { useGroupsStore, useUserStore } from "@/lib/stores";
-import { Button } from "@/components/ui/button";
-import Group from "@/types/Group";
-import { useToast } from "@/components/ui/use-toast";
-import GroupSettingBtn from "@/components/buttons/GroupSettingBtn";
+} from '@/components/ui/dropdown-menu';
+import { useGroupsStore, useUserStore } from '@/lib/stores';
+import { Button } from '@/components/ui/button';
+import Group from '@/types/Group';
+import { useToast } from '@/components/ui/use-toast';
+import GroupSettingBtn from '@/components/buttons/GroupSettingBtn';
 
 export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
   const [isDelete, setIsDelete] = React.useState<boolean>(false);
   const { groups, setGroups } = useGroupsStore();
   const defalutGroupId = useUserStore((state) => state.user?.defaultGroupId);
-  const [resultMessage, setResultMessage] = React.useState<string>("");
+  const [resultMessage, setResultMessage] = React.useState<string>('');
   const formRef = React.useRef<HTMLFormElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const [groupName, setGroupName] = React.useState<string>("");
+  const [groupName, setGroupName] = React.useState<string>('');
   const { toast } = useToast();
 
   return (
@@ -34,14 +34,14 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
       onOpenChange={(open) => {
         if (!open) {
           setTimeout(() => {
-            setResultMessage("");
+            setResultMessage('');
             formRef.current?.reset();
-            setGroupName("");
+            setGroupName('');
           }, 100);
         } else {
-          setResultMessage("");
+          setResultMessage('');
           formRef.current?.reset();
-          setGroupName("");
+          setGroupName('');
         }
       }}
     >
@@ -92,18 +92,20 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
           )}
         </DropdownMenuContent>
       </DropdownMenu>
-      <DialogContent className="text-darkblue max-w-[425px] transition-all duration-500  ease-out">
+      <DialogContent className="max-w-[425px] text-darkblue transition-all duration-500  ease-out">
         {isDelete ? (
           <>
             <DialogTitle>그룹 삭제</DialogTitle>
             <span className=" inline">
-              <h3 style={{ display: "inline", margin: "0" }}>
-                &quot;{" "}
+              <h3 style={{ display: 'inline', margin: '0' }}>
+                &quot;
+                {' '}
                 {
                   groups.find((group) => group.groupId === curGroup.groupId)
                     ?.groupName
                 }
-                &quot;{" "}
+                &quot;
+                {' '}
               </h3>
               그룹을 삭제하시겠습니까?
             </span>
@@ -124,8 +126,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
                       .then(() =>
                         toast({
                           title: `'${curGroup.groupName}' 그룹이 삭제되었습니다.`,
-                        }),
-                      );
+                        }));
                   }}
                 >
                   삭제
@@ -148,8 +149,8 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
                   const inputValue = inputRef.current?.value;
                   if (!inputValue) return;
                   formRef.current?.reset();
-                  setGroupName("");
-                  setResultMessage("설정 되었습니다.");
+                  setGroupName('');
+                  setResultMessage('설정 되었습니다.');
                   groupApi
                     .renameGroup({
                       groupId: curGroup.groupId,
@@ -166,14 +167,14 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
                     .catch((error) => {
                       console.error(error);
                       setResultMessage(
-                        "설정 중 오류가 발생했습니다. 다시 시도해 주세요.",
+                        '설정 중 오류가 발생했습니다. 다시 시도해 주세요.',
                       );
                     });
                 }}
               >
                 <input
                   ref={inputRef}
-                  className="text-l text-darkblue w-full bg-transparent outline-none placeholder:text-gray-500  dark:text-gray-700"
+                  className="text-l w-full bg-transparent text-darkblue outline-none placeholder:text-gray-500  dark:text-gray-700"
                   placeholder="새로운 그룹명을 입력해주세요"
                   onChange={(e) => setGroupName(e.target.value)}
                 />
@@ -183,7 +184,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
                   className="size-6"
                   onClick={() => {
                     formRef.current?.reset();
-                    setGroupName("");
+                    setGroupName('');
                   }}
                 />
               )}
