@@ -1,7 +1,7 @@
-import React from 'react';
 import Image from 'next/image';
 import SearchModal from '@/components/modals/SearchModal';
 import LogoutBtn from '@/components/buttons/LogoutBtn';
+import Announcement from '@/components/announcement/Announcement';
 
 export default function Header() {
   return (
@@ -14,6 +14,7 @@ export default function Header() {
         className="h-[75px] w-[150px] lg:h-[100px] lg:w-[200px]"
       />
       <div className="flex flex-row gap-2">
+        <Announcement />
         <SearchModal />
         <LogoutBtn />
       </div>
