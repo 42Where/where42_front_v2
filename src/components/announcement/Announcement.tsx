@@ -14,6 +14,7 @@ export default function Announcements() {
   // 리렌더링 시 다시 API 받아오지 않도록 메모이제이션 할까 싶다
   const [isOpen, setIsOpen] = useState(false);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+  const currDate = new Date();
   useEffect(() => {
     announcementApi.getAnnouncement({ page: 0, size: 10 }).then((res) => {
       setAnnouncements(res);
@@ -36,6 +37,7 @@ export default function Announcements() {
               announcementType={announcement.title}
               title={announcement.content}
               date={announcement.createAt}
+              currDate={currDate}
             />
           ))
         }
