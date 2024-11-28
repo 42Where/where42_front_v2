@@ -15,7 +15,7 @@ const announcementApi = {
         size,
       },
     });
-    return response.data;
+    return response.data.announcements;
   },
   postAnnouncement: async ({
     title,
