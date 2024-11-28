@@ -11,6 +11,7 @@ import { Announcement } from '@/types/Announcement';
 
 export default function Announcements() {
   // 리렌더링 시 다시 API 받아오지 않도록 메모이제이션 할까 싶다
+  // TODO: 비어있을 때 처리
   const [isOpen, setIsOpen] = useState(false);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const currDate = new Date();
@@ -30,7 +31,7 @@ export default function Announcements() {
         align="end"
       >
         {
-          announcements.length && announcements.map((announcement) => (
+          announcements.length === 0 ? '공지사항이 없습니다.' : announcements.map((announcement) => (
             <AnnouncementItem
               key={announcement.announcementId}
               announcementType={announcement.title}
