@@ -15,7 +15,12 @@ const announcementApi = {
         size,
       },
     });
-    return response.data.announcements;
+    try {
+      return response.data.announcements;
+    } catch (error) {
+      console.error('Error: ', error);
+      return [];
+    }
   },
   postAnnouncement: async ({
     title,
