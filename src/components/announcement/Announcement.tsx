@@ -9,14 +9,13 @@ import { useEffect, useState } from 'react';
 import announcementApi from '@/api/announcementApi';
 import { Announcement } from '@/types/Announcement';
 
-// 드롭다운에서는 최근 3개월까지 보여줄까 싶음
 export default function Announcements() {
   // 리렌더링 시 다시 API 받아오지 않도록 메모이제이션 할까 싶다
   const [isOpen, setIsOpen] = useState(false);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const currDate = new Date();
   useEffect(() => {
-    announcementApi.getAnnouncement({ page: 0, size: 10 }).then((res) => {
+    announcementApi.getAnnouncement({ page: 0, size: 30 }).then((res) => {
       setAnnouncements(res);
     });
   }, []);
