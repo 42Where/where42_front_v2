@@ -19,14 +19,14 @@ const announcementApi = {
   },
   postAnnouncement: async ({
     title,
-    comment,
+    content,
   }: {
     title: string;
-    comment: string;
+    content: string;
   }): Promise<number> => {
     const response = await axios.post('/v3/announcement', {
       title,
-      comment,
+      content,
     });
     return response.status;
   },
