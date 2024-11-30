@@ -1,10 +1,5 @@
 {
-  "plugins": [
-    "import",
-    "jsx-a11y",
-    "react",
-    "react-hooks"
-  ],
+  "plugins": ["import", "jsx-a11y", "react", "react-hooks"],
   "extends": [
     "plugin:import/recommended",
     "plugin:jsx-a11y/recommended",
@@ -23,6 +18,13 @@
     "react/jsx-props-no-spreading": ["off"],
     "implicit-arrow-linebreak": ["off"],
     "operator-linebreak": ["off"],
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "react/jsx-one-expression-per-line": [
+      "error",
+      {
+        "allow": "non-jsx"
+      }
+    ],
+    "function-paren-newline": ["off"]
   }
 }
