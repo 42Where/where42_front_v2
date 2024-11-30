@@ -12,7 +12,7 @@ export default function SetCheckBtn() {
     } else {
       setChecked(false);
     }
-  }, []);
+  }, [setChecked]);
 
   return (
     <Button

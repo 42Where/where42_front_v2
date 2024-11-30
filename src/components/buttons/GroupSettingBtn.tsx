@@ -15,8 +15,8 @@ export default function GroupSettingBtn({
   curGroup: Group;
   groups: Group[];
 }) {
-  return !groups.find((group) => group.groupId === curGroup.groupId)
-    ?.isInEdit ? (
+  return (
+    !groups.find((group) => group.groupId === curGroup.groupId)?.isInEdit && (
       <DropdownMenuTrigger className="absolute right-[50px] top-[8px] flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 md:right-[64px] md:top-[16px]">
         <TooltipProvider>
           <Tooltip>
@@ -32,5 +32,6 @@ export default function GroupSettingBtn({
           </Tooltip>
         </TooltipProvider>
       </DropdownMenuTrigger>
-    ) : null;
+    )
+  );
 }
