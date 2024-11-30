@@ -11,6 +11,7 @@ export default function CustomLocationModal() {
   return (
     <Dialog
       onOpenChange={(open) => {
+        // TODO: Take a look into this later.. do we really need timer?
         if (!open) {
           setTimeout(() => {
             setResultMessage('');

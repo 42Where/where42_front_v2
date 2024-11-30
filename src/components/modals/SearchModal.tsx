@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { z } from 'zod';
@@ -20,11 +20,11 @@ const SearchInputSchema = z.string().regex(/^[a-zA-Z0-9-]*$/, {
 });
 export default function SearchModal() {
   const { user } = useUserStore();
-  const [resultMessage, setResultMessage] = React.useState<string>('');
-  const [searchedUsers, setSearchedUsers] = React.useState<SearchedUser[]>([]);
-  const formRef = React.useRef<HTMLFormElement>(null);
-  const inputRef = React.useRef<HTMLInputElement>(null);
-  const [searchValue, setSearchValue] = React.useState<string>('');
+  const [resultMessage, setResultMessage] = useState<string>('');
+  const [searchedUsers, setSearchedUsers] = useState<SearchedUser[]>([]);
+  const formRef = useRef<HTMLFormElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [searchValue, setSearchValue] = useState<string>('');
   return (
     <Dialog
       onOpenChange={(open) => {

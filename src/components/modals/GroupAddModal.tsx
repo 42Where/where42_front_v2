@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -19,7 +19,7 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
   const { user } = useUserStore();
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
   const { groups, setGroups } = useGroupsStore();
-  const [checkedGroups, setCheckedGroups] = React.useState<number[]>([]);
+  const [checkedGroups, setCheckedGroups] = useState<number[]>([]);
 
   return (
     <Dialog>
@@ -68,7 +68,7 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
               <Button
                 onClick={() => {
                   checkedGroups.forEach((groupId) => {
-                    const temp = groups;
+                    const temp = [...groups];
                     const myGroup = temp.find(
                       (g) => g.groupId === curGroup.groupId,
                     );
@@ -78,7 +78,7 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
                     }
                     const tempGroup = temp.find((g) => g.groupId === groupId);
                     if (!tempGroup) return;
-                    const targUsers = checkedUsers;
+                    const targUsers = [...checkedUsers];
                     tempGroup.members.forEach((member) => {
                       checkedUsers.forEach((u) => {
                         if (u.intraId === member.intraId) {

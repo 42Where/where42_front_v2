@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useRef } from 'react';
 import { X } from 'lucide-react';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import {
@@ -20,13 +20,13 @@ import { useToast } from '@/components/ui/use-toast';
 import GroupSettingBtn from '@/components/buttons/GroupSettingBtn';
 
 export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
-  const [isDelete, setIsDelete] = React.useState<boolean>(false);
+  const [isDelete, setIsDelete] = useState<boolean>(false);
   const { groups, setGroups } = useGroupsStore();
   const defalutGroupId = useUserStore((state) => state.user?.defaultGroupId);
-  const [resultMessage, setResultMessage] = React.useState<string>('');
-  const formRef = React.useRef<HTMLFormElement>(null);
-  const inputRef = React.useRef<HTMLInputElement>(null);
-  const [groupName, setGroupName] = React.useState<string>('');
+  const [resultMessage, setResultMessage] = useState<string>('');
+  const formRef = useRef<HTMLFormElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [groupName, setGroupName] = useState<string>('');
   const { toast } = useToast();
 
   return (
@@ -52,7 +52,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
             <DropdownMenuItem
               className="text-xl"
               onClick={() => {
-                const temp = groups;
+                const temp = [...groups];
                 const tempGroup = temp.find(
                   (group) => group.groupId === curGroup.groupId,
                 );
@@ -98,14 +98,12 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
             <DialogTitle>그룹 삭제</DialogTitle>
             <span className=" inline">
               <h3 style={{ display: 'inline', margin: '0' }}>
-                &quot;
-                {' '}
+                &quot;{' '}
                 {
                   groups.find((group) => group.groupId === curGroup.groupId)
                     ?.groupName
                 }
-                &quot;
-                {' '}
+                &quot;{' '}
               </h3>
               그룹을 삭제하시겠습니까?
             </span>
@@ -126,7 +124,8 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
                       .then(() =>
                         toast({
                           title: `'${curGroup.groupName}' 그룹이 삭제되었습니다.`,
-                        }));
+                        }),
+                      );
                   }}
                 >
                   삭제
@@ -157,7 +156,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
                       groupName: inputValue,
                     })
                     .then(() => {
-                      const temp = groups;
+                      const temp = [...groups];
                       const tempGroup = temp.find(
                         (group) => group.groupId === curGroup.groupId,
                       );

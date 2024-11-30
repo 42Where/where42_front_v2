@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import Image from 'next/image';
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
@@ -33,9 +33,9 @@ export default function UserSettingModal({
   targGroup: Group;
 }) {
   const { user } = useUserStore();
-  const [isDelete, setIsDelete] = React.useState<boolean>(true);
+  const [isDelete, setIsDelete] = useState<boolean>(true);
   const { groups, setGroups } = useGroupsStore();
-  const [checkedGroups, setCheckedGroups] = React.useState<number[]>([]);
+  const [checkedGroups, setCheckedGroups] = useState<number[]>([]);
   const targGroupId = targGroup.groupId;
   const { setCheckedUsers } = useCheckedUsersStore();
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
@@ -63,7 +63,7 @@ export default function UserSettingModal({
             className="text-xl"
             onClick={() => {
               setCheckedUsers([targUser]);
-              const temp = groups;
+              const temp = [...groups];
               const tempGroup = temp.find(
                 (g) => g.groupId === targGroup.groupId,
               );
@@ -125,7 +125,7 @@ export default function UserSettingModal({
                 <Button
                   onClick={() => {
                     checkedGroups.forEach((groupId) => {
-                      const temp = groups;
+                      const temp = [...groups];
                       const tempGroup = temp.find((g) => g.groupId === groupId);
                       if (!tempGroup) return;
                       let isExist = false;
@@ -175,8 +175,7 @@ export default function UserSettingModal({
             <h3 style={{ display: 'inline', margin: '0' }}>
               &quot;
               {targGroup.groupName}
-              &quot;
-              {' '}
+              &quot;{' '}
             </h3>
             그룹으로부터 삭제하시겠습니까?
           </span>
@@ -192,7 +191,7 @@ export default function UserSettingModal({
                 <Button
                   variant="destructive"
                   onClick={() => {
-                    let temp = groups;
+                    const temp = [...groups];
                     const tempGroup = temp.find(
                       (g) => g.groupId === targGroupId,
                     );
@@ -203,7 +202,6 @@ export default function UserSettingModal({
                       setGroups(temp);
                     }
                     if (targGroupId === user?.defaultGroupId) {
-                      temp = groups;
                       temp.forEach((g) => {
                         const updatedGroup = {
                           ...g,

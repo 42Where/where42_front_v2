@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { X } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -28,14 +28,14 @@ import SearchedCard from '@/components/cards/SearchedCard';
 
 export default function NewGroupModal() {
   const { groups, setGroups } = useGroupsStore();
-  const formRef = React.useRef<HTMLFormElement>(null);
-  const inputRef = React.useRef<HTMLInputElement>(null);
-  const [searchValue, setSearchValue] = React.useState<string>('');
-  const [isDuplicated, setIsDuplicated] = React.useState<boolean>(false);
-  const [isAddingUser, setIsAddingUser] = React.useState<boolean>(false);
-  const [searchedUsers, setSearchedUsers] = React.useState<User[]>([]);
-  const [selectedUsers, setSelectedUsers] = React.useState<User[]>([]);
-  const [groupId, setGroupId] = React.useState<number>(0);
+  const formRef = useRef<HTMLFormElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [isDuplicated, setIsDuplicated] = useState<boolean>(false);
+  const [isAddingUser, setIsAddingUser] = useState<boolean>(false);
+  const [searchedUsers, setSearchedUsers] = useState<User[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
+  const [groupId, setGroupId] = useState<number>(0);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -46,7 +46,8 @@ export default function NewGroupModal() {
     if (groups[0]) {
       setSearchedUsers(
         groups[0].members.filter((user) =>
-          user.intraName.includes(searchValue)),
+          user.intraName.includes(searchValue),
+        ),
       );
     }
   }, [searchValue]);
@@ -91,11 +92,8 @@ export default function NewGroupModal() {
                 <AlertDialogDescription>
                   현재
                   <h3 style={{ display: 'inline', margin: '0' }}>
-                    &quot;
-                    {' '}
-                    {searchValue}
-                    &quot;
-                    {' '}
+                    &quot; {searchValue}
+                    &quot;{' '}
                   </h3>
                   그룹이 이미 존재합니다. 같은 이름의 그룹을 생성하시겠습니까?
                 </AlertDialogDescription>
@@ -207,7 +205,9 @@ export default function NewGroupModal() {
                                 selectedUser.intraId !== searchedMember.intraId,
                             ),
                           );
-                        } else setSelectedUsers([...selectedUsers, searchedMember]);
+                        } else {
+                          setSelectedUsers([...selectedUsers, searchedMember]);
+                        }
                       }}
                       isAddingUser
                     />
@@ -282,7 +282,8 @@ export default function NewGroupModal() {
                     .then(() =>
                       toast({
                         title: `'${inputValue}' 그룹이 생성되었습니다.`,
-                      }))
+                      }),
+                    )
                     .then(() => setIsAddingUser(true))
                     .catch((error) => {
                       console.error(error);

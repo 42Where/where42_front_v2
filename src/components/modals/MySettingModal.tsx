@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useRef } from 'react';
 import { X } from 'lucide-react';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
@@ -19,14 +19,12 @@ import CustomLocationContent from '@/components/utils/CustomLocationContent';
 import SettingBtn from '@/components/buttons/MySettingBtn';
 
 export default function MySettingModal() {
-  const [isMessage, setIsMessage] = React.useState<boolean>(false);
+  const [isMessage, setIsMessage] = useState<boolean>(false);
   const { user, setUser } = useUserStore();
-  const [resultMessage, setResultMessage] = React.useState<string>('');
-  const formRef = React.useRef<HTMLFormElement>(null);
-  const inputRef = React.useRef<HTMLInputElement>(null);
-  const [searchValue, setSearchValue] = React.useState<string>(
-    user?.comment || '',
-  );
+  const [resultMessage, setResultMessage] = useState<string>('');
+  const formRef = useRef<HTMLFormElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [searchValue, setSearchValue] = useState<string>(user?.comment || '');
   if (!user) return null;
 
   return (

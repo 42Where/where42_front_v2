@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Dialog,
   DialogContent,
@@ -34,7 +33,7 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
       </DialogTrigger>
       <DialogContent className="max-w-[425px] text-darkblue transition-all duration-500  ease-out">
         <DialogTitle>그룹 삭제</DialogTitle>
-        <p className="">선택한 카뎃들을 삭제하시겠습니까?</p>
+        <p>선택한 카뎃들을 삭제하시겠습니까?</p>
         {curGroup.groupId === user?.defaultGroupId && (
           <p className=" text-red-700">
             * 기본 그룹에서 삭제할 시 모든 그룹에서 삭제됩니다.
@@ -47,7 +46,7 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
               <Button
                 variant="destructive"
                 onClick={() => {
-                  let temp = groups;
+                  const temp = [...groups];
                   const myGroup = temp.find(
                     (g) => g.groupId === curGroup.groupId,
                   );
@@ -65,7 +64,6 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
                     setGroups(temp);
                   }
                   if (curGroup.groupId === user?.defaultGroupId) {
-                    temp = groups;
                     temp.forEach((g) => {
                       const updatedGroup = {
                         ...g,
@@ -77,9 +75,7 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
                     });
                     setGroups(temp);
                   }
-                  const checkedUsersId = checkedUsers.map(
-                    (u) => u.intraId,
-                  );
+                  const checkedUsersId = checkedUsers.map((u) => u.intraId);
                   groupApi
                     .removeMembersFromGroup({
                       groupId: curGroup.groupId,

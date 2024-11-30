@@ -22,7 +22,19 @@ export default function CustomLocationContent({
   const [locationValue, setLocationValue] = React.useState<string>('');
 
   if (!user) return null;
-  return user.inCluster ? (
+  if (!user.inCluster) {
+    return (
+      <DialogContent
+        className="flex min-h-[300px] max-w-[550px] flex-col items-center
+       justify-center transition-all duration-500 ease-out"
+      >
+        <p className="text-center text-xl  ">
+          수동 위치 설정은 클러스터 안에 있을 때만 가능해요 😢
+        </p>
+      </DialogContent>
+    );
+  }
+  return (
     <DialogContent className="min-h-[400px] max-w-[550px] transition-all duration-500 ease-out">
       <DialogHeader className="gap-2">
         <DialogTitle>수동 자리 설정</DialogTitle>
@@ -73,15 +85,6 @@ export default function CustomLocationContent({
           </DialogClose>
         </div>
       </div>
-    </DialogContent>
-  ) : (
-    <DialogContent
-      className="flex min-h-[300px] max-w-[550px] flex-col
-      items-center justify-center transition-all duration-500 ease-out"
-    >
-      <p className="text-center text-xl  ">
-        수동 위치 설정은 클러스터 안에 있을 때만 가능해요 😢
-      </p>
     </DialogContent>
   );
 }
