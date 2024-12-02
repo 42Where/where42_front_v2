@@ -1,5 +1,7 @@
 FROM node:alpine AS deps
-RUN apk add libc6-compat python3 build-base
+# 의존성 넣어서 실행하면 137.6s
+# RUN apk add libc6-compat python3 build-base
+# 의존성 없이 실행하면 109.8s. 제거해도 이상 없는 것 같으니 제거
 WORKDIR /app
 # package.json과 package-lock.json을 먼저 복사해서 캐시 활용
 COPY package.json package-lock.json ./
