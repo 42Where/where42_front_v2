@@ -7,6 +7,7 @@ RUN npm ci
 FROM node:alpine AS builder
 WORKDIR /app
 # 의존성 설치 후 나머지 파일 복사
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
