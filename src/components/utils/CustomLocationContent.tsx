@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogClose,
-} from '@/components/ui/dialog';
+import { DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { useUserStore } from '@/lib/stores';
 import { Button } from '@/components/ui/button';
 import locationApi from '@/api/locationApi';
@@ -20,6 +15,29 @@ export default function CustomLocationContent({
 }) {
   const { user, setUser } = useUserStore();
   const [locationValue, setLocationValue] = React.useState<string>('');
+
+  function setClickHandler() {
+    if (!user) return;
+    setResultMessage('설정 되었습니다.');
+    locationApi
+      .setCustomLocation({ location: locationValue })
+      .then(() => setUser({ ...user, location: locationValue }))
+      .catch((error) => {
+        console.error(error);
+        setResultMessage('설정 중 오류가 발생했습니다. 다시 시도해 주세요.');
+      });
+  }
+  function initClickHandler() {
+    if (!user) return;
+    setResultMessage('삭제 되었습니다.');
+    locationApi
+      .deleteCustomLocation()
+      .then(() => setUser({ ...user, location: '' }))
+      .catch((error) => {
+        console.error(error);
+        setResultMessage('삭제 중 오류가 발생했습니다. 다시 시도해 주세요.');
+      });
+  }
 
   if (!user) return null;
   if (!user.inCluster) {
@@ -47,39 +65,10 @@ export default function CustomLocationContent({
       <div className="flex flex-row items-center justify-between">
         <div />
         <div className="flex flex-row gap-2">
-          <Button
-            className="bg-darkblue"
-            onClick={() => {
-              setResultMessage('설정 되었습니다.');
-              locationApi
-                .setCustomLocation({ location: locationValue })
-                .then(() => setUser({ ...user, location: locationValue }))
-                .catch((error) => {
-                  console.error(error);
-                  setResultMessage(
-                    '설정 중 오류가 발생했습니다. 다시 시도해 주세요.',
-                  );
-                });
-            }}
-          >
+          <Button className="bg-darkblue" onClick={() => setClickHandler}>
             설정
           </Button>
-          <Button
-            onClick={() => {
-              setResultMessage('삭제 되었습니다.');
-              locationApi
-                .deleteCustomLocation()
-                .then(() => setUser({ ...user, location: '' }))
-                .catch((error) => {
-                  console.error(error);
-                  setResultMessage(
-                    '삭제 중 오류가 발생했습니다. 다시 시도해 주세요.',
-                  );
-                });
-            }}
-          >
-            자리 초기화
-          </Button>
+          <Button onClick={() => initClickHandler}>자리 초기화</Button>
           <DialogClose asChild>
             <Button variant="destructive">취소</Button>
           </DialogClose>

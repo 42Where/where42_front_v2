@@ -16,6 +16,7 @@ export default function LocationBtn({
   isMyProfile?: boolean;
 }) {
   const [location, setLocation] = useState<string>('');
+
   useEffect(() => {
     if ('location' in user && user.location) {
       setLocation(user.location);
@@ -28,6 +29,7 @@ export default function LocationBtn({
       setLocation('퇴근');
     }
   }, [user]);
+
   return (
     <TooltipProvider>
       <Tooltip>

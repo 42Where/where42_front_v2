@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, FormEvent } from 'react';
 import { X } from 'lucide-react';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
@@ -25,24 +25,55 @@ export default function MySettingModal() {
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchValue, setSearchValue] = useState<string>(user?.comment || '');
-  if (!user) return null;
 
+  function openHandler(open: boolean) {
+    if (!open) {
+      setTimeout(() => {
+        setResultMessage('');
+        formRef.current?.reset();
+        setSearchValue(user?.comment || '');
+      }, 100);
+    } else {
+      setResultMessage('');
+      formRef.current?.reset();
+      setSearchValue(user?.comment || '');
+    }
+  }
+
+  function submitHandler(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const inputValue = inputRef.current?.value;
+    if (inputValue === undefined) return;
+    if (inputValue.length > 15) {
+      setResultMessage('15자 이하로 입력해주세요.');
+      return;
+    }
+    formRef.current?.reset();
+    setSearchValue('');
+    setResultMessage('설정 되었습니다.');
+    if (inputValue === user?.comment || !user) return;
+    if (inputValue === '') {
+      memberApi
+        .deleteComment()
+        .then(() => setUser({ ...user, comment: '' }))
+        .catch((error) => {
+          console.error(error);
+          setResultMessage('설정 중 오류가 발생했습니다. 다시 시도해 주세요.');
+        });
+      return;
+    }
+    memberApi
+      .updateComment({ comment: inputValue })
+      .then(() => setUser({ ...user, comment: inputValue }))
+      .catch((error) => {
+        console.error(error);
+        setResultMessage('설정 중 오류가 발생했습니다. 다시 시도해 주세요.');
+      });
+  }
+
+  if (!user) return null;
   return (
-    <Dialog
-      onOpenChange={(open) => {
-        if (!open) {
-          setTimeout(() => {
-            setResultMessage('');
-            formRef.current?.reset();
-            setSearchValue(user?.comment || '');
-          }, 100);
-        } else {
-          setResultMessage('');
-          formRef.current?.reset();
-          setSearchValue(user?.comment || '');
-        }
-      }}
-    >
+    <Dialog onOpenChange={(open) => openHandler(open)}>
       <DropdownMenu>
         <DropdownMenuTrigger>
           <SettingBtn />
@@ -68,40 +99,7 @@ export default function MySettingModal() {
               <form
                 className="flex w-full flex-row items-center gap-2"
                 ref={formRef}
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  const inputValue = inputRef.current?.value;
-                  if (inputValue === undefined) return;
-                  if (inputValue.length > 15) {
-                    setResultMessage('15자 이하로 입력해주세요.');
-                    return;
-                  }
-                  formRef.current?.reset();
-                  setSearchValue('');
-                  setResultMessage('설정 되었습니다.');
-                  if (inputValue === user?.comment) return;
-                  if (inputValue === '') {
-                    memberApi
-                      .deleteComment()
-                      .then(() => setUser({ ...user, comment: '' }))
-                      .catch((error) => {
-                        console.error(error);
-                        setResultMessage(
-                          '설정 중 오류가 발생했습니다. 다시 시도해 주세요.',
-                        );
-                      });
-                    return;
-                  }
-                  memberApi
-                    .updateComment({ comment: inputValue })
-                    .then(() => setUser({ ...user, comment: inputValue }))
-                    .catch((error) => {
-                      console.error(error);
-                      setResultMessage(
-                        '설정 중 오류가 발생했습니다. 다시 시도해 주세요.',
-                      );
-                    });
-                }}
+                onSubmit={async (e) => submitHandler(e)}
               >
                 <input
                   ref={inputRef}
@@ -111,24 +109,19 @@ export default function MySettingModal() {
                   value={searchValue}
                 />
               </form>
+              <p
+                className={`text-l  text-darkblue ${searchValue.length > 15 ? 'text-red-500' : 'text-gray-400'}`}
+              >
+                {searchValue.length}/15
+              </p>
               {searchValue && (
-                <>
-                  <p
-                    className={`text-l  text-darkblue ${
-                      searchValue.length > 15 ? 'text-red-500' : 'text-gray-400'
-                    }`}
-                  >
-                    {searchValue.length}
-                    /15
-                  </p>
-                  <X
-                    className="size-6"
-                    onClick={() => {
-                      formRef.current?.reset();
-                      setSearchValue('');
-                    }}
-                  />
-                </>
+                <X
+                  className="size-6"
+                  onClick={() => {
+                    formRef.current?.reset();
+                    setSearchValue('');
+                  }}
+                />
               )}
             </div>
             <p className="text-l  text-darkblue">{resultMessage}</p>

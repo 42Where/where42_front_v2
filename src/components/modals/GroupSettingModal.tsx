@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, FormEvent } from 'react';
 import { X } from 'lucide-react';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import {
@@ -29,22 +29,63 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
   const [groupName, setGroupName] = useState<string>('');
   const { toast } = useToast();
 
+  function openHandler(open: boolean) {
+    if (!open) {
+      setTimeout(() => {
+        setResultMessage('');
+        formRef.current?.reset();
+        setGroupName('');
+      }, 100);
+    } else {
+      setResultMessage('');
+      formRef.current?.reset();
+      setGroupName('');
+    }
+  }
+  function deleteClickHandler() {
+    groupApi
+      .removeGroup({ groupId: curGroup.groupId })
+      .then(() => {
+        const temp = groups.filter(
+          (group) => group.groupId !== curGroup.groupId,
+        );
+        setGroups(temp);
+      })
+      .then(() =>
+        toast({
+          title: `'${curGroup.groupName}' 그룹이 삭제되었습니다.`,
+        }),
+      );
+  }
+  function submitHandler(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const inputValue = inputRef.current?.value;
+    if (!inputValue) return;
+    formRef.current?.reset();
+    setGroupName('');
+    setResultMessage('설정 되었습니다.');
+    groupApi
+      .renameGroup({
+        groupId: curGroup.groupId,
+        groupName: inputValue,
+      })
+      .then(() => {
+        const temp = [...groups];
+        const tempGroup = temp.find(
+          (group) => group.groupId === curGroup.groupId,
+        );
+        if (tempGroup) tempGroup.groupName = inputValue;
+        setGroups(temp);
+      })
+      .catch((error) => {
+        console.error(error);
+        setResultMessage('설정 중 오류가 발생했습니다. 다시 시도해 주세요.');
+      });
+  }
+
+  // TODO: 50줄 이내로 줄일것
   return (
-    <Dialog
-      onOpenChange={(open) => {
-        if (!open) {
-          setTimeout(() => {
-            setResultMessage('');
-            formRef.current?.reset();
-            setGroupName('');
-          }, 100);
-        } else {
-          setResultMessage('');
-          formRef.current?.reset();
-          setGroupName('');
-        }
-      }}
-    >
+    <Dialog onOpenChange={(open) => openHandler(open)}>
       <DropdownMenu>
         <GroupSettingBtn groups={groups} curGroup={curGroup} />
         <DropdownMenuContent side="bottom" className=" min-w-50 text-darkblue">
@@ -112,21 +153,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
               <div className="flex flex-row gap-2">
                 <Button
                   variant="destructive"
-                  onClick={() => {
-                    groupApi
-                      .removeGroup({ groupId: curGroup.groupId })
-                      .then(() => {
-                        const temp = groups.filter(
-                          (group) => group.groupId !== curGroup.groupId,
-                        );
-                        setGroups(temp);
-                      })
-                      .then(() =>
-                        toast({
-                          title: `'${curGroup.groupName}' 그룹이 삭제되었습니다.`,
-                        }),
-                      );
-                  }}
+                  onClick={() => deleteClickHandler}
                 >
                   삭제
                 </Button>
@@ -143,33 +170,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
               <form
                 className="flex w-full flex-row items-center gap-2"
                 ref={formRef}
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  const inputValue = inputRef.current?.value;
-                  if (!inputValue) return;
-                  formRef.current?.reset();
-                  setGroupName('');
-                  setResultMessage('설정 되었습니다.');
-                  groupApi
-                    .renameGroup({
-                      groupId: curGroup.groupId,
-                      groupName: inputValue,
-                    })
-                    .then(() => {
-                      const temp = [...groups];
-                      const tempGroup = temp.find(
-                        (group) => group.groupId === curGroup.groupId,
-                      );
-                      if (tempGroup) tempGroup.groupName = inputValue;
-                      setGroups(temp);
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                      setResultMessage(
-                        '설정 중 오류가 발생했습니다. 다시 시도해 주세요.',
-                      );
-                    });
-                }}
+                onSubmit={async (e) => submitHandler(e)}
               >
                 <input
                   ref={inputRef}

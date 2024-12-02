@@ -19,20 +19,21 @@ export default function ProfileCard({
   group: Group;
 }) {
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
+  function clickHandler() {
+    if (isEdit) {
+      const temp = [...checkedUsers];
+      if (isCheck) temp.splice(temp.indexOf(user), 1);
+      else temp.push(user);
+      setCheckedUsers(temp);
+    }
+  }
   return (
     <button
       type="button"
       className={`flex flex-row items-center justify-between rounded-2xl border-2 p-4 hover:border-[#FFB5B5] md:p-6 ${
         isEdit && 'cursor-pointer'
       }`}
-      onClick={() => {
-        if (isEdit) {
-          const temp = [...checkedUsers];
-          if (isCheck) temp.splice(temp.indexOf(user), 1);
-          else temp.push(user);
-          setCheckedUsers(temp);
-        }
-      }}
+      onClick={() => clickHandler}
     >
       <div className="flex flex-row items-center gap-4 md:gap-6">
         <ProfilePic user={user} type="userCard" />

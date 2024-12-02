@@ -21,6 +21,39 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
   const { user } = useUserStore();
   const { toast } = useToast();
 
+  function clickHandler() {
+    const temp = [...groups];
+    const myGroup = temp.find((g) => g.groupId === curGroup.groupId);
+    if (myGroup) {
+      myGroup.isInEdit = false;
+      setGroups(temp);
+    }
+    const tempGroup = temp.find((g) => g.groupId === curGroup.groupId);
+    if (tempGroup) {
+      tempGroup.members = tempGroup.members.filter(
+        (member) => !checkedUsers.includes(member),
+      );
+      setGroups(temp);
+    }
+    if (curGroup.groupId === user?.defaultGroupId) {
+      temp.forEach((g) => {
+        const updatedGroup = {
+          ...g,
+          members: g.members.filter((member) => !checkedUsers.includes(member)),
+        };
+        return updatedGroup;
+      });
+      setGroups(temp);
+    }
+    const checkedUsersId = checkedUsers.map((u) => u.intraId);
+    groupApi
+      .removeMembersFromGroup({
+        groupId: curGroup.groupId,
+        members: checkedUsersId,
+      })
+      .then(() => toast({ title: '삭제되었습니다.' }));
+  }
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -43,47 +76,7 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
           <div />
           <div className="flex flex-row gap-2">
             <DialogClose asChild>
-              <Button
-                variant="destructive"
-                onClick={() => {
-                  const temp = [...groups];
-                  const myGroup = temp.find(
-                    (g) => g.groupId === curGroup.groupId,
-                  );
-                  if (myGroup) {
-                    myGroup.isInEdit = false;
-                    setGroups(temp);
-                  }
-                  const tempGroup = temp.find(
-                    (g) => g.groupId === curGroup.groupId,
-                  );
-                  if (tempGroup) {
-                    tempGroup.members = tempGroup.members.filter(
-                      (member) => !checkedUsers.includes(member),
-                    );
-                    setGroups(temp);
-                  }
-                  if (curGroup.groupId === user?.defaultGroupId) {
-                    temp.forEach((g) => {
-                      const updatedGroup = {
-                        ...g,
-                        members: g.members.filter(
-                          (member) => !checkedUsers.includes(member),
-                        ),
-                      };
-                      return updatedGroup;
-                    });
-                    setGroups(temp);
-                  }
-                  const checkedUsersId = checkedUsers.map((u) => u.intraId);
-                  groupApi
-                    .removeMembersFromGroup({
-                      groupId: curGroup.groupId,
-                      members: checkedUsersId,
-                    })
-                    .then(() => toast({ title: '삭제되었습니다.' }));
-                }}
-              >
+              <Button variant="destructive" onClick={() => clickHandler}>
                 삭제
               </Button>
             </DialogClose>
