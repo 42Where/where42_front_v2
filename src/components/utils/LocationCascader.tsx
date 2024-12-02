@@ -41,7 +41,7 @@ function SingleCascader({
           ? 'bg-darkblue text-white hover:bg-gray-700'
           : 'border-2 border-darkblue bg-white text-darkblue hover:bg-gray-200'
       } border-0 border-darkblue`}
-      onClick={() => clickHandler}
+      onClick={() => clickHandler()}
     >
       {data.label}
     </Button>

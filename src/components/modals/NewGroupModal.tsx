@@ -195,7 +195,7 @@ export default function NewGroupModal() {
                 >
                   취소
                 </AlertDialogCancel>
-                <AlertDialogAction onClick={() => addDuplicatedGroupClickHandler}>
+                <AlertDialogAction onClick={() => addDuplicatedGroupClickHandler()}>
                   계속 생성
                 </AlertDialogAction>
               </AlertDialogFooter>
@@ -256,7 +256,7 @@ export default function NewGroupModal() {
               </div>
               <Button
                 className="text-l w-30 lg:w-30  h-8 gap-2 rounded-full hover:bg-gray-200 lg:h-10 lg:text-xl"
-                onClick={() => addClickHandler}
+                onClick={() => addClickHandler()}
                 variant="outline"
               >
                 추가하기

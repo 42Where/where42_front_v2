@@ -65,10 +65,10 @@ export default function CustomLocationContent({
       <div className="flex flex-row items-center justify-between">
         <div />
         <div className="flex flex-row gap-2">
-          <Button className="bg-darkblue" onClick={() => setClickHandler}>
+          <Button className="bg-darkblue" onClick={() => setClickHandler()}>
             설정
           </Button>
-          <Button onClick={() => initClickHandler}>자리 초기화</Button>
+          <Button onClick={() => initClickHandler()}>자리 초기화</Button>
           <DialogClose asChild>
             <Button variant="destructive">취소</Button>
           </DialogClose>

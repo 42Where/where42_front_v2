@@ -115,7 +115,7 @@ export default function UserSettingModal({
           <DialogTrigger asChild onClick={() => setIsDelete(false)}>
             <DropdownMenuItem className="text-xl">다른 그룹에 추가하기</DropdownMenuItem>
           </DialogTrigger>
-          <DropdownMenuItem className="text-xl" onClick={() => selectClickHandler}>
+          <DropdownMenuItem className="text-xl" onClick={() => selectClickHandler()}>
             유저 선택하기
           </DropdownMenuItem>
           <DialogTrigger asChild onClick={() => setIsDelete(true)}>
@@ -152,7 +152,7 @@ export default function UserSettingModal({
             <div />
             <div className="flex flex-row gap-2">
               <DialogClose asChild>
-                <Button onClick={() => addClickHandler}>그룹에 추가</Button>
+                <Button onClick={() => addClickHandler()}>그룹에 추가</Button>
               </DialogClose>
               <DialogClose asChild>
                 <Button className="bg-darkblue">취소</Button>
@@ -184,7 +184,7 @@ export default function UserSettingModal({
             <div />
             <div className="flex flex-row gap-2">
               <DialogClose asChild>
-                <Button variant="destructive" onClick={() => deleteClickHandler}>
+                <Button variant="destructive" onClick={() => deleteClickHandler()}>
                   삭제
                 </Button>
               </DialogClose>

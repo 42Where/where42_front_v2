@@ -9,11 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 import groupApi from '@/api/groupApi';
 import Group from '@/types/Group';
-import {
-  useCheckedUsersStore,
-  useGroupsStore,
-  useUserStore,
-} from '@/lib/stores';
+import { useCheckedUsersStore, useGroupsStore, useUserStore } from '@/lib/stores';
 
 export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
   const { user } = useUserStore();
@@ -23,9 +19,7 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
 
   function groupSelectClickHandler(g: Group) {
     if (checkedGroups.includes(g.groupId)) {
-      setCheckedGroups(
-        checkedGroups.filter((groupId) => groupId !== g.groupId),
-      );
+      setCheckedGroups(checkedGroups.filter((groupId) => groupId !== g.groupId));
     } else {
       setCheckedGroups([...checkedGroups, g.groupId]);
     }
@@ -94,7 +88,7 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
           <div />
           <div className="flex flex-row gap-2">
             <DialogClose asChild>
-              <Button onClick={() => groupAddClickHandler}>그룹에 추가</Button>
+              <Button onClick={() => groupAddClickHandler()}>그룹에 추가</Button>
             </DialogClose>
             <DialogClose asChild>
               <Button className="bg-darkblue">취소</Button>
