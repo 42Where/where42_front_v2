@@ -15,9 +15,7 @@ export default function AnnouncementItem({
 }) {
   const renderedDate = useMemo(() => {
     const diffTime = currDate.getTime() - new Date(date).getTime();
-    const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    if (diffHours < 24) return `${diffHours}시간 전`;
     return diffDays < 7 ? `${diffDays}일 전` : date;
   }, [date, currDate]);
   return (

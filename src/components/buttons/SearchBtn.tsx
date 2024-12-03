@@ -1,20 +1,12 @@
 import Image from 'next/image';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 export default function SearchBtn() {
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <button
-            className="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 lg:size-14"
-            type="button"
-          >
+          <div className="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 lg:size-14">
             <Image
               src="/image/search.svg"
               alt="search"
@@ -22,7 +14,7 @@ export default function SearchBtn() {
               height={40}
               className="size-[30px] rounded-lg hover:bg-gray-200 lg:size-[40px]"
             />
-          </button>
+          </div>
         </TooltipTrigger>
         <TooltipContent>유저 검색</TooltipContent>
       </Tooltip>
