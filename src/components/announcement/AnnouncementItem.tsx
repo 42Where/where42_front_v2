@@ -15,14 +15,16 @@ export default function AnnouncementItem({
 }) {
   const renderedDate = useMemo(() => {
     const diffTime = currDate.getTime() - new Date(date).getTime();
+    const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    if (diffHours < 24) return `${diffHours}시간 전`;
     return diffDays < 7 ? `${diffDays}일 전` : date;
   }, [date, currDate]);
   return (
     <div
-      className={`flex w-full flex-col items-start justify-center text-xs lg:text-sm ${!isLast && 'border-b'} gap-1 lg:gap-2 p-1`}
+      className={`flex w-full flex-col items-start justify-center text-xs lg:text-sm ${!isLast && 'border-b'} gap-1 p-1 lg:gap-2`}
     >
-      <span className="text-baseblue flex w-full flex-row items-center justify-between text-[10px] lg:text-xs">
+      <span className="flex w-full flex-row items-center justify-between text-[10px] text-baseblue lg:text-xs">
         <p>{announcementType}</p>
         <p>{renderedDate}</p>
       </span>
