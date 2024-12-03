@@ -27,7 +27,7 @@ export default function GroupEditBar({
            px-2 py-1 text-darkblue hover:bg-gray-200 md:h-8 md:px-3 lg:text-xl"
           onClick={() => {
             if (checkedUsers.length !== curGroup.members.length) {
-            // curGroup.members.map((member) => temp.push(member));
+              // curGroup.members.map((member) => temp.push(member));
               setCheckedUsers(curGroup.members.slice());
             } else setCheckedUsers([]);
           }}

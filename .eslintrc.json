@@ -19,12 +19,7 @@
     "implicit-arrow-linebreak": ["off"],
     "operator-linebreak": ["off"],
     "react/require-default-props": "off",
-    "react/jsx-one-expression-per-line": [
-      "error",
-      {
-        "allow": "non-jsx"
-      }
-    ],
+    "react/jsx-one-expression-per-line": ["off"],
     "function-paren-newline": ["off"]
   }
 }
