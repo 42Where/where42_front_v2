@@ -29,6 +29,7 @@ export default function SurveyLink({
       </p>
       <a
         href="https://docs.google.com/forms/d/1a5S5JxdLjx9qQSucrkZ-wVTDrUcJWhiAPjkAmbmcF1U/edit"
+        target="_blank"
         className="decoration-[#FFB5B5] hover:underline"
       >
         🏃 설문조사 참여하기 🏃
