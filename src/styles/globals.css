@@ -3,11 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-  input[type="search"] {
+  input[type='search'] {
     -webkit-appearance: none !important;
   }
   html {
-    font-family: "GmarketSansMd";
+    font-family: GmarketSansMd, sans-serif;
+
     @apply text-[#4A6282];
   }
   body {
@@ -16,11 +17,11 @@
     padding: 0;
   }
   h1 {
-    font-family: "GmarketSansLg";
+    font-family: GmarketSansLg, serif;
   }
 
   h2 {
-    font-family: "GmarketSansLg";
+    font-family: GmarketSansLg, serif;
   }
   :root {
     --background: 0 0% 100%;
@@ -51,6 +52,7 @@
     --input: 240 5.9% 90%;
     --ring: 240 10% 3.9%;
     --darkblue: 215 56% 17%;
+    --baseblue: 214 27.5% 40%;
 
     --radius: 0.5rem;
   }
@@ -93,16 +95,16 @@
 /* 2xl: 데스크탑 (1536+) */
 
 @font-face {
-  font-family: "GmarketSans";
-  src: url("/fonts/woff2/GmarketSansLight.woff2");
+  font-family: GmarketSans;
+  src: url('/fonts/woff2/GmarketSansLight.woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap; /* 폰트 로딩 퍼포먼스를 개선하기 위함 */
 }
 
 @font-face {
-  font-family: "GmarketSansMd";
-  src: url("/fonts/woff2/GmarketSansMedium.woff2");
+  font-family: GmarketSansMd;
+  src: url('/fonts/woff2/GmarketSansMedium.woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -110,8 +112,8 @@
 }
 
 @font-face {
-  font-family: "GmarketSansLg";
-  src: url("/fonts/woff2/GmarketSansBold.woff2");
+  font-family: GmarketSansLg;
+  src: url('/fonts/woff2/GmarketSansBold.woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;

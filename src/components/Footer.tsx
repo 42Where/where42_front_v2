@@ -1,20 +1,19 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import RepoLink from "./utils/RepoLink";
+} from '@/components/ui/accordion';
+import RepoLink from './utils/RepoLink';
 
 export default function Footer() {
   return (

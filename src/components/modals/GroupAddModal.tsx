@@ -1,25 +1,58 @@
-import React from "react";
+import { useState } from 'react';
 import {
   Dialog,
   DialogContent,
   DialogClose,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "../ui/button";
-import groupApi from "@/api/groupApi";
-import Group from "@/types/Group";
-import {
-  useCheckedUsersStore,
-  useGroupsStore,
-  useUserStore,
-} from "@/lib/stores";
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import groupApi from '@/api/groupApi';
+import Group from '@/types/Group';
+import { useCheckedUsersStore, useGroupsStore, useUserStore } from '@/lib/stores';
 
 export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
   const { user } = useUserStore();
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
   const { groups, setGroups } = useGroupsStore();
-  const [checkedGroups, setCheckedGroups] = React.useState<number[]>([]);
+  const [checkedGroups, setCheckedGroups] = useState<number[]>([]);
+
+  function groupSelectClickHandler(g: Group) {
+    if (checkedGroups.includes(g.groupId)) {
+      setCheckedGroups(checkedGroups.filter((groupId) => groupId !== g.groupId));
+    } else {
+      setCheckedGroups([...checkedGroups, g.groupId]);
+    }
+  }
+
+  function groupAddClickHandler() {
+    checkedGroups.forEach((groupId) => {
+      const temp = [...groups];
+      const myGroup = temp.find((g) => g.groupId === curGroup.groupId);
+      if (myGroup) {
+        myGroup.isInEdit = false;
+        setGroups(temp);
+      }
+      const tempGroup = temp.find((g) => g.groupId === groupId);
+      if (!tempGroup) return;
+      const targUsers = [...checkedUsers];
+      tempGroup.members.forEach((member) => {
+        checkedUsers.forEach((u) => {
+          if (u.intraId === member.intraId) {
+            targUsers.splice(targUsers.indexOf(u), 1);
+          }
+        });
+      });
+      const targUserIds = targUsers.map((u) => u.intraId);
+      groupApi.addMemberAtGroup({ groupId, members: targUserIds }).then(() => {
+        if (tempGroup?.members) {
+          tempGroup.members = [...tempGroup.members, ...targUsers];
+          setGroups(temp);
+          setCheckedUsers([]);
+        }
+      });
+    });
+  }
 
   return (
     <Dialog>
@@ -41,20 +74,10 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
                   key={g.groupId}
                   className={`rounded-2xl ${
                     checkedGroups.includes(g.groupId)
-                      ? "bg-darkblue text-white hover:bg-gray-500"
-                      : "border-2 border-darkblue bg-white text-darkblue hover:bg-gray-200"
+                      ? 'bg-darkblue text-white hover:bg-gray-500'
+                      : 'border-2 border-darkblue bg-white text-darkblue hover:bg-gray-200'
                   } gap-2 border-0 border-darkblue px-3 py-1  text-xl`}
-                  onClick={() => {
-                    if (checkedGroups.includes(g.groupId)) {
-                      setCheckedGroups(
-                        checkedGroups.filter(
-                          (groupId) => groupId !== g.groupId,
-                        ),
-                      );
-                    } else {
-                      setCheckedGroups([...checkedGroups, g.groupId]);
-                    }
-                  }}
+                  onClick={() => groupSelectClickHandler(g)}
                 >
                   {g.groupName}
                 </Button>
@@ -65,45 +88,7 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
           <div />
           <div className="flex flex-row gap-2">
             <DialogClose asChild>
-              <Button
-                onClick={() => {
-                  checkedGroups.forEach((groupId) => {
-                    const temp = groups;
-                    const myGroup = temp.find(
-                      (g) => g.groupId === curGroup.groupId,
-                    );
-                    if (myGroup) {
-                      myGroup.isInEdit = false;
-                      setGroups(temp);
-                    }
-                    const tempGroup = temp.find((g) => g.groupId === groupId);
-                    if (!tempGroup) return;
-                    const targUsers = checkedUsers;
-                    tempGroup.members.forEach((member) => {
-                      checkedUsers.forEach((u) => {
-                        if (u.intraId === member.intraId) {
-                          targUsers.splice(targUsers.indexOf(u), 1);
-                        }
-                      });
-                    });
-                    const targUserIds = targUsers.map((u) => u.intraId);
-                    groupApi
-                      .addMemberAtGroup({ groupId, members: targUserIds })
-                      .then(() => {
-                        if (tempGroup?.members) {
-                          tempGroup.members = [
-                            ...tempGroup.members,
-                            ...targUsers,
-                          ];
-                          setGroups(temp);
-                          setCheckedUsers([]);
-                        }
-                      });
-                  });
-                }}
-              >
-                그룹에 추가
-              </Button>
+              <Button onClick={() => groupAddClickHandler()}>그룹에 추가</Button>
             </DialogClose>
             <DialogClose asChild>
               <Button className="bg-darkblue">취소</Button>

@@ -13,8 +13,9 @@ const memberApi = {
       comment,
     });
   },
-  deleteComment: async (): Promise<void> =>
-    await axios.delete('/v3/member/comment'),
+  deleteComment: async (): Promise<void> => {
+    await axios.delete('/v3/member/comment');
+  },
   deleteAccount: async (): Promise<void> => {
     await axios.delete('/v3/member');
   },

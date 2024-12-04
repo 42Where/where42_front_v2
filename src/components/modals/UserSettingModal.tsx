@@ -1,26 +1,20 @@
-import React from "react";
-import { DialogTrigger } from "@radix-ui/react-dialog";
-import Image from "next/image";
-import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import { useState } from 'react';
+import { DialogTrigger } from '@radix-ui/react-dialog';
+import Image from 'next/image';
+import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
+import { Dialog, DialogContent, DialogTitle, DialogClose } from '@/components/ui/dialog';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogClose,
-} from "@/components/ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import { useGroupsStore, useUserStore } from "@/lib/stores";
-import { Button } from "../ui/button";
-import groupApi from "@/api/groupApi";
-import { User } from "@/types/User";
-import Group from "@/types/Group";
-import { useCheckedUsersStore } from "@/lib/stores";
-import { useAddedMembersStore } from "@/lib/stores";
-import { useToast } from "@/components/ui/use-toast";
+  useGroupsStore,
+  useUserStore,
+  useCheckedUsersStore,
+  useAddedMembersStore,
+} from '@/lib/stores';
+import { Button } from '@/components/ui/button';
+import groupApi from '@/api/groupApi';
+import { User } from '@/types/User';
+import Group from '@/types/Group';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function UserSettingModal({
   targUser,
@@ -30,13 +24,80 @@ export default function UserSettingModal({
   targGroup: Group;
 }) {
   const { user } = useUserStore();
-  const [isDelete, setIsDelete] = React.useState<boolean>(true);
+  const [isDelete, setIsDelete] = useState<boolean>(true);
   const { groups, setGroups } = useGroupsStore();
-  const [checkedGroups, setCheckedGroups] = React.useState<number[]>([]);
+  const [checkedGroups, setCheckedGroups] = useState<number[]>([]);
   const targGroupId = targGroup.groupId;
   const { setCheckedUsers } = useCheckedUsersStore();
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
   const { toast } = useToast();
+
+  function selectClickHandler() {
+    setCheckedUsers([targUser]);
+    const temp = [...groups];
+    const tempGroup = temp.find((g) => g.groupId === targGroup.groupId);
+    if (tempGroup) {
+      tempGroup.isInEdit = true;
+      temp.map((g) => {
+        const buf = g;
+        if (g.groupId !== targGroup.groupId) buf.isInEdit = false;
+        return buf;
+      });
+      setGroups(temp);
+    }
+  }
+  function addClickHandler() {
+    checkedGroups.forEach((groupId) => {
+      const temp = [...groups];
+      const tempGroup = temp.find((g) => g.groupId === groupId);
+      if (!tempGroup) return;
+      let isExist = false;
+      tempGroup.members.forEach((member) => {
+        if (targUser.intraId === member.intraId) {
+          isExist = true;
+        }
+      });
+      if (isExist) return;
+      groupApi
+        .addMemberAtGroup({
+          groupId,
+          members: [targUser.intraId],
+        })
+        .then(() => {
+          if (tempGroup?.members) {
+            tempGroup.members = [...tempGroup.members, targUser];
+            setGroups(temp);
+          }
+        })
+        .then(() => toast({ title: '그룹에 추가되었습니다.' }));
+    });
+  }
+  function deleteClickHandler() {
+    const temp = [...groups];
+    const tempGroup = temp.find((g) => g.groupId === targGroupId);
+    if (tempGroup) {
+      tempGroup.members = tempGroup.members.filter((member) => member.intraId !== targUser.intraId);
+      setGroups(temp);
+    }
+    if (targGroupId === user?.defaultGroupId) {
+      temp.forEach((g) => {
+        const updatedGroup = {
+          ...g,
+          members: g.members.filter((member) => member.intraId !== targUser.intraId),
+        };
+        return updatedGroup;
+      });
+      setGroups(temp);
+    }
+    const buf = addedMembers.filter((addedMember) => addedMember !== targUser.intraId);
+    setAddedMembers(buf);
+    groupApi
+      .removeMembersFromGroup({
+        groupId: targGroupId,
+        members: [targUser.intraId],
+      })
+      .then(() => toast({ title: '그룹에서 삭제되었습니다.' }));
+  }
 
   return (
     <Dialog>
@@ -52,35 +113,13 @@ export default function UserSettingModal({
         </DropdownMenuTrigger>
         <DropdownMenuContent side="bottom" className="min-w-50  text-darkblue">
           <DialogTrigger asChild onClick={() => setIsDelete(false)}>
-            <DropdownMenuItem className="text-xl">
-              다른 그룹에 추가하기
-            </DropdownMenuItem>
+            <DropdownMenuItem className="text-xl">다른 그룹에 추가하기</DropdownMenuItem>
           </DialogTrigger>
-          <DropdownMenuItem
-            className="text-xl"
-            onClick={() => {
-              setCheckedUsers([targUser]);
-              const temp = groups;
-              const tempGroup = temp.find(
-                (g) => g.groupId === targGroup.groupId,
-              );
-              if (tempGroup) {
-                tempGroup.isInEdit = true;
-                temp.map((g) => {
-                  const buf = g;
-                  if (g.groupId !== targGroup.groupId) buf.isInEdit = false;
-                  return buf;
-                });
-                setGroups(temp);
-              }
-            }}
-          >
+          <DropdownMenuItem className="text-xl" onClick={() => selectClickHandler()}>
             유저 선택하기
           </DropdownMenuItem>
           <DialogTrigger asChild onClick={() => setIsDelete(true)}>
-            <DropdownMenuItem className="text-xl text-red-700">
-              그룹에서 삭제하기
-            </DropdownMenuItem>
+            <DropdownMenuItem className="text-xl text-red-700">그룹에서 삭제하기</DropdownMenuItem>
           </DialogTrigger>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -95,19 +134,13 @@ export default function UserSettingModal({
                     key={g.groupId}
                     className={`rounded-2xl ${
                       checkedGroups.includes(g.groupId)
-                        ? "bg-darkblue text-white hover:bg-gray-500"
-                        : "border-darkblue text-darkblue border-2 bg-white hover:bg-gray-200"
-                    } border-darkblue gap-2 border-0 px-3 py-1  text-xl`}
+                        ? 'bg-darkblue text-white hover:bg-gray-500'
+                        : 'border-2 border-darkblue bg-white text-darkblue hover:bg-gray-200'
+                    } gap-2 border-0 border-darkblue px-3 py-1  text-xl`}
                     onClick={() => {
                       if (checkedGroups.includes(g.groupId)) {
-                        setCheckedGroups(
-                          checkedGroups.filter(
-                            (groupId) => groupId !== g.groupId,
-                          ),
-                        );
-                      } else {
-                        setCheckedGroups([...checkedGroups, g.groupId]);
-                      }
+                        setCheckedGroups(checkedGroups.filter((groupId) => groupId !== g.groupId));
+                      } else setCheckedGroups([...checkedGroups, g.groupId]);
                     }}
                   >
                     {g.groupName}
@@ -119,39 +152,7 @@ export default function UserSettingModal({
             <div />
             <div className="flex flex-row gap-2">
               <DialogClose asChild>
-                <Button
-                  onClick={() => {
-                    checkedGroups.forEach((groupId) => {
-                      const temp = groups;
-                      const tempGroup = temp.find((g) => g.groupId === groupId);
-                      if (!tempGroup) return;
-                      let isExist = false;
-                      tempGroup.members.forEach((member) => {
-                        if (targUser.intraId === member.intraId) {
-                          isExist = true;
-                        }
-                      });
-                      if (isExist) return;
-                      groupApi
-                        .addMemberAtGroup({
-                          groupId,
-                          members: [targUser.intraId],
-                        })
-                        .then(() => {
-                          if (tempGroup?.members) {
-                            tempGroup.members = [
-                              ...tempGroup.members,
-                              targUser,
-                            ];
-                            setGroups(temp);
-                          }
-                        })
-                        .then(() => toast({ title: "그룹에 추가되었습니다." }));
-                    });
-                  }}
-                >
-                  그룹에 추가
-                </Button>
+                <Button onClick={() => addClickHandler()}>그룹에 추가</Button>
               </DialogClose>
               <DialogClose asChild>
                 <Button className="bg-darkblue">취소</Button>
@@ -160,61 +161,30 @@ export default function UserSettingModal({
           </div>
         </DialogContent>
       ) : (
-        <DialogContent className="text-darkblue  max-w-[425px] transition-all duration-500 ease-out">
+        <DialogContent className="max-w-[425px]  text-darkblue transition-all duration-500 ease-out">
           <DialogTitle>그룹 삭제</DialogTitle>
           <span className="inline">
-            <h3 style={{ display: "inline", margin: "0" }}>
-              &quot;{targUser.intraName}&quot;
+            <h3 style={{ display: 'inline', margin: '0' }}>
+              &quot;
+              {targUser.intraName}
+              &quot;
             </h3>
-            <p style={{ display: "inline", margin: "0" }}>님을</p>
-            <h3 style={{ display: "inline", margin: "0" }}>
-              &quot;{targGroup.groupName}&quot;{" "}
+            <p style={{ display: 'inline', margin: '0' }}>님을</p>
+            <h3 style={{ display: 'inline', margin: '0' }}>
+              &quot;
+              {targGroup.groupName}
+              &quot;{' '}
             </h3>
             그룹으로부터 삭제하시겠습니까?
           </span>
           {targGroup.groupId === user?.defaultGroupId && (
-            <p className=" text-red-700">
-              * 기본 그룹에서 삭제할 시 모든 그룹에서 삭제됩니다.
-            </p>
+            <p className=" text-red-700">* 기본 그룹에서 삭제할 시 모든 그룹에서 삭제됩니다.</p>
           )}
           <div className="flex flex-row items-center justify-between">
             <div />
             <div className="flex flex-row gap-2">
               <DialogClose asChild>
-                <Button
-                  variant="destructive"
-                  onClick={() => {
-                    let temp = groups;
-                    const tempGroup = temp.find(
-                      (g) => g.groupId === targGroupId,
-                    );
-                    if (tempGroup) {
-                      tempGroup.members = tempGroup.members.filter(
-                        (member) => member.intraId !== targUser.intraId,
-                      );
-                      setGroups(temp);
-                    }
-                    if (targGroupId === user?.defaultGroupId) {
-                      temp = groups;
-                      temp.forEach((g) => {
-                        g.members = g.members.filter(
-                          (member) => member.intraId !== targUser.intraId,
-                        );
-                      });
-                      setGroups(temp);
-                    }
-                    const buf = addedMembers.filter(
-                      (addedMember) => addedMember !== targUser.intraId,
-                    );
-                    setAddedMembers(buf);
-                    groupApi
-                      .removeMembersFromGroup({
-                        groupId: targGroupId,
-                        members: [targUser.intraId],
-                      })
-                      .then(() => toast({ title: "그룹에서 삭제되었습니다." }));
-                  }}
-                >
+                <Button variant="destructive" onClick={() => deleteClickHandler()}>
                   삭제
                 </Button>
               </DialogClose>

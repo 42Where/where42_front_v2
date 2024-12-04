@@ -1,8 +1,8 @@
 import React from 'react';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { useUserStore } from '@/lib/stores';
-import LocationBtn from '../buttons/LocationBtn';
-import CustomLocationContent from '../utils/CustomLocationContent';
+import LocationBtn from '@/components/buttons/LocationBtn';
+import CustomLocationContent from '@/components/utils/CustomLocationContent';
 
 export default function CustomLocationModal() {
   const { user } = useUserStore();
@@ -11,6 +11,7 @@ export default function CustomLocationModal() {
   return (
     <Dialog
       onOpenChange={(open) => {
+        // TODO: Take a look into this later.. do we really need timer?
         if (!open) {
           setTimeout(() => {
             setResultMessage('');
@@ -21,7 +22,8 @@ export default function CustomLocationModal() {
       }}
     >
       <DialogTrigger>
-        {/* 20240910: Nested button warning can happen in dev mode, but nothing is wrong on production mode. Relax. */}
+        {/* 20240910: Nested button warning can happen in dev mode,
+        but nothing is wrong on production mode. Relax. */}
         <LocationBtn user={user} isMyProfile />
       </DialogTrigger>
       <CustomLocationContent

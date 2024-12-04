@@ -1,20 +1,20 @@
-import React from "react";
-import { useRouter } from "next/router";
+import React from 'react';
+import { useRouter } from 'next/router';
 
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/ui/accordion";
-import { Button } from "../ui/button";
-import groupApi from "@/api/groupApi";
+} from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
+import groupApi from '@/api/groupApi';
 
 export default function AgreementModal({
   showModal,
@@ -26,7 +26,7 @@ export default function AgreementModal({
   const router = useRouter();
   return (
     <Dialog open={showModal}>
-      <DialogContent className="text-darkblue  max-w-[800px] gap-2">
+      <DialogContent className="max-w-[800px]  gap-2 text-darkblue">
         <DialogHeader className="text-m  ">
           <DialogTitle>
             <h2 className="text-l  text-darkblue">
@@ -81,7 +81,7 @@ export default function AgreementModal({
                 groupApi.agreeJoin();
                 setShowModal(false);
               }}
-              size={"lg"}
+              size="lg"
               className="text-xl"
             >
               동의
@@ -89,10 +89,10 @@ export default function AgreementModal({
             <Button
               onClick={() => {
                 setShowModal(false);
-                router.push("/login");
+                router.push('/login');
               }}
-              variant={"destructive"}
-              size={"lg"}
+              variant="destructive"
+              size="lg"
               className="text-xl"
             >
               거절

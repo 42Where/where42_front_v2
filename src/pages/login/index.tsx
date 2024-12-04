@@ -1,6 +1,6 @@
-import React from "react";
-import Image from "next/image";
-import LoginBtn from "@/components/buttons/LoginBtn";
+import React from 'react';
+import Image from 'next/image';
+import LoginBtn from '@/components/buttons/LoginBtn';
 
 export default function LoginPage() {
   return (
@@ -34,7 +34,7 @@ export default function LoginPage() {
       </div>
       <div className="relative flex min-h-[50vh] w-full flex-col items-center justify-center sm:hidden">
         <Image src="/image/fill/bottom.png" alt="bottom" layout="fill" />
-        <LoginBtn isMobile={true} />
+        <LoginBtn isMobile />
       </div>
     </main>
   );

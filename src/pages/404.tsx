@@ -1,7 +1,7 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function NotFoundPage() {
   return (
@@ -30,7 +30,7 @@ export default function NotFoundPage() {
             </h2>
           </span>
           <Link href="/">
-            <Button className={`${"bg-darkblue"} rounded-full `} size="xlg">
+            <Button className={`${'bg-darkblue'} rounded-full `} size="xlg">
               메인으로 돌아가기
             </Button>
           </Link>

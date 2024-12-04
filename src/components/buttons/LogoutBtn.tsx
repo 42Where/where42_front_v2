@@ -1,12 +1,12 @@
-import Cookies from "js-cookie";
-import { useRouter } from "next/router";
-import Image from "next/image";
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 
 export default function LogoutBtn() {
   const router = useRouter();
@@ -14,14 +14,13 @@ export default function LogoutBtn() {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <div
+          <button
             className="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 lg:size-14"
-            role="button"
-            tabIndex={0}
+            type="button"
             onClick={() => {
-              Cookies.remove("accessToken");
-              Cookies.remove("refreshToken");
-              router.push("/login");
+              Cookies.remove('accessToken');
+              Cookies.remove('refreshToken');
+              router.push('/login');
             }}
           >
             <Image
@@ -31,7 +30,7 @@ export default function LogoutBtn() {
               height={40}
               className="size-[30px] rounded-lg hover:bg-gray-200 lg:size-[40px]"
             />
-          </div>
+          </button>
         </TooltipTrigger>
         <TooltipContent>로그아웃</TooltipContent>
       </Tooltip>
