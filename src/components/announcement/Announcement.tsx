@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from 'react';
 import announcementApi from '@/api/announcementApi';
 import { Announcement } from '@/types/Announcement';
+import SurveyLink from '@/components/announcement/SurveyLink';
 
 export default function Announcements() {
   // 리렌더링 시 다시 API 받아오지 않도록 메모이제이션 할까 싶다
@@ -27,20 +28,21 @@ export default function Announcements() {
         <AnnouncementBtn isOpen={isOpen} />
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="max-h-60 lg:max-h-80 w-48 lg:w-64 overflow-auto rounded-none p-0"
+        className="max-h-60 w-48 overflow-auto rounded-none p-0 md:max-h-80 md:w-64"
         align="end"
       >
-        {
-          announcements.length === 0 ? '공지사항이 없습니다.' : announcements.map((announcement) => (
-            <AnnouncementItem
-              key={announcement.announcementId}
-              announcementType={announcement.title}
-              title={announcement.content}
-              date={announcement.createAt}
-              currDate={currDate}
-            />
-          ))
-        }
+        <SurveyLink announcementType="설문조사" date="2024-12-4" currDate={currDate} />
+        {announcements.length === 0
+          ? '공지사항이 없습니다.'
+          : announcements.map((announcement) => (
+              <AnnouncementItem
+                key={announcement.announcementId}
+                announcementType={announcement.title}
+                title={announcement.content}
+                date={announcement.createAt}
+                currDate={currDate}
+              />
+            ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

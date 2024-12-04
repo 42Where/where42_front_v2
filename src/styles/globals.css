@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  input[type="search"] {
+  input[type='search'] {
     -webkit-appearance: none !important;
   }
   html {
@@ -96,7 +96,7 @@
 
 @font-face {
   font-family: GmarketSans;
-  src: url("/fonts/woff2/GmarketSansLight.woff2");
+  src: url('/fonts/woff2/GmarketSansLight.woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap; /* 폰트 로딩 퍼포먼스를 개선하기 위함 */
@@ -104,7 +104,7 @@
 
 @font-face {
   font-family: GmarketSansMd;
-  src: url("/fonts/woff2/GmarketSansMedium.woff2");
+  src: url('/fonts/woff2/GmarketSansMedium.woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -113,7 +113,7 @@
 
 @font-face {
   font-family: GmarketSansLg;
-  src: url("/fonts/woff2/GmarketSansBold.woff2");
+  src: url('/fonts/woff2/GmarketSansBold.woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;

@@ -20,7 +20,7 @@ export default function AnnouncementItem({
   }, [date, currDate]);
   return (
     <div
-      className={`flex w-full flex-col items-start justify-center text-xs lg:text-sm ${!isLast && 'border-b'} gap-1 p-1 lg:gap-2`}
+      className={`flex w-full flex-col items-start justify-center text-[10px] lg:text-sm ${!isLast && 'border-b'} gap-1 p-1 lg:gap-2`}
     >
       <span className="flex w-full flex-row items-center justify-between text-[10px] text-baseblue lg:text-xs">
         <p>{announcementType}</p>
