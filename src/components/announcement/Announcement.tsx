@@ -31,7 +31,7 @@ export default function Announcements() {
         className="max-h-60 w-48 overflow-auto rounded-none p-0 md:max-h-80 md:w-64"
         align="end"
       >
-        <SurveyLink announcementType="설문조사" date="2024-12-4" currDate={currDate} />
+        <SurveyLink announcementType="설문조사" date="2024-12-04" currDate={currDate} />
         {announcements.length === 0
           ? '공지사항이 없습니다.'
           : announcements.map((announcement) => (
