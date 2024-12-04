@@ -26,7 +26,7 @@ export default function AnnouncementItem({
         <p>{announcementType}</p>
         <p>{renderedDate}</p>
       </span>
-      <p>{title}</p>
+      <p className="whitespace-pre-wrap">{title}</p>
     </div>
   );
 }
