@@ -39,3 +39,6 @@ next-env.d.ts
 
 # asdf
 .tool-versions
+
+# test page
+/src/pages/test/*
