@@ -13,20 +13,6 @@ const authApi = {
   },
 };
 
-axios.interceptors.request.use(
-  (config) => {
-    const accessToken = Cookies.get('accessToken');
-    const newConfig = config;
-    if (accessToken) {
-      newConfig.headers.Authorization = `Bearer ${accessToken}`;
-    } else {
-      newConfig.headers.Authorization = 'Bearer NONE';
-    }
-    return newConfig;
-  },
-  (error) => Promise.reject(error),
-);
-
 axios.interceptors.response.use(
   async (response) =>
     // console.log(response.config.url, response.config.data, response.status);
