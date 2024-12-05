@@ -8,11 +8,11 @@ export default function Header({ isAdmin }: { isAdmin: boolean }) {
   return (
     <header className="flex flex-row items-center justify-between p-2 pb-0 md:p-4">
       <Image
-        src="/image/logo/logoC.svg"
+        src={`${isAdmin ? '/image/logo/logoAdmin.svg' : '/image/logo/logoC.svg'}`}
         alt="logo"
         width={200}
         height={100}
-        className="h-[75px] w-[150px] lg:h-[100px] lg:w-[200px]"
+        className={`${isAdmin && 'h-[100px] w-[200px] lg:h-[150px] lg:w-[300px]'} h-[75px] w-[150px] lg:h-[100px] lg:w-[200px]`}
       />
       <div className="flex flex-row gap-2">
         {isAdmin && <AdminLinkBtn />}
