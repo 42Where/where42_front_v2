@@ -9,7 +9,7 @@ export default function AdminLinkBtn() {
         <TooltipTrigger asChild>
           <Link
             href="/admin"
-            className="size-[38px] rounded-lg p-2 hover:bg-gray-200 lg:size-[52px]"
+            className="hidden size-[38px] items-center justify-center rounded-lg p-1 hover:bg-gray-200 md:block lg:size-[52px]"
           >
             <Image src="/image/admin.svg" alt="admin" width={40} height={40} />
           </Link>
