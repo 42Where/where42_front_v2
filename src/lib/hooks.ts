@@ -4,7 +4,7 @@ import groupApi from '@/api/groupApi';
 import adminApi from '@/api/adminApi';
 import { useUserStore, useGroupsStore, useAddedMembersStore } from '@/lib/stores';
 
-export default function useInfoSet() {
+export default function useInfoSet(checkAdminOnly?: boolean) {
   const { setUser } = useUserStore();
   const { setGroups } = useGroupsStore();
   const { setAddedMembers } = useAddedMembersStore();
@@ -17,6 +17,7 @@ export default function useInfoSet() {
       .getMyStatus()
       .then((res) => setIsAdmin(res.role === 'ADMIN'))
       .catch((err) => console.error(err));
+    if (checkAdminOnly) return;
     authApi
       .getMyInfo()
       .then((res) => {
