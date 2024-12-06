@@ -1,16 +1,25 @@
 import { Textarea } from '@/components/ui/textarea';
 import Divider from '@/components/utils/Divider';
-import { useRef, useState, FormEvent } from 'react';
+import { useRef, useState, FormEvent, useEffect } from 'react';
 import announcementApi from '@/api/announcementApi';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import AnnouncementMenu from '@/components/admin/AnnouncementMenu';
-import { AnnouncementType } from '@/types/Announcement';
+import { AnnouncementType, Announcement } from '@/types/Announcement';
+import Announcements from '@/components/announcement/Announcements';
 
 export default function AnnouncementWriter() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [textValue, settextValue] = useState<string>('');
   const [type, setType] = useState<AnnouncementType>('기능 추가');
+  const [dummyAnnouncement, setDummyAnnouncement] = useState<Announcement>({
+    announcementId: 42,
+    title: type,
+    content: textValue,
+    authorName: 'rip van wrinkle',
+    createAt: '',
+    updateAt: '',
+  });
   const formRef = useRef<HTMLFormElement>(null);
   const LIMIT = 100;
   const { toast } = useToast();
@@ -29,17 +38,22 @@ export default function AnnouncementWriter() {
       })
       .then(() => toast({ title: '추가되었습니다.' }))
       .catch((err) => console.error(err));
-    // setResultMessage('설정 되었습니다.');
-    // if (inputValue === user?.comment || !user) return;
   }
 
+  useEffect(() => {
+    const dummy = {
+      announcementId: 42,
+      title: type,
+      content: textValue,
+      authorName: 'rip van wrinkle',
+      createAt: '',
+      updateAt: '',
+    };
+    setDummyAnnouncement(dummy);
+  }, [textValue, type]);
+
   return (
-    <div className="flex w-full flex-col items-start justify-start gap-2">
-      <div />
-      <h3 className="w-full border-l-2 border-darkblue pl-2 text-xl text-darkblue">
-        전체 공지사항 조회
-      </h3>
-      <Divider />
+    <div className="flex w-full flex-col items-center justify-start gap-2">
       <div className="flex w-full flex-col items-start gap-2 pl-2">
         <AnnouncementMenu type={type} setType={setType} />
         <form
@@ -51,20 +65,24 @@ export default function AnnouncementWriter() {
             ref={textareaRef}
             onChange={(e) => settextValue(e.target.value)}
             value={textValue}
+            className="text-black"
           />
           <div className="flex w-full flex-row items-start justify-between">
             <p className={`${textValue.length > LIMIT && 'text-red-500'} text-sm`}>
               {textValue.length}/{LIMIT}
             </p>
             <Button
-              className="rounded-lg border-2 border-darkblue bg-darkblue text-lg"
+              className="rounded-lg border-2 border-darkblue bg-darkblue"
               disabled={textValue.length === 0 || textValue.length / LIMIT > 1}
             >
-              추가
+              추가하기
             </Button>
           </div>
         </form>
       </div>
+      <Divider />
+      <h3>미리보기</h3>
+      <Announcements dummyAnnouncement={dummyAnnouncement} />
     </div>
   );
 }
