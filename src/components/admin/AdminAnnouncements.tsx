@@ -6,11 +6,9 @@ export default function AdminAnnouncements({ announcements }: { announcements: A
   return (
     <div className="flex w-full flex-col items-start justify-start gap-2">
       <div />
-      <h3 className="w-full border-r-2 border-darkblue text-xl text-darkblue">
-        전체 공지사항 조회
-      </h3>
+      <h3 className="w-full text-xl text-darkblue">전체 공지사항 조회</h3>
       <Divider />
-      <div className="h-vh flex h-[70vh] flex-col overflow-auto">
+      <div className="h-vh flex h-[70vh] flex-col overflow-auto pr-1">
         {announcements.length === 0
           ? '공지사항이 없습니다.'
           : announcements.map((announcement) => (

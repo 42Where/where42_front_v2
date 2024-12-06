@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { Announcement } from '@/types/Announcement';
 import announcementApi from '@/api/announcementApi';
 import AdminAnnouncements from '@/components/admin/AdminAnnouncements';
+import AnnouncementWriter from '@/components/admin/AnnouncementWriter';
 
 export default function AdminPage() {
   const router = useRouter();
@@ -28,9 +29,9 @@ export default function AdminPage() {
     <main className="flex h-full min-h-screen w-full flex-col justify-start px-2 md:px-10">
       <Header isAdmin />
       <Divider />
-      <div className="h-sv flex flex-row items-center justify-start">
+      <div className="flex flex-row items-start justify-center">
         <AdminAnnouncements announcements={announcements} />
-        <div className="w-full" />
+        <AnnouncementWriter />
       </div>
     </main>
   );
