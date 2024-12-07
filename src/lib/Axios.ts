@@ -19,29 +19,49 @@ export const axios = Axios.create({
   withCredentials: true,
 });
 
+let isRefreshing = false; // 토큰 재발급 상태
+let refreshSubscribers: Array<Function> = []; // 재발급 대기 중인 요청 리스트
+
+const onTokenRefreshed = (newToken: string) => {
+  refreshSubscribers.forEach((callback) => callback(newToken));
+  refreshSubscribers = [];
+};
+
+const addSubscriber = (callback: Function) => {
+  refreshSubscribers.push(callback);
+};
+
 axios.interceptors.response.use(
-  async (response) =>
-    // console.log(response.config.url, response.config.data, response.status);
-    response,
+  (response) => response,
   async (error) => {
-    console.log(error.response);
-    console.log(error.response.status);
-    if (error.response && error.response.status === 401) {
-      try {
-        const res = await tokenAxios.post('/v3/jwt/reissue').then((r) => r.data);
-        console.log('Refreshed token successfully!');
-        const { accessToken } = res;
-        const originalRequest = error.config;
-        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-        return await axios(originalRequest);
-      } catch (err) {
-        console.error('Failed to refresh token:', err);
-        Cookies.remove('accessToken');
-        Cookies.remove('refreshToken');
-        window.location.href = '/login';
+    const { config, response } = error;
+    console.log(response, response.status);
+    if (response && response.status === 401) {
+      if (!isRefreshing) {
+        isRefreshing = true;
+        try {
+          const res = await tokenAxios.post('/v3/jwt/reissue').then((r) => r.data);
+          console.log('Refreshed token successfully!');
+          const newAccessToken = res;
+          const originalRequest = error.config;
+          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+          isRefreshing = false;
+          onTokenRefreshed(newAccessToken);
+        } catch (err) {
+          console.error('Failed to refresh token:', err);
+          isRefreshing = false;
+          Cookies.remove('accessToken');
+          Cookies.remove('refreshToken');
+          window.location.href = '/login';
+          return Promise.reject(err);
+        }
       }
-    } else if (error.response && error.response.status === 500) {
-      return Promise.reject(error);
+      return new Promise((resolve) => {
+        addSubscriber((newToken: string) => {
+          config.headers.Authorization = `Bearer ${newToken}`;
+          resolve(axios(config));
+        });
+      });
     }
     return Promise.reject(error);
   },
