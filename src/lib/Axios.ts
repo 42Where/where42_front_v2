@@ -43,10 +43,11 @@ axios.interceptors.response.use(
           const res = await tokenAxios.post('/v3/jwt/reissue').then((r) => r.data);
           console.log('Refreshed token successfully!');
           const newAccessToken = res;
-          const originalRequest = error.config;
-          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
           isRefreshing = false;
           onTokenRefreshed(newAccessToken);
+          config.headers.Authorization = `Bearer ${newAccessToken}`;
+          // 새로운 액세스 토큰의 쿠키 세팅(Cookie.set)은 백엔드에서 해준다. 토큰 생성 및 세팅의 책임을 백엔드로 분리했다.
+          return await axios(config); // 첫 번째 요청 재시도
         } catch (err) {
           console.error('Failed to refresh token:', err);
           isRefreshing = false;
