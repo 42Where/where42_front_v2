@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Header from '@/components/Header';
+import Header from '@/components/header/Header';
 import MyProfileCard from '@/components/cards/MyProfileCard';
 import Groups from '@/components/group/Groups';
 import Footer from '@/components/Footer';
@@ -16,7 +16,7 @@ export default function Home() {
   const { groups } = useGroupsStore();
   const { intraId, agreement } = router.query;
   const [showModal, setShowModal] = useState(false);
-  useInfoSet();
+  const isAdmin = useInfoSet();
 
   useEffect(() => {
     if (agreement && agreement === 'false') setShowModal(true);
@@ -29,7 +29,7 @@ export default function Home() {
     <>
       <main className="flex h-full min-h-screen w-full flex-col justify-start px-2 md:px-10">
         <AgreementModal showModal={showModal} setShowModal={setShowModal} />
-        <Header />
+        <Header isAdmin={isAdmin} />
         {user ? <MyProfileCard user={user} /> : <ProfileSkeleton />}
         <Divider />
         {groups && <Groups groups={groups} />}

@@ -10,17 +10,21 @@ import announcementApi from '@/api/announcementApi';
 import { Announcement } from '@/types/Announcement';
 import SurveyLink from '@/components/announcement/SurveyLink';
 
-export default function Announcements() {
+export default function Announcements({ dummyAnnouncement }: { dummyAnnouncement?: Announcement }) {
   // 리렌더링 시 다시 API 받아오지 않도록 메모이제이션 할까 싶다
   // TODO: 비어있을 때 처리
   const [isOpen, setIsOpen] = useState(false);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const currDate = new Date();
   useEffect(() => {
+    if (dummyAnnouncement) {
+      setAnnouncements([dummyAnnouncement]);
+      return;
+    }
     announcementApi.getAnnouncement({ page: 0, size: 30 }).then((res) => {
       setAnnouncements(res);
     });
-  }, []);
+  }, [dummyAnnouncement]);
 
   return (
     <DropdownMenu onOpenChange={(open) => setIsOpen(open)}>

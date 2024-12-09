@@ -30,12 +30,8 @@ const announcementApi = {
     });
     return response.status;
   },
-  deleteAnnouncement: async ({
-    announcementId,
-  }: {
-    announcementId: number;
-  }): Promise<void> => {
-    await axios.delete('/v3/announcement', { data: { announcementId } });
+  deleteAnnouncement: async ({ announcementId }: { announcementId: number }): Promise<void> => {
+    await axios.delete(`/v3/announcement/${announcementId}`);
   },
 };
 
