@@ -8,7 +8,6 @@ import {
 import { useEffect, useState } from 'react';
 import announcementApi from '@/api/announcementApi';
 import { Announcement } from '@/types/Announcement';
-import SurveyLink from '@/components/announcement/SurveyLink';
 
 export default function Announcements({ dummyAnnouncement }: { dummyAnnouncement?: Announcement }) {
   // 리렌더링 시 다시 API 받아오지 않도록 메모이제이션 할까 싶다
@@ -35,7 +34,6 @@ export default function Announcements({ dummyAnnouncement }: { dummyAnnouncement
         className="max-h-60 w-48 overflow-auto rounded-none p-0 md:max-h-80 md:w-64"
         align="end"
       >
-        <SurveyLink announcementType="설문조사" date="2024-12-04" currDate={currDate} />
         {announcements.length === 0
           ? '공지사항이 없습니다.'
           : announcements.map((announcement) => (
