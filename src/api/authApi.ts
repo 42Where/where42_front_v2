@@ -11,6 +11,10 @@ const authApi = {
     const response = await tokenAxios.post('/v3/jwt/reissue');
     return response.data;
   },
+  logout: async (): Promise<string> => {
+    const response = await tokenAxios.post('/v3/logout');
+    return response.data;
+  },
 };
 
 axios.interceptors.response.use(

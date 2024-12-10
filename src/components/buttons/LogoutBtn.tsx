@@ -1,15 +1,29 @@
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import authApi from '@/api/authApi';
 
 export default function LogoutBtn() {
   const router = useRouter();
+
+  function logoutHandler() {
+    authApi
+      .logout()
+      .then((r) => {
+        console.log(r, 'Logged out successfully!');
+        return r;
+      })
+      .then(() => {
+        Cookies.remove('accessToken');
+        Cookies.remove('refreshToken');
+        router.push('/login');
+      })
+      .catch((err) => {
+        console.error('Failed to log out:', err);
+      });
+  }
+
   return (
     <TooltipProvider>
       <Tooltip>
@@ -17,11 +31,7 @@ export default function LogoutBtn() {
           <button
             className="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 lg:size-14"
             type="button"
-            onClick={() => {
-              Cookies.remove('accessToken');
-              Cookies.remove('refreshToken');
-              router.push('/login');
-            }}
+            onClick={logoutHandler}
           >
             <Image
               src="/image/signOut.svg"
