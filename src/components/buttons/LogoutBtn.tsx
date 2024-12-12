@@ -2,26 +2,27 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import authApi from '@/api/authApi';
+// import authApi from '@/api/authApi';
 
 export default function LogoutBtn() {
   const router = useRouter();
 
   function logoutHandler() {
-    authApi
-      .logout()
-      .then((r) => {
-        console.log(r, 'Logged out successfully!');
-        return r;
-      })
-      .then(() => {
-        Cookies.remove('accessToken');
-        Cookies.remove('refreshToken');
-        router.push('/login');
-      })
-      .catch((err) => {
-        console.error('Failed to log out:', err);
-      });
+    // authApi
+    //   .logout()
+    //   .then((r) => {
+    //     console.log(r, 'Logged out successfully!');
+    //     return r;
+    //   })
+    //   .then(() => {
+    Cookies.remove('accessToken', { path: '/', domain: '.where42.kr' });
+    Cookies.remove('refreshToken', { path: '/', domain: '.where42.kr' });
+    console.log('Cookies removed!');
+    router.push('/login');
+    // })
+    // .catch((err) => {
+    //   console.error('Failed to log out:', err);
+    // });
   }
 
   return (
