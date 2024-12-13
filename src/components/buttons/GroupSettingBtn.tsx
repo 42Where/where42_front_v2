@@ -12,7 +12,10 @@ export default function GroupSettingBtn({
 }) {
   return (
     !groups.find((group) => group.groupId === curGroup.groupId)?.isInEdit && (
-      <DropdownMenuTrigger className="absolute right-[50px] top-[12px] flex size-6 items-center justify-center rounded-lg hover:bg-gray-200 md:right-[64px] md:top-[16px] md:size-10">
+      <DropdownMenuTrigger
+        className="absolute right-[50px] top-[10px] flex size-7 items-center justify-center rounded-lg
+      p-1 hover:bg-gray-200 md:right-[64px] md:top-[16px] md:size-10"
+      >
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>
