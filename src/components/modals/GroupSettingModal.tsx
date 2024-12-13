@@ -1,5 +1,4 @@
 import { useState, useRef, FormEvent } from 'react';
-import { X } from 'lucide-react';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import { Dialog, DialogContent, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import groupApi from '@/api/groupApi';
@@ -9,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import Group from '@/types/Group';
 import { useToast } from '@/components/ui/use-toast';
 import GroupSettingBtn from '@/components/buttons/GroupSettingBtn';
+import XBtn from '@/components/buttons/XBtn';
 
 export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
   const [isDelete, setIsDelete] = useState<boolean>(false);
@@ -153,8 +153,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
                 />
               </form>
               {groupName && (
-                <X
-                  className="size-6"
+                <XBtn
                   onClick={() => {
                     formRef.current?.reset();
                     setGroupName('');

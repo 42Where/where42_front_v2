@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, FormEvent } from 'react';
-import { X } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
@@ -25,6 +24,7 @@ import Group from '@/types/Group';
 import { useToast } from '@/components/ui/use-toast';
 import { SearchedUser, User } from '@/types/User';
 import SearchedCard from '@/components/cards/SearchedCard';
+import XBtn from '@/components/buttons/XBtn';
 
 export default function NewGroupModal() {
   const { groups, setGroups } = useGroupsStore();
@@ -212,8 +212,7 @@ export default function NewGroupModal() {
                       className="flex flex-row items-center gap-2 rounded-xl border border-gray-400 p-2 shadow-lg"
                     >
                       <p className="text-l  text-darkblue">{selectedUser.intraName}</p>
-                      <X
-                        className="size-6 cursor-pointer"
+                      <XBtn
                         onClick={() => {
                           setSelectedUsers(
                             selectedUsers.filter((selected) => selected !== selectedUser),
@@ -233,8 +232,7 @@ export default function NewGroupModal() {
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
                 {searchValue && (
-                  <X
-                    className="size-6"
+                  <XBtn
                     onClick={() => {
                       formRef.current?.reset();
                       setSearchValue('');
@@ -277,8 +275,7 @@ export default function NewGroupModal() {
                 />
               </form>
               {searchValue && (
-                <X
-                  className="size-6"
+                <XBtn
                   onClick={() => {
                     formRef.current?.reset();
                     setSearchValue('');
