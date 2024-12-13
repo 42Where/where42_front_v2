@@ -25,7 +25,7 @@ export const DefaultCustomLocation: CascaderOption = {
       value: '2층',
       children: [
         {
-          label: '1클러스터',
+          label: 'C1',
           value: 'c1',
           children: [
             { label: '회의실', value: '회의실' },
@@ -34,7 +34,7 @@ export const DefaultCustomLocation: CascaderOption = {
           ],
         },
         {
-          label: '2클러스터',
+          label: 'C2',
           value: 'c2',
           children: [
             { label: '테이블', value: '테이블' },
@@ -48,7 +48,7 @@ export const DefaultCustomLocation: CascaderOption = {
       value: '3층',
       children: [
         {
-          label: 'x1클러스터',
+          label: 'CX1',
           value: 'cx1',
           children: [
             { label: '회의실', value: '회의실' },
@@ -57,7 +57,7 @@ export const DefaultCustomLocation: CascaderOption = {
           ],
         },
         {
-          label: 'x2클러스터',
+          label: 'CX2',
           value: 'cx2',
           children: [
             { label: '테이블', value: '테이블' },
@@ -71,7 +71,7 @@ export const DefaultCustomLocation: CascaderOption = {
       value: '4층',
       children: [
         {
-          label: '3클러스터',
+          label: 'C3',
           value: 'c3',
           children: [
             { label: '회의실', value: '회의실' },
@@ -80,7 +80,7 @@ export const DefaultCustomLocation: CascaderOption = {
           ],
         },
         {
-          label: '4클러스터',
+          label: 'C4',
           value: 'c4',
           children: [
             { label: '테이블', value: '테이블' },
@@ -94,7 +94,7 @@ export const DefaultCustomLocation: CascaderOption = {
       value: '5층',
       children: [
         {
-          label: '5클러스터',
+          label: 'C5',
           value: 'c5',
           children: [
             { label: '집현전', value: '집현전' },
@@ -103,7 +103,7 @@ export const DefaultCustomLocation: CascaderOption = {
           ],
         },
         {
-          label: '6클러스터',
+          label: 'C6',
           value: '개포 5층 c6',
           children: [
             { label: '테이블', value: '개포 5층 c6 테이블' },
