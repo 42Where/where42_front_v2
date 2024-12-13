@@ -3,7 +3,12 @@ import { DialogTrigger } from '@radix-ui/react-dialog';
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import memberApi from '@/api/memberApi';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu';
 import { useUserStore } from '@/lib/stores';
 import CustomLocationContent from '@/components/utils/CustomLocationContent';
 import SettingBtn from '@/components/buttons/MySettingBtn';
@@ -71,10 +76,11 @@ export default function MySettingModal() {
         </DropdownMenuTrigger>
         <DropdownMenuContent side="left" className=" min-w-50 text-darkblue">
           <DialogTrigger asChild onClick={() => setIsMessage(true)}>
-            <DropdownMenuItem className="text-xl">상태 메시지 수정</DropdownMenuItem>
+            <DropdownMenuItem className="text-sm md:text-xl">상태 메시지 수정</DropdownMenuItem>
           </DialogTrigger>
+          <DropdownMenuSeparator />
           <DialogTrigger asChild onClick={() => setIsMessage(false)}>
-            <DropdownMenuItem className="text-xl">수동 위치 설정</DropdownMenuItem>
+            <DropdownMenuItem className="text-sm md:text-xl">수동 위치 설정</DropdownMenuItem>
           </DialogTrigger>
         </DropdownMenuContent>
       </DropdownMenu>
