@@ -76,11 +76,11 @@ export default function MySettingModal() {
         </DropdownMenuTrigger>
         <DropdownMenuContent side="left" className=" min-w-50 text-darkblue">
           <DialogTrigger asChild onClick={() => setIsMessage(true)}>
-            <DropdownMenuItem className="text-sm md:text-xl">상태 메시지 수정</DropdownMenuItem>
+            <DropdownMenuItem className="md:text-xl">상태 메시지 수정</DropdownMenuItem>
           </DialogTrigger>
           <DropdownMenuSeparator />
           <DialogTrigger asChild onClick={() => setIsMessage(false)}>
-            <DropdownMenuItem className="text-sm md:text-xl">수동 위치 설정</DropdownMenuItem>
+            <DropdownMenuItem className="md:text-xl">수동 위치 설정</DropdownMenuItem>
           </DialogTrigger>
         </DropdownMenuContent>
       </DropdownMenu>
