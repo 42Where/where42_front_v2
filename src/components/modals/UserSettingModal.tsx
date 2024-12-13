@@ -167,12 +167,12 @@ export default function UserSettingModal({
             <h3 style={{ display: 'inline', margin: '0' }}>
               &quot;
               {targUser.intraName}
-              &quot;
+              &quot;{' '}
             </h3>
             <p style={{ display: 'inline', margin: '0' }}>님을</p>
             <h3 style={{ display: 'inline', margin: '0' }}>
-              &quot;
-              {targGroup.groupName}
+              {' '}
+              &quot;{targGroup.groupName}
               &quot;{' '}
             </h3>
             그룹으로부터 삭제하시겠습니까?
