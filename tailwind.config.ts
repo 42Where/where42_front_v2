@@ -37,6 +37,7 @@ const config = {
         foreground: 'hsl(var(--foreground))',
         darkblue: 'hsl(var(--darkblue))',
         baseblue: 'hsl(var(--baseblue))',
+        basepink: 'hsl(var(--basepink))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
