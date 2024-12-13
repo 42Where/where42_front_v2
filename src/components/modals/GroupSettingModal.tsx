@@ -90,20 +90,20 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
         <GroupSettingBtn groups={groups} curGroup={curGroup} />
         <DropdownMenuContent side="bottom" className=" min-w-50 text-darkblue">
           {curGroup.members.length > 0 && (
-            <DropdownMenuItem className="text-xl" onClick={() => editClickHandler()}>
+            <DropdownMenuItem className="md:text-xl" onClick={() => editClickHandler()}>
               그룹 수정
             </DropdownMenuItem>
           )}
           {defalutGroupId !== curGroup.groupId && (
             <>
               <DialogTrigger asChild>
-                <DropdownMenuItem className="text-xl" onClick={() => setIsDelete(false)}>
+                <DropdownMenuItem className="md:text-xl" onClick={() => setIsDelete(false)}>
                   그룹명 수정
                 </DropdownMenuItem>
               </DialogTrigger>
               <DialogTrigger asChild>
                 <DropdownMenuItem
-                  className="text-xl text-red-700"
+                  className="text-red-700 md:text-xl"
                   onClick={() => setIsDelete(true)}
                 >
                   그룹 삭제
