@@ -19,7 +19,7 @@ export default function Header({ isAdmin }: { isAdmin: boolean }) {
         alt="logo"
         width={200}
         height={100}
-        className={`${isAdmin && 'h-[75px] w-[200px] lg:h-[100px] lg:w-[300px]'} h-[50px] w-[100px] lg:h-[100px] lg:w-[200px]`}
+        className={`${isAdmin && 'h-[50px] w-[100px] lg:h-[100px] lg:w-[300px]'} h-[50px] w-[100px] lg:h-[100px] lg:w-[200px]`}
       />
       {inAdminPage ? <HomeLinkBtn /> : <HeaderMenu isAdmin={isAdmin} />}
     </header>

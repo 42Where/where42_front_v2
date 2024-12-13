@@ -29,7 +29,7 @@ export default function Groups({ groups }: { groups: Group[] }) {
           <AccordionTrigger className="p-1 text-darkblue md:p-4 md:text-2xl">
             <GroupHeadCount curGroup={curGroup} />
           </AccordionTrigger>
-          <AccordionContent className="pb-0">
+          <AccordionContent className="pb-0 md:pb-4">
             <GroupCardContainer curGroup={curGroup} />
           </AccordionContent>
         </AccordionItem>
