@@ -18,6 +18,7 @@ const config = {
       air: '1400px',
       '2xl': '1536px',
       '3xl': '1600px',
+      '4xl': '1800px',
     },
     container: {
       center: true,
