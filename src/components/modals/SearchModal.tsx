@@ -123,7 +123,7 @@ export default function SearchModal() {
         {/* eslint-disable-next-line no-nested-ternary */}
         {searchedUsers?.length ? (
           searchedUsers?.length > 4 ? (
-            <div className="h-[200px] w-full overflow-scroll rounded-md md:h-[600px]">
+            <div className="h-[400px] w-full overflow-scroll rounded-md md:h-[600px]">
               <div className="grid grid-flow-row gap-2 md:grid-cols-2">
                 {searchedUsers?.map((searchedMember) => (
                   <SearchedCard key={searchedMember.intraId} member={searchedMember} />
