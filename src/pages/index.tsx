@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex h-full min-h-screen w-full flex-col justify-start px-2 md:px-10">
+      <main className="flex h-full min-h-screen w-full flex-col justify-start px-1 md:px-10">
         <AgreementModal showModal={showModal} setShowModal={setShowModal} />
         <Header isAdmin={isAdmin} />
         {user ? <MyProfileCard user={user} /> : <ProfileSkeleton />}

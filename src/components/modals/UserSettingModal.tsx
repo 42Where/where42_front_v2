@@ -1,9 +1,19 @@
 import { useState } from 'react';
-import { DialogTrigger } from '@radix-ui/react-dialog';
+import {
+  DialogTrigger,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogClose,
+} from '@/components/ui/dialog';
 import Image from 'next/image';
-import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
-import { Dialog, DialogContent, DialogTitle, DialogClose } from '@/components/ui/dialog';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
+import {
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '@/components/ui/dropdown-menu';
 import {
   useGroupsStore,
   useUserStore,
@@ -113,13 +123,17 @@ export default function UserSettingModal({
         </DropdownMenuTrigger>
         <DropdownMenuContent side="bottom" className="min-w-50  text-darkblue">
           <DialogTrigger asChild onClick={() => setIsDelete(false)}>
-            <DropdownMenuItem className="text-xl">다른 그룹에 추가하기</DropdownMenuItem>
+            <DropdownMenuItem className="md:text-xl">다른 그룹에 추가하기</DropdownMenuItem>
           </DialogTrigger>
-          <DropdownMenuItem className="text-xl" onClick={() => selectClickHandler()}>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className="md:text-xl" onClick={() => selectClickHandler()}>
             유저 선택하기
           </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DialogTrigger asChild onClick={() => setIsDelete(true)}>
-            <DropdownMenuItem className="text-xl text-red-700">그룹에서 삭제하기</DropdownMenuItem>
+            <DropdownMenuItem className="text-red-700 md:text-xl">
+              그룹에서 삭제하기
+            </DropdownMenuItem>
           </DialogTrigger>
         </DropdownMenuContent>
       </DropdownMenu>

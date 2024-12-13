@@ -18,7 +18,7 @@ export default function GroupCardContainer({ curGroup }: { curGroup: Group }) {
 
   return (
     <>
-      <div className="4xl:grid-cols-4 grid grid-flow-row gap-4 lg:grid-cols-2 air:grid-cols-3">
+      <div className="4xl:grid-cols-4 grid grid-flow-row border-t md:gap-4 md:border-0 lg:grid-cols-2 air:grid-cols-3">
         {curGroup.members.map(
           (member) =>
             (!checked || member.inCluster) && (

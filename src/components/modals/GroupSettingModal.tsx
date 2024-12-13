@@ -88,7 +88,7 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
     <Dialog onOpenChange={(open) => openHandler(open)}>
       <DropdownMenu>
         <GroupSettingBtn groups={groups} curGroup={curGroup} />
-        <DropdownMenuContent side="bottom" className=" min-w-50 text-darkblue">
+        <DropdownMenuContent side="bottom" className="min-w-50 text-darkblue">
           {curGroup.members.length > 0 && (
             <DropdownMenuItem className="md:text-xl" onClick={() => editClickHandler()}>
               그룹 수정

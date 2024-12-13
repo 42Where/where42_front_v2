@@ -8,7 +8,7 @@ import SetCheckBtn from '@/components/buttons/SetCheckBtn';
 
 export default function MyProfileCard({ user }: { user: User }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-2 pb-2 pt-0 md:gap-0 md:pb-4 lg:px-8">
+    <div className="flex flex-col items-center justify-center px-1 pb-1 md:pb-4 lg:px-8">
       <div className="flex min-h-full min-w-full flex-row items-center justify-between">
         <div className="flex flex-row items-center gap-4 lg:gap-6">
           <ProfilePic user={user} type="myCard" />

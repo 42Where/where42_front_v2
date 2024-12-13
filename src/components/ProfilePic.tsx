@@ -10,8 +10,8 @@ export default function ProfilePic({ user, type }: { user: User; type: CardType 
         <TooltipTrigger asChild>
           <Avatar
             className={`${type === 'searchedCard' && 'size-16 md:size-20'}
-            ${type === 'myCard' && 'size-24 cursor-pointer lg:size-28'}
-            ${type === 'userCard' && 'size-20 cursor-pointer md:size-28'}
+            ${type === 'myCard' && 'size-20 cursor-pointer lg:size-28'}
+            ${type === 'userCard' && 'size-16 cursor-pointer md:size-28'}
             ${
               (user.location || user.inCluster) && 'border-basepink'
             } border-4 hover:border-[#bfb5ff]`}

@@ -30,7 +30,7 @@ export default function ProfileCard({
   return (
     <button
       type="button"
-      className={`hover:border-basepink flex cursor-default flex-row items-center justify-between rounded-2xl border-2 p-2 md:p-4 ${
+      className={`md:hover:border-basepink flex cursor-default flex-row items-center justify-between border-b p-2 md:rounded-2xl md:border-2 md:p-4 ${
         isEdit && 'cursor-pointer'
       }`}
       onClick={clickHandler}
