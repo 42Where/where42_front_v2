@@ -24,7 +24,7 @@ export default function GroupCardContainer({ curGroup }: { curGroup: Group }) {
       </div>
       {(curGroup.members.length === 0 ||
         (checked && !curGroup.members.filter((member) => member.inCluster).length)) && (
-        <p className="text-center text-xl">아무도 없어요.. 😢</p>
+        <p className="p-6 text-center md:text-xl">아무도 없어요.. 😢</p>
       )}
     </>
   );

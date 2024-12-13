@@ -165,8 +165,8 @@ export default function NewGroupModal() {
     <Dialog onOpenChange={(open) => openHandler(open)}>
       <DialogTrigger>
         <Button
-          className="text-l w-30 lg:w-30 h-8 gap-2 rounded-full
-          border-2 border-darkblue bg-white  px-3 py-1 text-darkblue hover:bg-gray-200 lg:h-10 lg:text-xl"
+          className="h-6 gap-2 rounded-full border-2 border-darkblue
+          bg-white px-3 py-1  text-xs text-darkblue hover:bg-gray-200 md:h-8 lg:h-10 lg:text-xl"
         >
           <Image src="/image/newGroup.svg" alt="newGroup" width={20} height={20} />새 그룹
         </Button>
