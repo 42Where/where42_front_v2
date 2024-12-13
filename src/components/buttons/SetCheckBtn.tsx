@@ -16,15 +16,15 @@ export default function SetCheckBtn() {
 
   return (
     <Button
-      className="text-l h-8 w-40 gap-1 rounded-full
-     border-2 border-darkblue bg-white
-     p-2 text-darkblue hover:bg-gray-200  lg:h-10 lg:w-52 lg:gap-2 lg:p-4 lg:text-xl"
+      className="h-6 gap-1 rounded-full border-2 border-darkblue bg-white
+     p-2 text-xs text-darkblue
+     hover:bg-gray-200 md:h-8 lg:h-10 lg:w-52 lg:gap-2 lg:p-4 lg:text-xl"
       onClick={() => {
         setChecked(!checked);
         localStorage.setItem('checked', JSON.stringify(!checked));
       }}
     >
-      <Checkbox checked={checked} className="size-4 border-2" size={12} />
+      <Checkbox checked={checked} className="size-3 md:size-4 md:border-2" size={12} />
       출근한 친구만 보기
     </Button>
   );

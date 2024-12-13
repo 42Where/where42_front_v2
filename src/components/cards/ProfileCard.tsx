@@ -30,17 +30,17 @@ export default function ProfileCard({
   return (
     <button
       type="button"
-      className={`flex flex-row items-center justify-between rounded-2xl border-2 p-4 hover:border-[#FFB5B5] md:p-6 ${
+      className={`md:hover:border-basepink flex cursor-default flex-row items-center justify-between border-b p-2 md:rounded-2xl md:border-2 md:p-4 ${
         isEdit && 'cursor-pointer'
       }`}
       onClick={clickHandler}
     >
-      <div className="flex flex-row items-center gap-4 md:gap-6">
+      <div className="flex flex-row items-center gap-2 md:gap-4">
         <ProfilePic user={user} type="userCard" />
         <div className="flex flex-col items-start gap-1 md:gap-2">
           <LocationBtn user={user} />
           <h2 className=" text-xl text-darkblue md:text-3xl">{user.intraName}</h2>
-          <p className=" text-l  lg:text-xl">{user.comment}</p>
+          <p className="text-md lg:text-lg">{user.comment}</p>
         </div>
       </div>
       {isEdit ? (

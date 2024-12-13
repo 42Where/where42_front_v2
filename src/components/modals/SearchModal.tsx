@@ -1,6 +1,5 @@
 import { useState, useRef, FormEvent } from 'react';
 import Image from 'next/image';
-import { X } from 'lucide-react';
 import { z } from 'zod';
 import SearchedCard from '@/components/cards/SearchedCard';
 import SearchBtn from '@/components/buttons/SearchBtn';
@@ -14,6 +13,7 @@ import {
 import memberApi from '@/api/memberApi';
 import { useUserStore } from '@/lib/stores';
 import { SearchedUser } from '@/types/User';
+import XBtn from '@/components/buttons/XBtn';
 
 const SearchInputSchema = z.string().regex(/^[a-zA-Z0-9-]*$/, {
   message: '영어, 숫자, -만 입력 가능합니다.',
@@ -111,8 +111,7 @@ export default function SearchModal() {
             />
           </form>
           {searchValue && (
-            <X
-              className="size-6"
+            <XBtn
               onClick={() => {
                 formRef.current?.reset();
                 setSearchValue('');
@@ -124,7 +123,7 @@ export default function SearchModal() {
         {/* eslint-disable-next-line no-nested-ternary */}
         {searchedUsers?.length ? (
           searchedUsers?.length > 4 ? (
-            <div className="h-[200px] w-full overflow-scroll rounded-md md:h-[600px]">
+            <div className="h-[400px] w-full overflow-scroll rounded-md md:h-[600px]">
               <div className="grid grid-flow-row gap-2 md:grid-cols-2">
                 {searchedUsers?.map((searchedMember) => (
                   <SearchedCard key={searchedMember.intraId} member={searchedMember} />

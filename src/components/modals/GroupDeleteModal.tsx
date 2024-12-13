@@ -52,8 +52,8 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className="text-l h-6 gap-2 rounded-full
-          border-2 border-red-700 bg-white px-2 text-red-700 hover:bg-gray-200 md:h-8 md:px-3 lg:text-xl"
+          className="h-5 rounded-full border-2 border-red-700 bg-white
+          px-2 text-xs text-red-700 hover:bg-gray-200 md:h-8 md:px-3 lg:text-xl"
         >
           삭제
         </Button>

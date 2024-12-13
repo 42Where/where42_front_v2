@@ -1,22 +1,18 @@
 import { useState, useRef, FormEvent } from 'react';
-import { X } from 'lucide-react';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import memberApi from '@/api/memberApi';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import { useUserStore } from '@/lib/stores';
 import CustomLocationContent from '@/components/utils/CustomLocationContent';
 import SettingBtn from '@/components/buttons/MySettingBtn';
+import XBtn from '@/components/buttons/XBtn';
 
 export default function MySettingModal() {
   const [isMessage, setIsMessage] = useState<boolean>(false);
@@ -80,14 +76,11 @@ export default function MySettingModal() {
         </DropdownMenuTrigger>
         <DropdownMenuContent side="left" className=" min-w-50 text-darkblue">
           <DialogTrigger asChild onClick={() => setIsMessage(true)}>
-            <DropdownMenuItem className="text-xl">
-              상태 메시지 수정
-            </DropdownMenuItem>
+            <DropdownMenuItem className="md:text-xl">상태 메시지 수정</DropdownMenuItem>
           </DialogTrigger>
+          <DropdownMenuSeparator />
           <DialogTrigger asChild onClick={() => setIsMessage(false)}>
-            <DropdownMenuItem className="text-xl">
-              수동 위치 설정
-            </DropdownMenuItem>
+            <DropdownMenuItem className="md:text-xl">수동 위치 설정</DropdownMenuItem>
           </DialogTrigger>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -115,8 +108,7 @@ export default function MySettingModal() {
                 {searchValue.length}/15
               </p>
               {searchValue && (
-                <X
-                  className="size-6"
+                <XBtn
                   onClick={() => {
                     formRef.current?.reset();
                     setSearchValue('');
@@ -128,10 +120,7 @@ export default function MySettingModal() {
           </DialogHeader>
         </DialogContent>
       ) : (
-        <CustomLocationContent
-          resultMessage={resultMessage}
-          setResultMessage={setResultMessage}
-        />
+        <CustomLocationContent resultMessage={resultMessage} setResultMessage={setResultMessage} />
       )}
     </Dialog>
   );

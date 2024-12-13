@@ -8,7 +8,7 @@ export default function GroupCardContainer({ curGroup }: { curGroup: Group }) {
 
   return (
     <>
-      <div className="grid grid-flow-row gap-4 lg:grid-cols-2 air:grid-cols-3 3xl:grid-cols-4">
+      <div className="4xl:grid-cols-4 grid grid-flow-row border-t md:gap-4 md:border-0 lg:grid-cols-2 air:grid-cols-3">
         {curGroup.members.map(
           (member) =>
             (!checked || member.inCluster) && (
@@ -23,9 +23,8 @@ export default function GroupCardContainer({ curGroup }: { curGroup: Group }) {
         )}
       </div>
       {(curGroup.members.length === 0 ||
-        (checked &&
-          !curGroup.members.filter((member) => member.inCluster).length)) && (
-          <p className="text-center text-xl">아무도 없어요.. 😢</p>
+        (checked && !curGroup.members.filter((member) => member.inCluster).length)) && (
+        <p className="p-6 text-center md:text-xl">아무도 없어요.. 😢</p>
       )}
     </>
   );

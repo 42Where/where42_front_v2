@@ -18,6 +18,7 @@ const config = {
       air: '1400px',
       '2xl': '1536px',
       '3xl': '1600px',
+      '4xl': '1800px',
     },
     container: {
       center: true,
@@ -37,6 +38,7 @@ const config = {
         foreground: 'hsl(var(--foreground))',
         darkblue: 'hsl(var(--darkblue))',
         baseblue: 'hsl(var(--baseblue))',
+        basepink: 'hsl(var(--basepink))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',

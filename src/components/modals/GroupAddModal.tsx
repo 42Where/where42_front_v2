@@ -58,8 +58,8 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className="text-l h-6 gap-2 rounded-full
-          border-2 border-darkblue bg-white px-2 text-darkblue hover:bg-gray-200  md:h-8  md:px-3 lg:text-xl"
+          className="h-5 gap-2 rounded-full border-2
+          border-darkblue bg-white px-2 text-xs text-darkblue hover:bg-gray-200  md:h-8  md:px-3 lg:text-xl"
         >
           다른 그룹에 추가
         </Button>
