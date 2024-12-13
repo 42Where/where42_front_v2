@@ -1,6 +1,5 @@
 import { useState, useRef, FormEvent } from 'react';
 import Image from 'next/image';
-import { X } from 'lucide-react';
 import { z } from 'zod';
 import SearchedCard from '@/components/cards/SearchedCard';
 import SearchBtn from '@/components/buttons/SearchBtn';
@@ -14,6 +13,7 @@ import {
 import memberApi from '@/api/memberApi';
 import { useUserStore } from '@/lib/stores';
 import { SearchedUser } from '@/types/User';
+import XBtn from '@/components/buttons/XBtn';
 
 const SearchInputSchema = z.string().regex(/^[a-zA-Z0-9-]*$/, {
   message: '영어, 숫자, -만 입력 가능합니다.',
@@ -111,8 +111,7 @@ export default function SearchModal() {
             />
           </form>
           {searchValue && (
-            <X
-              className="size-6"
+            <XBtn
               onClick={() => {
                 formRef.current?.reset();
                 setSearchValue('');
