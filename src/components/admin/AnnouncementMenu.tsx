@@ -17,7 +17,7 @@ export default function AnnouncementMenu({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <p className="cursor-pointer text-darkblue decoration-[#FFB5B5] hover:underline">
+        <p className="decoration-basepink cursor-pointer text-darkblue hover:underline">
           종류: {type}
         </p>
       </DropdownMenuTrigger>

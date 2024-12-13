@@ -248,6 +248,9 @@ export default function NewGroupModal() {
                       member={searchedMember as SearchedUser}
                       onClick={() => clickSearchedUserHandler(searchedMember as SearchedUser)}
                       isAddingUser
+                      isAlreadyAdded={selectedUsers.some(
+                        (selectedUser) => selectedUser.intraId === searchedMember.intraId,
+                      )}
                     />
                   ))}
                 </div>
