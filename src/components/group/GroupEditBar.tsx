@@ -4,13 +4,7 @@ import { Button } from '@/components/ui/button';
 import GroupDeleteModal from '@/components/modals/GroupDeleteModal';
 import GroupAddModal from '@/components/modals/GroupAddModal';
 
-export default function GroupEditBar({
-  groups,
-  curGroup,
-}: {
-  groups: Group[];
-  curGroup: Group;
-}) {
+export default function GroupEditBar({ groups, curGroup }: { groups: Group[]; curGroup: Group }) {
   const { setGroups } = useGroupsStore();
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
   return (
@@ -23,8 +17,8 @@ export default function GroupEditBar({
       )}
       <div className="flex flex-row gap-1 md:gap-2">
         <Button
-          className="text-l h-6 gap-2 rounded-full border-2 border-darkblue bg-white
-           px-2 py-1 text-darkblue hover:bg-gray-200 md:h-8 md:px-3 lg:text-xl"
+          className="h-5 gap-2 rounded-full border-2 border-darkblue bg-white
+           px-2 py-1 text-xs text-darkblue hover:bg-gray-200 md:h-8 md:px-3 lg:text-xl"
           onClick={() => {
             if (checkedUsers.length !== curGroup.members.length) {
               // curGroup.members.map((member) => temp.push(member));
@@ -35,8 +29,8 @@ export default function GroupEditBar({
           전체 선택
         </Button>
         <Button
-          className="text-l h-6 gap-2 rounded-full border-2 border-darkblue px-2
-           text-white md:h-8 md:px-3 lg:text-xl"
+          className="h-5 gap-2 rounded-full border-2 border-darkblue px-2
+           text-xs text-white md:h-8 md:px-3 lg:text-xl"
           onClick={() => {
             setGroups(
               groups.map((g) => {
