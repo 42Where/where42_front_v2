@@ -46,7 +46,7 @@ export default function CustomLocationContent({
         className="flex min-h-[300px] max-w-[550px] flex-col items-center
        justify-center transition-all duration-500 ease-out"
       >
-        <p className="text-center text-xl  ">
+        <p className="text-md text-center md:text-xl">
           수동 위치 설정은 클러스터 안에 있을 때만 가능해요 😢
         </p>
       </DialogContent>
