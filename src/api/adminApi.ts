@@ -3,11 +3,8 @@ import { axios } from '@/lib/Axios';
 
 const adminApi = {
   getMyStatus: async (): Promise<Admin> => {
-    try {
-      const response = await axios.get('/v3/admin/status');
-      return response.data;
-    } catch (error) {
-      // NOTE: 현재는 status 가져올 때 일반 유저면 403인데 이제 곧 200으로 처리될 것임.
+    const response = await axios.get('/v3/admin/status');
+    if (response.status === 403) {
       return {
         intraName: '',
         role: 'USER',
