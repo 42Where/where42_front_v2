@@ -21,6 +21,8 @@ export default function useInfoSet() {
       try {
         // 라우터 쿼리 처리
         // debugger;
+        // 만약 라우터가 초기화되지 않았다면 API 호출을 하지 않는다.
+        if (!router.isReady) return;
         if (agreement === 'false') {
           setShowModal(true);
           return;
