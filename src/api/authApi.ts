@@ -22,9 +22,10 @@ axios.interceptors.response.use(
     // console.log(response.config.url, response.config.data, response.status);
     response,
   async (error) => {
-    console.log(error.response);
-    console.log(error.response.status);
-    if (error.response && error.response.status === 401) {
+    const { response } = error;
+    console.log(response);
+    console.log(response.status);
+    if (response && response.status === 401) {
       try {
         const res = await authApi.reissueToken();
         console.log('Refreshed token successfully!');

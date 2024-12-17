@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import Header from '@/components/header/Header';
 import MyProfileCard from '@/components/cards/MyProfileCard';
 import Groups from '@/components/group/Groups';
@@ -11,19 +9,9 @@ import useInfoSet from '@/lib/hooks';
 import Divider from '@/components/utils/Divider';
 
 export default function Home() {
-  const router = useRouter();
   const { user } = useUserStore();
   const { groups } = useGroupsStore();
-  const { intraId, agreement } = router.query;
-  const [showModal, setShowModal] = useState(false);
-  const isAdmin = useInfoSet();
-
-  useEffect(() => {
-    if (agreement && agreement === 'false') setShowModal(true);
-    if (router.query.intraId || router.query.agreement) {
-      router.replace(router.pathname, router.pathname, { shallow: true });
-    }
-  }, [intraId, agreement, router]);
+  const { isAdmin, showModal, setShowModal } = useInfoSet();
 
   return (
     <>
