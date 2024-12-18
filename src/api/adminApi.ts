@@ -3,8 +3,15 @@ import { axios } from '@/lib/Axios';
 
 const adminApi = {
   getMyStatus: async (): Promise<Admin> => {
-    const response = await axios.get('/v3/admin/status');
-    return response.data;
+    try {
+      const response = await axios.get('/v3/admin/status');
+      return response.data;
+    } catch (error) {
+      return {
+        intraName: '',
+        role: 'USER',
+      };
+    }
   },
   getAllStatus: async (): Promise<Admin[]> => {
     const response = await axios.get('/v3/admin/status/all');
