@@ -50,7 +50,7 @@ export default function SingleBlock() {
   return (
     <div className="flex flex-row items-center justify-center gap-4">
       <h2 className="text-2xl">r1</h2>
-      <div className="hidden flex-col items-center justify-center lg:flex">
+      <div className="hidden flex-col items-start justify-center lg:flex">
         <SingleRow seats={oddSeats} />
         <SingleRow seats={evenSeats} pad={oddSeats.length === evenSeats.length} />
       </div>
