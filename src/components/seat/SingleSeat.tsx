@@ -6,9 +6,9 @@ export default function SingleSeat({ user, seatNumber }: { user?: User; seatNumb
   return (
     <button
       type="button"
-      className={`${user && 'cursor-default'} flex flex-col items-center justify-center gap-1 rounded-md p-4 py-2 hover:bg-gray-200`}
+      className={`${!user && 'cursor-default'} flex flex-col items-center justify-center gap-1 rounded-md p-4 py-2 hover:bg-gray-200`}
     >
-      <Image src="/image/seat.svg" alt="seat" width={20} height={20} />
+      <Image src={`${user ? user.image : '/image/seat.svg'}`} alt="seat" width={20} height={20} />
       <p className="text-xs">{seatNumber}</p>
     </button>
   );
