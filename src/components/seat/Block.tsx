@@ -1,4 +1,4 @@
-import SingleRow from '@/components/seat/SingleRow';
+import Col from '@/components/seat/Col';
 
 const dummySeats = [
   {
@@ -53,12 +53,12 @@ export default function SingleBlock() {
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <div className="hidden flex-row items-end justify-center lg:flex">
-        <SingleRow seats={oddSeats} />
-        <SingleRow seats={evenSeats} pad />
+        <Col seats={oddSeats} />
+        <Col seats={evenSeats} pad />
       </div>
       <h3 className="text-2xl text-darkblue">r1</h3>
       <div className="block lg:hidden">
-        <SingleRow seats={dummySeats} />
+        <Col seats={dummySeats} />
       </div>
     </div>
   );

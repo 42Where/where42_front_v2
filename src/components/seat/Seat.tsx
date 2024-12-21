@@ -19,7 +19,12 @@ export default function SingleSeat({
         ${user && 'cursor-pointer hover:bg-secondary'}
         ${isFriend && 'border-2 border-basepink'}`}
     >
-      <Image src={`${user ? user.image : '/image/seat.svg'}`} alt="seat" width={20} height={20} />
+      <Image
+        src={`${user ? user.image : '/image/seats/seat.svg'}`}
+        alt="seat"
+        width={20}
+        height={20}
+      />
       <p className="text-xs">{seatNumber}</p>
     </button>
   );
