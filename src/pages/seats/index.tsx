@@ -1,4 +1,5 @@
 import SingleBlock from '@/components/seat/Block';
+import HalfXBlock from '@/components/seat/HalfXBlock';
 import SeatNavigator from '@/components/seat/Navigator';
 import XBlock from '@/components/seat/XBlock';
 
@@ -8,9 +9,8 @@ export default function SeatsPage() {
       <SeatNavigator />
       <div className="flex flex-row gap-10">
         <SingleBlock />
-        <SingleBlock />
         <XBlock />
-        <XBlock isHalfCross />
+        <HalfXBlock />
       </div>
     </main>
   );
