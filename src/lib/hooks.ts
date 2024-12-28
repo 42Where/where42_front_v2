@@ -15,7 +15,7 @@ export default function useInfoSet() {
     let userDefaultGroupId: number;
     adminApi
       .getMyStatus()
-      .then((res) => setIsAdmin(res.role === 'ADMIN'))
+      .then((res) => setIsAdmin(res.admin))
       .catch((err) => console.error(err));
     authApi
       .getMyInfo()

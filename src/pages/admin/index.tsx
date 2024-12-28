@@ -25,7 +25,7 @@ export default function AdminPage() {
     adminApi
       .getMyStatus()
       .then((res) => {
-        if (res.role !== 'ADMIN') router.push('/');
+        if (res.admin === false) router.push('/');
       })
       .catch((err) => console.error(err));
   }, [router]);

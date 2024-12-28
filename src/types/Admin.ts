@@ -1,4 +1,3 @@
 export type Admin = {
-  intraName: string;
-  role: string;
+  admin: boolean;
 };
