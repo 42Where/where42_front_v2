@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '@/components/header/Header';
 import MyProfileCard from '@/components/cards/MyProfileCard';
@@ -15,15 +15,14 @@ export default function Home() {
   const { user } = useUserStore();
   const { groups } = useGroupsStore();
   const { intraId, agreement } = router.query;
-  const [showModal, setShowModal] = useState(false);
-  const isAdmin = useInfoSet();
+  const { isAdmin, setShowModal, showModal } = useInfoSet();
 
   useEffect(() => {
     if (agreement && agreement === 'false') setShowModal(true);
     if (router.query.intraId || router.query.agreement) {
       router.replace(router.pathname, router.pathname, { shallow: true });
     }
-  }, [intraId, agreement, router]);
+  }, [intraId, agreement, router, setShowModal]);
 
   return (
     <>

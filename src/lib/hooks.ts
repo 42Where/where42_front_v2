@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import authApi from '@/api/authApi';
 import groupApi from '@/api/groupApi';
 import adminApi from '@/api/adminApi';
+import { useRouter } from 'next/router';
 import { useUserStore, useGroupsStore, useAddedMembersStore } from '@/lib/stores';
 
 export default function useInfoSet() {
@@ -10,44 +11,62 @@ export default function useInfoSet() {
   const { setAddedMembers } = useAddedMembersStore();
   const [isAdmin, setIsAdmin] = useState(false);
 
+  const [showModal, setShowModal] = useState(false);
+  const router = useRouter();
+  const { intraId, agreement } = router.query;
+
   useEffect(() => {
-    let userIntraId: number;
-    let userDefaultGroupId: number;
-    adminApi
-      .getMyStatus()
-      .then((res) => setIsAdmin(res.admin))
-      .catch((err) => console.error(err));
-    authApi
-      .getMyInfo()
-      .then((res) => {
-        setUser(res);
-        userIntraId = res.intraId;
-        userDefaultGroupId = res.defaultGroupId;
-      })
-      .catch((err) => console.error(err));
-    groupApi
-      .getAllGroups()
-      .then((res) => {
-        const updatedGroups = res.map((group) => {
-          if (group.groupId === userDefaultGroupId) {
-            return { ...group, groupName: '친구 목록' };
-          }
-          return group;
-        });
-        const sortedGroup = [...updatedGroups].sort((a, b) => a.groupId - b.groupId);
-        const defaultGroup = sortedGroup.find((group) => group.groupName === '친구 목록');
-        if (defaultGroup) {
-          sortedGroup.splice(sortedGroup.indexOf(defaultGroup), 1);
-          sortedGroup.push(defaultGroup);
+    const initializeInfo = async () => {
+      try {
+        // 만약 라우터가 초기화되지 않았다면 API 호출을 하지 않는다.
+        if (!router.isReady) return;
+        if (agreement === 'false') {
+          setShowModal(true);
+          return;
         }
-        setGroups(sortedGroup);
-        const allMemberIds = res.flatMap((group) => group.members.map((member) => member.intraId));
+        if (intraId || agreement) {
+          await router.replace(router.pathname, router.pathname, { shallow: true });
+        }
+
+        // 어드민 상태 확인
+        const adminRes = await adminApi.getMyStatus();
+        setIsAdmin(adminRes.admin);
+
+        // 사용자 정보 가져오기
+        const userRes = await authApi.getMyInfo();
+        setUser(userRes);
+        const userIntraId = userRes.intraId;
+        const userDefaultGroupId = userRes.defaultGroupId;
+
+        // 그룹 정보 가져오기 및 정렬
+        const groupRes = await groupApi.getAllGroups();
+        const updatedGroups = groupRes.map((group) =>
+          group.groupId === userDefaultGroupId ? { ...group, groupName: '친구 목록' } : group,
+        );
+
+        const sortedGroups = updatedGroups.sort((a, b) => a.groupId - b.groupId);
+        const defaultGroup = sortedGroups.find((group) => group.groupName === '친구 목록');
+
+        if (defaultGroup) {
+          sortedGroups.splice(sortedGroups.indexOf(defaultGroup), 1);
+          sortedGroups.push(defaultGroup);
+        }
+
+        setGroups(sortedGroups);
+
+        // 모든 멤버 ID 수집
+        const allMemberIds = groupRes.flatMap((group) =>
+          group.members.map((member) => member.intraId),
+        );
         allMemberIds.push(userIntraId);
         setAddedMembers(allMemberIds);
-      })
-      .catch((err) => console.error(err));
-  }, [setAddedMembers, setGroups, setUser]);
+      } catch (error) {
+        console.error('Error initializing info:', error);
+      }
+    };
 
-  // 유저가 어드민인지 확인하고 반환합니다.
-  return isAdmin;
+    initializeInfo();
+  }, [router, setUser, setGroups, setAddedMembers, intraId, agreement]);
+
+  return { isAdmin, showModal, setShowModal };
 }
