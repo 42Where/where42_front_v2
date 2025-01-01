@@ -69,7 +69,7 @@ export default function AgreementModal({
               onClick={() => {
                 groupApi.agreeJoin().then((res) => {
                   console.log(res);
-                  router.push('/');
+                  router.reload();
                 });
               }}
               size="lg"
