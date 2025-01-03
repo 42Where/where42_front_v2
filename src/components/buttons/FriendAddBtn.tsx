@@ -1,18 +1,23 @@
 import Image from 'next/image';
 import { SearchedUser } from '@/types/User';
 import groupApi from '@/api/groupApi';
-import {
-  useUserStore,
-  useAddedMembersStore,
-  useGroupsStore,
-} from '@/lib/stores';
+import { useUserStore, useAddedMembersStore, useGroupsStore, useClusterStore } from '@/lib/stores';
+import { updateClusterUser } from '@/lib/clusterUtils';
 import { useToast } from '@/components/ui/use-toast';
+import { ClusterName, RowName } from '@/types/Cluster';
 
-export default function FriendAddBtn({ member }: { member: SearchedUser }) {
+export default function FriendAddBtn({
+  member,
+  isClusterView,
+}: {
+  member: SearchedUser;
+  isClusterView?: boolean;
+}) {
   const { user } = useUserStore();
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
   const { groups, setGroups } = useGroupsStore();
   const { toast } = useToast();
+  const { clusters, setClusters } = useClusterStore();
 
   function clickHandler() {
     setAddedMembers([...addedMembers, member.intraId]);
@@ -36,6 +41,23 @@ export default function FriendAddBtn({ member }: { member: SearchedUser }) {
           title: `'${member.intraName}'님을 친구 목록에 추가했습니다.`,
         });
       });
+    if (isClusterView) {
+      if (!member || !member.location) return;
+      const userCluster = member.location.slice(0, 2) as ClusterName;
+      const userRow = String(member.location.slice(2, 4)) as RowName;
+      const userSeat = member.location[5];
+      setClusters(
+        updateClusterUser(clusters, userCluster, userRow, Number(userSeat), {
+          intraId: member.intraId,
+          intraName: member.intraName,
+          image: member.image,
+          cluster: userCluster,
+          row: Number(userRow[1]),
+          seat: Number(userSeat),
+          isFriend: true,
+        }),
+      );
+    }
   }
 
   return (
