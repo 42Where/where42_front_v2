@@ -50,8 +50,8 @@ export default function SingleSeat({
         <button
           type="button"
           className={`flex h-10 w-9 cursor-default flex-col items-center justify-center gap-1 rounded-md md:size-14
-        ${user && 'cursor-pointer hover:bg-secondary'}
-        ${user?.isFriend && 'bg-[#FFDDDD]'}`}
+            ${user && 'cursor-pointer hover:bg-secondary'}
+            ${user?.isFriend ? 'bg-[#FFDDDD]' : 'bg-slate-300'}`}
         >
           <div className="relative h-full w-6 md:w-8">
             <Image
