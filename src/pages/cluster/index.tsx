@@ -36,17 +36,18 @@ export default function SeatsPage() {
   useEffect(() => {
     if (fetchedClusters.current[selectedCluster]) return;
     clusterApi.getClusterUsers({ cluster: selectedCluster }).then((users) => {
-      users.forEach((user) =>
-        setClusters(
+      const updatedClusters = users.reduce(
+        (updated, user) =>
           updateClusterUser(
-            clusters,
+            updated,
             selectedCluster,
             `r${String(user.row)}` as RowName,
             user.seat,
             user,
           ),
-        ),
+        clusters,
       );
+      setClusters(updatedClusters); // 한 번만 호출
     });
     fetchedClusters.current[selectedCluster] = true; // 플래그 설정
   }, [selectedCluster]);
