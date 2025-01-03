@@ -43,9 +43,18 @@ export default function FriendAddBtn({
       });
     if (isClusterView) {
       if (!member || !member.location) return;
-      const userCluster = member.location.slice(0, 2) as ClusterName;
-      const userRow = String(member.location.slice(2, 4)) as RowName;
-      const userSeat = member.location[5];
+      let userCluster;
+      let userRow;
+      let userSeat;
+      if (member.location.length === 6) {
+        userCluster = member.location.slice(0, 2) as ClusterName;
+        userRow = String(member.location.slice(2, 4)) as RowName;
+        userSeat = member.location.slice(5, 6);
+      } else if (member.location.length === 7) {
+        userCluster = member.location.slice(0, 3) as ClusterName;
+        userRow = String(member.location.slice(3, 5)) as RowName;
+        userSeat = member.location.slice(6, 7);
+      } else throw new Error('Invalid location');
       setClusters(
         updateClusterUser(clusters, userCluster, userRow, Number(userSeat), {
           intraId: member.intraId,
