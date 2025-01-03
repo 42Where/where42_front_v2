@@ -21,16 +21,16 @@ export default function SingleSeat({
     return (
       <button
         type="button"
-        className="flex h-10 w-9 cursor-default flex-col items-center justify-center gap-1 rounded-md md:size-14"
+        className="flex h-10 w-9 cursor-default flex-col items-center justify-center gap-1 rounded-md md:size-14 2xl:size-20"
       >
         <Image
           src="/image/seats/seat.svg"
           alt="seat"
           width={32}
           height={32}
-          className="size-5 md:size-8"
+          className="size-5 md:size-8 2xl:size-12"
         />
-        <p className="text-[8px] md:text-xs">{seatNumber}</p>
+        <p className="text-[8px] md:text-xs 2xl:text-base">{seatNumber}</p>
       </button>
     );
 
@@ -49,11 +49,11 @@ export default function SingleSeat({
       <DropdownMenuTrigger asChild>
         <button
           type="button"
-          className={`flex h-10 w-9 cursor-default flex-col items-center justify-center gap-1 rounded-md md:size-14
+          className={`flex h-10 w-9 cursor-default flex-col items-center justify-center gap-1 rounded-md md:size-14 2xl:size-20
             ${user && 'cursor-pointer hover:bg-secondary'}
             ${user?.isFriend ? 'bg-[#FFDDDD]' : 'bg-slate-300'}`}
         >
-          <div className="relative h-full w-6 md:w-8">
+          <div className="relative h-full w-6 md:w-8 2xl:w-12">
             <Image
               src={user.image || '/image/seats/defaultUserImage.svg'}
               alt="seat"
@@ -62,15 +62,17 @@ export default function SingleSeat({
               className="object-top"
             />
           </div>
-          <p className="text-[8px] md:text-xs">{seatNumber}</p>
+          <p className="text-[8px] md:text-xs 2xl:text-base">{seatNumber}</p>
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="rounded-xl p-2 md:p-4">
         <div className="flex flex-row items-center gap-4 md:gap-4">
-          <ProfilePic user={dummyUser} type="searchedCard" />
+          <ProfilePic user={dummyUser} type="userCard" />
           <div className="flex flex-col items-start gap-1">
             <LocationBtn user={dummyUser} />
-            <h2 className=" text-xl text-darkblue md:text-2xl">{dummyUser.intraName}</h2>
+            <h2 className=" text-xl text-darkblue md:text-2xl 2xl:text-3xl">
+              {dummyUser.intraName}
+            </h2>
             <p className=" md:text-md text-sm ">{dummyUser.comment}</p>
           </div>
           {!user.isFriend && (

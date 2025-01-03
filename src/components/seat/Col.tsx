@@ -24,7 +24,7 @@ export default function Column({
   return (
     <div
       className={`flex h-full flex-row justify-center md:flex-col ${gap ? 'gap-10' : 'md:gap-2'}
-        ${reversed ? 'items-end' : 'items-start'} ${pb && 'pb-24'} ${slanted && 'relative w-20 py-[60px]'}`}
+        ${reversed ? 'items-end' : 'items-start'} ${pb && 'pb-24'} ${slanted && 'relative w-20 py-[60px] 2xl:w-36 2xl:py-20'}`}
     >
       {!slanted && seats.map((seat) => <RenderSeat key={getSeatKey(seat)} seat={seat} />)}
       {slanted && (

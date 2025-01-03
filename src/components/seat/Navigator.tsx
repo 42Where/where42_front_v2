@@ -14,7 +14,7 @@ function SeatTab({
   return (
     <button
       type="button"
-      className={`${isSelected ? 'border-b border-basepink text-black' : 'text-gray-400'} p-2 text-xs sm:p-4 sm:text-base`}
+      className={`${isSelected ? 'border-b border-basepink text-black' : 'text-gray-400'} p-2 text-xs sm:p-4 sm:text-base 2xl:text-2xl`}
       onClick={() => {
         if (!isSelected) setSelectedCluster(c);
       }}

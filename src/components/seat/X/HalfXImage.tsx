@@ -7,7 +7,7 @@ export default function HalfXImage({ rot }: { rot?: boolean }) {
         src="/image/seats/CX1HalfCross.svg"
         width={240}
         height={240}
-        className={`hidden md:block ${rot && 'rotate-180'}`}
+        className={`hidden md:block 2xl:w-96 ${rot && 'rotate-180'}`}
         alt="CX1HalfCross"
       />
       <Image
