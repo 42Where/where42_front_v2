@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import {
   ClusterName,
   CX1Cluster,
@@ -21,9 +21,20 @@ export default function SeatsPage() {
   const [selectedCluster, setSelectedCluster] = useState<ClusterName>('c1');
   const { clusters, setClusters } = useClusterStore();
   const currentCluster = clusters[selectedCluster];
+  const fetchedClusters = useRef<Record<ClusterName, boolean>>({
+    c1: false,
+    c2: false,
+    cx1: false,
+    cx2: false,
+    c3: false,
+    c4: false,
+    c5: false,
+    c6: false,
+  });
   useInfoSet();
 
   useEffect(() => {
+    if (fetchedClusters.current[selectedCluster]) return;
     clusterApi.getClusterUsers({ cluster: selectedCluster }).then((users) => {
       users.forEach((user) =>
         setClusters(
@@ -37,6 +48,7 @@ export default function SeatsPage() {
         ),
       );
     });
+    fetchedClusters.current[selectedCluster] = true; // 플래그 설정
   }, [selectedCluster]);
 
   return (
