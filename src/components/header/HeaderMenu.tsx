@@ -3,12 +3,21 @@ import LogoutBtn from '@/components/buttons/LogoutBtn';
 import Announcements from '@/components/announcement/Announcements';
 import AdminLinkBtn from '@/components/buttons/AdminLinkBtn';
 import ClusterLinkBtn from '@/components/buttons/ClusterLinkBtn';
+import HomeLinkBtn from '@/components/buttons/HomeLinkBtn';
 
-export default function HeaderMenu({ isAdmin }: { isAdmin: boolean }) {
+export default function HeaderMenu({
+  isAdmin,
+  isAdminPage,
+  isClusterPage,
+}: {
+  isAdmin: boolean;
+  isAdminPage?: boolean;
+  isClusterPage?: boolean;
+}) {
   return (
     <div className="flex flex-row gap-2">
       {isAdmin && <AdminLinkBtn />}
-      <ClusterLinkBtn />
+      {isClusterPage || isAdminPage ? <HomeLinkBtn /> : <ClusterLinkBtn />}
       <Announcements />
       <SearchModal />
       <LogoutBtn />

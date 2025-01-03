@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import HeaderMenu from '@/components/header/HeaderMenu';
-import HomeLinkBtn from '@/components/buttons/HomeLinkBtn';
 import { useRouter } from 'next/router';
 
 export default function Header({
@@ -23,7 +22,7 @@ export default function Header({
         className={`${isAdmin && 'h-[50px] w-[100px] lg:h-[100px] lg:w-[300px]'} h-[50px] w-[100px] cursor-pointer lg:h-[100px] lg:w-[200px]`}
         onClick={() => router.push('/')}
       />
-      {isAdminPage || isClusterPage ? <HomeLinkBtn /> : <HeaderMenu isAdmin={isAdmin} />}
+      <HeaderMenu isAdmin={isAdmin} isAdminPage={isAdminPage} isClusterPage={isClusterPage} />
     </header>
   );
 }
