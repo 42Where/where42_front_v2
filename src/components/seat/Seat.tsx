@@ -9,15 +9,17 @@ import LocationBtn from '@/components/buttons/LocationBtn';
 import ProfilePic from '@/components/ProfilePic';
 import FriendAddBtn from '@/components/buttons/FriendAddBtn';
 import { User } from '@/types/User';
+import { useUserStore } from '@/lib/stores';
 
 export default function SingleSeat({
-  user,
+  clusterUser,
   seatNumber,
 }: {
-  user?: ActiveClusterUser;
+  clusterUser?: ActiveClusterUser;
   seatNumber: number;
 }) {
-  if (!user)
+  const { user } = useUserStore();
+  if (!clusterUser)
     return (
       <button
         type="button"
@@ -34,16 +36,19 @@ export default function SingleSeat({
       </button>
     );
 
+  const isMySeat = user?.intraId === clusterUser.intraId;
+
   const dummyUser: User = {
-    intraId: user.intraId,
-    intraName: user.intraName,
-    image: user.image,
-    location: `${user.cluster}r${user.row}s${user.seat}`,
+    intraId: clusterUser.intraId,
+    intraName: clusterUser.intraName,
+    image: clusterUser.image,
+    location: `${clusterUser.cluster}r${clusterUser.row}s${clusterUser.seat}`,
     inCluster: true,
-    comment: '',
+    comment: isMySeat ? '우주를 여행하는 당신의 영원한 친구' : '',
     agree: true,
     defaultGroupId: 0,
   };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -51,11 +56,12 @@ export default function SingleSeat({
           type="button"
           className={`flex h-10 w-9 cursor-default flex-col items-center justify-center gap-1 rounded-md md:size-14 2xl:size-20
             ${user && 'cursor-pointer hover:bg-secondary'}
-            ${user?.isFriend ? 'bg-[#FFDDDD]' : 'bg-slate-300'}`}
+            ${isMySeat && 'bg-basepink'}
+            ${clusterUser?.isFriend ? 'bg-[#FFDDDD]' : 'bg-slate-300'}`}
         >
           <div className="relative h-full w-6 md:w-8 2xl:w-12">
             <Image
-              src={user.image || '/image/seats/defaultUserImage.svg'}
+              src={clusterUser.image || '/image/seats/defaultUserImage.svg'}
               alt="seat"
               fill
               objectFit="cover"
@@ -73,13 +79,13 @@ export default function SingleSeat({
             <h2 className=" text-xl text-darkblue md:text-2xl 2xl:text-3xl">
               {dummyUser.intraName}
             </h2>
-            <p className=" md:text-md text-sm ">{dummyUser.comment}</p>
+            <p className="md:text-md text-sm text-baseblue">{dummyUser.comment}</p>
           </div>
-          {!user.isFriend && (
+          {!clusterUser.isFriend && (
             <FriendAddBtn
               member={{
                 ...dummyUser,
-                friend: user.isFriend,
+                friend: clusterUser.isFriend,
                 inOrOut: true,
               }}
               isClusterView
