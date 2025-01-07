@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import Cookies from 'js-cookie';
 
+// Axios without interceptors
 export const tokenAxios = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_DEV_API_URL,
   headers: {
@@ -10,6 +11,7 @@ export const tokenAxios = Axios.create({
   withCredentials: true,
 });
 
+// Axios with interceptors
 export const axios = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_DEV_API_URL,
   headers: {
@@ -19,6 +21,17 @@ export const axios = Axios.create({
   withCredentials: true,
 });
 
+type ReissueTokenResponse = { accessToken: string };
+
+const reissueToken = async (): Promise<ReissueTokenResponse> => {
+  const intraId = Cookies.get('intraId');
+  const response = await tokenAxios.post('/v3/jwt/reissue', {
+    intraId,
+  });
+  return response.data;
+};
+
+// Reissuing logic
 let isRefreshing = false; // 토큰 재발급 상태
 let refreshSubscribers: Array<Function> = []; // 재발급 대기 중인 요청 리스트
 
@@ -40,9 +53,9 @@ axios.interceptors.response.use(
       if (!isRefreshing) {
         isRefreshing = true;
         try {
-          const res = await tokenAxios.post('/v3/jwt/reissue').then((r) => r.data);
+          const res = await reissueToken();
           console.log('Refreshed token successfully!');
-          const newAccessToken = res;
+          const newAccessToken = res.accessToken;
           isRefreshing = false;
           onTokenRefreshed(newAccessToken);
           config.headers.Authorization = `Bearer ${newAccessToken}`;
@@ -71,11 +84,8 @@ axios.interceptors.request.use(
   (config) => {
     const accessToken = Cookies.get('accessToken');
     const newConfig = config;
-    if (accessToken) {
-      newConfig.headers.Authorization = `Bearer ${accessToken}`;
-    } else {
-      newConfig.headers.Authorization = 'Bearer NONE';
-    }
+    if (accessToken) newConfig.headers.Authorization = `Bearer ${accessToken}`;
+    else newConfig.headers.Authorization = 'Bearer NONE';
     return newConfig;
   },
   (error) => Promise.reject(error),
