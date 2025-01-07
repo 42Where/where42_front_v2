@@ -21,14 +21,7 @@ const authApi = {
   logout: async (): Promise<void> => {
     const response = await axios.post('/v3/logout');
     console.log(response.data);
-    Cookies.remove('accessToken', {
-      path: '/',
-      domain: '.where42.com',
-    });
-    Cookies.remove('refreshToken', {
-      path: '/',
-      domain: '.where42.com',
-    });
+    Cookies.remove('accessToken', { domain: '.where42.kr' });
   },
 };
 

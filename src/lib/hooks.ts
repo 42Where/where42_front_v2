@@ -35,7 +35,7 @@ export default function useInfoSet() {
 
         // 사용자 정보 가져오기
         const userRes = await authApi.getMyInfo();
-        Cookies.set('intraId', String(userRes.intraId));
+        Cookies.set('intraId', String(userRes.intraId), { domain: '.where42.kr' });
         setUser(userRes);
         const userIntraId = userRes.intraId;
         const userDefaultGroupId = userRes.defaultGroupId;
