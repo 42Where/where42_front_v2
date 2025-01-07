@@ -51,8 +51,7 @@ axios.interceptors.response.use(
         } catch (err) {
           console.error('Failed to refresh token:', err);
           isRefreshing = false;
-          Cookies.remove('accessToken');
-          Cookies.remove('refreshToken');
+          Cookies.remove('accessToken', { domain: '.where42.kr' });
           window.location.href = '/login';
           return Promise.reject(err);
         }

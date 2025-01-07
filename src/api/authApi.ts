@@ -42,8 +42,7 @@ axios.interceptors.response.use(
         return await axios(originalRequest);
       } catch (err) {
         console.error('Failed to refresh token:', err);
-        Cookies.remove('accessToken');
-        Cookies.remove('refreshToken');
+        Cookies.remove('accessToken', { domain: '.where42.kr' });
         window.location.href = '/login';
       }
     } else if (error.response && error.response.status === 500) {
