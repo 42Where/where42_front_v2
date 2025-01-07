@@ -2,17 +2,33 @@ import { User } from '@/types/User';
 import { axios, tokenAxios } from '@/lib/Axios';
 import Cookies from 'js-cookie';
 
+type ReissueTokenResponse = {
+  accessToken: string;
+};
+
 const authApi = {
   getMyInfo: async (): Promise<User> => {
     const response = await axios.get('/v3/member');
     return response.data;
   },
-  reissueToken: async (): Promise<any> => {
+  reissueToken: async (): Promise<ReissueTokenResponse> => {
     const intraId = Cookies.get('intraId');
     const response = await tokenAxios.post('/v3/jwt/reissue', {
       IntraId: intraId,
     });
     return response.data;
+  },
+  logout: async (): Promise<void> => {
+    const response = await axios.post('/v3/logout');
+    console.log(response.data);
+    Cookies.remove('accessToken', {
+      path: '/',
+      domain: '.where42.com',
+    });
+    Cookies.remove('refreshToken', {
+      path: '/',
+      domain: '.where42.com',
+    });
   },
 };
 

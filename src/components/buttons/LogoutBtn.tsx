@@ -1,12 +1,7 @@
-import Cookies from 'js-cookie';
+import authApi from '@/api/authApi';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 export default function LogoutBtn() {
   const router = useRouter();
@@ -17,9 +12,8 @@ export default function LogoutBtn() {
           <button
             className="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 lg:size-14"
             type="button"
-            onClick={() => {
-              Cookies.remove('accessToken');
-              Cookies.remove('refreshToken');
+            onClick={async () => {
+              await authApi.logout();
               router.push('/login');
             }}
           >
