@@ -14,7 +14,7 @@ const authApi = {
   reissueToken: async (): Promise<ReissueTokenResponse> => {
     const intraId = Cookies.get('intraId');
     const response = await tokenAxios.post('/v3/jwt/reissue', {
-      IntraId: intraId,
+      intraId,
     });
     return response.data;
   },
