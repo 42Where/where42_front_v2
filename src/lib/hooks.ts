@@ -4,6 +4,7 @@ import groupApi from '@/api/groupApi';
 import adminApi from '@/api/adminApi';
 import { useRouter } from 'next/router';
 import { useUserStore, useGroupsStore, useAddedMembersStore } from '@/lib/stores';
+import Cookies from 'js-cookie';
 
 export default function useInfoSet() {
   const { setUser } = useUserStore();
@@ -34,6 +35,7 @@ export default function useInfoSet() {
 
         // 사용자 정보 가져오기
         const userRes = await authApi.getMyInfo();
+        Cookies.set('intraId', String(userRes.intraId));
         setUser(userRes);
         const userIntraId = userRes.intraId;
         const userDefaultGroupId = userRes.defaultGroupId;

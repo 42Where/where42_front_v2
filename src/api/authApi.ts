@@ -8,7 +8,10 @@ const authApi = {
     return response.data;
   },
   reissueToken: async (): Promise<any> => {
-    const response = await tokenAxios.post('/v3/jwt/reissue');
+    const intraId = Cookies.get('intraId');
+    const response = await tokenAxios.post('/v3/jwt/reissue', {
+      IntraId: intraId,
+    });
     return response.data;
   },
 };
