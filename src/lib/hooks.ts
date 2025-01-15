@@ -5,6 +5,7 @@ import adminApi from '@/api/adminApi';
 import { useRouter } from 'next/router';
 import { useUserStore, useGroupsStore, useAddedMembersStore } from '@/lib/stores';
 import Cookies from 'js-cookie';
+// import { useQuery } from '@tanstack/react-query';
 
 export default function useInfoSet() {
   const { setUser } = useUserStore();
