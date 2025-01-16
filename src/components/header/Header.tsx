@@ -19,7 +19,7 @@ export default function Header({
         alt="logo"
         width={200}
         height={100}
-        className={`${isAdmin && 'h-[50px] w-[100px] lg:h-[100px] lg:w-[300px]'} h-[50px] w-[100px] cursor-pointer lg:h-[100px] lg:w-[200px]`}
+        className="h-[50px] w-[100px] cursor-pointer lg:h-[100px] lg:w-[300px]"
         onClick={() => router.push('/')}
       />
       <HeaderMenu isAdmin={isAdmin} isAdminPage={isAdminPage} isClusterPage={isClusterPage} />
