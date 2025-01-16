@@ -25,7 +25,11 @@ export default function ProfilePic({ user, type }: { user: User; type: CardType 
             <AvatarFallback />
           </Avatar>
         </TooltipTrigger>
-        {type !== 'searchedCard' && <TooltipContent>인트라 프로필 방문</TooltipContent>}
+        {type !== 'searchedCard' && (
+          <TooltipContent>
+            <p className="text-baseblue">인트라 프로필 방문</p>
+          </TooltipContent>
+        )}
       </Tooltip>
     </TooltipProvider>
   );

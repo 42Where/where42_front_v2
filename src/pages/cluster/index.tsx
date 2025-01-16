@@ -31,7 +31,7 @@ export default function SeatsPage() {
     c5: false,
     c6: false,
   });
-  useInfoSet();
+  const { isAdmin } = useInfoSet();
 
   useEffect(() => {
     if (fetchedClusters.current[selectedCluster]) return;
@@ -54,7 +54,7 @@ export default function SeatsPage() {
 
   return (
     <main className="flex h-full min-h-screen w-full flex-col items-center justify-start px-1 pb-20 md:px-10">
-      <Header isAdmin={false} isClusterPage />
+      <Header isAdmin={isAdmin} isClusterPage />
       <div className="flex flex-col items-center justify-center gap-4 md:gap-10">
         <SeatNavigator selectedCluster={selectedCluster} setSelectedCluster={setSelectedCluster} />
         <div className="flex flex-row gap-10">

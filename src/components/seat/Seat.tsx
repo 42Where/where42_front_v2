@@ -76,7 +76,7 @@ export default function SingleSeat({
           <ProfilePic user={dummyUser} type="userCard" />
           <div className="flex flex-col items-start gap-1">
             <LocationBtn user={dummyUser} />
-            <h2 className=" text-xl text-darkblue md:text-2xl 2xl:text-3xl">
+            <h2 className="text-xl text-darkblue md:text-2xl 2xl:text-3xl">
               {dummyUser.intraName}
             </h2>
             <p className="md:text-md text-sm text-baseblue">{dummyUser.comment}</p>
