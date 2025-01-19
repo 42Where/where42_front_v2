@@ -1,9 +1,9 @@
 import React from 'react';
 import { DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
-import { useUserStore } from '@/lib/stores';
 import { Button } from '@/components/ui/button';
-import locationApi from '@/api/locationApi';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { useDeleteLocation, useUpdateLocation } from '@/hooks/useMutateLocations';
+import useMyInfo from '@/hooks/useMyInfo';
 import LocationCascader from './LocationCascader';
 
 export default function CustomLocationContent({
@@ -13,30 +13,20 @@ export default function CustomLocationContent({
   resultMessage: string;
   setResultMessage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-  const { user, setUser } = useUserStore();
+  const user = useMyInfo().data;
   const [locationValue, setLocationValue] = React.useState<string>('');
+  const updateLocation = useUpdateLocation(locationValue);
+  const deleteLocation = useDeleteLocation();
 
   function setClickHandler() {
     if (!user) return;
     setResultMessage('설정 되었습니다.');
-    locationApi
-      .setCustomLocation({ location: locationValue })
-      .then(() => setUser({ ...user, location: locationValue }))
-      .catch((error) => {
-        console.error(error);
-        setResultMessage('설정 중 오류가 발생했습니다. 다시 시도해 주세요.');
-      });
+    updateLocation.mutate();
   }
   function initClickHandler() {
     if (!user) return;
     setResultMessage('삭제 되었습니다.');
-    locationApi
-      .deleteCustomLocation()
-      .then(() => setUser({ ...user, location: '' }))
-      .catch((error) => {
-        console.error(error);
-        setResultMessage('삭제 중 오류가 발생했습니다. 다시 시도해 주세요.');
-      });
+    deleteLocation.mutate();
   }
 
   if (!user) return null;

@@ -7,7 +7,7 @@ export function useUpdateLocation(location: string) {
   const myInfo = queryClient.getQueryData(queryOption.queryKey);
   const { queryKey } = queryOption;
 
-  useMutation({
+  return useMutation({
     mutationFn: () => locationApi.setCustomLocation({ location }),
     onMutate: () => {
       if (!myInfo) return;
@@ -17,7 +17,6 @@ export function useUpdateLocation(location: string) {
       if (!myInfo) return;
       queryClient.setQueryData(queryKey, { ...myInfo });
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey }),
   });
 }
 
@@ -27,7 +26,7 @@ export function useDeleteLocation() {
   const myInfo = queryClient.getQueryData(queryOption.queryKey);
   const { queryKey } = queryOption;
 
-  useMutation({
+  return useMutation({
     mutationFn: locationApi.deleteCustomLocation,
     onMutate: () => {
       if (!myInfo) return;
@@ -37,6 +36,5 @@ export function useDeleteLocation() {
       if (!myInfo) return;
       queryClient.setQueryData(queryKey, { ...myInfo });
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey }),
   });
 }

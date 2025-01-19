@@ -8,7 +8,7 @@ import Group from '@/types/Group';
 export default function useGroupList() {
   const { setAddedMembers } = useAddedMembersStore();
   const myInfoRes = useMyInfo();
-  const queryRes = useQuery({
+  return useQuery({
     queryKey: ['groupList'],
     queryFn: groupApi.getAllGroups,
     staleTime: 5 * 60 * 1000,
@@ -36,5 +36,4 @@ export default function useGroupList() {
       return sortedGroups;
     },
   });
-  return queryRes;
 }
