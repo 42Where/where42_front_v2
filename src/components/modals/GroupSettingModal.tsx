@@ -3,22 +3,24 @@ import { DialogTrigger } from '@radix-ui/react-dialog';
 import { Dialog, DialogContent, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import groupApi from '@/api/groupApi';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import { useGroupsStore, useUserStore } from '@/lib/stores';
+import { useGroupsStore } from '@/lib/stores';
 import { Button } from '@/components/ui/button';
 import Group from '@/types/Group';
 import { useToast } from '@/components/ui/use-toast';
 import GroupSettingBtn from '@/components/buttons/GroupSettingBtn';
 import XBtn from '@/components/buttons/XBtn';
+import useMyInfo from '@/hooks/useMyInfo';
 
 export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
   const [isDelete, setIsDelete] = useState<boolean>(false);
   const { groups, setGroups } = useGroupsStore();
-  const defalutGroupId = useUserStore((state) => state.user?.defaultGroupId);
   const [resultMessage, setResultMessage] = useState<string>('');
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [groupName, setGroupName] = useState<string>('');
   const { toast } = useToast();
+  const defalutGroupId = useMyInfo().data?.defaultGroupId;
+  if (!defalutGroupId) return null;
 
   function editClickHandler() {
     const temp = [...groups];

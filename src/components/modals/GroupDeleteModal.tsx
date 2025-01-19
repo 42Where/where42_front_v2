@@ -8,14 +8,17 @@ import {
 import { Button } from '@/components/ui/button';
 import groupApi from '@/api/groupApi';
 import Group from '@/types/Group';
-import { useCheckedUsersStore, useGroupsStore, useUserStore } from '@/lib/stores';
+import { useCheckedUsersStore, useGroupsStore } from '@/lib/stores';
+import useMyInfo from '@/hooks/useMyInfo';
 import { useToast } from '@/components/ui/use-toast';
 
 export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
   const { checkedUsers } = useCheckedUsersStore();
   const { groups, setGroups } = useGroupsStore();
-  const { user } = useUserStore();
+  const user = useMyInfo().data;
   const { toast } = useToast();
+
+  if (!user) return null;
 
   function clickHandler() {
     const temp = [...groups];
@@ -61,7 +64,7 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
       <DialogContent className="max-w-[425px] text-darkblue transition-all duration-500  ease-out">
         <DialogTitle>그룹 삭제</DialogTitle>
         <p>선택한 카뎃들을 삭제하시겠습니까?</p>
-        {curGroup.groupId === user?.defaultGroupId && (
+        {curGroup.groupId === user.defaultGroupId && (
           <p className=" text-red-700">* 기본 그룹에서 삭제할 시 모든 그룹에서 삭제됩니다.</p>
         )}
         <div className="flex flex-row items-center justify-between">

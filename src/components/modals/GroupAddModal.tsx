@@ -9,13 +9,15 @@ import {
 import { Button } from '@/components/ui/button';
 import groupApi from '@/api/groupApi';
 import Group from '@/types/Group';
-import { useCheckedUsersStore, useGroupsStore, useUserStore } from '@/lib/stores';
+import { useCheckedUsersStore, useGroupsStore } from '@/lib/stores';
+import useMyInfo from '@/hooks/useMyInfo';
 
 export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
-  const { user } = useUserStore();
+  const user = useMyInfo().data;
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
   const { groups, setGroups } = useGroupsStore();
   const [checkedGroups, setCheckedGroups] = useState<number[]>([]);
+  if (!user) return null;
 
   function groupSelectClickHandler(g: Group) {
     if (checkedGroups.includes(g.groupId)) {
@@ -69,7 +71,7 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
         <div className="flex flex-col gap-2">
           {groups.map(
             (g) =>
-              g.groupId !== user?.defaultGroupId && (
+              g.groupId !== user.defaultGroupId && (
                 <Button
                   key={g.groupId}
                   className={`rounded-2xl ${

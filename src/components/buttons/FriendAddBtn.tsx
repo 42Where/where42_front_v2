@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import { SearchedUser } from '@/types/User';
 import groupApi from '@/api/groupApi';
-import { useUserStore, useAddedMembersStore, useGroupsStore, useClusterStore } from '@/lib/stores';
+import { useAddedMembersStore, useGroupsStore, useClusterStore } from '@/lib/stores';
+import useMyInfo from '@/hooks/useMyInfo';
 import { updateClusterUser } from '@/lib/clusterUtils';
 import { useToast } from '@/components/ui/use-toast';
 import { ClusterName, RowName } from '@/types/Cluster';
@@ -13,16 +14,17 @@ export default function FriendAddBtn({
   member: SearchedUser;
   isClusterView?: boolean;
 }) {
-  const { user } = useUserStore();
+  const user = useMyInfo().data;
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
   const { groups, setGroups } = useGroupsStore();
   const { toast } = useToast();
   const { clusters, setClusters } = useClusterStore();
 
   function clickHandler() {
+    if (!user) return;
     setAddedMembers([...addedMembers, member.intraId]);
     const updatedGroups = groups.map((group) => {
-      if (group.groupId === user?.defaultGroupId) {
+      if (group.groupId === user.defaultGroupId) {
         return {
           ...group,
           members: [...group.members, member],
@@ -33,7 +35,7 @@ export default function FriendAddBtn({
     setGroups(updatedGroups);
     groupApi
       .addMemberAtGroup({
-        groupId: user?.defaultGroupId as number,
+        groupId: user.defaultGroupId as number,
         members: [member.intraId],
       })
       .then(() => {
