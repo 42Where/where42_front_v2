@@ -31,7 +31,7 @@ export default function Announcements({ dummyAnnouncement }: { dummyAnnouncement
         <AnnouncementBtn isOpen={isOpen} />
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="max-h-60 w-48 overflow-auto rounded-none p-0 md:max-h-80 md:w-64"
+        className="max-h-60 w-48 overflow-auto break-all rounded-none p-0 md:max-h-80 md:w-64"
         align="end"
       >
         {announcements.length === 0
