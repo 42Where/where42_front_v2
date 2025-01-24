@@ -103,7 +103,7 @@ export default function MySettingModal() {
                 />
               </form>
               <p
-                className={`text-l  text-darkblue ${searchValue.length > 15 ? 'text-red-500' : 'text-gray-400'}`}
+                className={`text-l text-darkblue ${searchValue.length > 15 ? 'text-red-500' : 'text-gray-400'}`}
               >
                 {searchValue.length}/15
               </p>
