@@ -20,6 +20,7 @@ export default function useGroupList() {
     refetchIntervalInBackground: true,
     enabled: !!myInfoRes.data,
     select: (groupRes): Group[] => {
+      // get sorted groups
       if (!myInfoRes.data) return groupRes;
       const { defaultGroupId, intraId } = myInfoRes.data;
       const updatedGroups = groupRes.map((group) =>

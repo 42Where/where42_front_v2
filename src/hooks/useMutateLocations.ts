@@ -2,39 +2,51 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { queryOption } from '@/hooks/useMyInfo';
 import locationApi from '@/api/locationApi';
 
-export function useUpdateLocation(location: string) {
+// We don't need queryInvalidation since we do know the updated information
+export function useUpdateLocation() {
   const queryClient = useQueryClient();
-  const myInfo = queryClient.getQueryData(queryOption.queryKey);
   const { queryKey } = queryOption;
 
   return useMutation({
-    mutationFn: () => locationApi.setCustomLocation({ location }),
-    onMutate: () => {
-      if (!myInfo) return;
-      queryClient.setQueryData(queryKey, { ...myInfo, location });
+    mutationFn: (newLocation: string) => locationApi.setCustomLocation({ location: newLocation }),
+    onMutate: async (newLocation) => {
+      await queryClient.cancelQueries({ queryKey });
+      const prevData = queryClient.getQueryData(queryKey);
+      queryClient.setQueryData(queryKey, (oldData) => {
+        if (!oldData) return undefined;
+        return {
+          ...oldData,
+          location: newLocation,
+        };
+      });
+      return { prevData };
     },
-    onError: () => {
-      if (!myInfo) return;
-      queryClient.setQueryData(queryKey, { ...myInfo });
+    onError: (error, newLocation, context) => {
+      if (context?.prevData) queryClient.setQueryData(queryKey, context.prevData);
     },
   });
 }
 
-// After deletion, we need to refetch the location data
 export function useDeleteLocation() {
   const queryClient = useQueryClient();
-  const myInfo = queryClient.getQueryData(queryOption.queryKey);
   const { queryKey } = queryOption;
 
   return useMutation({
     mutationFn: locationApi.deleteCustomLocation,
-    onMutate: () => {
-      if (!myInfo) return;
-      queryClient.setQueryData(queryKey, { ...myInfo, location: undefined });
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey });
+      const prevData = queryClient.getQueryData(queryKey);
+      queryClient.setQueryData(queryKey, (oldData) => {
+        if (!oldData) return undefined;
+        return {
+          ...oldData,
+          location: undefined,
+        };
+      });
+      return { prevData };
     },
-    onError: () => {
-      if (!myInfo) return;
-      queryClient.setQueryData(queryKey, { ...myInfo });
+    onError: (error, _, context) => {
+      if (context?.prevData) queryClient.setQueryData(queryKey, context.prevData);
     },
   });
 }
