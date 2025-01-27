@@ -4,38 +4,44 @@ import memberApi from '@/api/memberApi';
 
 // no onSuccess handler.
 
-export function useUpdateComment(comment: string) {
+export function useUpdateComment() {
   const queryClient = useQueryClient();
-  const myInfo = queryClient.getQueryData(queryOption.queryKey);
   const { queryKey } = queryOption;
 
   return useMutation({
-    mutationFn: () => memberApi.updateComment({ comment }),
-    onMutate: () => {
-      if (!myInfo) return;
-      queryClient.setQueryData(queryKey, { ...myInfo, comment });
+    mutationFn: (comment: string) => memberApi.updateComment({ comment }),
+    onMutate: async (comment) => {
+      await queryClient.cancelQueries({ queryKey });
+      const prevData = queryClient.getQueryData(queryKey);
+      queryClient.setQueryData(queryKey, (oldData) => {
+        if (!oldData) return undefined;
+        return { ...oldData, comment };
+      });
+      return { prevData };
     },
-    onError: () => {
-      if (!myInfo) return;
-      queryClient.setQueryData(queryKey, { ...myInfo });
+    onError: (error, _, context) => {
+      if (context?.prevData) queryClient.setQueryData(queryKey, context.prevData);
     },
   });
 }
 
 export function useDeleteComment() {
   const queryClient = useQueryClient();
-  const myInfo = queryClient.getQueryData(queryOption.queryKey);
   const { queryKey } = queryOption;
 
   return useMutation({
     mutationFn: memberApi.deleteComment,
-    onMutate: () => {
-      if (!myInfo) return;
-      queryClient.setQueryData(queryKey, { ...myInfo, comment: '' });
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey });
+      const prevData = queryClient.getQueryData(queryKey);
+      queryClient.setQueryData(queryKey, (oldData) => {
+        if (!oldData) return undefined;
+        return { ...oldData, comment: undefined };
+      });
+      return { prevData };
     },
-    onError: () => {
-      if (!myInfo) return;
-      queryClient.setQueryData(queryKey, { ...myInfo });
+    onError: (error, _, context) => {
+      if (context?.prevData) queryClient.setQueryData(queryKey, context.prevData);
     },
   });
 }
