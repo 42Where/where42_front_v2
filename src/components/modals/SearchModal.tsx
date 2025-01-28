@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import memberApi from '@/api/memberApi';
-import { useUserStore } from '@/lib/stores';
+import useMyInfo from '@/hooks/useMyInfo';
 import { SearchedUser } from '@/types/User';
 import XBtn from '@/components/buttons/XBtn';
 
@@ -19,7 +19,7 @@ const SearchInputSchema = z.string().regex(/^[a-zA-Z0-9-]*$/, {
   message: '영어, 숫자, -만 입력 가능합니다.',
 });
 export default function SearchModal() {
-  const { user } = useUserStore();
+  const user = useMyInfo().data;
   const [resultMessage, setResultMessage] = useState<string>('');
   const [searchedUsers, setSearchedUsers] = useState<SearchedUser[]>([]);
   const formRef = useRef<HTMLFormElement>(null);

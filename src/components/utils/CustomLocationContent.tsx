@@ -15,13 +15,13 @@ export default function CustomLocationContent({
 }) {
   const user = useMyInfo().data;
   const [locationValue, setLocationValue] = React.useState<string>('');
-  const updateLocation = useUpdateLocation(locationValue);
+  const updateLocation = useUpdateLocation();
   const deleteLocation = useDeleteLocation();
 
   function setClickHandler() {
     if (!user) return;
     setResultMessage('설정 되었습니다.');
-    updateLocation.mutate();
+    updateLocation.mutate(locationValue);
   }
   function initClickHandler() {
     if (!user) return;

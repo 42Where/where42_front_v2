@@ -14,17 +14,13 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
-import {
-  useGroupsStore,
-  useUserStore,
-  useCheckedUsersStore,
-  useAddedMembersStore,
-} from '@/lib/stores';
+import { useGroupsStore, useCheckedUsersStore, useAddedMembersStore } from '@/lib/stores';
 import { Button } from '@/components/ui/button';
 import groupApi from '@/api/groupApi';
 import { User } from '@/types/User';
 import Group from '@/types/Group';
 import { useToast } from '@/components/ui/use-toast';
+import useMyInfo from '@/hooks/useMyInfo';
 
 export default function UserSettingModal({
   targUser,
@@ -33,7 +29,7 @@ export default function UserSettingModal({
   targUser: User;
   targGroup: Group;
 }) {
-  const { user } = useUserStore();
+  const user = useMyInfo().data;
   const [isDelete, setIsDelete] = useState<boolean>(true);
   const { groups, setGroups } = useGroupsStore();
   const [checkedGroups, setCheckedGroups] = useState<number[]>([]);
