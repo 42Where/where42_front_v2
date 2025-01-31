@@ -6,49 +6,19 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import groupApi from '@/api/groupApi';
 import Group from '@/types/Group';
-import { useCheckedUsersStore, useGroupsStore } from '@/lib/stores';
+import { useCheckedUsersStore } from '@/lib/stores';
 import useMyInfo from '@/hooks/useMyInfo';
-import { useToast } from '@/components/ui/use-toast';
+import { useDeleteGroupMember } from '@/hooks/useMutateGroups';
 
 export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
   const { checkedUsers } = useCheckedUsersStore();
-  const { groups, setGroups } = useGroupsStore();
+  const { mutate } = useDeleteGroupMember();
   const user = useMyInfo().data;
-  const { toast } = useToast();
-
   if (!user) return null;
 
   function clickHandler() {
-    const temp = [...groups];
-    const myGroup = temp.find((g) => g.groupId === curGroup.groupId);
-    if (myGroup) {
-      myGroup.isInEdit = false;
-      setGroups(temp);
-    }
-    const tempGroup = temp.find((g) => g.groupId === curGroup.groupId);
-    if (tempGroup) {
-      tempGroup.members = tempGroup.members.filter((member) => !checkedUsers.includes(member));
-      setGroups(temp);
-    }
-    if (curGroup.groupId === user?.defaultGroupId) {
-      temp.forEach((g) => {
-        const updatedGroup = {
-          ...g,
-          members: g.members.filter((member) => !checkedUsers.includes(member)),
-        };
-        return updatedGroup;
-      });
-      setGroups(temp);
-    }
-    const checkedUsersId = checkedUsers.map((u) => u.intraId);
-    groupApi
-      .removeMembersFromGroup({
-        groupId: curGroup.groupId,
-        members: checkedUsersId,
-      })
-      .then(() => toast({ title: '삭제되었습니다.' }));
+    mutate({ groupId: curGroup.groupId, members: checkedUsers });
   }
 
   return (

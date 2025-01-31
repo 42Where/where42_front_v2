@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import { SearchedUser } from '@/types/User';
-import groupApi from '@/api/groupApi';
-import { useAddedMembersStore, useGroupsStore, useClusterStore } from '@/lib/stores';
+import { useClusterStore } from '@/lib/stores';
 import useMyInfo from '@/hooks/useMyInfo';
 import { updateClusterUser } from '@/lib/clusterUtils';
-import { useToast } from '@/components/ui/use-toast';
 import { ClusterName, RowName } from '@/types/Cluster';
+import { useAddGroupMember } from '@/hooks/useMutateGroups';
 
 export default function FriendAddBtn({
   member,
@@ -15,34 +14,16 @@ export default function FriendAddBtn({
   isClusterView?: boolean;
 }) {
   const user = useMyInfo().data;
-  const { addedMembers, setAddedMembers } = useAddedMembersStore();
-  const { groups, setGroups } = useGroupsStore();
-  const { toast } = useToast();
   const { clusters, setClusters } = useClusterStore();
+  const { mutate } = useAddGroupMember();
 
   function clickHandler() {
     if (!user) return;
-    setAddedMembers([...addedMembers, member.intraId]);
-    const updatedGroups = groups.map((group) => {
-      if (group.groupId === user.defaultGroupId) {
-        return {
-          ...group,
-          members: [...group.members, member],
-        };
-      }
-      return group;
+    mutate({
+      members: [member],
+      groupId: user.defaultGroupId,
     });
-    setGroups(updatedGroups);
-    groupApi
-      .addMemberAtGroup({
-        groupId: user.defaultGroupId as number,
-        members: [member.intraId],
-      })
-      .then(() => {
-        toast({
-          title: `'${member.intraName}'님을 친구 목록에 추가했습니다.`,
-        });
-      });
+
     if (isClusterView) {
       if (!member || !member.location) return;
       let userCluster;

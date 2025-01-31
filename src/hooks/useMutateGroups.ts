@@ -3,6 +3,8 @@ import { queryOption } from '@/hooks/useGroupList';
 import groupApi from '@/api/groupApi';
 import { useAddedMembersStore } from '@/lib/stores';
 import { User } from '@/types/User';
+import { useToast } from '@/components/ui/use-toast';
+import Group from '@/types/Group';
 
 interface AddDeleteParamType {
   members: User[];
@@ -13,6 +15,7 @@ export function useAddGroupMember() {
   const queryClient = useQueryClient();
   const { queryKey } = queryOption;
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
+  const { toast } = useToast();
 
   return useMutation({
     mutationFn: ({ members, groupId }: AddDeleteParamType) =>
@@ -26,7 +29,7 @@ export function useAddGroupMember() {
       const intraIds = members.flatMap((u) => u.intraId);
       setAddedMembers([...addedMembers, ...intraIds]);
       const targGroup = prevData?.find((g) => g.groupId === groupId);
-      if (!targGroup) return { prevData };
+      if (!targGroup) return { prevData, members };
       targGroup.members.forEach((u) => {
         if (!intraIds.includes(u.intraId)) targGroup.members.push(u);
       });
@@ -37,7 +40,12 @@ export function useAddGroupMember() {
           targGroup,
         };
       });
-      return { prevData };
+      return { prevData, members };
+    },
+    onSuccess: (data, _, context) => {
+      toast({
+        title: `'${context.members.length > 1 ? '성공적으로' : `'${context.members[0]}'님이 친구 목록에`} 추가되었습니다.`,
+      });
     },
     onError: (error, _, context) => {
       if (context?.prevData) queryClient.setQueryData(queryKey, context.prevData);
@@ -49,6 +57,7 @@ export function useDeleteGroupMember() {
   const queryClient = useQueryClient();
   const { queryKey } = queryOption;
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
+  const { toast } = useToast();
 
   return useMutation({
     mutationFn: ({ members, groupId }: AddDeleteParamType) =>
@@ -62,7 +71,7 @@ export function useDeleteGroupMember() {
       const intraIds = members.flatMap((u) => u.intraId);
       setAddedMembers(addedMembers.filter((id) => !intraIds.includes(id)));
       const targGroup = prevData?.find((g) => g.groupId === groupId);
-      if (!targGroup) return { prevData };
+      if (!targGroup) return { prevData, members };
       targGroup.members = targGroup.members.filter((u) => !intraIds.includes(u.intraId));
       queryClient.setQueryData(queryKey, (oldData) => {
         if (!oldData) return undefined;
@@ -71,7 +80,12 @@ export function useDeleteGroupMember() {
           targGroup,
         };
       });
-      return { prevData };
+      return { prevData, members };
+    },
+    onSuccess: (data, _, context) => {
+      toast({
+        title: `'${context.members.length > 1 ? '성공적으로' : `'${context.members[0]}'님이 친구 목록에서`} 삭제되었습니다.`,
+      });
     },
     onError: (error, _, context) => {
       if (context?.prevData) queryClient.setQueryData(queryKey, context.prevData);
@@ -90,7 +104,10 @@ export function useCreateGroup() {
   const { queryKey } = queryOption;
 
   return useMutation({
-    mutationFn: (groupName: string) => groupApi.createGroup({ groupName }),
+    mutationFn: async (groupName: string) => {
+      const { groupId, groupName: newGroupName } = await groupApi.createGroup({ groupName });
+      return { groupId, groupName: newGroupName };
+    },
     onSuccess: ({ groupId, groupName }: CreateRenameParamType) => {
       queryClient.setQueryData(queryKey, (oldData) => {
         if (!oldData) return undefined;
@@ -131,17 +148,23 @@ export function useRenameGroup() {
 export function useDeleteGroup() {
   const queryClient = useQueryClient();
   const { queryKey } = queryOption;
+  const { toast } = useToast();
 
   return useMutation({
-    mutationFn: (groupId: number) => groupApi.removeGroup({ groupId }),
-    onMutate: async (groupId: number) => {
+    mutationFn: (group: Group) => groupApi.removeGroup({ groupId: group.groupId }),
+    onMutate: async (group: Group) => {
       await queryClient.cancelQueries({ queryKey });
       const prevData = queryClient.getQueryData(queryKey);
       queryClient.setQueryData(queryKey, (oldData) => {
         if (!oldData) return undefined;
-        return oldData.filter((g) => g.groupId !== groupId);
+        return oldData.filter((g) => g.groupId !== group.groupId);
       });
-      return { prevData };
+      return { prevData, group };
+    },
+    onSuccess: (data, _, context) => {
+      toast({
+        title: `'${context.group.groupName}' 그룹이 삭제되었습니다.`,
+      });
     },
     onError: (error, _, context) => {
       if (context?.prevData) queryClient.setQueryData(queryKey, context.prevData);

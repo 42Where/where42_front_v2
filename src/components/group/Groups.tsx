@@ -21,7 +21,7 @@ export default function Groups({ groups }: { groups: Group[] }) {
           value={curGroup.groupId.toString()}
           className="relative overflow-hidden transition-all duration-500 ease-in-out"
         >
-          {curGroup.isInEdit && <GroupEditBar groups={groups} curGroup={curGroup} />}
+          {curGroup.isInEdit && <GroupEditBar curGroup={curGroup} />}
           <GroupSettingModal curGroup={curGroup} />
           <AccordionTrigger className="p-1 text-darkblue md:p-4 md:text-2xl">
             <GroupHeadCount curGroup={curGroup} />

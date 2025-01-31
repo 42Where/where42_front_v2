@@ -21,8 +21,8 @@ export default function MySettingModal() {
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchValue, setSearchValue] = useState<string>(user?.comment || '');
-  const deleteComment = useDeleteComment();
-  const updateComment = useUpdateComment();
+  const deleteMutate = useDeleteComment().mutate;
+  const updateMutate = useUpdateComment().mutate;
 
   function openHandler(open: boolean) {
     if (!open) {
@@ -50,8 +50,8 @@ export default function MySettingModal() {
     setSearchValue('');
     setResultMessage('설정 되었습니다.');
     if (inputValue === user?.comment || !user) return;
-    if (inputValue === '') deleteComment.mutate();
-    updateComment.mutate(searchValue);
+    if (inputValue === '') deleteMutate();
+    updateMutate(searchValue);
   }
 
   if (!user) return null;

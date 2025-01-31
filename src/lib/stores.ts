@@ -1,18 +1,7 @@
 import { create } from 'zustand';
 import { User } from '@/types/User';
-import Group from '@/types/Group';
 import { Clusters } from '@/types/Cluster';
 import { getClusters } from '@/lib/clusterUtils';
-
-type GroupsStore = {
-  groups: Group[];
-  setGroups: (val: Group[]) => void;
-};
-
-const useGroupsStore = create<GroupsStore>((set) => ({
-  groups: [],
-  setGroups: (val: Group[]) => set(() => ({ groups: val })),
-}));
 
 type AddedMembersStore = {
   addedMembers: number[];
@@ -54,10 +43,4 @@ const useClusterStore = create<ClusterStore>((set) => ({
   setClusters: (val: Clusters) => set(() => ({ clusters: val })),
 }));
 
-export {
-  useGroupsStore,
-  useAddedMembersStore,
-  useCheckedStore,
-  useCheckedUsersStore,
-  useClusterStore,
-};
+export { useAddedMembersStore, useCheckedStore, useCheckedUsersStore, useClusterStore };

@@ -7,17 +7,19 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import groupApi from '@/api/groupApi';
 import Group from '@/types/Group';
-import { useCheckedUsersStore, useGroupsStore } from '@/lib/stores';
+import { useCheckedUsersStore } from '@/lib/stores';
 import useMyInfo from '@/hooks/useMyInfo';
+import { useAddGroupMember } from '@/hooks/useMutateGroups';
+import useGroupList from '@/hooks/useGroupList';
 
-export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
+export default function GroupAddModal() {
   const user = useMyInfo().data;
-  const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
-  const { groups, setGroups } = useGroupsStore();
+  const groups = useGroupList().data;
+  const { checkedUsers } = useCheckedUsersStore();
   const [checkedGroups, setCheckedGroups] = useState<number[]>([]);
-  if (!user) return null;
+  const { mutate } = useAddGroupMember();
+  if (!user || !groups) return null;
 
   function groupSelectClickHandler(g: Group) {
     if (checkedGroups.includes(g.groupId)) {
@@ -28,32 +30,7 @@ export default function GroupAddModal({ curGroup }: { curGroup: Group }) {
   }
 
   function groupAddClickHandler() {
-    checkedGroups.forEach((groupId) => {
-      const temp = [...groups];
-      const myGroup = temp.find((g) => g.groupId === curGroup.groupId);
-      if (myGroup) {
-        myGroup.isInEdit = false;
-        setGroups(temp);
-      }
-      const tempGroup = temp.find((g) => g.groupId === groupId);
-      if (!tempGroup) return;
-      const targUsers = [...checkedUsers];
-      tempGroup.members.forEach((member) => {
-        checkedUsers.forEach((u) => {
-          if (u.intraId === member.intraId) {
-            targUsers.splice(targUsers.indexOf(u), 1);
-          }
-        });
-      });
-      const targUserIds = targUsers.map((u) => u.intraId);
-      groupApi.addMemberAtGroup({ groupId, members: targUserIds }).then(() => {
-        if (tempGroup?.members) {
-          tempGroup.members = [...tempGroup.members, ...targUsers];
-          setGroups(temp);
-          setCheckedUsers([]);
-        }
-      });
-    });
+    checkedGroups.forEach((groupId) => mutate({ groupId, members: [...checkedUsers] }));
   }
 
   return (

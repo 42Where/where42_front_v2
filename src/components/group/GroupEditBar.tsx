@@ -1,18 +1,21 @@
 import Group from '@/types/Group';
-import { useCheckedUsersStore, useGroupsStore } from '@/lib/stores';
+import { useCheckedUsersStore } from '@/lib/stores';
 import { Button } from '@/components/ui/button';
 import GroupDeleteModal from '@/components/modals/GroupDeleteModal';
 import GroupAddModal from '@/components/modals/GroupAddModal';
+import { useQueryClient } from '@tanstack/react-query';
+import useGroupList from '@/hooks/useGroupList';
 
-export default function GroupEditBar({ groups, curGroup }: { groups: Group[]; curGroup: Group }) {
-  const { setGroups } = useGroupsStore();
+export default function GroupEditBar({ curGroup }: { curGroup: Group }) {
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
+  const { setQueryData } = useQueryClient();
+  const groups = useGroupList().data;
   return (
     <div className="absolute right-[50px] top-[4px] flex flex-col items-center justify-center gap-1 md:right-[80px] md:top-[16px] md:flex-row md:gap-2">
       {checkedUsers.length > 0 && (
         <div className="flex flex-row gap-1 md:gap-2">
           <GroupDeleteModal curGroup={curGroup} />
-          <GroupAddModal curGroup={curGroup} />
+          <GroupAddModal />
         </div>
       )}
       <div className="flex flex-row gap-1 md:gap-2">
@@ -32,11 +35,11 @@ export default function GroupEditBar({ groups, curGroup }: { groups: Group[]; cu
           className="h-5 gap-2 rounded-full border-2 border-darkblue px-2
            text-xs text-white md:h-8 md:px-3 lg:text-xl"
           onClick={() => {
-            setGroups(
+            if (!groups) return;
+            setQueryData(
+              ['groupList'],
               groups.map((g) => {
-                if (g.groupId === curGroup.groupId) {
-                  return { ...curGroup, isInEdit: false };
-                }
+                if (g.groupId === curGroup.groupId) return { ...curGroup, isInEdit: false };
                 return g;
               }),
             );

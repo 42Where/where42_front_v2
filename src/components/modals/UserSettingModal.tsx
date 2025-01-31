@@ -14,13 +14,14 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
-import { useGroupsStore, useCheckedUsersStore, useAddedMembersStore } from '@/lib/stores';
+import { useCheckedUsersStore, useAddedMembersStore } from '@/lib/stores';
 import { Button } from '@/components/ui/button';
-import groupApi from '@/api/groupApi';
 import { User } from '@/types/User';
 import Group from '@/types/Group';
-import { useToast } from '@/components/ui/use-toast';
 import useMyInfo from '@/hooks/useMyInfo';
+import useGroupList from '@/hooks/useGroupList';
+import { useQueryClient } from '@tanstack/react-query';
+import { useAddGroupMember, useDeleteGroupMember } from '@/hooks/useMutateGroups';
 
 export default function UserSettingModal({
   targUser,
@@ -29,16 +30,19 @@ export default function UserSettingModal({
   targUser: User;
   targGroup: Group;
 }) {
-  const user = useMyInfo().data;
   const [isDelete, setIsDelete] = useState<boolean>(true);
-  const { groups, setGroups } = useGroupsStore();
   const [checkedGroups, setCheckedGroups] = useState<number[]>([]);
-  const targGroupId = targGroup.groupId;
-  const { setCheckedUsers } = useCheckedUsersStore();
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
-  const { toast } = useToast();
+  const { setCheckedUsers } = useCheckedUsersStore();
+  const { setQueryData } = useQueryClient();
+  const user = useMyInfo().data;
+  const groups = useGroupList().data;
+  const targGroupId = targGroup.groupId;
+  const addMutate = useAddGroupMember().mutate;
+  const deleteMutate = useDeleteGroupMember().mutate;
 
   function selectClickHandler() {
+    if (!groups) return;
     setCheckedUsers([targUser]);
     const temp = [...groups];
     const tempGroup = temp.find((g) => g.groupId === targGroup.groupId);
@@ -49,10 +53,11 @@ export default function UserSettingModal({
         if (g.groupId !== targGroup.groupId) buf.isInEdit = false;
         return buf;
       });
-      setGroups(temp);
+      setQueryData(['groupList'], temp);
     }
   }
   function addClickHandler() {
+    if (!groups) return;
     checkedGroups.forEach((groupId) => {
       const temp = [...groups];
       const tempGroup = temp.find((g) => g.groupId === groupId);
@@ -64,45 +69,14 @@ export default function UserSettingModal({
         }
       });
       if (isExist) return;
-      groupApi
-        .addMemberAtGroup({
-          groupId,
-          members: [targUser.intraId],
-        })
-        .then(() => {
-          if (tempGroup?.members) {
-            tempGroup.members = [...tempGroup.members, targUser];
-            setGroups(temp);
-          }
-        })
-        .then(() => toast({ title: '그룹에 추가되었습니다.' }));
+      addMutate({ groupId, members: tempGroup.members });
     });
   }
   function deleteClickHandler() {
-    const temp = [...groups];
-    const tempGroup = temp.find((g) => g.groupId === targGroupId);
-    if (tempGroup) {
-      tempGroup.members = tempGroup.members.filter((member) => member.intraId !== targUser.intraId);
-      setGroups(temp);
-    }
-    if (targGroupId === user?.defaultGroupId) {
-      temp.forEach((g) => {
-        const updatedGroup = {
-          ...g,
-          members: g.members.filter((member) => member.intraId !== targUser.intraId),
-        };
-        return updatedGroup;
-      });
-      setGroups(temp);
-    }
+    if (!groups) return;
     const buf = addedMembers.filter((addedMember) => addedMember !== targUser.intraId);
     setAddedMembers(buf);
-    groupApi
-      .removeMembersFromGroup({
-        groupId: targGroupId,
-        members: [targUser.intraId],
-      })
-      .then(() => toast({ title: '그룹에서 삭제되었습니다.' }));
+    deleteMutate({ members: [targUser], groupId: targGroupId });
   }
 
   return (
@@ -137,7 +111,7 @@ export default function UserSettingModal({
         <DialogContent className=" text-darkblue transition-all duration-500 ease-out">
           <DialogTitle>추가할 그룹을 선택하세요</DialogTitle>
           <div className="flex flex-col gap-2">
-            {groups.map(
+            {groups?.map(
               (g) =>
                 g.groupId !== user?.defaultGroupId && (
                   <Button
