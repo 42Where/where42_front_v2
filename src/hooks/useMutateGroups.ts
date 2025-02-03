@@ -5,6 +5,7 @@ import { useAddedMembersStore } from '@/lib/stores';
 import { User } from '@/types/User';
 import { useToast } from '@/components/ui/use-toast';
 import Group from '@/types/Group';
+import { useEffect } from 'react';
 
 interface AddDeleteParamType {
   members: User[];
@@ -15,9 +16,10 @@ export function useAddGroupMember() {
   const queryClient = useQueryClient();
   const { queryKey } = queryOption;
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
+  let allIdMembers: number[] = [];
   const { toast } = useToast();
 
-  return useMutation({
+  const res = useMutation({
     mutationFn: ({ members, groupId }: AddDeleteParamType) =>
       groupApi.addMemberAtGroup({
         groupId,
@@ -27,7 +29,7 @@ export function useAddGroupMember() {
       await queryClient.cancelQueries({ queryKey });
       const prevData = queryClient.getQueryData(queryKey);
       const intraIds = members.flatMap((u) => u.intraId);
-      setAddedMembers([...addedMembers, ...intraIds]);
+      allIdMembers = [...addedMembers, ...intraIds];
       const targGroup = prevData?.find((g) => g.groupId === groupId);
       if (!targGroup) return { prevData, members };
       targGroup.members.forEach((u) => {
@@ -51,46 +53,61 @@ export function useAddGroupMember() {
       if (context?.prevData) queryClient.setQueryData(queryKey, context.prevData);
     },
   });
+
+  useEffect(() => {
+    if (res.isSuccess) setAddedMembers(allIdMembers || []);
+  }, [res.isSuccess]);
+
+  return res;
 }
 
 export function useDeleteGroupMember() {
   const queryClient = useQueryClient();
   const { queryKey } = queryOption;
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
+  let allIdMembers: number[] = [];
   const { toast } = useToast();
 
-  return useMutation({
+  const res = useMutation({
     mutationFn: ({ members, groupId }: AddDeleteParamType) =>
       groupApi.removeMembersFromGroup({
         groupId,
         members: members.flatMap((u) => u.intraId),
       }),
     onMutate: async ({ members, groupId }: AddDeleteParamType) => {
-      await queryClient.cancelQueries({ queryKey });
+      // await queryClient.cancelQueries({ queryKey });
       const prevData = queryClient.getQueryData(queryKey);
       const intraIds = members.flatMap((u) => u.intraId);
-      setAddedMembers(addedMembers.filter((id) => !intraIds.includes(id)));
+      allIdMembers = addedMembers.filter((id) => !intraIds.includes(id));
       const targGroup = prevData?.find((g) => g.groupId === groupId);
+      console.log(prevData, intraIds, targGroup);
       if (!targGroup) return { prevData, members };
       targGroup.members = targGroup.members.filter((u) => !intraIds.includes(u.intraId));
-      queryClient.setQueryData(queryKey, (oldData) => {
-        if (!oldData) return undefined;
-        return {
-          ...oldData,
-          targGroup,
-        };
-      });
+      // queryClient.setQueryData(queryKey, (oldData) => {
+      //   if (!oldData) return undefined;
+      //   return {
+      //     ...oldData,
+      //     targGroup,
+      //   };
+      // });
       return { prevData, members };
     },
     onSuccess: (data, _, context) => {
+      console.log(context);
       toast({
-        title: `'${context.members.length > 1 ? '성공적으로' : `'${context.members[0]}'님이 친구 목록에서`} 삭제되었습니다.`,
+        title: `'${context.members.length > 1 ? '성공적으로' : `'${context.members[0].intraName}'님이 친구 목록에서`} 삭제되었습니다.`,
       });
     },
     onError: (error, _, context) => {
       if (context?.prevData) queryClient.setQueryData(queryKey, context.prevData);
     },
   });
+
+  useEffect(() => {
+    if (res.isSuccess) setAddedMembers(allIdMembers || []);
+  }, [res.isSuccess]);
+
+  return res;
 }
 
 interface CreateRenameParamType {

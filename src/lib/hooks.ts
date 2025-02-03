@@ -16,10 +16,10 @@ export default function useInfoSet() {
       setShowModal(true);
     }
   }, [router.isReady, agreement]);
-
   const userRes = useMyInfo();
   const groupRes = useGroupList();
   const adminStatusRes = useAdminStatus();
+
   const isLoading = !userRes.isLoading || !groupRes.isLoading || !adminStatusRes.isLoading;
 
   return { showModal, setShowModal, isLoading };
