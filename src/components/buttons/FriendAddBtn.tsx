@@ -20,7 +20,7 @@ export default function FriendAddBtn({
   function clickHandler() {
     if (!user) return;
     mutate({
-      members: [member],
+      addMembers: [member],
       groupId: user.defaultGroupId,
     });
 

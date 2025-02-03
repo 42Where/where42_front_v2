@@ -73,7 +73,7 @@ export default function NewGroupModal() {
 
   function addClickHandler() {
     setIsAddingUser(false);
-    addGroupMutate({ groupId, members: selectedUsers });
+    addGroupMutate({ groupId, addMembers: selectedUsers });
   }
 
   async function submitHandler(e: FormEvent<HTMLFormElement>) {

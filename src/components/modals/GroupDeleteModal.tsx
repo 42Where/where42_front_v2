@@ -18,7 +18,7 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
   if (!user) return null;
 
   function clickHandler() {
-    mutate({ groupId: curGroup.groupId, members: checkedUsers });
+    mutate({ groupId: curGroup.groupId, deleteMembers: checkedUsers });
   }
 
   return (

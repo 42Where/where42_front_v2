@@ -69,14 +69,14 @@ export default function UserSettingModal({
         }
       });
       if (isExist) return;
-      addMutate({ groupId, members: tempGroup.members });
+      addMutate({ groupId, addMembers: tempGroup.members });
     });
   }
   function deleteClickHandler() {
     if (!groups) return;
     const buf = addedMembers.filter((addedMember) => addedMember !== targUser.intraId);
     setAddedMembers(buf);
-    deleteMutate({ members: [targUser], groupId: targGroupId });
+    deleteMutate({ deleteMembers: [targUser], groupId: targGroupId });
   }
 
   return (

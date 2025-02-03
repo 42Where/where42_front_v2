@@ -30,7 +30,7 @@ export default function GroupAddModal() {
   }
 
   function groupAddClickHandler() {
-    checkedGroups.forEach((groupId) => mutate({ groupId, members: [...checkedUsers] }));
+    checkedGroups.forEach((groupId) => mutate({ groupId, addMembers: [...checkedUsers] }));
   }
 
   return (
