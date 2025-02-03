@@ -34,7 +34,7 @@ export default function UserSettingModal({
   const [checkedGroups, setCheckedGroups] = useState<number[]>([]);
   const { addedMembers, setAddedMembers } = useAddedMembersStore();
   const { setCheckedUsers } = useCheckedUsersStore();
-  const { setQueryData } = useQueryClient();
+  const queryClient = useQueryClient();
   const user = useMyInfo().data;
   const groups = useGroupList().data;
   const targGroupId = targGroup.groupId;
@@ -46,6 +46,7 @@ export default function UserSettingModal({
     setCheckedUsers([targUser]);
     const temp = [...groups];
     const tempGroup = temp.find((g) => g.groupId === targGroup.groupId);
+    console.log(tempGroup);
     if (tempGroup) {
       tempGroup.isInEdit = true;
       temp.map((g) => {
@@ -53,7 +54,7 @@ export default function UserSettingModal({
         if (g.groupId !== targGroup.groupId) buf.isInEdit = false;
         return buf;
       });
-      setQueryData(['groupList'], temp);
+      queryClient.setQueryData(['groupList'], temp);
     }
   }
   function addClickHandler() {

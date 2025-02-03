@@ -8,7 +8,7 @@ import useGroupList from '@/hooks/useGroupList';
 
 export default function GroupEditBar({ curGroup }: { curGroup: Group }) {
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
-  const { setQueryData } = useQueryClient();
+  const queryClient = useQueryClient();
   const groups = useGroupList().data;
   return (
     <div className="absolute right-[50px] top-[4px] flex flex-col items-center justify-center gap-1 md:right-[80px] md:top-[16px] md:flex-row md:gap-2">
@@ -36,7 +36,7 @@ export default function GroupEditBar({ curGroup }: { curGroup: Group }) {
            text-xs text-white md:h-8 md:px-3 lg:text-xl"
           onClick={() => {
             if (!groups) return;
-            setQueryData(
+            queryClient.setQueryData(
               ['groupList'],
               groups.map((g) => {
                 if (g.groupId === curGroup.groupId) return { ...curGroup, isInEdit: false };
