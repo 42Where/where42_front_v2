@@ -103,10 +103,10 @@ export function useDeleteGroupMember() {
   return res;
 }
 
-interface CreateRenameParamType {
+type CreateRenameParamType = {
   groupId: number;
   groupName: string;
-}
+};
 
 // We don't do optimistic update here because we need to get the new group id from the server.
 export function useCreateGroup() {
