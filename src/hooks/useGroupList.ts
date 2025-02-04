@@ -1,9 +1,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import groupApi from '@/api/groupApi';
 import useMyInfo from '@/hooks/useMyInfo';
-import { useAddedMembersStore } from '@/lib/stores';
 import Group from '@/types/Group';
-import { useEffect } from 'react';
 
 export const queryOption = queryOptions({
   queryKey: ['groupList'],
@@ -12,9 +10,7 @@ export const queryOption = queryOptions({
 
 // fresh for 5 min, and auto updated
 export default function useGroupList() {
-  const { setAddedMembers } = useAddedMembersStore();
   const myInfoRes = useMyInfo();
-  let allIdMembers: number[] = [];
 
   const res = useQuery({
     ...queryOption,
@@ -37,20 +33,10 @@ export default function useGroupList() {
         sortedGroups.splice(sortedGroups.indexOf(defaultGroup), 1);
         sortedGroups.push(defaultGroup);
       }
-      // 모든 멤버 ID 수집
-      const allMemberIds = groupRes.flatMap((group) =>
-        group.members.map((member) => member.intraId),
-      );
       // allMemberIds.push(intraId);
-      allIdMembers = allMemberIds;
       return sortedGroups;
     },
   });
-
-  useEffect(() => {
-    if (res.isPending) return;
-    setAddedMembers(allIdMembers || []);
-  }, [res.isSuccess]);
 
   return res;
 }

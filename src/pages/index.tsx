@@ -11,17 +11,14 @@ import useMyInfo from '@/hooks/useMyInfo';
 import useGroupList from '@/hooks/useGroupList';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useAddedMembersStore } from '@/lib/stores';
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
-  const { addedMembers } = useAddedMembersStore();
   const router = useRouter();
   const { agreement } = router.query;
   const user = useMyInfo().data;
   const groups = useGroupList().data;
   const isAdmin = useAdminStatus().data?.admin;
-  console.log(addedMembers);
 
   useEffect(() => {
     // 만약 라우터가 초기화되지 않았다면 API 호출을 하지 않는다.

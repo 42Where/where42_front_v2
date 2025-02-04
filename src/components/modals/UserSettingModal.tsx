@@ -14,7 +14,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
-import { useCheckedUsersStore, useAddedMembersStore } from '@/lib/stores';
+import { useCheckedUsersStore } from '@/lib/stores';
 import { Button } from '@/components/ui/button';
 import { User } from '@/types/User';
 import Group from '@/types/Group';
@@ -32,7 +32,6 @@ export default function UserSettingModal({
 }) {
   const [isDelete, setIsDelete] = useState<boolean>(true);
   const [checkedGroups, setCheckedGroups] = useState<number[]>([]);
-  const { addedMembers, setAddedMembers } = useAddedMembersStore();
   const { setCheckedUsers } = useCheckedUsersStore();
   const queryClient = useQueryClient();
   const user = useMyInfo().data;
@@ -75,8 +74,6 @@ export default function UserSettingModal({
   }
   function deleteClickHandler() {
     if (!groups) return;
-    const buf = addedMembers.filter((addedMember) => addedMember !== targUser.intraId);
-    setAddedMembers(buf);
     deleteMutate({ deleteMembers: [targUser], groupId: targGroupId });
   }
 

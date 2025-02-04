@@ -1,8 +1,9 @@
 import { SearchedUser } from '@/types/User';
-import { useAddedMembersStore } from '@/lib/stores';
 import LocationBtn from '@/components/buttons/LocationBtn';
 import ProfilePic from '@/components/ProfilePic';
 import FriendAddBtn from '@/components/buttons/FriendAddBtn';
+import useGroupList from '@/hooks/useGroupList';
+import useMyInfo from '@/hooks/useMyInfo';
 
 export default function SearchedCard({
   member,
@@ -15,13 +16,16 @@ export default function SearchedCard({
   isAddingUser?: boolean;
   isAlreadyAdded?: boolean;
 }) {
-  const { addedMembers } = useAddedMembersStore();
+  const group = useGroupList().data;
+  const user = useMyInfo().data;
+
+  if (!group || !user) return null;
   return (
     <button
       type="button"
       className={`flex cursor-default flex-row items-center justify-between rounded-2xl border-2 p-2 ${
         isAddingUser &&
-        `hover:border-basepink transform cursor-pointer transition-transform active:scale-95 ${isAlreadyAdded && 'border-basepink'}`
+        `transform cursor-pointer transition-transform hover:border-basepink active:scale-95 ${isAlreadyAdded && 'border-basepink'}`
       }`}
       onClick={() => onClick && onClick()}
     >
@@ -33,7 +37,8 @@ export default function SearchedCard({
           <p className=" md:text-md text-sm ">{member.comment}</p>
         </div>
       </div>
-      {!addedMembers.find((a) => a === member.intraId) && <FriendAddBtn member={member} />}
+      {!group[group.length - 1].members.find((a) => a.intraId === member.intraId) ||
+        (user.intraId !== member.intraId && <FriendAddBtn member={member} />)}
     </button>
   );
 }

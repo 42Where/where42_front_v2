@@ -29,6 +29,7 @@ export default function NewGroupModal() {
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchValue, setSearchValue] = useState<string>('');
+  const [newGroupName, setNewGroupName] = useState<string>('');
   const [isDuplicated, setIsDuplicated] = useState<boolean>(false);
   const [isAddingUser, setIsAddingUser] = useState<boolean>(false);
   const [searchedUsers, setSearchedUsers] = useState<User[]>([]);
@@ -54,10 +55,10 @@ export default function NewGroupModal() {
     }
   }
 
-  function addDuplicatedGroupClickHandler() {
-    setSearchValue('');
-    newGroupMutate(searchValue);
-    // 이건 낙관적 업데이트 하든 말든 모달 닫히게 하는거니 false 처리하는게 맞음
+  async function addDuplicatedGroupClickHandler() {
+    const { groupId: newGroupId } = await newGroupMutate(newGroupName);
+    setGroupId(newGroupId);
+    setIsAddingUser(true);
     setIsDuplicated(false);
   }
 
@@ -132,7 +133,7 @@ export default function NewGroupModal() {
                 <AlertDialogDescription>
                   현재
                   <h3 style={{ display: 'inline', margin: '0' }}>
-                    &quot; {searchValue}
+                    &quot; {newGroupName}
                     &quot;{' '}
                   </h3>
                   그룹이 이미 존재합니다. 같은 이름의 그룹을 생성하시겠습니까?
@@ -226,14 +227,13 @@ export default function NewGroupModal() {
                   ref={inputRef}
                   className="text-l w-full bg-transparent text-darkblue outline-none placeholder:text-gray-500  dark:text-gray-700"
                   placeholder="생성할 그룹의 이름을 입력하세요."
-                  onChange={(e) => setSearchValue(e.target.value)}
+                  onChange={(e) => setNewGroupName(e.target.value)}
                 />
               </form>
               {searchValue && (
                 <XBtn
                   onClick={() => {
                     formRef.current?.reset();
-                    setSearchValue('');
                   }}
                 />
               )}
