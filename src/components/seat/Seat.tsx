@@ -9,7 +9,7 @@ import LocationBtn from '@/components/buttons/LocationBtn';
 import ProfilePic from '@/components/ProfilePic';
 import FriendAddBtn from '@/components/buttons/FriendAddBtn';
 import { User } from '@/types/User';
-import { useUserStore } from '@/lib/stores';
+import useMyInfo from '@/hooks/useMyInfo';
 
 export default function SingleSeat({
   clusterUser,
@@ -18,7 +18,7 @@ export default function SingleSeat({
   clusterUser?: ActiveClusterUser;
   seatNumber: number;
 }) {
-  const { user } = useUserStore();
+  const user = useMyInfo().data;
   if (!clusterUser)
     return (
       <button

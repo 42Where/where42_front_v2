@@ -6,46 +6,19 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import groupApi from '@/api/groupApi';
 import Group from '@/types/Group';
-import { useCheckedUsersStore, useGroupsStore, useUserStore } from '@/lib/stores';
-import { useToast } from '@/components/ui/use-toast';
+import { useCheckedUsersStore } from '@/lib/stores';
+import useMyInfo from '@/hooks/useMyInfo';
+import { useDeleteGroupMember } from '@/hooks/useMutateGroups';
 
 export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
   const { checkedUsers } = useCheckedUsersStore();
-  const { groups, setGroups } = useGroupsStore();
-  const { user } = useUserStore();
-  const { toast } = useToast();
+  const { mutate } = useDeleteGroupMember();
+  const user = useMyInfo().data;
+  if (!user) return null;
 
   function clickHandler() {
-    const temp = [...groups];
-    const myGroup = temp.find((g) => g.groupId === curGroup.groupId);
-    if (myGroup) {
-      myGroup.isInEdit = false;
-      setGroups(temp);
-    }
-    const tempGroup = temp.find((g) => g.groupId === curGroup.groupId);
-    if (tempGroup) {
-      tempGroup.members = tempGroup.members.filter((member) => !checkedUsers.includes(member));
-      setGroups(temp);
-    }
-    if (curGroup.groupId === user?.defaultGroupId) {
-      temp.forEach((g) => {
-        const updatedGroup = {
-          ...g,
-          members: g.members.filter((member) => !checkedUsers.includes(member)),
-        };
-        return updatedGroup;
-      });
-      setGroups(temp);
-    }
-    const checkedUsersId = checkedUsers.map((u) => u.intraId);
-    groupApi
-      .removeMembersFromGroup({
-        groupId: curGroup.groupId,
-        members: checkedUsersId,
-      })
-      .then(() => toast({ title: '삭제되었습니다.' }));
+    mutate({ groupId: curGroup.groupId, deleteMembers: checkedUsers });
   }
 
   return (
@@ -61,7 +34,7 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
       <DialogContent className="max-w-[425px] text-darkblue transition-all duration-500  ease-out">
         <DialogTitle>그룹 삭제</DialogTitle>
         <p>선택한 카뎃들을 삭제하시겠습니까?</p>
-        {curGroup.groupId === user?.defaultGroupId && (
+        {curGroup.groupId === user.defaultGroupId && (
           <p className=" text-red-700">* 기본 그룹에서 삭제할 시 모든 그룹에서 삭제됩니다.</p>
         )}
         <div className="flex flex-row items-center justify-between">

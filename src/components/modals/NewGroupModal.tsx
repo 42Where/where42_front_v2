@@ -18,24 +18,26 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { useGroupsStore } from '@/lib/stores';
-import groupApi from '@/api/groupApi';
-import Group from '@/types/Group';
-import { useToast } from '@/components/ui/use-toast';
 import { SearchedUser, User } from '@/types/User';
 import SearchedCard from '@/components/cards/SearchedCard';
 import XBtn from '@/components/buttons/XBtn';
+import { useAddGroupMember, useCreateGroup } from '@/hooks/useMutateGroups';
+import useGroupList from '@/hooks/useGroupList';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function NewGroupModal() {
-  const { groups, setGroups } = useGroupsStore();
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchValue, setSearchValue] = useState<string>('');
+  const [newGroupName, setNewGroupName] = useState<string>('');
   const [isDuplicated, setIsDuplicated] = useState<boolean>(false);
   const [isAddingUser, setIsAddingUser] = useState<boolean>(false);
   const [searchedUsers, setSearchedUsers] = useState<User[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
   const [groupId, setGroupId] = useState<number>(0);
+  const newGroupMutate = useCreateGroup().mutateAsync;
+  const addGroupMutate = useAddGroupMember().mutate;
+  const groups = useGroupList().data;
   const { toast } = useToast();
 
   function openHandler(open: boolean) {
@@ -53,27 +55,11 @@ export default function NewGroupModal() {
     }
   }
 
-  function addDuplicatedGroupClickHandler() {
-    setSearchValue('');
-    groupApi
-      .createGroup({ groupName: searchValue })
-      .then((res) => {
-        const newGroup = {
-          groupId: res.groupId,
-          groupName: res.groupName,
-          members: [],
-          isFolded: false,
-          isInEdit: false,
-        } as Group;
-        const temp = groups;
-        temp.push(newGroup);
-        setGroups(temp);
-        setSelectedUsers([]);
-      })
-      .then(() => setIsDuplicated(false))
-      .catch((error) => {
-        console.error(error);
-      });
+  async function addDuplicatedGroupClickHandler() {
+    const { groupId: newGroupId } = await newGroupMutate(newGroupName);
+    setGroupId(newGroupId);
+    setIsAddingUser(true);
+    setIsDuplicated(false);
   }
 
   function clickSearchedUserHandler(searchedMember: SearchedUser) {
@@ -88,77 +74,44 @@ export default function NewGroupModal() {
 
   function addClickHandler() {
     setIsAddingUser(false);
-    groupApi
-      .addMemberAtGroup({
-        groupId,
-        members: selectedUsers.map((user) => user.intraId),
-      })
-      .then(() => {
-        toast({
-          title: '그룹에 친구를 성공적으로 추가했습니다.',
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    setGroups(
-      groups.map((group) => {
-        if (group.groupId === groupId) {
-          return {
-            ...group,
-            members: [...group.members, ...selectedUsers],
-          };
-        }
-        return group;
-      }),
-    );
+    addGroupMutate({ groupId, addMembers: selectedUsers });
   }
 
-  function submitHandler(e: FormEvent<HTMLFormElement>) {
+  async function submitHandler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const inputValue = inputRef.current?.value;
-    if (!inputValue) return;
+    if (!inputValue || !groups) return;
     formRef.current?.reset();
+    setSearchValue('');
     if (groups.some((group) => group.groupName === inputValue)) {
       setIsDuplicated(true);
       return;
     }
-    setSearchValue('');
-    groupApi
-      .createGroup({ groupName: inputValue })
-      .then((res) => {
-        const newGroup = {
-          groupId: res.groupId,
-          groupName: res.groupName,
-          members: [],
-          isFolded: false,
-          isInEdit: false,
-        } as Group;
-        setGroupId(res.groupId);
-        const temp = groups;
-        temp.push(newGroup);
-        setGroups(temp);
-        setSelectedUsers([]);
-      })
-      .then(() =>
-        toast({
-          title: `'${inputValue}' 그룹이 생성되었습니다.`,
-        }),
-      )
-      .then(() => setIsAddingUser(true))
-      .catch((error) => {
-        console.error(error);
+    try {
+      const { groupId: newGroupId } = await newGroupMutate(inputValue);
+      setGroupId(newGroupId);
+      setSelectedUsers([]);
+      setIsAddingUser(true);
+    } catch {
+      toast({
+        title: '그룹 생성중 문제가 발생했습니다.',
       });
+    }
   }
 
   useEffect(() => {
-    if (groups[0]) setSearchedUsers(groups[0].members);
+    // 그룹 생성 후 멤버 추가 화면에서 기본 멤버들 들어있는 상태로 추가해야 함.
+    if (!groups) return;
+    // last index of group
+    setSearchedUsers(groups[groups.length - 1].members);
   }, [isAddingUser, groups]);
 
   useEffect(() => {
-    if (groups[0]) {
-      setSearchedUsers(groups[0].members.filter((user) => user.intraName.includes(searchValue)));
-    }
+    // 멤버 검색할 때
+    if (!groups) return;
+    setSearchedUsers(
+      groups[groups.length - 1].members.filter((user) => user.intraName.includes(searchValue)),
+    );
   }, [searchValue, groups]);
 
   return (
@@ -180,7 +133,7 @@ export default function NewGroupModal() {
                 <AlertDialogDescription>
                   현재
                   <h3 style={{ display: 'inline', margin: '0' }}>
-                    &quot; {searchValue}
+                    &quot; {newGroupName}
                     &quot;{' '}
                   </h3>
                   그룹이 이미 존재합니다. 같은 이름의 그룹을 생성하시겠습니까?
@@ -274,14 +227,13 @@ export default function NewGroupModal() {
                   ref={inputRef}
                   className="text-l w-full bg-transparent text-darkblue outline-none placeholder:text-gray-500  dark:text-gray-700"
                   placeholder="생성할 그룹의 이름을 입력하세요."
-                  onChange={(e) => setSearchValue(e.target.value)}
+                  onChange={(e) => setNewGroupName(e.target.value)}
                 />
               </form>
               {searchValue && (
                 <XBtn
                   onClick={() => {
                     formRef.current?.reset();
-                    setSearchValue('');
                   }}
                 />
               )}

@@ -16,6 +16,7 @@ import { updateClusterUser } from '@/lib/clusterUtils';
 import clusterApi from '@/api/clusterApi';
 import useInfoSet from '@/lib/hooks';
 import { useClusterStore } from '@/lib/stores';
+import useAdminStatus from '@/hooks/useAdminStatus';
 
 export default function SeatsPage() {
   const [selectedCluster, setSelectedCluster] = useState<ClusterName>('c1');
@@ -31,7 +32,8 @@ export default function SeatsPage() {
     c5: false,
     c6: false,
   });
-  const { isAdmin } = useInfoSet();
+  useInfoSet();
+  const isAdmin = useAdminStatus().data?.admin;
 
   useEffect(() => {
     if (fetchedClusters.current[selectedCluster]) return;
@@ -54,7 +56,7 @@ export default function SeatsPage() {
 
   return (
     <main className="flex h-full min-h-screen w-full flex-col items-center justify-start px-1 pb-20 md:px-10">
-      <Header isAdmin={isAdmin} isClusterPage />
+      <Header isAdmin={!!isAdmin} isClusterPage />
       <div className="flex flex-col items-center justify-center gap-4 md:gap-10">
         <SeatNavigator selectedCluster={selectedCluster} setSelectedCluster={setSelectedCluster} />
         <div className="flex flex-row gap-10">

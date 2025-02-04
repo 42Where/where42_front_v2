@@ -2,25 +2,27 @@ import { useState, useRef, FormEvent } from 'react';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import memberApi from '@/api/memberApi';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-import { useUserStore } from '@/lib/stores';
 import CustomLocationContent from '@/components/utils/CustomLocationContent';
 import SettingBtn from '@/components/buttons/MySettingBtn';
 import XBtn from '@/components/buttons/XBtn';
+import { useDeleteComment, useUpdateComment } from '@/hooks/useMutateComments';
+import useMyInfo from '@/hooks/useMyInfo';
 
 export default function MySettingModal() {
   const [isMessage, setIsMessage] = useState<boolean>(false);
-  const { user, setUser } = useUserStore();
+  const user = useMyInfo().data;
   const [resultMessage, setResultMessage] = useState<string>('');
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchValue, setSearchValue] = useState<string>(user?.comment || '');
+  const deleteMutate = useDeleteComment().mutate;
+  const updateMutate = useUpdateComment().mutate;
 
   function openHandler(open: boolean) {
     if (!open) {
@@ -48,23 +50,8 @@ export default function MySettingModal() {
     setSearchValue('');
     setResultMessage('설정 되었습니다.');
     if (inputValue === user?.comment || !user) return;
-    if (inputValue === '') {
-      memberApi
-        .deleteComment()
-        .then(() => setUser({ ...user, comment: '' }))
-        .catch((error) => {
-          console.error(error);
-          setResultMessage('설정 중 오류가 발생했습니다. 다시 시도해 주세요.');
-        });
-      return;
-    }
-    memberApi
-      .updateComment({ comment: inputValue })
-      .then(() => setUser({ ...user, comment: inputValue }))
-      .catch((error) => {
-        console.error(error);
-        setResultMessage('설정 중 오류가 발생했습니다. 다시 시도해 주세요.');
-      });
+    if (inputValue === '') deleteMutate();
+    updateMutate(searchValue);
   }
 
   if (!user) return null;

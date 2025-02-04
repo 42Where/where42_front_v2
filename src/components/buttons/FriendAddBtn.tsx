@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { SearchedUser } from '@/types/User';
-import groupApi from '@/api/groupApi';
-import { useUserStore, useAddedMembersStore, useGroupsStore, useClusterStore } from '@/lib/stores';
+import { useClusterStore } from '@/lib/stores';
+import useMyInfo from '@/hooks/useMyInfo';
 import { updateClusterUser } from '@/lib/clusterUtils';
-import { useToast } from '@/components/ui/use-toast';
 import { ClusterName, RowName } from '@/types/Cluster';
+import { useAddGroupMember } from '@/hooks/useMutateGroups';
 
 export default function FriendAddBtn({
   member,
@@ -13,34 +13,17 @@ export default function FriendAddBtn({
   member: SearchedUser;
   isClusterView?: boolean;
 }) {
-  const { user } = useUserStore();
-  const { addedMembers, setAddedMembers } = useAddedMembersStore();
-  const { groups, setGroups } = useGroupsStore();
-  const { toast } = useToast();
+  const user = useMyInfo().data;
   const { clusters, setClusters } = useClusterStore();
+  const { mutate } = useAddGroupMember();
 
   function clickHandler() {
-    setAddedMembers([...addedMembers, member.intraId]);
-    const updatedGroups = groups.map((group) => {
-      if (group.groupId === user?.defaultGroupId) {
-        return {
-          ...group,
-          members: [...group.members, member],
-        };
-      }
-      return group;
+    if (!user) return;
+    mutate({
+      addMembers: [member],
+      groupId: user.defaultGroupId,
     });
-    setGroups(updatedGroups);
-    groupApi
-      .addMemberAtGroup({
-        groupId: user?.defaultGroupId as number,
-        members: [member.intraId],
-      })
-      .then(() => {
-        toast({
-          title: `'${member.intraName}'님을 친구 목록에 추가했습니다.`,
-        });
-      });
+
     if (isClusterView) {
       if (!member || !member.location) return;
       let userCluster;
@@ -48,11 +31,11 @@ export default function FriendAddBtn({
       let userSeat;
       if (member.location.length === 6) {
         userCluster = member.location.slice(0, 2) as ClusterName;
-        userRow = String(member.location.slice(2, 4)) as RowName;
+        userRow = member.location.slice(2, 4) as RowName;
         userSeat = member.location.slice(5, 6);
       } else if (member.location.length === 7) {
         userCluster = member.location.slice(0, 3) as ClusterName;
-        userRow = String(member.location.slice(3, 5)) as RowName;
+        userRow = member.location.slice(3, 5) as RowName;
         userSeat = member.location.slice(6, 7);
       } else throw new Error('Invalid location');
       setClusters(
