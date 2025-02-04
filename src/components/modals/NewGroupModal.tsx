@@ -101,13 +101,16 @@ export default function NewGroupModal() {
   useEffect(() => {
     // 그룹 생성 후 멤버 추가 화면에서 기본 멤버들 들어있는 상태로 추가해야 함.
     if (!groups) return;
-    setSearchedUsers(groups[0].members);
+    // last index of group
+    setSearchedUsers(groups[groups.length - 1].members);
   }, [isAddingUser, groups]);
 
   useEffect(() => {
     // 멤버 검색할 때
     if (!groups) return;
-    setSearchedUsers(groups[0].members.filter((user) => user.intraName.includes(searchValue)));
+    setSearchedUsers(
+      groups[groups.length - 1].members.filter((user) => user.intraName.includes(searchValue)),
+    );
   }, [searchValue, groups]);
 
   return (
