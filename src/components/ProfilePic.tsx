@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { User } from '@/types/User';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { CardType } from '@/types/enums';
+import Image from 'next/image';
 
 export default function ProfilePic({ user, type }: { user: User; type: CardType }) {
   return (
@@ -22,7 +23,9 @@ export default function ProfilePic({ user, type }: { user: User; type: CardType 
             }}
           >
             <AvatarImage src={user.image} />
-            <AvatarFallback />
+            <AvatarFallback>
+              <Image src="/image/seats/defaultUserImage.svg" alt="defaultUserImage" fill />
+            </AvatarFallback>
           </Avatar>
         </TooltipTrigger>
         {type !== 'searchedCard' && (

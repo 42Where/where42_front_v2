@@ -10,6 +10,7 @@ import ProfilePic from '@/components/ProfilePic';
 import FriendAddBtn from '@/components/buttons/FriendAddBtn';
 import { User } from '@/types/User';
 import useMyInfo from '@/hooks/useMyInfo';
+import { useState } from 'react';
 
 export default function SingleSeat({
   clusterUser,
@@ -19,6 +20,8 @@ export default function SingleSeat({
   seatNumber: number;
 }) {
   const user = useMyInfo().data;
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
   if (!clusterUser)
     return (
       <button
@@ -61,11 +64,16 @@ export default function SingleSeat({
         >
           <div className="relative h-full w-6 md:w-8 2xl:w-12">
             <Image
-              src={clusterUser.image || '/image/seats/defaultUserImage.svg'}
+              src={
+                isImageLoaded && clusterUser.image
+                  ? clusterUser.image
+                  : '/image/seats/defaultUserImage.svg'
+              }
               alt="seat"
               fill
               objectFit="cover"
               className="object-top"
+              onLoadingComplete={() => setIsImageLoaded(true)}
             />
           </div>
           <p className="text-[8px] md:text-xs 2xl:text-base">{seatNumber}</p>
