@@ -1,10 +1,11 @@
 import Image from 'next/image';
-import { SearchedUser } from '@/types/User';
-import { useClusterStore } from '@/lib/stores';
+import { useAddGroupMember } from '@/hooks/useMutateGroups';
 import useMyInfo from '@/hooks/useMyInfo';
+import { useClusterStore } from '@/lib/stores';
 import { updateClusterUser } from '@/lib/clusterUtils';
 import { ClusterName, RowName } from '@/types/Cluster';
-import { useAddGroupMember } from '@/hooks/useMutateGroups';
+import { SearchedUser } from '@/types/User';
+import userAdd from '@/assets/user/userAdd.svg';
 
 export default function FriendAddBtn({
   member,
@@ -58,13 +59,7 @@ export default function FriendAddBtn({
       className="right-[110px] flex size-14 items-center justify-center rounded-lg hover:bg-gray-200"
       onClick={clickHandler}
     >
-      <Image
-        src="/image/user/userAdd.svg"
-        alt="userAdd"
-        width={30}
-        height={30}
-        className="hover:bg-gray-200"
-      />
+      <Image src={userAdd} alt="userAdd" width={30} height={30} className="hover:bg-gray-200" />
     </button>
   );
 }

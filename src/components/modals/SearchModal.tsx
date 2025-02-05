@@ -10,10 +10,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import XBtn from '@/components/buttons/XBtn';
 import memberApi from '@/api/memberApi';
 import useMyInfo from '@/hooks/useMyInfo';
 import { SearchedUser } from '@/types/User';
-import XBtn from '@/components/buttons/XBtn';
+import search from '@/assets/search.svg';
 
 const SearchInputSchema = z.string().regex(/^[a-zA-Z0-9-]*$/, {
   message: '영어, 숫자, -만 입력 가능합니다.',
@@ -97,7 +98,7 @@ export default function SearchModal() {
           <DialogTitle>카뎃 검색</DialogTitle>
         </DialogHeader>
         <div className="flex w-full flex-row items-center gap-2  rounded-xl border border-gray-400 p-2 shadow-lg">
-          <Image src="/image/search.svg" width={20} height={20} alt="search" />
+          <Image src={search} width={20} height={20} alt="search" />
           <form
             className="flex w-full flex-row items-center gap-2"
             ref={formRef}

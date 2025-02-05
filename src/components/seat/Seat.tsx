@@ -1,5 +1,5 @@
+import { useState } from 'react';
 import Image from 'next/image';
-import { ActiveClusterUser } from '@/types/Cluster';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,8 +8,11 @@ import {
 import LocationBtn from '@/components/buttons/LocationBtn';
 import ProfilePic from '@/components/ProfilePic';
 import FriendAddBtn from '@/components/buttons/FriendAddBtn';
-import { User } from '@/types/User';
 import useMyInfo from '@/hooks/useMyInfo';
+import { ActiveClusterUser } from '@/types/Cluster';
+import { User } from '@/types/User';
+import defaultUserImage from '@/assets/seats/defaultUserImage.svg';
+import seat from '@/assets/seats/seat.svg';
 
 export default function SingleSeat({
   clusterUser,
@@ -19,6 +22,8 @@ export default function SingleSeat({
   seatNumber: number;
 }) {
   const user = useMyInfo().data;
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
   if (!clusterUser)
     return (
       <button
@@ -26,7 +31,7 @@ export default function SingleSeat({
         className="flex h-10 w-9 cursor-default flex-col items-center justify-center gap-1 rounded-md md:size-14 2xl:size-20"
       >
         <Image
-          src="/image/seats/seat.svg"
+          src={seat}
           alt="seat"
           width={32}
           height={32}
@@ -61,11 +66,12 @@ export default function SingleSeat({
         >
           <div className="relative h-full w-6 md:w-8 2xl:w-12">
             <Image
-              src={clusterUser.image || '/image/seats/defaultUserImage.svg'}
+              src={isImageLoaded && clusterUser.image ? clusterUser.image : defaultUserImage}
               alt="seat"
               fill
               objectFit="cover"
               className="object-top"
+              onLoadingComplete={() => setIsImageLoaded(true)}
             />
           </div>
           <p className="text-[8px] md:text-xs 2xl:text-base">{seatNumber}</p>

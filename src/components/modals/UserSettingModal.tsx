@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Image from 'next/image';
+import { useQueryClient } from '@tanstack/react-query';
 import {
   DialogTrigger,
   Dialog,
@@ -6,7 +8,6 @@ import {
   DialogTitle,
   DialogClose,
 } from '@/components/ui/dialog';
-import Image from 'next/image';
 import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -14,14 +15,14 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
-import { useCheckedUsersStore } from '@/lib/stores';
 import { Button } from '@/components/ui/button';
-import { User } from '@/types/User';
-import Group from '@/types/Group';
+import { useAddGroupMember, useDeleteGroupMember } from '@/hooks/useMutateGroups';
 import useMyInfo from '@/hooks/useMyInfo';
 import useGroupList from '@/hooks/useGroupList';
-import { useQueryClient } from '@tanstack/react-query';
-import { useAddGroupMember, useDeleteGroupMember } from '@/hooks/useMutateGroups';
+import { useCheckedUsersStore } from '@/lib/stores';
+import { User } from '@/types/User';
+import Group from '@/types/Group';
+import functionButton from '@/assets/functionButton.svg';
 
 export default function UserSettingModal({
   targUser,
@@ -45,7 +46,6 @@ export default function UserSettingModal({
     setCheckedUsers([targUser]);
     const temp = [...groups];
     const tempGroup = temp.find((g) => g.groupId === targGroup.groupId);
-    console.log(tempGroup);
     if (tempGroup) {
       tempGroup.isInEdit = true;
       temp.map((g) => {
@@ -82,7 +82,7 @@ export default function UserSettingModal({
       <DropdownMenu>
         <DropdownMenuTrigger asChild className="cursor-pointer">
           <Image
-            src="/image/functionButton.svg"
+            src={functionButton}
             alt="function"
             width={30}
             height={30}

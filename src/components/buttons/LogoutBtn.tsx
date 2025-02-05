@@ -2,6 +2,7 @@ import authApi from '@/api/authApi';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import signOut from '@/assets/signOut.svg';
 
 export default function LogoutBtn() {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function LogoutBtn() {
             }}
           >
             <Image
-              src="/image/signOut.svg"
+              src={signOut}
               alt="search"
               width={40}
               height={40}

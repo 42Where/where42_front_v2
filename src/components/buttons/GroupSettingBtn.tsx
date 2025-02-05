@@ -2,6 +2,7 @@ import Group from '@/types/Group';
 import Image from 'next/image';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import pencil from '@/assets/pencil.svg';
 
 export default function GroupSettingBtn({
   curGroup,
@@ -19,7 +20,7 @@ export default function GroupSettingBtn({
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>
-              <Image src="/image/pencil.svg" alt="pencil" width={24} height={24} />
+              <Image src={pencil} alt="pencil" width={24} height={24} />
             </TooltipTrigger>
             <TooltipContent>그룹 설정</TooltipContent>
           </Tooltip>

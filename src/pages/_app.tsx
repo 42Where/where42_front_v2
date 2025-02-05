@@ -1,4 +1,3 @@
-import React from 'react';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Toaster } from '@/components/ui/toaster';
@@ -14,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Toaster />
       <Head>
         <title>Where42</title>
-        <link rel="icon" href="/image/logo/logo.svg" />
+        <link rel="icon" href="/image/logo.svg" />
       </Head>
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />

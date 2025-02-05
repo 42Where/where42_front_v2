@@ -1,4 +1,3 @@
-// import React from 'react';
 // import Image from 'next/image';
 // import groupApi from '@/api/groupApi';
 // import { useGroupsStore, useUserStore } from '@/lib/stores';
