@@ -1,8 +1,9 @@
+import Image from 'next/image';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { User } from '@/types/User';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { CardType } from '@/types/enums';
-import Image from 'next/image';
+import { User } from '@/types/User';
+import defaultUserImage from '@/assets/seats/defaultUserImage.svg';
 
 export default function ProfilePic({ user, type }: { user: User; type: CardType }) {
   return (
@@ -24,7 +25,7 @@ export default function ProfilePic({ user, type }: { user: User; type: CardType 
           >
             <AvatarImage src={user.image} />
             <AvatarFallback>
-              <Image src="/image/seats/defaultUserImage.svg" alt="defaultUserImage" fill />
+              <Image src={defaultUserImage} alt="defaultUserImage" fill />
             </AvatarFallback>
           </Avatar>
         </TooltipTrigger>

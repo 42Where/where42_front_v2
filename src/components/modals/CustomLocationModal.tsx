@@ -1,12 +1,12 @@
-import React from 'react';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import useMyInfo from '@/hooks/useMyInfo';
 import LocationBtn from '@/components/buttons/LocationBtn';
 import CustomLocationContent from '@/components/utils/CustomLocationContent';
+import { useState } from 'react';
 
 export default function CustomLocationModal() {
   const user = useMyInfo().data;
-  const [resultMessage, setResultMessage] = React.useState<string>('');
+  const [resultMessage, setResultMessage] = useState<string>('');
   if (!user) return null;
   return (
     <Dialog

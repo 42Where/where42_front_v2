@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import setting from '@/assets/setting.svg';
 
 export default function MySettingBtn() {
   return (
@@ -7,7 +8,7 @@ export default function MySettingBtn() {
       <Tooltip>
         <TooltipTrigger asChild>
           <Image
-            src="/image/setting.svg"
+            src={setting}
             alt="setting"
             width={60}
             height={60}

@@ -1,11 +1,7 @@
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import Image from 'next/image';
 import Link from 'next/link';
+import logoC from '@/assets/logo/logoC.svg';
 
 export default function RepoLink() {
   return (
@@ -14,12 +10,11 @@ export default function RepoLink() {
         <TooltipTrigger asChild>
           <Link href="https://github.com/42Where">
             <Image
-              src="image/logo/logoC.svg"
+              src={logoC}
               alt="logo"
               width={120}
               height={120}
-              className="
-        w-[80px] md:w-[120px]"
+              className="w-[80px] md:w-[120px]"
             />
           </Link>
         </TooltipTrigger>

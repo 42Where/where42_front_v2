@@ -1,4 +1,3 @@
-import React from 'react';
 import ProfilePic from '@/components/ProfilePic';
 import { User } from '@/types/User';
 import { useCheckedUsersStore } from '@/lib/stores';

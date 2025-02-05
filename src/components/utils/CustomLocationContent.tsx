@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
@@ -14,7 +14,7 @@ export default function CustomLocationContent({
   setResultMessage: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const user = useMyInfo().data;
-  const [locationValue, setLocationValue] = React.useState<string>('');
+  const [locationValue, setLocationValue] = useState<string>('');
   const updateLocation = useUpdateLocation();
   const deleteLocation = useDeleteLocation();
 

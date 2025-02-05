@@ -1,4 +1,3 @@
-import React from 'react';
 import { User } from '@/types/User';
 import NewGroupModal from '@/components/modals/NewGroupModal';
 import MySettingModal from '@/components/modals/MySettingModal';

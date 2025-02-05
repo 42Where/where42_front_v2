@@ -1,10 +1,7 @@
 import Image from 'next/image';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import megaphone from '@/assets/megaphone/megaphone.svg';
+import megaphoneActive from '@/assets/megaphone/megaphoneActive.svg';
 
 export default function AnnouncementBtn({ isOpen }: { isOpen: boolean }) {
   return (
@@ -12,7 +9,7 @@ export default function AnnouncementBtn({ isOpen }: { isOpen: boolean }) {
       <Tooltip>
         <TooltipTrigger asChild>
           <Image
-            src={`${isOpen ? '/image/megaphoneActive.svg' : '/image/megaphone.svg'}`}
+            src={`${isOpen ? megaphoneActive : megaphone}`}
             alt="announcement"
             width={40}
             height={40}

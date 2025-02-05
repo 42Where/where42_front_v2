@@ -18,12 +18,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { SearchedUser, User } from '@/types/User';
 import SearchedCard from '@/components/cards/SearchedCard';
 import XBtn from '@/components/buttons/XBtn';
+import { useToast } from '@/components/ui/use-toast';
 import { useAddGroupMember, useCreateGroup } from '@/hooks/useMutateGroups';
 import useGroupList from '@/hooks/useGroupList';
-import { useToast } from '@/components/ui/use-toast';
+import { SearchedUser, User } from '@/types/User';
+import newGroup from '@/assets/newGroup.svg';
+import search from '@/assets/search.svg';
 
 export default function NewGroupModal() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -121,7 +123,7 @@ export default function NewGroupModal() {
           className="h-6 gap-2 rounded-full border-2 border-darkblue
           bg-white px-3 py-1  text-xs text-darkblue hover:bg-gray-200 md:h-8 lg:h-10 lg:text-xl"
         >
-          <Image src="/image/newGroup.svg" alt="newGroup" width={20} height={20} />새 그룹
+          <Image src={newGroup} alt="newGroup" width={20} height={20} />새 그룹
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] transition-all duration-500 ease-out">
@@ -177,7 +179,7 @@ export default function NewGroupModal() {
                 </div>
               )}
               <div className="flex w-full flex-row items-center gap-2 rounded-xl border border-gray-400 p-2 shadow-lg">
-                <Image src="/image/search.svg" width={20} height={20} alt="search" />
+                <Image src={search} width={20} height={20} alt="search" />
                 <input
                   ref={inputRef}
                   className="text-l w-full bg-transparent text-darkblue outline-none placeholder:text-gray-500  dark:text-gray-700"
