@@ -9,7 +9,7 @@ export default function AnnouncementBtn({ isOpen }: { isOpen: boolean }) {
       <Tooltip>
         <TooltipTrigger asChild>
           <Image
-            src={`${isOpen ? megaphoneActive : megaphone}`}
+            src={isOpen ? megaphoneActive : megaphone}
             alt="announcement"
             width={40}
             height={40}
