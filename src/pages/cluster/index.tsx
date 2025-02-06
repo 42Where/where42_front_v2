@@ -16,7 +16,7 @@ import { updateClusterUser } from '@/lib/clusterUtils';
 import clusterApi from '@/api/clusterApi';
 import useInfoSet from '@/lib/hooks';
 import { useClusterStore } from '@/lib/stores';
-import useAdminStatus from '@/hooks/useAdminStatus';
+import { useAdminStatus } from '@/hooks';
 
 export default function SeatsPage() {
   const [selectedCluster, setSelectedCluster] = useState<ClusterName>('c1');

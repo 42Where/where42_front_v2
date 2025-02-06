@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import GroupDeleteModal from '@/components/modals/GroupDeleteModal';
 import GroupAddModal from '@/components/modals/GroupAddModal';
 import { useQueryClient } from '@tanstack/react-query';
-import useGroupList from '@/hooks/useGroupList';
+import { useGroupList } from '@/hooks';
 
 export default function GroupEditBar({ curGroup }: { curGroup: Group }) {
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();

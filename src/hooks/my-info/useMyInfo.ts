@@ -2,7 +2,7 @@ import { queryOptions, useQuery } from '@tanstack/react-query';
 import authApi from '@/api/authApi';
 import Cookies from 'js-cookie';
 
-export const queryOption = queryOptions({
+export const userOption = queryOptions({
   queryKey: ['userInfo'],
   queryFn: authApi.getMyInfo,
   staleTime: Infinity,
@@ -12,6 +12,6 @@ export const queryOption = queryOptions({
   },
 });
 
-export default function useMyInfo() {
-  return useQuery(queryOption);
+export function useMyInfo() {
+  return useQuery(userOption);
 }

@@ -6,9 +6,7 @@ import ProfileSkeleton from '@/components/utils/ProfileSkeleton';
 import AgreementModal from '@/components/modals/AgreementModal';
 import Divider from '@/components/utils/Divider';
 import CardSkeleton from '@/components/utils/CardSkeleton';
-import useAdminStatus from '@/hooks/useAdminStatus';
-import useMyInfo from '@/hooks/useMyInfo';
-import useGroupList from '@/hooks/useGroupList';
+import { useMyInfo, useGroupList, useAdminStatus } from '@/hooks';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 

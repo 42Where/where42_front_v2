@@ -8,8 +8,7 @@ import {
 import { Button } from '@/components/ui/button';
 import Group from '@/types/Group';
 import { useCheckedUsersStore } from '@/lib/stores';
-import useMyInfo from '@/hooks/useMyInfo';
-import { useDeleteGroupMember } from '@/hooks/useMutateGroups';
+import { useDeleteGroupMember, useMyInfo } from '@/hooks';
 
 export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
   const { checkedUsers } = useCheckedUsersStore();

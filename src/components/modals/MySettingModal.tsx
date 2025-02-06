@@ -1,18 +1,22 @@
 import { useState, useRef, FormEvent } from 'react';
-import { DialogTrigger } from '@radix-ui/react-dialog';
-import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import CustomLocationContent from '@/components/utils/CustomLocationContent';
 import SettingBtn from '@/components/buttons/MySettingBtn';
 import XBtn from '@/components/buttons/XBtn';
-import { useDeleteComment, useUpdateComment } from '@/hooks/useMutateComments';
-import useMyInfo from '@/hooks/useMyInfo';
+import { useDeleteComment, useUpdateComment, useMyInfo } from '@/hooks';
 
 export default function MySettingModal() {
   const [isMessage, setIsMessage] = useState<boolean>(false);

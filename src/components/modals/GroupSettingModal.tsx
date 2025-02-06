@@ -1,15 +1,18 @@
 import { useState, useRef, FormEvent } from 'react';
-import { DialogTrigger } from '@radix-ui/react-dialog';
-import { Dialog, DialogContent, DialogTitle, DialogClose } from '@/components/ui/dialog';
+import { useQueryClient } from '@tanstack/react-query';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogClose,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import Group from '@/types/Group';
 import GroupSettingBtn from '@/components/buttons/GroupSettingBtn';
 import XBtn from '@/components/buttons/XBtn';
-import useMyInfo from '@/hooks/useMyInfo';
-import { useDeleteGroup, useRenameGroup } from '@/hooks/useMutateGroups';
-import { useQueryClient } from '@tanstack/react-query';
-import useGroupList from '@/hooks/useGroupList';
+import { useDeleteGroup, useRenameGroup, useGroupList, useMyInfo } from '@/hooks';
+import Group from '@/types/Group';
 
 export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
   const [isDelete, setIsDelete] = useState<boolean>(false);

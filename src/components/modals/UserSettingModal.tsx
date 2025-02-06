@@ -16,9 +16,7 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { useAddGroupMember, useDeleteGroupMember } from '@/hooks/useMutateGroups';
-import useMyInfo from '@/hooks/useMyInfo';
-import useGroupList from '@/hooks/useGroupList';
+import { useAddGroupMember, useDeleteGroupMember, useMyInfo, useGroupList } from '@/hooks';
 import { useCheckedUsersStore } from '@/lib/stores';
 import { User } from '@/types/User';
 import Group from '@/types/Group';

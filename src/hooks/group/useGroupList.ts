@@ -1,19 +1,19 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import groupApi from '@/api/groupApi';
-import useMyInfo from '@/hooks/useMyInfo';
+import { useMyInfo } from '@/hooks/my-info/useMyInfo';
 import Group from '@/types/Group';
 
-export const queryOption = queryOptions({
+export const groupOption = queryOptions({
   queryKey: ['groupList'],
   queryFn: groupApi.getAllGroups,
 });
 
 // fresh for 5 min, and auto updated
-export default function useGroupList() {
+export function useGroupList() {
   const myInfoRes = useMyInfo();
 
   const res = useQuery({
-    ...queryOption,
+    ...groupOption,
     staleTime: 5 * 60 * 1000,
     refetchInterval: 5 * 60 * 1000,
     refetchIntervalInBackground: true,

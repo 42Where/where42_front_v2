@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { queryOption } from '@/hooks/useGroupList';
+import { groupOption } from '@/hooks/group/useGroupList';
 import groupApi from '@/api/groupApi';
 import { User } from '@/types/User';
 import { useToast } from '@/components/ui/use-toast';
@@ -17,7 +17,7 @@ type DeleteParamType = {
 
 export function useAddGroupMember() {
   const queryClient = useQueryClient();
-  const { queryKey } = queryOption;
+  const { queryKey } = groupOption;
   const { toast } = useToast();
 
   const res = useMutation({
@@ -62,7 +62,7 @@ export function useAddGroupMember() {
 
 export function useDeleteGroupMember() {
   const queryClient = useQueryClient();
-  const { queryKey } = queryOption;
+  const { queryKey } = groupOption;
   const { toast } = useToast();
 
   const res = useMutation({
@@ -111,7 +111,7 @@ type CreateRenameParamType = {
 // We don't do optimistic update here because we need to get the new group id from the server.
 export function useCreateGroup() {
   const queryClient = useQueryClient();
-  const { queryKey } = queryOption;
+  const { queryKey } = groupOption;
 
   return useMutation({
     mutationFn: async (groupName: string) => {
@@ -129,7 +129,7 @@ export function useCreateGroup() {
 
 export function useRenameGroup() {
   const queryClient = useQueryClient();
-  const { queryKey } = queryOption;
+  const { queryKey } = groupOption;
 
   return useMutation({
     mutationFn: ({ groupId, groupName }: CreateRenameParamType) =>
@@ -156,7 +156,7 @@ export function useRenameGroup() {
 
 export function useDeleteGroup() {
   const queryClient = useQueryClient();
-  const { queryKey } = queryOption;
+  const { queryKey } = groupOption;
   const { toast } = useToast();
 
   return useMutation({

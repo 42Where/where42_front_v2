@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import { useAddGroupMember } from '@/hooks/useMutateGroups';
-import useMyInfo from '@/hooks/useMyInfo';
+import { useAddGroupMember, useMyInfo } from '@/hooks';
 import { useClusterStore } from '@/lib/stores';
 import { updateClusterUser } from '@/lib/clusterUtils';
 import { ClusterName, RowName } from '@/types/Cluster';

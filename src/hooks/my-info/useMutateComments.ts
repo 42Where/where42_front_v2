@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { queryOption } from '@/hooks/useMyInfo';
+import { userOption } from '@/hooks/my-info/useMyInfo';
 import memberApi from '@/api/memberApi';
 
 // no onSuccess handler.
 
 export function useUpdateComment() {
   const queryClient = useQueryClient();
-  const { queryKey } = queryOption;
+  const { queryKey } = userOption;
 
   return useMutation({
     mutationFn: (comment: string) => memberApi.updateComment({ comment }),
@@ -27,7 +27,7 @@ export function useUpdateComment() {
 
 export function useDeleteComment() {
   const queryClient = useQueryClient();
-  const { queryKey } = queryOption;
+  const { queryKey } = userOption;
 
   return useMutation({
     mutationFn: memberApi.deleteComment,

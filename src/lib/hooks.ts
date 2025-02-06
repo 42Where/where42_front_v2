@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import useMyInfo from '@/hooks/useMyInfo';
-import useAdminStatus from '@/hooks/useAdminStatus';
-import useGroupList from '@/hooks/useGroupList';
+import { useMyInfo, useAdminStatus, useGroupList } from '@/hooks';
 
 export default function useInfoSet() {
   const [showModal, setShowModal] = useState(false);

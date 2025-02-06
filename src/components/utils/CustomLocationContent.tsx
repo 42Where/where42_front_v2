@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { useDeleteLocation, useUpdateLocation } from '@/hooks/useMutateLocations';
-import useMyInfo from '@/hooks/useMyInfo';
+import { useDeleteLocation, useUpdateLocation, useMyInfo } from '@/hooks';
 import LocationCascader from './LocationCascader';
 
 export default function CustomLocationContent({

@@ -1,5 +1,5 @@
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
-import useMyInfo from '@/hooks/useMyInfo';
+import { useMyInfo } from '@/hooks';
 import LocationBtn from '@/components/buttons/LocationBtn';
 import CustomLocationContent from '@/components/utils/CustomLocationContent';
 import { useState } from 'react';

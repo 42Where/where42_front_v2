@@ -9,9 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 import Group from '@/types/Group';
 import { useCheckedUsersStore } from '@/lib/stores';
-import useMyInfo from '@/hooks/useMyInfo';
-import { useAddGroupMember } from '@/hooks/useMutateGroups';
-import useGroupList from '@/hooks/useGroupList';
+import { useAddGroupMember, useMyInfo, useGroupList } from '@/hooks';
 
 export default function GroupAddModal() {
   const user = useMyInfo().data;

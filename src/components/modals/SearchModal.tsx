@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/dialog';
 import XBtn from '@/components/buttons/XBtn';
 import memberApi from '@/api/memberApi';
-import useMyInfo from '@/hooks/useMyInfo';
+import { useMyInfo } from '@/hooks';
 import { SearchedUser } from '@/types/User';
 import search from '@/assets/search.svg';
 

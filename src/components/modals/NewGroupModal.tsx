@@ -21,8 +21,7 @@ import {
 import SearchedCard from '@/components/cards/SearchedCard';
 import XBtn from '@/components/buttons/XBtn';
 import { useToast } from '@/components/ui/use-toast';
-import { useAddGroupMember, useCreateGroup } from '@/hooks/useMutateGroups';
-import useGroupList from '@/hooks/useGroupList';
+import { useAddGroupMember, useCreateGroup, useGroupList } from '@/hooks';
 import { SearchedUser, User } from '@/types/User';
 import newGroup from '@/assets/newGroup.svg';
 import search from '@/assets/search.svg';

@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { queryOption } from '@/hooks/useMyInfo';
+import { userOption } from '@/hooks/my-info/useMyInfo';
 import locationApi from '@/api/locationApi';
 
 // We don't need queryInvalidation since we do know the updated information
 export function useUpdateLocation() {
   const queryClient = useQueryClient();
-  const { queryKey } = queryOption;
+  const { queryKey } = userOption;
 
   return useMutation({
     mutationFn: (newLocation: string) => locationApi.setCustomLocation({ location: newLocation }),
@@ -29,7 +29,7 @@ export function useUpdateLocation() {
 
 export function useDeleteLocation() {
   const queryClient = useQueryClient();
-  const { queryKey } = queryOption;
+  const { queryKey } = userOption;
 
   return useMutation({
     mutationFn: locationApi.deleteCustomLocation,
