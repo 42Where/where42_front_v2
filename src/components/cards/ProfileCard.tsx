@@ -4,7 +4,7 @@ import { useCheckedUsersStore } from '@/lib/stores';
 import { Checkbox } from '@/components/ui/checkbox';
 import UserSettingModal from '@/components/modals/UserSettingModal';
 import Group from '@/types/Group';
-import LocationBtn from '@/components/buttons/LocationBtn';
+import { LocationBtn } from '@/components/buttons';
 
 export default function ProfileCard({
   user,

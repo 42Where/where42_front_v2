@@ -19,7 +19,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import SearchedCard from '@/components/cards/SearchedCard';
-import XBtn from '@/components/buttons/XBtn';
+import { XBtn } from '@/components/buttons';
 import { useToast } from '@/components/ui/use-toast';
 import { useAddGroupMember, useCreateGroup, useGroupList } from '@/hooks';
 import { SearchedUser, User } from '@/types/User';

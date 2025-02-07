@@ -4,13 +4,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import pencil from '@/assets/pencil.svg';
 
-export default function GroupSettingBtn({
-  curGroup,
-  groups,
-}: {
-  curGroup: Group;
-  groups: Group[];
-}) {
+export function GroupSettingBtn({ curGroup, groups }: { curGroup: Group; groups: Group[] }) {
   return (
     !groups.find((group) => group.groupId === curGroup.groupId)?.isInEdit && (
       <DropdownMenuTrigger

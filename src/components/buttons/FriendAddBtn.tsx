@@ -6,7 +6,7 @@ import { ClusterName, RowName } from '@/types/Cluster';
 import { SearchedUser } from '@/types/User';
 import userAdd from '@/assets/user/userAdd.svg';
 
-export default function FriendAddBtn({
+export function FriendAddBtn({
   member,
   isClusterView,
 }: {

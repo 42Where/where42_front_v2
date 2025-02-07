@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import setting from '@/assets/setting.svg';
 
-export default function MySettingBtn() {
+export function MySettingBtn() {
   return (
     <TooltipProvider>
       <Tooltip>

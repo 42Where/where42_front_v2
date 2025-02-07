@@ -1,8 +1,8 @@
-import { Dialog, DialogTrigger } from '@/components/ui/dialog';
-import { useMyInfo } from '@/hooks';
-import LocationBtn from '@/components/buttons/LocationBtn';
-import CustomLocationContent from '@/components/utils/CustomLocationContent';
 import { useState } from 'react';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
+import { LocationBtn } from '@/components/buttons';
+import CustomLocationContent from '@/components/utils/CustomLocationContent';
+import { useMyInfo } from '@/hooks';
 
 export default function CustomLocationModal() {
   const user = useMyInfo().data;

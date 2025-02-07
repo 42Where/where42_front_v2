@@ -1,14 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 import { User, SearchedUser } from '@/types/User';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
-export default function LocationBtn({
+export function LocationBtn({
   user,
   isMyProfile,
 }: {
@@ -20,10 +15,7 @@ export default function LocationBtn({
   useEffect(() => {
     if ('location' in user && user.location) {
       setLocation(user.location);
-    } else if (
-      ('inCluster' in user && user.inCluster) ||
-      ('inOrOut' in user && user.inOrOut)
-    ) {
+    } else if (('inCluster' in user && user.inCluster) || ('inOrOut' in user && user.inOrOut)) {
       setLocation('개포');
     } else {
       setLocation('퇴근');

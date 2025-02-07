@@ -5,9 +5,8 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import LocationBtn from '@/components/buttons/LocationBtn';
 import ProfilePic from '@/components/ProfilePic';
-import FriendAddBtn from '@/components/buttons/FriendAddBtn';
+import { FriendAddBtn, LocationBtn } from '@/components/buttons';
 import { useMyInfo } from '@/hooks';
 import { ActiveClusterUser } from '@/types/Cluster';
 import { User } from '@/types/User';

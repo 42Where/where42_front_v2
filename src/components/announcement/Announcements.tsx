@@ -5,7 +5,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import AnnouncementBtn from '@/components/buttons/AnnouncementBtn';
+import { AnnouncementBtn } from '@/components/buttons';
 import AnnouncementItem from '@/components/announcement/AnnouncementItem';
 import { Announcement } from '@/types/Announcement';
 

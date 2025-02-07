@@ -3,7 +3,7 @@ import NewGroupModal from '@/components/modals/NewGroupModal';
 import MySettingModal from '@/components/modals/MySettingModal';
 import CustomLocationModal from '@/components/modals/CustomLocationModal';
 import ProfilePic from '@/components/ProfilePic';
-import SetCheckBtn from '@/components/buttons/SetCheckBtn';
+import { SetCheckBtn } from '@/components/buttons';
 
 export default function MyProfileCard({ user }: { user: User }) {
   return (

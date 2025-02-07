@@ -14,8 +14,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import CustomLocationContent from '@/components/utils/CustomLocationContent';
-import SettingBtn from '@/components/buttons/MySettingBtn';
-import XBtn from '@/components/buttons/XBtn';
+import { MySettingBtn, XBtn } from '@/components/buttons';
 import { useDeleteComment, useUpdateComment, useMyInfo } from '@/hooks';
 
 export default function MySettingModal() {
@@ -63,7 +62,7 @@ export default function MySettingModal() {
     <Dialog onOpenChange={(open) => openHandler(open)}>
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <SettingBtn />
+          <MySettingBtn />
         </DropdownMenuTrigger>
         <DropdownMenuContent side="left" className=" min-w-50 text-darkblue">
           <DialogTrigger asChild onClick={() => setIsMessage(true)}>

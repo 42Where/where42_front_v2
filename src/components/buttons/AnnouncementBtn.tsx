@@ -3,7 +3,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import megaphone from '@/assets/megaphone/megaphone.svg';
 import megaphoneActive from '@/assets/megaphone/megaphoneActive.svg';
 
-export default function AnnouncementBtn({ isOpen }: { isOpen: boolean }) {
+export function AnnouncementBtn({ isOpen }: { isOpen: boolean }) {
   return (
     <TooltipProvider>
       <Tooltip>

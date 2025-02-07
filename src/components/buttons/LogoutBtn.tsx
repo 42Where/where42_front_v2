@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import signOut from '@/assets/signOut.svg';
 
-export default function LogoutBtn() {
+export function LogoutBtn() {
   const router = useRouter();
   return (
     <TooltipProvider>

@@ -9,8 +9,7 @@ import {
 } from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import GroupSettingBtn from '@/components/buttons/GroupSettingBtn';
-import XBtn from '@/components/buttons/XBtn';
+import { GroupSettingBtn, XBtn } from '@/components/buttons';
 import { useDeleteGroup, useRenameGroup, useGroupList, useMyInfo } from '@/hooks';
 import Group from '@/types/Group';
 

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import search from '@/assets/search.svg';
 
-export default function SearchBtn() {
+export function SearchBtn() {
   return (
     <TooltipProvider>
       <Tooltip>

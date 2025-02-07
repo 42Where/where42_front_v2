@@ -2,7 +2,7 @@ import { useState, useRef, FormEvent } from 'react';
 import Image from 'next/image';
 import { z } from 'zod';
 import SearchedCard from '@/components/cards/SearchedCard';
-import SearchBtn from '@/components/buttons/SearchBtn';
+import { SearchBtn, XBtn } from '@/components/buttons';
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import XBtn from '@/components/buttons/XBtn';
 import memberApi from '@/api/memberApi';
 import { useMyInfo } from '@/hooks';
 import { SearchedUser } from '@/types/User';

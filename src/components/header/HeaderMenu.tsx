@@ -1,5 +1,5 @@
 import SearchModal from '@/components/modals/SearchModal';
-import LogoutBtn from '@/components/buttons/LogoutBtn';
+import { LogoutBtn } from '@/components/buttons';
 import Announcements from '@/components/announcement/Announcements';
 import { AdminLink, ClusterLink, HomeLink } from '@/components/links';
 

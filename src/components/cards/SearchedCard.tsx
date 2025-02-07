@@ -1,7 +1,6 @@
 import { SearchedUser } from '@/types/User';
-import LocationBtn from '@/components/buttons/LocationBtn';
+import { LocationBtn, FriendAddBtn } from '@/components/buttons';
 import ProfilePic from '@/components/ProfilePic';
-import FriendAddBtn from '@/components/buttons/FriendAddBtn';
 import { useGroupList, useMyInfo } from '@/hooks';
 
 export default function SearchedCard({

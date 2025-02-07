@@ -2,13 +2,13 @@ import { useRouter } from 'next/router';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 
-export default function LoginBtn({ isMobile }: { isMobile?: boolean }) {
+export function LoginBtn({ isMobile }: { isMobile?: boolean }) {
   const router = useRouter();
   const [isClicked, setIsClicked] = useState(false);
 
   return (
     <Button
-      className={`${isMobile ? 'bg-[#4A6282] absolute z-auto' : 'bg-darkblue hidden sm:block'} rounded-full `}
+      className={`${isMobile ? 'absolute z-auto bg-[#4A6282]' : 'hidden bg-darkblue sm:block'} rounded-full `}
       size="xlg"
       onClick={() => {
         setIsClicked(true);
