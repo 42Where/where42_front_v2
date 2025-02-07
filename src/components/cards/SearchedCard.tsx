@@ -37,8 +37,8 @@ export default function SearchedCard({
           <p className=" md:text-md text-sm ">{member.comment}</p>
         </div>
       </div>
-      {!group[group.length - 1].members.find((a) => a.intraId === member.intraId) ||
-        (user.intraId !== member.intraId && <FriendAddBtn member={member} />)}
+      {!group[group.length - 1].members.find((a) => a.intraId === member.intraId) &&
+        user.intraId !== member.intraId && <FriendAddBtn member={member} />}
     </button>
   );
 }
