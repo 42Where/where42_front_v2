@@ -37,10 +37,10 @@ function SingleCascader({
 
   return (
     <Button
-      className={`w-24 gap-2 rounded-lg border-darkblue px-3 py-1 text-base md:w-32 md:text-xl ${
+      className={`w-24 gap-2 rounded-lg px-3 py-1 text-base md:w-32 md:text-xl ${
         isSelected
-          ? 'border-0 bg-darkblue text-white hover:bg-gray-700'
-          : 'border-2 bg-white text-darkblue hover:bg-gray-200'
+          ? 'bg-darkblue text-white hover:bg-gray-700'
+          : 'bg-white text-darkblue hover:bg-gray-200'
       }`}
       onClick={() => clickHandler()}
     >
