@@ -6,9 +6,7 @@ import {
 } from '@/components/ui/accordion';
 import Group from '@/types/Group';
 import GroupSettingModal from '@/components/modals/GroupSettingModal';
-import GroupEditBar from '@/components/group/GroupEditBar';
-import GroupHeadCount from '@/components/group/GroupHeadCount';
-import GroupCardContainer from '@/components/group/GroupCardContainer';
+import { GroupEditBar, GroupHeadCount, GroupCardContainer } from './group-utils';
 
 export default function Groups({ groups }: { groups: Group[] }) {
   const defaultValues = groups.map((group) => group.groupId.toString());

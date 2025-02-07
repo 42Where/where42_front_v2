@@ -1,6 +1,6 @@
 import Group from '@/types/Group';
 
-export default function GroupHeadCount({ curGroup }: { curGroup: Group }) {
+export function GroupHeadCount({ curGroup }: { curGroup: Group }) {
   return (
     <span className="flex flex-row items-center justify-start gap-6">
       {curGroup.groupName}

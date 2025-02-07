@@ -6,7 +6,7 @@ import GroupAddModal from '@/components/modals/GroupAddModal';
 import { useQueryClient } from '@tanstack/react-query';
 import { useGroupList } from '@/hooks';
 
-export default function GroupEditBar({ curGroup }: { curGroup: Group }) {
+export function GroupEditBar({ curGroup }: { curGroup: Group }) {
   const { checkedUsers, setCheckedUsers } = useCheckedUsersStore();
   const queryClient = useQueryClient();
   const groups = useGroupList().data;

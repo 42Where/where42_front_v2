@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import LoginBtn from '@/components/buttons/LoginBtn';
+import { LoginBtn } from '@/components/buttons';
 import logo from '@/assets/logo/logo.svg';
 
 export default function LoginPage() {

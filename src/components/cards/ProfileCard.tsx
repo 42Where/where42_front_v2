@@ -1,10 +1,10 @@
 import ProfilePic from '@/components/ProfilePic';
-import { User } from '@/types/User';
-import { useCheckedUsersStore } from '@/lib/stores';
 import { Checkbox } from '@/components/ui/checkbox';
 import UserSettingModal from '@/components/modals/UserSettingModal';
-import Group from '@/types/Group';
 import { LocationBtn } from '@/components/buttons';
+import { useCheckedUsersStore } from '@/lib/stores';
+import { User } from '@/types/User';
+import Group from '@/types/Group';
 
 export default function ProfileCard({
   user,
