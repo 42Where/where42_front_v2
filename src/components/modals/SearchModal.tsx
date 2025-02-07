@@ -18,29 +18,13 @@ import search from '@/assets/search.svg';
 const SearchInputSchema = z.string().regex(/^[a-zA-Z0-9-]*$/, {
   message: '영어, 숫자, -만 입력 가능합니다.',
 });
+
 export default function SearchModal() {
   const user = useMyInfo().data;
   const [resultMessage, setResultMessage] = useState<string>('');
   const [searchedUsers, setSearchedUsers] = useState<SearchedUser[]>([]);
-  const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchValue, setSearchValue] = useState<string>('');
-
-  function openHandler(open: boolean) {
-    if (!open) {
-      setTimeout(() => {
-        setSearchedUsers([]);
-        setResultMessage('');
-        formRef.current?.reset();
-        setSearchValue('');
-      }, 100);
-    } else {
-      setSearchedUsers([]);
-      setResultMessage('');
-      formRef.current?.reset();
-      setSearchValue('');
-    }
-  }
 
   function submitHandler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -57,8 +41,6 @@ export default function SearchModal() {
       setResultMessage(errors[0].message);
       return;
     }
-    formRef.current?.reset();
-    setSearchValue('');
     if (inputValue === user?.intraName) {
       setResultMessage('나는 우주를 여행하는 당신의 영원한 친구입니다.');
       return;
@@ -67,12 +49,10 @@ export default function SearchModal() {
     memberApi
       .searchMember({ keyWord: inputValue })
       .then((data) => {
-        if (data.length > 0) {
-          setSearchedUsers(data);
-        } else setResultMessage('검색 결과가 없습니다.');
+        if (data.length > 0) setSearchedUsers(data);
+        else setResultMessage('검색 결과가 없습니다.');
       })
       .catch((error) => {
-        console.error(error);
         if (error.response?.status === 500) {
           setResultMessage('서버 에러가 발생했습니다. 관리자에게 문의해주세요');
           setSearchedUsers([]);
@@ -84,62 +64,51 @@ export default function SearchModal() {
   }
 
   return (
-    <Dialog onOpenChange={(open) => openHandler(open)}>
+    <Dialog
+      onOpenChange={(open) => {
+        // 검색 모달이 닫힐 때 초기화
+        if (!open) {
+          setSearchedUsers([]);
+          setResultMessage('');
+        }
+      }}
+    >
       <DialogTrigger>
         <SearchBtn />
       </DialogTrigger>
       <DialogContent
         className={`flex flex-col items-center transition-all duration-500 ease-out ${
-          searchedUsers?.length ? 'max-w-[800px]' : 'max-w-[425px]'
+          searchedUsers?.length > 3 ? 'max-w-[800px]' : 'max-w-[425px]'
         }`}
       >
         <DialogHeader className="gap-2">
           <DialogTitle>카뎃 검색</DialogTitle>
         </DialogHeader>
-        <div className="flex w-full flex-row items-center gap-2  rounded-xl border border-gray-400 p-2 shadow-lg">
+        <div className="flex w-full flex-row items-center gap-2 rounded-xl border border-gray-400 p-2 shadow-lg">
           <Image src={search} width={20} height={20} alt="search" />
           <form
             className="flex w-full flex-row items-center gap-2"
-            ref={formRef}
             onSubmit={async (e) => submitHandler(e)}
           >
             <input
               ref={inputRef}
-              className="text-l w-full bg-transparent text-darkblue outline-none placeholder:text-gray-500  dark:text-gray-700"
+              className="text-l w-full bg-transparent text-darkblue outline-none placeholder:text-gray-500 dark:text-gray-700"
               placeholder="검색할 카뎃의 아이디를 입력해주세요"
               onChange={(e) => setSearchValue(e.target.value)}
             />
           </form>
-          {searchValue && (
-            <XBtn
-              onClick={() => {
-                formRef.current?.reset();
-                setSearchValue('');
-              }}
-            />
-          )}
+          {searchValue && <XBtn onClick={() => setSearchValue('')} />}
         </div>
-        {/* TODO: make this ternary into HOC */}
-        {/* eslint-disable-next-line no-nested-ternary */}
-        {searchedUsers?.length ? (
-          searchedUsers?.length > 4 ? (
-            <div className="h-[400px] w-full overflow-scroll rounded-md md:h-[600px]">
-              <div className="grid grid-flow-row gap-2 md:grid-cols-2">
-                {searchedUsers?.map((searchedMember) => (
-                  <SearchedCard key={searchedMember.intraId} member={searchedMember} />
-                ))}
-              </div>
-            </div>
-          ) : (
-            <div className="grid w-full grid-flow-row gap-2 md:grid-cols-2">
-              {searchedUsers?.map((searchedMember) => (
-                <SearchedCard key={searchedMember.intraId} member={searchedMember} />
-              ))}
-            </div>
-          )
-        ) : (
-          <p className="text-l  text-darkblue">{resultMessage}</p>
+        {searchedUsers?.length > 0 && (
+          <div
+            className={`grid max-h-[400px] w-full grid-flow-row items-start gap-2 overflow-auto ${searchedUsers?.length > 3 && 'md:max-h-[600px] md:grid-cols-2'}`}
+          >
+            {searchedUsers?.map((searchedMember) => (
+              <SearchedCard key={searchedMember.intraId} member={searchedMember} />
+            ))}
+          </div>
         )}
+        {!searchedUsers?.length && <p className="text-l text-darkblue">{resultMessage}</p>}
       </DialogContent>
     </Dialog>
   );

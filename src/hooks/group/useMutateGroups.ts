@@ -13,6 +13,7 @@ type AddParamType = {
 type DeleteParamType = {
   deleteMembers: User[];
   groupId: number;
+  isDefaultGroup?: boolean;
 };
 
 export function useAddGroupMember() {
@@ -71,17 +72,16 @@ export function useDeleteGroupMember() {
         groupId,
         members: deleteMembers.flatMap((u) => u.intraId),
       }),
-    onMutate: async ({ deleteMembers, groupId }: DeleteParamType) => {
+    onMutate: async ({ deleteMembers, groupId, isDefaultGroup }: DeleteParamType) => {
       const prevData = queryClient.getQueryData(queryKey);
-      return { prevData, deleteMembers, groupId };
+      return { prevData, deleteMembers, groupId, isDefaultGroup };
     },
     onSuccess: (data, _, context) => {
       queryClient.setQueryData(queryKey, (oldData) => {
         if (!oldData) return undefined;
         const updatedGroups = oldData.map((group) => {
-          if (group.groupId !== context.groupId) return group;
-
-          // 대상 그룹의 멤버 배열도 새로운 배열로 업데이트 (불변성 유지)
+          // 기본 그룹에서 삭제할 경우 모든 그룹에서 삭제
+          if (group.groupId !== context.groupId && !context.isDefaultGroup) return group;
           return {
             ...group,
             members: group.members.filter(

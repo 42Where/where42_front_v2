@@ -1,5 +1,5 @@
 import { LocationBtn, FriendAddBtn } from '@/components/buttons';
-import ProfilePic from '@/components/ProfilePic';
+import ProfilePic from '@/components/cards/ProfilePic';
 import { useGroupList, useMyInfo } from '@/hooks';
 import { SearchedUser } from '@/types/User';
 

@@ -1,6 +1,6 @@
-import ProfilePic from '@/components/ProfilePic';
+import ProfilePic from '@/components/cards/ProfilePic';
 import { Checkbox } from '@/components/ui/checkbox';
-import UserSettingModal from '@/components/modals/UserSettingModal';
+import UserSettingModal from '@/components/modals/user-setting/UserSettingModal';
 import { LocationBtn } from '@/components/buttons';
 import { useCheckedUsersStore } from '@/lib/stores';
 import { User } from '@/types/User';
@@ -29,9 +29,10 @@ export default function ProfileCard({
   return (
     <button
       type="button"
-      className={`flex cursor-default flex-row items-center justify-between break-all border-b p-2 md:rounded-2xl md:border-2 md:p-4 md:hover:border-basepink ${
-        isEdit && 'cursor-pointer'
-      }`}
+      className={`flex cursor-default flex-row items-center justify-between break-all
+        border-b-2 p-2 md:rounded-2xl md:border-4 md:p-4 md:hover:border-basepink ${
+          isEdit && 'cursor-pointer'
+        }`}
       onClick={clickHandler}
     >
       <div className="flex flex-row items-center gap-2 md:gap-4">
