@@ -5,7 +5,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from '@/component
 import { GroupSettingBtn } from '@/components/buttons';
 import { useGroupList, useMyInfo } from '@/hooks';
 import Group from '@/types/Group';
-import { RenameModalContent, DeleteModalContent } from './contents';
+import { GroupRenameContent, GroupDeleteContent } from './contents';
 
 export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
   const [isDelete, setIsDelete] = useState<boolean>(false);
@@ -60,9 +60,9 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
         </DropdownMenuContent>
       </DropdownMenu>
       <DialogContent className="max-w-[425px] text-darkblue transition-all duration-500  ease-out">
-        {isDelete && <DeleteModalContent groups={groups} curGroup={curGroup} />}
+        {isDelete && <GroupDeleteContent groups={groups} curGroup={curGroup} />}
         {!isDelete && (
-          <RenameModalContent
+          <GroupRenameContent
             curGroup={curGroup}
             groupName={groupName}
             setGroupName={setGroupName}

@@ -1,5 +1,5 @@
 import { User } from '@/types/User';
-import NewGroupModal from '@/components/modals/group/NewGroupModal';
+import NewGroupModal from '@/components/modals/group/new/NewGroupModal';
 import MySettingModal from '@/components/modals/my-setting/MySettingModal';
 import CustomLocationModal from '@/components/modals/my-setting/CustomLocationModal';
 import ProfilePic from '@/components/ProfilePic';

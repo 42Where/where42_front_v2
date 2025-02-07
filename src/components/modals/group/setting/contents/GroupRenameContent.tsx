@@ -10,7 +10,7 @@ type RenameModalContentProps = {
   setGroupName: (groupName: string) => void;
 };
 
-export function RenameModalContent({ curGroup, groupName, setGroupName }: RenameModalContentProps) {
+export function GroupRenameContent({ curGroup, groupName, setGroupName }: RenameModalContentProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const renameMutate = useRenameGroup().mutate;

@@ -14,12 +14,12 @@ export default function GroupDeleteModal({ curGroup }: { curGroup: Group }) {
   const { checkedUsers } = useCheckedUsersStore();
   const { mutate } = useDeleteGroupMember();
   const user = useMyInfo().data;
-  if (!user) return null;
 
   function clickHandler() {
     mutate({ groupId: curGroup.groupId, deleteMembers: checkedUsers });
   }
 
+  if (!user) return null;
   return (
     <Dialog>
       <DialogTrigger asChild>

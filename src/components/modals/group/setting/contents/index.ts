@@ -1,2 +1,2 @@
-export * from './DeleteContent';
-export * from './RenameContent';
+export * from './GroupDeleteContent';
+export * from './GroupRenameContent';

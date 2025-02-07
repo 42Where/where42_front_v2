@@ -8,7 +8,7 @@ type DeleteModalContentProps = {
   curGroup: Group;
 };
 
-export function DeleteModalContent({ groups, curGroup }: DeleteModalContentProps) {
+export function GroupDeleteContent({ groups, curGroup }: DeleteModalContentProps) {
   const deleteMutate = useDeleteGroup().mutate;
 
   function deleteClickHandler() {
