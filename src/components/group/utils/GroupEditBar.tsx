@@ -1,8 +1,8 @@
 import Group from '@/types/Group';
 import { useCheckedUsersStore } from '@/lib/stores';
 import { Button } from '@/components/ui/button';
-import GroupDeleteModal from '@/components/modals/GroupDeleteModal';
-import GroupAddModal from '@/components/modals/GroupAddModal';
+import GroupDeleteModal from '@/components/modals/group/GroupDeleteModal';
+import GroupAddModal from '@/components/modals/group/GroupAddModal';
 import { useQueryClient } from '@tanstack/react-query';
 import { useGroupList } from '@/hooks';
 

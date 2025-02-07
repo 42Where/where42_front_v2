@@ -12,7 +12,7 @@ export function AnnouncementWriter() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [textValue, settextValue] = useState<string>('');
   const [type, setType] = useState<AnnouncementType>('기능 추가');
-  const [dummyAnnouncement, setDummyAnnouncement] = useState<Announcement>({
+  const [example, setExample] = useState<Announcement>({
     announcementId: 42,
     title: type,
     content: textValue,
@@ -40,15 +40,7 @@ export function AnnouncementWriter() {
   }
 
   useEffect(() => {
-    const dummy = {
-      announcementId: 42,
-      title: type,
-      content: textValue,
-      authorName: 'rip van wrinkle',
-      createAt: '',
-      updateAt: '',
-    };
-    setDummyAnnouncement(dummy);
+    setExample((prev) => ({ ...prev, content: textValue }));
   }, [textValue, type]);
 
   return (
@@ -81,7 +73,7 @@ export function AnnouncementWriter() {
       </div>
       <Divider />
       <h3>미리보기</h3>
-      <Announcements dummyAnnouncement={dummyAnnouncement} />
+      <Announcements example={example} />
     </div>
   );
 }

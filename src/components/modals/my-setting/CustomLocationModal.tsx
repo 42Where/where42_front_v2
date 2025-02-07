@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { LocationBtn } from '@/components/buttons';
-import CustomLocationContent from '@/components/utils/CustomLocationContent';
+import CustomLocationContent from '@/components/modals/my-setting/CustomLocationContent';
 import { useMyInfo } from '@/hooks';
 
 export default function CustomLocationModal() {

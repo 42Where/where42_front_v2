@@ -5,8 +5,8 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import Group from '@/types/Group';
-import GroupSettingModal from '@/components/modals/GroupSettingModal';
-import { GroupEditBar, GroupHeadCount, GroupCardContainer } from './group-utils';
+import GroupSettingModal from '@/components/modals/group/setting/GroupSettingModal';
+import { GroupEditBar, GroupHeadCount, GroupCardContainer } from './utils';
 
 export default function Groups({ groups }: { groups: Group[] }) {
   const defaultValues = groups.map((group) => group.groupId.toString());
