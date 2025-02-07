@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import {
   Accordion,
@@ -15,7 +14,7 @@ export default function AgreementModal({
   setShowModal,
 }: {
   showModal: boolean;
-  setShowModal: (show: boolean) => void;
+  setShowModal: (state: boolean) => void;
 }) {
   const router = useRouter();
   return (
@@ -65,12 +64,7 @@ export default function AgreementModal({
           <div />
           <div className="flex flex-row gap-2">
             <Button
-              onClick={() => {
-                groupApi.agreeJoin().then((res) => {
-                  console.log(res);
-                  router.reload();
-                });
-              }}
+              onClick={() => groupApi.agreeJoin().then(() => router.reload())}
               size="lg"
               className="text-xl"
             >

@@ -19,7 +19,11 @@ export default function ProfilePic({ user, type }: { user: User; type: CardType 
             } border-4 hover:border-[#bfb5ff]`}
             onClick={() => {
               if (type !== 'searchedCard') {
-                window.open(`https://profile.intra.42.fr/users/${user.intraId}`);
+                window.open(
+                  `https://profile.intra.42.fr/users/${user.intraId}`,
+                  '_blank',
+                  'noopener,noreferrer', // for security reasons
+                );
               }
             }}
           >
