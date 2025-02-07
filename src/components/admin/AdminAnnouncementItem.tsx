@@ -1,6 +1,6 @@
 import { Announcement } from '@/types/Announcement';
 
-export default function AdminAnnouncementItem({ announcement }: { announcement: Announcement }) {
+export function AdminAnnouncementItem({ announcement }: { announcement: Announcement }) {
   const { title, content, authorName, createAt, updateAt, announcementId } = announcement;
 
   return (

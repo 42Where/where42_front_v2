@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import cluster from '@/assets/seats/cluster.svg';
 
-export default function ClusterLinkBtn() {
+export function ClusterLink() {
   return (
     <TooltipProvider>
       <Tooltip>

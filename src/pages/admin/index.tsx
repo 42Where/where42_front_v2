@@ -1,14 +1,16 @@
-import adminApi from '@/api/adminApi';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import adminApi from '@/api/adminApi';
+import announcementApi from '@/api/announcementApi';
 import Header from '@/components/header/Header';
 import Divider from '@/components/utils/Divider';
-import { useEffect, useState } from 'react';
+import {
+  AdminAnnouncements,
+  AnnouncementWriter,
+  AdminHeader,
+  AnnouncementRemover,
+} from '@/components/admin';
 import { Announcement } from '@/types/Announcement';
-import announcementApi from '@/api/announcementApi';
-import AdminAnnouncements from '@/components/admin/AdminAnnouncements';
-import AnnouncementWriter from '@/components/admin/AnnouncementWriter';
-import AdminHeader from '@/components/admin/AdminHeader';
-import AnnouncementRemover from '@/components/admin/AnnouncementRemover';
 
 export default function AdminPage() {
   const router = useRouter();

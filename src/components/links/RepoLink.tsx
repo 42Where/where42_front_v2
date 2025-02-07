@@ -1,9 +1,9 @@
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import logoC from '@/assets/logo/logoC.svg';
 
-export default function RepoLink() {
+export function RepoLink() {
   return (
     <TooltipProvider>
       <Tooltip>

@@ -6,25 +6,13 @@ import ProfileSkeleton from '@/components/utils/ProfileSkeleton';
 import AgreementModal from '@/components/modals/AgreementModal';
 import Divider from '@/components/utils/Divider';
 import CardSkeleton from '@/components/utils/CardSkeleton';
-import { useMyInfo, useGroupList, useAdminStatus } from '@/hooks';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import useInfoSet from '@/hooks/useInfoSet';
 
 export default function Home() {
-  const [showModal, setShowModal] = useState(false);
-  const router = useRouter();
-  const { agreement } = router.query;
-  const user = useMyInfo().data;
-  const groups = useGroupList().data;
-  const isAdmin = useAdminStatus().data?.admin;
-
-  useEffect(() => {
-    // 만약 라우터가 초기화되지 않았다면 API 호출을 하지 않는다.
-    if (!router.isReady) return;
-    if (agreement === 'false') {
-      setShowModal(true);
-    }
-  }, [router.isReady, agreement]);
+  const { showModal, setShowModal, userRes, groupRes, adminStatusRes } = useInfoSet();
+  const user = userRes.data;
+  const groups = groupRes.data;
+  const isAdmin = adminStatusRes.data?.admin;
 
   return (
     <>

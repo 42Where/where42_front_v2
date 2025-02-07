@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import admin from '@/assets/admin.svg';
 
-export default function AdminLinkBtn() {
+export function AdminLink() {
   return (
     <TooltipProvider>
       <Tooltip>

@@ -12,7 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import RepoLink from './utils/RepoLink';
+import { RepoLink } from '@/components/links';
 
 export default function Footer() {
   return (

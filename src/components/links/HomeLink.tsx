@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import home from '@/assets/home.svg';
 
-export default function HomeLinkBtn() {
+export function HomeLink() {
   return (
     <TooltipProvider>
       <Tooltip>

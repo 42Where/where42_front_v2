@@ -20,5 +20,5 @@ export default function useInfoSet() {
 
   const isLoading = !userRes.isLoading || !groupRes.isLoading || !adminStatusRes.isLoading;
 
-  return { showModal, setShowModal, isLoading };
+  return { userRes, groupRes, adminStatusRes, showModal, setShowModal, isLoading };
 }

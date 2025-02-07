@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { AnnouncementType } from '@/types/Announcement';
 
-export default function AnnouncementMenu({
+export function AnnouncementMenu({
   type,
   setType,
 }: {
@@ -17,7 +17,7 @@ export default function AnnouncementMenu({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <p className="decoration-basepink cursor-pointer text-darkblue hover:underline">
+        <p className="cursor-pointer text-darkblue decoration-basepink hover:underline">
           종류: {type}
         </p>
       </DropdownMenuTrigger>

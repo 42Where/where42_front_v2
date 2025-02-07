@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { AxiosError } from 'axios';
 
-export default function AnnouncementRemover() {
+export function AnnouncementRemover() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [id, setId] = useState(0);
   const { toast } = useToast();

@@ -14,9 +14,8 @@ import CX2ClusterComp from '@/components/seat/X/CX2Cluster';
 import Header from '@/components/header/Header';
 import { updateClusterUser } from '@/lib/clusterUtils';
 import clusterApi from '@/api/clusterApi';
-import useInfoSet from '@/lib/hooks';
+import useInfoSet from '@/hooks/useInfoSet';
 import { useClusterStore } from '@/lib/stores';
-import { useAdminStatus } from '@/hooks';
 
 export default function SeatsPage() {
   const [selectedCluster, setSelectedCluster] = useState<ClusterName>('c1');
@@ -32,8 +31,8 @@ export default function SeatsPage() {
     c5: false,
     c6: false,
   });
-  useInfoSet();
-  const isAdmin = useAdminStatus().data?.admin;
+  const { adminStatusRes } = useInfoSet();
+  const isAdmin = adminStatusRes.data?.admin;
 
   useEffect(() => {
     if (fetchedClusters.current[selectedCluster]) return;

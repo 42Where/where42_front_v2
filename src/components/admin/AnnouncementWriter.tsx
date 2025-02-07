@@ -1,14 +1,14 @@
-import { Textarea } from '@/components/ui/textarea';
-import Divider from '@/components/utils/Divider';
 import { useRef, useState, FormEvent, useEffect } from 'react';
 import announcementApi from '@/api/announcementApi';
+import { Textarea } from '@/components/ui/textarea';
+import Divider from '@/components/utils/Divider';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
-import AnnouncementMenu from '@/components/admin/AnnouncementMenu';
 import { AnnouncementType, Announcement } from '@/types/Announcement';
 import Announcements from '@/components/announcement/Announcements';
+import { AnnouncementMenu } from './AnnouncementMenu';
 
-export default function AnnouncementWriter() {
+export function AnnouncementWriter() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [textValue, settextValue] = useState<string>('');
   const [type, setType] = useState<AnnouncementType>('기능 추가');
@@ -27,7 +27,6 @@ export default function AnnouncementWriter() {
   function submitHandler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const inputValue = textareaRef.current?.value;
-    console.log(inputValue);
     if (!inputValue) return;
     formRef.current?.reset();
     settextValue('');

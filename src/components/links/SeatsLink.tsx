@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import Link from 'next/link';
 
-export default function SeatsLinkBtn() {
+export function SeatsLink() {
   return (
     <TooltipProvider>
       <Tooltip>
