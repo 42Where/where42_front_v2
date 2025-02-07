@@ -44,7 +44,8 @@ export default function NewGroupModal() {
 
   if (!groups) return null;
   return (
-    <Dialog>
+    // 그룹 생성 후 친구 추가를 하지 않고 닫았을 때 clean up이 되도록
+    <Dialog onOpenChange={(isOpen) => !isOpen && setIsAddingUser(false)}>
       <DialogTrigger>
         <Button
           className="h-6 gap-2 rounded-full border-2 border-darkblue
