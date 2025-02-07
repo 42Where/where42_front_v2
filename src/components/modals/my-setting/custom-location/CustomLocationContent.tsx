@@ -18,12 +18,10 @@ export default function CustomLocationContent({
   const deleteLocation = useDeleteLocation();
 
   function setClickHandler() {
-    if (!user) return;
     setResultMessage('설정 되었습니다.');
     updateLocation.mutate(locationValue);
   }
   function initClickHandler() {
-    if (!user) return;
     setResultMessage('삭제 되었습니다.');
     deleteLocation.mutate();
   }

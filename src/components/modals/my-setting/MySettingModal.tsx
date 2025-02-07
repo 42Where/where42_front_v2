@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import CustomLocationContent from '@/components/modals/my-setting/CustomLocationContent';
+import CustomLocationContent from '@/components/modals/my-setting/custom-location/CustomLocationContent';
 import { MySettingBtn, XBtn } from '@/components/buttons';
 import { useDeleteComment, useUpdateComment, useMyInfo } from '@/hooks';
 

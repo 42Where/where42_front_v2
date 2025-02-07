@@ -1,7 +1,7 @@
 import { User } from '@/types/User';
 import NewGroupModal from '@/components/modals/group/new/NewGroupModal';
 import MySettingModal from '@/components/modals/my-setting/MySettingModal';
-import CustomLocationModal from '@/components/modals/my-setting/CustomLocationModal';
+import CustomLocationModal from '@/components/modals/my-setting/custom-location/CustomLocationModal';
 import ProfilePic from '@/components/ProfilePic';
 import { SetCheckBtn } from '@/components/buttons';
 
