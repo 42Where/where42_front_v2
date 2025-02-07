@@ -10,14 +10,7 @@ export default function LoginFailPage() {
       </div>
       <div className="w-full bg-white sm:w-1/2">
         <div className="flex h-full min-h-[50vh] flex-col items-center justify-center gap-8 sm:gap-8">
-          <Image
-            src={logo}
-            alt="logo"
-            width={100}
-            height={100}
-            priority
-            className="size-28 sm:size-32"
-          />
+          <Image src={logo} alt="logo" priority className="h-28 w-fit" />
           <span className="flex flex-col items-center gap-4">
             <h1 className="text-2xl sm:text-4xl">로그인에 실패했습니다.😢</h1>
             <h3 className="text-l sm:text-xl ">아래 버튼을 눌러 다시 시도해주세요.</h3>

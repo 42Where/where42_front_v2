@@ -9,13 +9,7 @@ export default function RepoLink() {
       <Tooltip>
         <TooltipTrigger asChild>
           <Link href="https://github.com/42Where">
-            <Image
-              src={logoC}
-              alt="logo"
-              width={120}
-              height={120}
-              className="w-[80px] md:w-[120px]"
-            />
+            <Image src={logoC} alt="logo" className="w-[80px] md:w-[120px]" />
           </Link>
         </TooltipTrigger>
         <TooltipContent>깃허브 레포지토리 방문</TooltipContent>

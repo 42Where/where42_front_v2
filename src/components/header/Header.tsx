@@ -19,9 +19,7 @@ export default function Header({
       <Image
         src={isAdminPage ? logoAdmin : logoC}
         alt="logo"
-        width={200}
-        height={100}
-        className="h-[50px] w-[100px] cursor-pointer lg:h-[100px] lg:w-[300px]"
+        className="h-8 w-fit cursor-pointer lg:h-16"
         onClick={() => router.push('/')}
       />
       <HeaderMenu isAdmin={isAdmin} isAdminPage={isAdminPage} isClusterPage={isClusterPage} />

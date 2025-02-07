@@ -11,14 +11,7 @@ export default function NotFoundPage() {
       </div>
       <div className="w-full bg-white sm:w-1/2">
         <div className="flex h-full min-h-[50vh] flex-col items-center justify-center gap-8 sm:gap-12">
-          <Image
-            src={logo}
-            alt="logo"
-            width={100}
-            height={100}
-            priority
-            className="size-28 sm:size-32"
-          />
+          <Image src={logo} alt="logo" priority className="h-28 w-fit" />
           <span className="flex flex-col items-center gap-4">
             <h2 className=" text-2xl sm:text-3xl">이 페이지는 존재하지 않습니다.</h2>
           </span>
