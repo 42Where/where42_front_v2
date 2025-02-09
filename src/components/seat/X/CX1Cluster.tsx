@@ -2,7 +2,7 @@ import Block from '@/components/seat/X/XBlock';
 import HalfXBlock from '@/components/seat/X/HalfXBlock';
 import { CX1Cluster } from '@/types/Cluster';
 
-export default function CX1ClusterComp({ clusterData }: { clusterData: CX1Cluster }) {
+export function CX1ClusterComp({ clusterData }: { clusterData: CX1Cluster }) {
   return (
     <div className="flex flex-col items-start justify-center gap-4 md:flex-row md:items-end md:gap-16">
       <HalfXBlock selectedRow="r3" row={clusterData.r3} />

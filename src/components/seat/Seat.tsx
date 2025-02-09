@@ -5,10 +5,9 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import LocationBtn from '@/components/buttons/LocationBtn';
-import ProfilePic from '@/components/ProfilePic';
-import FriendAddBtn from '@/components/buttons/FriendAddBtn';
-import useMyInfo from '@/hooks/useMyInfo';
+import ProfilePic from '@/components/cards/ProfilePic';
+import { FriendAddBtn, LocationBtn } from '@/components/buttons';
+import { useMyInfo } from '@/hooks';
 import { ActiveClusterUser } from '@/types/Cluster';
 import { User } from '@/types/User';
 import defaultUserImage from '@/assets/seats/defaultUserImage.svg';
@@ -43,7 +42,7 @@ export default function SingleSeat({
 
   const isMySeat = user?.intraId === clusterUser.intraId;
 
-  const dummyUser: User = {
+  const userSchema: User = {
     intraId: clusterUser.intraId,
     intraName: clusterUser.intraName,
     image: clusterUser.image,
@@ -79,18 +78,18 @@ export default function SingleSeat({
       </DropdownMenuTrigger>
       <DropdownMenuContent className="rounded-xl p-2 md:p-4">
         <div className="flex flex-row items-center gap-4 md:gap-4">
-          <ProfilePic user={dummyUser} type="userCard" />
+          <ProfilePic user={userSchema} type="userCard" />
           <div className="flex flex-col items-start gap-1">
-            <LocationBtn user={dummyUser} />
+            <LocationBtn user={userSchema} />
             <h2 className="text-xl text-darkblue md:text-2xl 2xl:text-3xl">
-              {dummyUser.intraName}
+              {userSchema.intraName}
             </h2>
-            <p className="md:text-md text-sm text-baseblue">{dummyUser.comment}</p>
+            <p className="md:text-md text-sm text-baseblue">{userSchema.comment}</p>
           </div>
           {!clusterUser.isFriend && (
             <FriendAddBtn
               member={{
-                ...dummyUser,
+                ...userSchema,
                 friend: clusterUser.isFriend,
                 inOrOut: true,
               }}

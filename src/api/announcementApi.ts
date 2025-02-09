@@ -1,6 +1,6 @@
 import { axios } from '@/lib/Axios';
 import { Announcement } from '@/types/Announcement';
-// TODO: 비즈니스 레이어에서 가능한 모든 에러를 처리해아할듯. (data가 없을 때 등)
+
 const announcementApi = {
   getAnnouncement: async ({
     page = 0,

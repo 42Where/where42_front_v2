@@ -37,7 +37,7 @@ function CX2Block({ reversed, clusterData }: { reversed: boolean; clusterData: C
   );
 }
 
-export default function CX2ClusterComp({ clusterData }: { clusterData: CX2Cluster }) {
+export function CX2ClusterComp({ clusterData }: { clusterData: CX2Cluster }) {
   return (
     <div className="flex w-full flex-row items-center justify-center gap-4 md:flex-col-reverse">
       <div className="flex flex-col items-center justify-center gap-4 md:flex-row">

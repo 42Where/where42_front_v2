@@ -1,9 +1,7 @@
+import { LocationBtn, FriendAddBtn } from '@/components/buttons';
+import ProfilePic from '@/components/cards/ProfilePic';
+import { useGroupList, useMyInfo } from '@/hooks';
 import { SearchedUser } from '@/types/User';
-import LocationBtn from '@/components/buttons/LocationBtn';
-import ProfilePic from '@/components/ProfilePic';
-import FriendAddBtn from '@/components/buttons/FriendAddBtn';
-import useGroupList from '@/hooks/useGroupList';
-import useMyInfo from '@/hooks/useMyInfo';
 
 export default function SearchedCard({
   member,

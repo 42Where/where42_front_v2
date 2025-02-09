@@ -1,13 +1,12 @@
 import Image from 'next/image';
-import { useAddGroupMember } from '@/hooks/useMutateGroups';
-import useMyInfo from '@/hooks/useMyInfo';
+import { useAddGroupMember, useMyInfo } from '@/hooks';
 import { useClusterStore } from '@/lib/stores';
 import { updateClusterUser } from '@/lib/clusterUtils';
 import { ClusterName, RowName } from '@/types/Cluster';
 import { SearchedUser } from '@/types/User';
 import userAdd from '@/assets/user/userAdd.svg';
 
-export default function FriendAddBtn({
+export function FriendAddBtn({
   member,
   isClusterView,
 }: {

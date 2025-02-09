@@ -9,14 +9,12 @@ import {
 } from '@/types/Cluster';
 import SeatNavigator from '@/components/seat/Navigator';
 import NormalCluster from '@/components/seat/nonX/Cluster';
-import CX1ClusterComp from '@/components/seat/X/CX1Cluster';
-import CX2ClusterComp from '@/components/seat/X/CX2Cluster';
+import { CX1ClusterComp, CX2ClusterComp } from '@/components/seat/X';
 import Header from '@/components/header/Header';
 import { updateClusterUser } from '@/lib/clusterUtils';
 import clusterApi from '@/api/clusterApi';
-import useInfoSet from '@/lib/hooks';
+import useInfoSet from '@/hooks/useInfoSet';
 import { useClusterStore } from '@/lib/stores';
-import useAdminStatus from '@/hooks/useAdminStatus';
 
 export default function SeatsPage() {
   const [selectedCluster, setSelectedCluster] = useState<ClusterName>('c1');
@@ -32,8 +30,8 @@ export default function SeatsPage() {
     c5: false,
     c6: false,
   });
-  useInfoSet();
-  const isAdmin = useAdminStatus().data?.admin;
+  const { adminStatusRes } = useInfoSet();
+  const isAdmin = adminStatusRes.data?.admin;
 
   useEffect(() => {
     if (fetchedClusters.current[selectedCluster]) return;
@@ -52,7 +50,7 @@ export default function SeatsPage() {
       setClusters(updatedClusters); // 한 번만 호출
     });
     fetchedClusters.current[selectedCluster] = true; // 플래그 설정
-  }, [selectedCluster]);
+  }, [selectedCluster, clusters, setClusters]);
 
   return (
     <main className="flex h-full min-h-screen w-full flex-col items-center justify-start px-1 pb-20 md:px-10">

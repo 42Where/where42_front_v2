@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useCheckedStore } from '@/lib/stores';
 
-export default function SetCheckBtn() {
+export function SetCheckBtn() {
   const { checked, setChecked } = useCheckedStore();
 
   useEffect(() => {
