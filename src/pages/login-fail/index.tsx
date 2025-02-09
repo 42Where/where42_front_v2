@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import { LoginBtn } from '@/components/buttons';
 import logo from '@/assets/logo/logo.svg';
+import left from '@/assets/fill/left.png';
+import bottom from '@/assets/fill/bottom.png';
 
 export default function LoginFailPage() {
   return (
-    <main className="flex min-h-[100vh] w-full flex-col text-darkblue sm:flex-row">
-      <div className="pt-8 sm:relative sm:min-h-[50vh] sm:w-1/2">
-        <Image src="/image/fill/left.png" alt="left" layout="fill" className="hidden sm:block" />
+    <main className="flex min-h-svh w-full flex-col text-darkblue sm:flex-row">
+      <div className="pt-8 sm:relative sm:min-h-[50svh] sm:w-1/2">
+        <Image src={left} alt="left" layout="fill" className="hidden sm:block" />
       </div>
       <div className="w-full bg-white sm:w-1/2">
         <div className="flex h-full min-h-[50vh] flex-col items-center justify-center gap-8 sm:gap-8">
@@ -19,8 +21,8 @@ export default function LoginFailPage() {
           <LoginBtn />
         </div>
       </div>
-      <div className="relative flex min-h-[50vh] w-full flex-col items-center justify-center sm:hidden">
-        <Image src="/image/fill/bottom.png" alt="bottom" layout="fill" />
+      <div className="relative flex min-h-[50svh] w-full flex-col items-center justify-center sm:hidden">
+        <Image src={bottom} alt="bottom" layout="fill" />
         <LoginBtn isMobile />
       </div>
     </main>

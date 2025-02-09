@@ -1,7 +1,7 @@
 import { useRef, useState, FormEvent, useEffect } from 'react';
 import announcementApi from '@/api/announcementApi';
 import { Textarea } from '@/components/ui/textarea';
-import Divider from '@/components/utils/Divider';
+import { Divider } from '@/components/utils/Divider';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { AnnouncementType, Announcement } from '@/types/Announcement';

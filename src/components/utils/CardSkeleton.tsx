@@ -5,7 +5,7 @@ function SingleCardSkeleton() {
   return <Skeleton className="h-[164px] w-full rounded-lg" />;
 }
 
-export default function CardSkeleton() {
+export function CardSkeleton() {
   const [skeletonNum, setSkeletonNum] = useState(8);
   useEffect(() => {
     setSkeletonNum(() => {

@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/accordion';
 import { RepoLink } from '@/components/links';
 
-export default function Footer() {
+export function Footer() {
   return (
     <footer
       className="relative bottom-0 left-0 flex w-full flex-row items-center justify-center gap-2

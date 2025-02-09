@@ -1,11 +1,8 @@
 import Header from '@/components/header/Header';
 import MyProfileCard from '@/components/cards/MyProfileCard';
 import Groups from '@/components/group/Groups';
-import Footer from '@/components/utils/Footer';
-import ProfileSkeleton from '@/components/utils/ProfileSkeleton';
+import { Footer, ProfileSkeleton, Divider, CardSkeleton } from '@/components/utils';
 import AgreementModal from '@/components/modals/AgreementModal';
-import Divider from '@/components/utils/Divider';
-import CardSkeleton from '@/components/utils/CardSkeleton';
 import useInfoSet from '@/hooks/useInfoSet';
 
 export default function Home() {

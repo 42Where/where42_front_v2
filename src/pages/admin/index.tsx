@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import adminApi from '@/api/adminApi';
 import announcementApi from '@/api/announcementApi';
 import Header from '@/components/header/Header';
-import Divider from '@/components/utils/Divider';
+import { Divider } from '@/components/utils/Divider';
 import {
   AdminAnnouncements,
   AnnouncementWriter,

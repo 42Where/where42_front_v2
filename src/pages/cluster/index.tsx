@@ -9,8 +9,7 @@ import {
 } from '@/types/Cluster';
 import SeatNavigator from '@/components/seat/Navigator';
 import NormalCluster from '@/components/seat/nonX/Cluster';
-import CX1ClusterComp from '@/components/seat/X/CX1Cluster';
-import CX2ClusterComp from '@/components/seat/X/CX2Cluster';
+import { CX1ClusterComp, CX2ClusterComp } from '@/components/seat/X';
 import Header from '@/components/header/Header';
 import { updateClusterUser } from '@/lib/clusterUtils';
 import clusterApi from '@/api/clusterApi';
@@ -51,7 +50,7 @@ export default function SeatsPage() {
       setClusters(updatedClusters); // 한 번만 호출
     });
     fetchedClusters.current[selectedCluster] = true; // 플래그 설정
-  }, [selectedCluster]);
+  }, [selectedCluster, clusters, setClusters]);
 
   return (
     <main className="flex h-full min-h-screen w-full flex-col items-center justify-start px-1 pb-20 md:px-10">
