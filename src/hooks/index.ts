@@ -4,3 +4,7 @@ export * from './my-info/useMutateComments';
 export * from './group/useMutateGroups';
 export * from './my-info/useMutateLocations';
 export * from './my-info/useMyInfo';
+export * from './stat/useClusterUsage';
+export * from './stat/useImacUsage';
+export * from './stat/useMyFavoriteSeats';
+export * from './stat/usePopularSeats';
