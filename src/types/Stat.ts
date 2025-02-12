@@ -13,9 +13,7 @@ type ClusterUsage = {
   totalImacCount: number;
 };
 
-type ClusterUsageResponse = {
-  clusters: ClusterUsage[];
-};
+type ClusterUsageResponse = ClusterUsage[];
 
 type SeatsArray = {
   seats: string[];
