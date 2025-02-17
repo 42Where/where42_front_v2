@@ -3,7 +3,7 @@ import { ClusterName } from './Cluster';
 type ImacUsage = {
   usageRate: number;
   usingImacUserCount: number;
-  totalImacUserCount: number;
+  totalUserCount: number;
 };
 
 type ClusterUsage = {
@@ -13,10 +13,14 @@ type ClusterUsage = {
   totalImacCount: number;
 };
 
-type ClusterUsageResponse = ClusterUsage[];
-
-type SeatsArray = {
-  seats: string[];
+type PopularSeat = {
+  seat: string;
+  usingTimeHour: number;
+  usingTimeMinute: number;
+  usingTimeSecond: number;
+  usingUserCount: number;
 };
 
-export type { ImacUsage, ClusterUsage, ClusterUsageResponse, SeatsArray };
+type ClusterUsageResponse = ClusterUsage[];
+
+export type { ImacUsage, ClusterUsage, ClusterUsageResponse, PopularSeat };

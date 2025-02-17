@@ -3,7 +3,7 @@ import statApi from '@/api/statApi';
 
 export function usePopularSeats() {
   const res = useQuery({
-    queryKey: ['imacUsage'],
+    queryKey: ['popularSeats'],
     queryFn: () => statApi.getPopularSeats({}),
     staleTime: Infinity,
   });
