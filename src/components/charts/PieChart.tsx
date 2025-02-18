@@ -37,7 +37,7 @@ export default function PieChart({ data, labels, clusterName, rate }: PieChartPr
 
   return (
     <div className="flex flex-col items-center justify-center gap-3">
-      <div className="size-40">
+      <div className="size-32 xl:size-40">
         <Pie data={chartData} options={options} />
       </div>
       <span className="flex flex-col items-center justify-center">

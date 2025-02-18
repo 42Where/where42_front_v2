@@ -10,7 +10,7 @@ export function ClusterLink() {
         <TooltipTrigger asChild>
           <Link
             href="/cluster"
-            className="flex size-[38px] items-center justify-center rounded-lg p-[2px] hover:bg-gray-200 md:block lg:size-[52px]"
+            className="flex size-[34px] items-center justify-center rounded-lg p-[2px] hover:bg-gray-200 md:block lg:size-[52px]"
           >
             <Image src={cluster} alt="cluster" width={50} height={50} />
           </Link>

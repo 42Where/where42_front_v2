@@ -11,9 +11,9 @@ export function AnnouncementBtn({ isOpen }: { isOpen: boolean }) {
           <Image
             src={isOpen ? megaphoneActive : megaphone}
             alt="announcement"
-            width={40}
-            height={40}
-            className="size-[38px] rounded-lg hover:bg-gray-200 lg:size-[52px]"
+            width={34}
+            height={34}
+            className="size-[34px] rounded-lg hover:bg-gray-200 lg:size-[52px]"
           />
         </TooltipTrigger>
         <TooltipContent>공지사항</TooltipContent>

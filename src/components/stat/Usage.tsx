@@ -1,5 +1,6 @@
 import PieChart from '@/components/charts/PieChart';
 import { ImacUsage, ClusterUsageArr } from '@/types/Stat';
+import { Title, SubTitle, StatContainer } from '@/components/stat/utils';
 
 type Props = {
   clusterUsage: ClusterUsageArr | undefined;
@@ -9,9 +10,9 @@ type Props = {
 function ClusterUsageComp({ clusterUsage }: { clusterUsage: ClusterUsageArr | undefined }) {
   if (!clusterUsage) return null;
   return (
-    <div className="flex w-1/2 flex-col items-start justify-center gap-6 rounded-xl border-2 border-darkblue p-6">
-      <h4 className="text-2xl text-darkblue">클러스터별 이용율</h4>
-      <div className="grid w-full grid-flow-col grid-rows-2 flex-row items-center justify-center gap-3 md:gap-10">
+    <StatContainer>
+      <SubTitle title="클러스터별 이용율" />
+      <div className="grid w-full grid-flow-col grid-rows-3 flex-row items-center justify-center gap-6 md:grid-rows-2 md:gap-10">
         {clusterUsage.map(
           (cluster) =>
             cluster.name !== 'c3' &&
@@ -26,33 +27,33 @@ function ClusterUsageComp({ clusterUsage }: { clusterUsage: ClusterUsageArr | un
             ),
         )}
       </div>
-    </div>
+    </StatContainer>
   );
 }
 
 function ImacUsageComp({ imacUsage }: { imacUsage: ImacUsage | undefined }) {
   if (!imacUsage) return null;
   return (
-    <div className="flex min-w-[48%] flex-col items-start justify-center gap-6 rounded-xl border-2 border-darkblue p-6">
-      <h4 className="text-2xl text-darkblue">클러스터 맥 사용 현황</h4>
+    <StatContainer>
+      <SubTitle title="클러스터 맥 사용 현황" />
       <div className="flex w-full items-center justify-center gap-3 md:gap-10">
         <PieChart
           data={[
             imacUsage.usingImacUserCount,
             imacUsage.totalUserCount - imacUsage.usingImacUserCount,
           ]}
-          labels={['아이맥 사용 인원', '개포 전체 인원']}
+          labels={['아이맥 사용 인원', '아이맥 미사용 인원']}
           rate={[imacUsage.usingImacUserCount, imacUsage.totalUserCount]}
         />
       </div>
-    </div>
+    </StatContainer>
   );
 }
 
 export function Usage({ clusterUsage, imacUsage }: Props) {
   return (
-    <div className="flex w-full flex-col items-start justify-center gap-6">
-      <h1 className="text-4xl text-darkblue">클러스터 현황</h1>
+    <div className="flex w-full flex-col items-start justify-center gap-2 xl:gap-6">
+      <Title title="클러스터 현황" />
       <ClusterUsageComp clusterUsage={clusterUsage} />
       <ImacUsageComp imacUsage={imacUsage} />
     </div>

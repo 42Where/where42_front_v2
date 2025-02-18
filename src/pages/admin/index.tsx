@@ -34,7 +34,7 @@ export default function AdminPage() {
 
   return (
     <main className="flex h-full min-h-screen w-full flex-col justify-start px-2 md:px-10">
-      <Header isAdmin isAdminPage />
+      <Header isAdmin />
       <Divider />
       <AdminHeader isDelete={isDelete} setIsDelete={setIsDelete} />
       <Divider />

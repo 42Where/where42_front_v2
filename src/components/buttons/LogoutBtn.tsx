@@ -11,7 +11,7 @@ export function LogoutBtn() {
       <Tooltip>
         <TooltipTrigger asChild>
           <button
-            className="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 lg:size-14"
+            className="flex size-[34px] items-center justify-center rounded-lg hover:bg-gray-200 lg:size-14"
             type="button"
             onClick={async () => {
               await authApi.logout();

@@ -14,11 +14,11 @@ export default function StatPage() {
   const myFavoriteSeatsRes = useMyFavoriteSeats().data;
 
   return (
-    <main className="flex h-full min-h-screen w-full flex-col items-center justify-start px-1 pb-20 md:px-10">
-      <Header isAdmin={!!isAdmin} isClusterPage />
-      <div className="flex h-full w-[1280px] flex-col gap-10">
+    <main className="flex h-full min-h-screen w-full flex-col items-center justify-start gap-4 px-2 pb-20 md:px-10">
+      <Header isAdmin={!!isAdmin} />
+      <div className="flex h-full w-full flex-col items-start justify-center gap-10 lg:flex-row">
         <Usage clusterUsage={clusterUsageRes} imacUsage={imacUsageRes} />
-        <div className="flex w-full flex-row items-start justify-center gap-3 md:gap-10">
+        <div className="flex w-full flex-col items-start justify-center gap-10">
           <MyStat intraName={userRes.data?.intraName} myFavoriteSeatsRes={myFavoriteSeatsRes} />
           <PopularSeats popularSeatsRes={popularSeatsRes} />
         </div>
