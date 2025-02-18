@@ -15,7 +15,7 @@ export function StatLink() {
             <Image src={stats} alt="stat" width={40} height={40} />
           </Link>
         </TooltipTrigger>
-        <TooltipContent>통계 페이지로 가기</TooltipContent>
+        <TooltipContent>자리 통계 보기</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );
