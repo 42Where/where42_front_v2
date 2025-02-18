@@ -21,6 +21,6 @@ type PopularSeat = {
   usingUserCount: number;
 };
 
-type ClusterUsageResponse = ClusterUsage[];
+type ClusterUsageArr = ClusterUsage[];
 
-export type { ImacUsage, ClusterUsage, ClusterUsageResponse, PopularSeat };
+export type { ImacUsage, ClusterUsage, ClusterUsageArr, PopularSeat };

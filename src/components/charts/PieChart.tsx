@@ -7,7 +7,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 // Props 타입 정의
 type PieChartProps = {
-  data: [number, number]; // 딱 2개의 데이터만 받음
+  data: [number, number]; // 2개의 데이터만 받음
   labels: [string, string]; // 라벨도 2개만 받음
   clusterName?: ClusterName;
   rate?: [number, number];
