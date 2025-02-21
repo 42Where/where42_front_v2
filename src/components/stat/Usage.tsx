@@ -11,7 +11,7 @@ function ClusterUsageComp({ clusterUsage }: { clusterUsage: ClusterUsageArr | un
   if (!clusterUsage) return null;
   return (
     <StatContainer>
-      <SubTitle title="클러스터별 이용율" />
+      <SubTitle title="클러스터별 이용률" />
       <div className="grid w-full grid-flow-col grid-rows-3 flex-row items-center justify-center gap-6 md:grid-rows-2 md:gap-10">
         {clusterUsage.map(
           (cluster) =>
