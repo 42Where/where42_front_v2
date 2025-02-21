@@ -21,6 +21,14 @@ type PopularSeat = {
   usingUserCount: number;
 };
 
+type FavoriteSeat = {
+  seat: string;
+  usingTimeHour: number;
+  usingTimeMinute: number;
+  usingTimeSecond: number;
+  usingCount: number;
+};
+
 type ClusterUsageArr = ClusterUsage[];
 
-export type { ImacUsage, ClusterUsage, ClusterUsageArr, PopularSeat };
+export type { ImacUsage, ClusterUsage, ClusterUsageArr, PopularSeat, FavoriteSeat };

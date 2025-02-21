@@ -1,5 +1,5 @@
 import { axios } from '@/lib/Axios';
-import { ImacUsage, ClusterUsageArr, PopularSeat } from '@/types/Stat';
+import { ImacUsage, ClusterUsageArr, PopularSeat, FavoriteSeat } from '@/types/Stat';
 
 const statApi = {
   getImacUsage: async (): Promise<ImacUsage> => {
@@ -10,7 +10,7 @@ const statApi = {
     const response = await axios.get(`/v3/location/cluster/usage`);
     return response.data.clusters;
   },
-  getMyFavoriteSeats: async ({ count = 1 }: { count?: number }): Promise<string[]> => {
+  getMyFavoriteSeats: async ({ count = 1 }: { count?: number }): Promise<FavoriteSeat[]> => {
     const response = await axios.get('/v3/analytics/seat-history', {
       params: { count },
     });
