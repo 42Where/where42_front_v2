@@ -38,7 +38,7 @@ function ImacUsageComp({ imacUsage }: { imacUsage: ImacUsage | undefined }) {
     <StatContainer>
       <SubTitle title="클러스터 맥 사용 현황" />
       <div className="flex w-full items-center justify-center gap-3 md:gap-10">
-        {!imacUsage && <PieSkeleton />}
+        {!imacUsage && <PieSkeleton noHeader />}
         {imacUsage && (
           <PieChart
             data={[
