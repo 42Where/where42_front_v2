@@ -1,5 +1,6 @@
 import { PopularSeat } from '@/types/Stat';
 import { Title, SubTitle, StatContainer } from '@/components/stat/utils';
+import { PopularSeatSkeletonContainer } from '@/components/stat/utils/PopularSeatSkeleton';
 
 type Props = {
   popularSeatsRes: PopularSeat[] | undefined;
@@ -12,6 +13,7 @@ export function PopularSeats({ popularSeatsRes }: Props) {
       <StatContainer>
         <SubTitle title="인기있는 자리 순위" />
         <div className="flex w-full flex-col items-center justify-center gap-5 text-darkblue">
+          {!popularSeatsRes && <PopularSeatSkeletonContainer />}
           {popularSeatsRes &&
             popularSeatsRes.map((seat, idx) => (
               <span

@@ -1,6 +1,7 @@
 import PieChart from '@/components/charts/PieChart';
 import { ImacUsage, ClusterUsageArr } from '@/types/Stat';
 import { Title, SubTitle, StatContainer } from '@/components/stat/utils';
+import { PieSkeleton, PieSkeletonContainer } from '@/components/stat/utils/PieSkeleton';
 
 type Props = {
   clusterUsage: ClusterUsageArr | undefined;
@@ -8,43 +9,46 @@ type Props = {
 };
 
 function ClusterUsageComp({ clusterUsage }: { clusterUsage: ClusterUsageArr | undefined }) {
-  if (!clusterUsage) return null;
   return (
     <StatContainer>
       <SubTitle title="클러스터별 이용률" />
       <div className="grid w-full grid-flow-col grid-rows-3 flex-row items-center justify-center gap-6 md:grid-rows-2 md:gap-10">
-        {clusterUsage.map(
-          (cluster) =>
-            cluster.name !== 'c3' &&
-            cluster.name !== 'c4' && (
-              <PieChart
-                data={[cluster.usingImacCount, cluster.totalImacCount - cluster.usingImacCount]}
-                labels={[`사용 중인 자리`, '빈 자리']}
-                clusterName={cluster.name}
-                rate={[cluster.usingImacCount, cluster.totalImacCount]}
-                key={cluster.name}
-              />
-            ),
-        )}
+        {!clusterUsage && <PieSkeletonContainer />}
+        {clusterUsage &&
+          clusterUsage.map(
+            (cluster) =>
+              cluster.name !== 'c3' &&
+              cluster.name !== 'c4' && (
+                <PieChart
+                  data={[cluster.usingImacCount, cluster.totalImacCount - cluster.usingImacCount]}
+                  labels={[`사용 중인 자리`, '빈 자리']}
+                  clusterName={cluster.name}
+                  rate={[cluster.usingImacCount, cluster.totalImacCount]}
+                  key={cluster.name}
+                />
+              ),
+          )}
       </div>
     </StatContainer>
   );
 }
 
 function ImacUsageComp({ imacUsage }: { imacUsage: ImacUsage | undefined }) {
-  if (!imacUsage) return null;
   return (
     <StatContainer>
       <SubTitle title="클러스터 맥 사용 현황" />
       <div className="flex w-full items-center justify-center gap-3 md:gap-10">
-        <PieChart
-          data={[
-            imacUsage.usingImacUserCount,
-            imacUsage.totalUserCount - imacUsage.usingImacUserCount,
-          ]}
-          labels={['아이맥 사용 인원', '아이맥 미사용 인원']}
-          rate={[imacUsage.usingImacUserCount, imacUsage.totalUserCount]}
-        />
+        {!imacUsage && <PieSkeleton />}
+        {imacUsage && (
+          <PieChart
+            data={[
+              imacUsage.usingImacUserCount,
+              imacUsage.totalUserCount - imacUsage.usingImacUserCount,
+            ]}
+            labels={['아이맥 사용 인원', '아이맥 미사용 인원']}
+            rate={[imacUsage.usingImacUserCount, imacUsage.totalUserCount]}
+          />
+        )}
       </div>
     </StatContainer>
   );
