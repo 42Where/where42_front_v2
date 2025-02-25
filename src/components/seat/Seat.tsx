@@ -10,7 +10,7 @@ import { FriendAddBtn, LocationBtn } from '@/components/buttons';
 import { useMyInfo } from '@/hooks';
 import { ActiveClusterUser } from '@/types/Cluster';
 import { User } from '@/types/User';
-import defaultUserImage from '@/assets/seats/defaultUserImage.svg';
+import defaultUserImage from '@/assets/seats/defaultUserImage.png';
 import seat from '@/assets/seats/seat.svg';
 
 export default function SingleSeat({

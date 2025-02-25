@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { CardType } from '@/types/enums';
 import { User } from '@/types/User';
-import defaultUserImage from '@/assets/seats/defaultUserImage.svg';
+import defaultUserImage from '@/assets/seats/defaultUserImage.png';
 
 export default function ProfilePic({ user, type }: { user: User; type: CardType }) {
   return (
