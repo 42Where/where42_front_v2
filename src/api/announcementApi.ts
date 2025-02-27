@@ -6,8 +6,8 @@ const announcementApi = {
     page = 0,
     size = 5,
   }: {
-    page: number;
-    size: number;
+    page?: number;
+    size?: number;
   }): Promise<Announcement[]> => {
     const response = await axios.get('/v3/announcement', {
       params: {

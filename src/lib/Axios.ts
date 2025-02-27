@@ -25,6 +25,7 @@ type ReissueTokenResponse = { accessToken: string };
 
 const reissueToken = async (): Promise<ReissueTokenResponse> => {
   const intraId = Cookies.get('intraId');
+  if (!intraId || intraId === '0') throw new Error('Intra ID not found');
   const response = await tokenAxios.post('/v3/jwt/reissue', {
     intraId,
   });

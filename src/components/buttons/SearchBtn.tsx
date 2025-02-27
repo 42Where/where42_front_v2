@@ -7,7 +7,7 @@ export function SearchBtn() {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <div className="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 lg:size-14">
+          <div className="flex size-[34px] items-center justify-center rounded-lg hover:bg-gray-200 lg:size-14">
             <Image
               src={search}
               alt="search"

@@ -54,7 +54,7 @@ export default function SeatsPage() {
 
   return (
     <main className="flex h-full min-h-screen w-full flex-col items-center justify-start px-1 pb-20 md:px-10">
-      <Header isAdmin={!!isAdmin} isClusterPage />
+      <Header isAdmin={!!isAdmin} />
       <div className="flex flex-col items-center justify-center gap-4 md:gap-10">
         <SeatNavigator selectedCluster={selectedCluster} setSelectedCluster={setSelectedCluster} />
         <div className="flex flex-row gap-10">
