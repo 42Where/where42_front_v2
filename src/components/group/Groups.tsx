@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import Group from '@/types/Group';
+import { Group } from '@/types';
 import GroupSettingModal from '@/components/modals/group/setting/GroupSettingModal';
 import { GroupEditBar, GroupHeadCount, GroupCardContainer } from './utils';
 

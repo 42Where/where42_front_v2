@@ -1,18 +1,17 @@
 import { axios } from '@/lib/Axios';
+import { SetCustomLocation, DeleteCustomLocation } from '@/types/api/location';
 
-const locationApi = {
-  setCustomLocation: async ({
-    location,
-  }: {
-    location: string;
-  }): Promise<void> => {
-    await axios.post('/v3/location/custom', {
-      customLocation: location,
-    });
-  },
-  deleteCustomLocation: async (): Promise<void> => {
-    await axios.delete('/v3/location/custom');
-  },
+const setCustomLocation: SetCustomLocation = async ({ location }) => {
+  await axios.post('/v3/location/custom', {
+    customLocation: location,
+  });
 };
 
-export default locationApi;
+const deleteCustomLocation: DeleteCustomLocation = async () => {
+  await axios.delete('/v3/location/custom');
+};
+
+export const locationApi = {
+  setCustomLocation,
+  deleteCustomLocation,
+};

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { userOption } from '@/hooks/my-info/useMyInfo';
-import locationApi from '@/api/locationApi';
+import { locationApi } from '@/api/locationApi';
 
 // We don't need queryInvalidation since we do know the updated information
 export function useUpdateLocation() {

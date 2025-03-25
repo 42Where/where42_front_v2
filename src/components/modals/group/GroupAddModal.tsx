@@ -7,7 +7,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import Group from '@/types/Group';
+import { Group } from '@/types';
 import { useCheckedUsersStore } from '@/lib/stores';
 import { useAddGroupMember, useMyInfo, useGroupList } from '@/hooks';
 

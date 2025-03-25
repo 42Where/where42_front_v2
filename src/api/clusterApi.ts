@@ -1,11 +1,9 @@
 import { axios } from '@/lib/Axios';
-import { ClusterName, ActiveClusterUser } from '@/types/Cluster';
+import { GetClusterUsers } from '@/types/api/cluster';
 
-const clusterApi = {
-  getClusterUsers: async ({ cluster }: { cluster: ClusterName }): Promise<ActiveClusterUser[]> => {
-    const response = await axios.get(`/v3/location/active/${cluster}`);
-    return response.data.members;
-  },
+const getClusterUsers: GetClusterUsers = async ({ cluster }) => {
+  const response = await axios.get(`/v3/location/active/${cluster}`);
+  return response.data.members;
 };
 
-export default clusterApi;
+export const clusterApi = { getClusterUsers };

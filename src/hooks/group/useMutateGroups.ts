@@ -1,9 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { groupOption } from '@/hooks/group/useGroupList';
-import groupApi from '@/api/groupApi';
-import { User } from '@/types/User';
+import { groupApi } from '@/api/groupApi';
+import { User, Group } from '@/types';
 import { useToast } from '@/components/ui/use-toast';
-import Group from '@/types/Group';
 
 type AddParamType = {
   addMembers: User[];

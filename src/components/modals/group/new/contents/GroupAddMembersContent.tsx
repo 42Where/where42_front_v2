@@ -4,8 +4,7 @@ import { Button } from '@/components/ui/button';
 import SearchedCard from '@/components/cards/SearchedCard';
 import { XBtn } from '@/components/buttons';
 import { useAddGroupMember } from '@/hooks';
-import { SearchedUser, User } from '@/types/User';
-import Group from '@/types/Group';
+import { SearchedUser, User, Group } from '@/types';
 import search from '@/assets/search.svg';
 
 export function GroupAddMembersContent({

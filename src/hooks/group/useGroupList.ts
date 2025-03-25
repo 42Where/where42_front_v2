@@ -1,7 +1,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
-import groupApi from '@/api/groupApi';
+import { groupApi } from '@/api/groupApi';
 import { useMyInfo } from '@/hooks/my-info/useMyInfo';
-import Group from '@/types/Group';
+import { Group } from '@/types';
 
 export const groupOption = queryOptions({
   queryKey: ['groupList'],

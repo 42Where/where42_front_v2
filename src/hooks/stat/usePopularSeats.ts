@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import statApi from '@/api/statApi';
+import { statApi } from '@/api/statApi';
 
 export function usePopularSeats() {
   const res = useQuery({

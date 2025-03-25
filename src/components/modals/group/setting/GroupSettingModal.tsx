@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { GroupSettingBtn } from '@/components/buttons';
 import { useGroupList, useMyInfo } from '@/hooks';
-import Group from '@/types/Group';
+import { Group } from '@/types';
 import { GroupRenameContent, GroupDeleteContent } from './contents';
 
 export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {

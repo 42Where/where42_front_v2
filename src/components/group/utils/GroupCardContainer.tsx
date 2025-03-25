@@ -1,6 +1,6 @@
 import ProfileCard from '@/components/cards/ProfileCard';
 import { useCheckedStore, useCheckedUsersStore } from '@/lib/stores';
-import Group from '@/types/Group';
+import { Group } from '@/types';
 
 export function GroupCardContainer({ curGroup }: { curGroup: Group }) {
   const { checked } = useCheckedStore();

@@ -1,4 +1,4 @@
-import authApi from '@/api/authApi';
+import { authApi } from '@/api/authApi';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';

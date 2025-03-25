@@ -3,8 +3,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import UserSettingModal from '@/components/modals/user-setting/UserSettingModal';
 import { LocationBtn } from '@/components/buttons';
 import { useCheckedUsersStore } from '@/lib/stores';
-import { User } from '@/types/User';
-import Group from '@/types/Group';
+import { User, Group } from '@/types';
 
 export default function ProfileCard({
   user,

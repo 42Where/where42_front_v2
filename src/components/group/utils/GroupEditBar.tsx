@@ -1,4 +1,4 @@
-import Group from '@/types/Group';
+import { Group } from '@/types';
 import { useCheckedUsersStore } from '@/lib/stores';
 import { Button } from '@/components/ui/button';
 import GroupDeleteModal from '@/components/modals/group/GroupDeleteModal';

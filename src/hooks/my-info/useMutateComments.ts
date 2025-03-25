@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { userOption } from '@/hooks/my-info/useMyInfo';
-import memberApi from '@/api/memberApi';
+import { memberApi } from '@/api';
 
 // no onSuccess handler.
 

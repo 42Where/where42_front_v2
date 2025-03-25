@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import statApi from '@/api/statApi';
+import { statApi } from '@/api/statApi';
 
 // fresh for 30 sec, and auto updated
 export function useImacUsage() {

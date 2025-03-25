@@ -11,8 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useMyInfo, useGroupList } from '@/hooks';
 import { useCheckedUsersStore } from '@/lib/stores';
-import { User } from '@/types/User';
-import Group from '@/types/Group';
+import { User, Group } from '@/types';
 import functionButton from '@/assets/functionButton.svg';
 import { UserAddContent, UserDeleteContent } from './contents';
 

@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useEffect, useState } from 'react';
-import announcementApi from '@/api/announcementApi';
+import { announcementApi } from '@/api/announcementApi';
 import { Announcement } from '@/types/Announcement';
 
 // example은 어드민 페이지에서 신규 공지사항을 테스트하는 용도로 사용됩니다.

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import adminApi from '@/api/adminApi';
-import announcementApi from '@/api/announcementApi';
+import { adminApi, announcementApi } from '@/api';
 import Header from '@/components/header/Header';
 import { Divider } from '@/components/utils/Divider';
 import {
