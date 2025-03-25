@@ -1,12 +1,12 @@
 import { axios } from '@/lib/Axios';
-import { ImacUsage, ClusterUsageArr, PopularSeat, FavoriteSeat } from '@/types/Stat';
+import { ImacUsage, ClusterUsage, PopularSeat, FavoriteSeat } from '@/types/Stat';
 
 const statApi = {
   getImacUsage: async (): Promise<ImacUsage> => {
     const response = await axios.get(`/v3/location/cluster/imacUsage`);
     return response.data;
   },
-  getClusterUsage: async (): Promise<ClusterUsageArr> => {
+  getClusterUsage: async (): Promise<ClusterUsage[]> => {
     const response = await axios.get(`/v3/location/cluster/usage`);
     return response.data.clusters;
   },

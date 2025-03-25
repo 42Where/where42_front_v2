@@ -1,14 +1,14 @@
 import PieChart from '@/components/charts/PieChart';
-import { ImacUsage, ClusterUsageArr } from '@/types/Stat';
+import { ImacUsage, ClusterUsage } from '@/types/Stat';
 import { Title, SubTitle, StatContainer } from '@/components/stat/utils';
 import { PieSkeleton, PieSkeletonContainer } from '@/components/stat/utils/PieSkeleton';
 
 type Props = {
-  clusterUsage: ClusterUsageArr | undefined;
+  clusterUsage: ClusterUsage[] | undefined;
   imacUsage: ImacUsage | undefined;
 };
 
-function ClusterUsageComp({ clusterUsage }: { clusterUsage: ClusterUsageArr | undefined }) {
+function ClusterUsageComp({ clusterUsage }: { clusterUsage: ClusterUsage[] | undefined }) {
   return (
     <StatContainer>
       <SubTitle title="클러스터별 이용률" />
