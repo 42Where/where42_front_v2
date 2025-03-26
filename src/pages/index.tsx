@@ -10,6 +10,7 @@ export default function Home() {
   const user = userRes.data;
   const groups = groupRes.data;
   const isAdmin = adminStatusRes.data?.admin;
+  // console.log(user, groups, isAdmin);
 
   return (
     <>
