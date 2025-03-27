@@ -19,6 +19,7 @@ export type {
   GetGroupMembers,
   RemoveMembersFromGroup,
   AddMemberAtGroup,
+  GetAllGroupsResponse,
   GetAllGroups,
   CreateGroup,
   RenameGroup,

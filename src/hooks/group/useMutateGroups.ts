@@ -3,6 +3,7 @@ import { groupOption } from '@/hooks/group/useGroupList';
 import { groupApi } from '@/api/groupApi';
 import { User, Group } from '@/types';
 import { useToast } from '@/components/ui/use-toast';
+import { getSortedGroups } from '@/lib/utils';
 
 type AddParamType = {
   addMembers: User[];
@@ -33,7 +34,8 @@ export function useAddGroupMember() {
     onSuccess: (data, _, context) => {
       queryClient.setQueryData(queryKey, (oldData) => {
         if (!oldData) return undefined;
-        const updatedGroups = oldData.map((group) => {
+        const sortedGroups = getSortedGroups(oldData);
+        const updatedGroups = sortedGroups.map((group) => {
           if (group.groupId !== context.groupId) return group;
           // 대상 그룹의 멤버 배열도 새로운 배열로 업데이트 (불변성 유지)
           return {
@@ -46,7 +48,12 @@ export function useAddGroupMember() {
             ],
           };
         });
-        return updatedGroups;
+        const updatedDefaultGroup = updatedGroups[updatedGroups.length - 1];
+        const updatedNormalGroup = updatedGroups.slice(1, -1);
+        return {
+          defaultGroup: updatedDefaultGroup,
+          groups: updatedNormalGroup,
+        };
       });
       toast({
         title: `'${context.addMembers.length > 1 ? '성공적으로' : `'${context.addMembers[0].intraName}'님이 친구 목록에`} 추가되었습니다.`,
@@ -78,7 +85,8 @@ export function useDeleteGroupMember() {
     onSuccess: (data, _, context) => {
       queryClient.setQueryData(queryKey, (oldData) => {
         if (!oldData) return undefined;
-        const updatedGroups = oldData.map((group) => {
+        const sortedGroups = getSortedGroups(oldData);
+        const updatedGroups = sortedGroups.map((group) => {
           // 기본 그룹에서 삭제할 경우 모든 그룹에서 삭제
           if (group.groupId !== context.groupId && !context.isDefaultGroup) return group;
           return {
@@ -88,7 +96,12 @@ export function useDeleteGroupMember() {
             ),
           };
         });
-        return updatedGroups;
+        const updatedDefaultGroup = updatedGroups[updatedGroups.length - 1];
+        const updatedNormalGroup = updatedGroups.slice(1, -1);
+        return {
+          defaultGroup: updatedDefaultGroup,
+          groups: updatedNormalGroup,
+        };
       });
       toast({
         title: `'${context.deleteMembers.length > 1 ? '성공적으로' : `'${context.deleteMembers[0].intraName}'님이 친구 목록에서`} 삭제되었습니다.`,
@@ -120,7 +133,13 @@ export function useCreateGroup() {
     onSuccess: ({ groupId, groupName }: CreateRenameParamType) => {
       queryClient.setQueryData(queryKey, (oldData) => {
         if (!oldData) return undefined;
-        return [...oldData, { groupId, groupName, members: [], isInEdit: false, isFolded: false }];
+        return {
+          defaultGroup: oldData.defaultGroup,
+          groups: [
+            ...oldData.groups,
+            { groupId, groupName, members: [], isInEdit: false, isFolded: false },
+          ],
+        };
       });
     },
   });
@@ -140,11 +159,14 @@ export function useRenameGroup() {
     onSuccess: (data, _, context) => {
       queryClient.setQueryData(queryKey, (oldData) => {
         if (!oldData) return undefined;
-        const updatedGroups = oldData.map((group) => {
+        const updatedGroups = oldData.groups.map((group) => {
           if (group.groupId !== context.groupId) return group;
           return { ...group, groupName: context.groupName };
         });
-        return updatedGroups;
+        return {
+          defaultGroup: oldData.defaultGroup,
+          groups: updatedGroups,
+        };
       });
     },
     onError: (error, _, context) => {
@@ -167,7 +189,10 @@ export function useDeleteGroup() {
     onSuccess: (data, _, context) => {
       queryClient.setQueryData(queryKey, (oldData) => {
         if (!oldData) return undefined;
-        return oldData.filter((group) => group.groupId !== context.group.groupId);
+        return {
+          defaultGroup: oldData.defaultGroup,
+          groups: oldData.groups.filter((group) => group.groupId !== context.group.groupId),
+        };
       });
       toast({
         title: `'${context.group.groupName}' 그룹이 삭제되었습니다.`,

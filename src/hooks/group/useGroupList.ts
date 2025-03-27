@@ -1,6 +1,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import { groupApi } from '@/api/groupApi';
 import { Group } from '@/types';
+import { getSortedGroups } from '@/lib/utils';
 
 export const groupOption = queryOptions({
   queryKey: ['groupList'],
@@ -16,10 +17,8 @@ export function useGroupList() {
     refetchIntervalInBackground: true,
     select: (groupRes): Group[] => {
       // TODO: 이 select 부분 group 상태 단순 참조할 때도 계속 불린다. useMemo로 최적화할 것
-      const { defaultGroup } = groupRes;
-      defaultGroup.groupName = '친구 목록';
-      const updatedGroups = [...groupRes.groups, { ...defaultGroup }];
-      return updatedGroups;
+      const sortedGroups = getSortedGroups(groupRes);
+      return sortedGroups;
     },
   });
 
