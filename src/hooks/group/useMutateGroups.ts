@@ -49,7 +49,7 @@ export function useAddGroupMember() {
           };
         });
         const updatedDefaultGroup = updatedGroups[updatedGroups.length - 1];
-        const updatedNormalGroup = updatedGroups.slice(1, -1);
+        const updatedNormalGroup = updatedGroups.slice(0, -1);
         return {
           defaultGroup: updatedDefaultGroup,
           groups: updatedNormalGroup,
@@ -97,7 +97,7 @@ export function useDeleteGroupMember() {
           };
         });
         const updatedDefaultGroup = updatedGroups[updatedGroups.length - 1];
-        const updatedNormalGroup = updatedGroups.slice(1, -1);
+        const updatedNormalGroup = updatedGroups.slice(0, -1);
         return {
           defaultGroup: updatedDefaultGroup,
           groups: updatedNormalGroup,
