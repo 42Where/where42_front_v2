@@ -40,7 +40,10 @@ export default function UserSettingModal({
         if (g.groupId !== targGroup.groupId) buf.isInEdit = false;
         return buf;
       });
-      queryClient.setQueryData(['groupList'], temp);
+      queryClient.setQueryData(['groupList'], {
+        defaultGroup: temp[temp.length - 1],
+        groups: temp.slice(0, -1),
+      });
     }
   }
 

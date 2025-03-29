@@ -25,7 +25,10 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
         if (buf.groupId !== curGroup.groupId) buf.isInEdit = false;
         return buf;
       });
-      queryClient.setQueryData(['groupList'], groupBuffer);
+      queryClient.setQueryData(['groupList'], {
+        defaultGroup: groupBuffer[groupBuffer.length - 1],
+        groups: groupBuffer.slice(0, -1),
+      });
     }
   }
 
