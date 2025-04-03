@@ -16,20 +16,14 @@ export default function GroupSettingModal({ curGroup }: { curGroup: Group }) {
 
   function editClickHandler() {
     if (!groups) return;
-    const groupBuffer = [...groups];
-    const targGroup = groupBuffer.find((group) => group.groupId === curGroup.groupId);
-    if (targGroup) {
-      targGroup.isInEdit = true;
-      groupBuffer.map((group) => {
-        const buf = group;
-        if (buf.groupId !== curGroup.groupId) buf.isInEdit = false;
-        return buf;
-      });
-      queryClient.setQueryData(['groupList'], {
-        defaultGroup: groupBuffer[groupBuffer.length - 1],
-        groups: groupBuffer.slice(0, -1),
-      });
-    }
+    const groupBuffer = groups.map((g) => {
+      if (g.groupId === curGroup.groupId) return { ...curGroup, isInEdit: true };
+      return { ...g, isInEdit: false };
+    });
+    queryClient.setQueryData(['groupList'], {
+      defaultGroup: groupBuffer[groupBuffer.length - 1],
+      groups: groupBuffer.slice(0, -1),
+    });
   }
 
   if (!defaultGroupId || !groups) return null;

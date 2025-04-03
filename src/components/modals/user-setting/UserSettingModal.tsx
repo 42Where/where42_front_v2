@@ -31,20 +31,14 @@ export default function UserSettingModal({
   function selectClickHandler() {
     if (!groups) return;
     setCheckedUsers([targUser]);
-    const temp = [...groups];
-    const tempGroup = temp.find((g) => g.groupId === targGroup.groupId);
-    if (tempGroup) {
-      tempGroup.isInEdit = true;
-      temp.map((g) => {
-        const buf = g;
-        if (g.groupId !== targGroup.groupId) buf.isInEdit = false;
-        return buf;
-      });
-      queryClient.setQueryData(['groupList'], {
-        defaultGroup: temp[temp.length - 1],
-        groups: temp.slice(0, -1),
-      });
-    }
+    const groupBuffer = groups.map((g) => {
+      if (g.groupId === targGroup.groupId) return { ...targGroup, isInEdit: true };
+      return { ...g, isInEdit: false };
+    });
+    queryClient.setQueryData(['groupList'], {
+      defaultGroup: groupBuffer[groupBuffer.length - 1],
+      groups: groupBuffer.slice(0, -1),
+    });
   }
 
   if (!user || !groups) return null;
