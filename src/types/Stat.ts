@@ -29,6 +29,4 @@ type FavoriteSeat = {
   usingCount: number;
 };
 
-type ClusterUsageArr = ClusterUsage[];
-
-export type { ImacUsage, ClusterUsage, ClusterUsageArr, PopularSeat, FavoriteSeat };
+export type { ImacUsage, ClusterUsage, PopularSeat, FavoriteSeat };

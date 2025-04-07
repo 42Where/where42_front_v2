@@ -1,5 +1,5 @@
 import { useState, useRef, FormEvent } from 'react';
-import announcementApi from '@/api/announcementApi';
+import { announcementApi } from '@/api/announcementApi';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

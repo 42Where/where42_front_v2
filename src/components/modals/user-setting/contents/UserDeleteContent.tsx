@@ -1,8 +1,7 @@
 import { DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { useDeleteGroupMember } from '@/hooks';
 import { Button } from '@/components/ui/button';
-import { User } from '@/types/User';
-import Group from '@/types/Group';
+import { User, Group } from '@/types';
 
 type UserDeleteContentProps = {
   targUser: User;

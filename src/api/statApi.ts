@@ -1,27 +1,38 @@
 import { axios } from '@/lib/Axios';
-import { ImacUsage, ClusterUsageArr, PopularSeat, FavoriteSeat } from '@/types/Stat';
+import {
+  GetImacUsage,
+  GetClusterUsage,
+  GetMyFavoriteSeats,
+  GetPopularSeats,
+} from '@/types/api/stat';
 
-const statApi = {
-  getImacUsage: async (): Promise<ImacUsage> => {
-    const response = await axios.get(`/v3/location/cluster/imacUsage`);
-    return response.data;
-  },
-  getClusterUsage: async (): Promise<ClusterUsageArr> => {
-    const response = await axios.get(`/v3/location/cluster/usage`);
-    return response.data.clusters;
-  },
-  getMyFavoriteSeats: async ({ count = 1 }: { count?: number }): Promise<FavoriteSeat[]> => {
-    const response = await axios.get('/v3/analytics/seat-history', {
-      params: { count },
-    });
-    return response.data.seats;
-  },
-  getPopularSeats: async ({ count = 5 }: { count?: number }): Promise<PopularSeat[]> => {
-    const response = await axios.get('/v3/analytics/popular-imac', {
-      params: { count },
-    });
-    return response.data.seats;
-  },
+const getImacUsage: GetImacUsage = async () => {
+  const response = await axios.get(`/v3/location/cluster/imacUsage`);
+  return response.data;
 };
 
-export default statApi;
+const getClusterUsage: GetClusterUsage = async () => {
+  const response = await axios.get(`/v3/location/cluster/usage`);
+  return response.data.clusters;
+};
+
+const getMyFavoriteSeats: GetMyFavoriteSeats = async ({ count = 1 }) => {
+  const response = await axios.get('/v3/analytics/seat-history', {
+    params: { count },
+  });
+  return response.data.seats;
+};
+
+const getPopularSeats: GetPopularSeats = async ({ count = 5 }) => {
+  const response = await axios.get('/v3/analytics/popular-imac', {
+    params: { count },
+  });
+  return response.data.seats;
+};
+
+export const statApi = {
+  getImacUsage,
+  getClusterUsage,
+  getMyFavoriteSeats,
+  getPopularSeats,
+};

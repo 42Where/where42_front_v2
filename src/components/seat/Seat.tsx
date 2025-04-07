@@ -8,8 +8,7 @@ import {
 import ProfilePic from '@/components/cards/ProfilePic';
 import { FriendAddBtn, LocationBtn } from '@/components/buttons';
 import { useMyInfo } from '@/hooks';
-import { ActiveClusterUser } from '@/types/Cluster';
-import { User } from '@/types/User';
+import { ActiveClusterUser, User } from '@/types';
 import defaultUserImage from '@/assets/seats/defaultUserImage.png';
 import seat from '@/assets/seats/seat.svg';
 

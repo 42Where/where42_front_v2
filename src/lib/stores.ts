@@ -1,6 +1,5 @@
 import { create } from 'zustand';
-import { User } from '@/types/User';
-import { Clusters } from '@/types/Cluster';
+import { User, Clusters } from '@/types';
 import { getClusters } from '@/lib/clusterUtils';
 
 type CheckedStore = {

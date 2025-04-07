@@ -2,7 +2,7 @@ import { useState, useRef, FormEvent } from 'react';
 import { DialogTitle } from '@/components/ui/dialog';
 import { XBtn } from '@/components/buttons';
 import { useRenameGroup } from '@/hooks';
-import Group from '@/types/Group';
+import { Group } from '@/types';
 
 type RenameModalContentProps = {
   curGroup: Group;

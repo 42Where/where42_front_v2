@@ -1,7 +1,7 @@
 import { DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { useDeleteGroup } from '@/hooks';
-import Group from '@/types/Group';
+import { Group } from '@/types';
 
 type DeleteModalContentProps = {
   groups: Group[];

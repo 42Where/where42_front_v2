@@ -1,4 +1,4 @@
-import Group from '@/types/Group';
+import { Group } from '@/types';
 import Image from 'next/image';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { DropdownMenuTrigger } from '@/components/ui/dropdown-menu';

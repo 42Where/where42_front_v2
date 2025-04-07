@@ -1,4 +1,4 @@
-import Group from '@/types/Group';
+import { Group } from '@/types';
 
 export function GroupHeadCount({ curGroup }: { curGroup: Group }) {
   return (

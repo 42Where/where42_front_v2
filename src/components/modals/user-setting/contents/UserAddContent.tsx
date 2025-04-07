@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { useAddGroupMember } from '@/hooks';
-import { User } from '@/types/User';
-import Group from '@/types/Group';
+import { User, Group } from '@/types';
 
 type UserAddContentProps = {
   targUser: User;

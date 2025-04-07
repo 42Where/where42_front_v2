@@ -1,4 +1,4 @@
-import Group from '@/types/Group';
+import { Group } from '@/types';
 import { useCheckedUsersStore } from '@/lib/stores';
 import { Button } from '@/components/ui/button';
 import GroupDeleteModal from '@/components/modals/group/GroupDeleteModal';
@@ -36,13 +36,14 @@ export function GroupEditBar({ curGroup }: { curGroup: Group }) {
            text-xs text-white md:h-8 md:px-3 lg:text-xl"
           onClick={() => {
             if (!groups) return;
-            queryClient.setQueryData(
-              ['groupList'],
-              groups.map((g) => {
-                if (g.groupId === curGroup.groupId) return { ...curGroup, isInEdit: false };
-                return g;
-              }),
-            );
+            const groupBuffer = groups.map((g) => {
+              if (g.groupId === curGroup.groupId) return { ...curGroup, isInEdit: false };
+              return g;
+            });
+            queryClient.setQueryData(['groupList'], {
+              defaultGroup: groupBuffer[groupBuffer.length - 1],
+              groups: groupBuffer.slice(0, -1),
+            });
           }}
         >
           완료

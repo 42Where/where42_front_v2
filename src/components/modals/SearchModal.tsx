@@ -10,9 +10,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import memberApi from '@/api/memberApi';
+import { memberApi } from '@/api';
 import { useMyInfo } from '@/hooks';
-import { SearchedUser } from '@/types/User';
+import { SearchedUser } from '@/types';
 import search from '@/assets/search.svg';
 
 const SearchInputSchema = z.string().regex(/^[a-zA-Z0-9-]*$/, {

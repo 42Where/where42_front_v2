@@ -1,17 +1,19 @@
-import { User } from '@/types/User';
+import { GetMyInfo, Logout } from '@/types/api/auth';
 import { axios } from '@/lib/Axios';
 import Cookies from 'js-cookie';
 
-const authApi = {
-  getMyInfo: async (): Promise<User> => {
-    const response = await axios.get('/v3/member');
-    return response.data;
-  },
-  logout: async (): Promise<void> => {
-    const response = await axios.post('/v3/logout');
-    console.log(response.data);
-    Cookies.remove('accessToken', { domain: '.where42.kr' });
-  },
+const getMyInfo: GetMyInfo = async () => {
+  const response = await axios.get('/v3/member');
+  return response.data;
 };
 
-export default authApi;
+const logout: Logout = async () => {
+  const response = await axios.post('/v3/logout');
+  console.log(response.data);
+  Cookies.remove('accessToken', { domain: '.where42.kr' });
+};
+
+export const authApi = {
+  getMyInfo,
+  logout,
+};

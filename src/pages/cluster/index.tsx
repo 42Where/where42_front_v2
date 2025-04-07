@@ -12,7 +12,7 @@ import NormalCluster from '@/components/seat/nonX/Cluster';
 import { CX1ClusterComp, CX2ClusterComp } from '@/components/seat/X';
 import Header from '@/components/header/Header';
 import { updateClusterUser } from '@/lib/clusterUtils';
-import clusterApi from '@/api/clusterApi';
+import { clusterApi } from '@/api/clusterApi';
 import useInfoSet from '@/hooks/useInfoSet';
 import { useClusterStore } from '@/lib/stores';
 

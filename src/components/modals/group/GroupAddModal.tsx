@@ -7,7 +7,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import Group from '@/types/Group';
+import { Group } from '@/types';
 import { useCheckedUsersStore } from '@/lib/stores';
 import { useAddGroupMember, useMyInfo, useGroupList } from '@/hooks';
 
@@ -25,7 +25,16 @@ export default function GroupAddModal() {
   }
 
   function groupAddClickHandler() {
-    checkedGroups.forEach((groupId) => mutate({ groupId, addMembers: [...checkedUsers] }));
+    checkedGroups.forEach((groupId) => {
+      if (!groups) return;
+      const targGroupMembers = groups.find((g) => g.groupId === groupId)?.members;
+      if (!targGroupMembers) return;
+      const filteredUsers = checkedUsers.filter(
+        (u) => !targGroupMembers.some((m) => m.intraId === u.intraId),
+      );
+      if (filteredUsers.length === 0) return;
+      mutate({ groupId, addMembers: [...filteredUsers] });
+    });
   }
 
   if (!user || !groups) return null;

@@ -2,8 +2,7 @@ import Image from 'next/image';
 import { useAddGroupMember, useMyInfo } from '@/hooks';
 import { useClusterStore } from '@/lib/stores';
 import { updateClusterUser } from '@/lib/clusterUtils';
-import { ClusterName, RowName } from '@/types/Cluster';
-import { SearchedUser } from '@/types/User';
+import { ClusterName, RowName, SearchedUser } from '@/types';
 import userAdd from '@/assets/user/userAdd.svg';
 
 export function FriendAddBtn({

@@ -7,7 +7,7 @@ import {
   AccordionContent,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import groupApi from '@/api/groupApi';
+import { groupApi } from '@/api/groupApi';
 
 export default function AgreementModal({
   showModal,

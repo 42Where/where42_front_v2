@@ -11,8 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useMyInfo, useGroupList } from '@/hooks';
 import { useCheckedUsersStore } from '@/lib/stores';
-import { User } from '@/types/User';
-import Group from '@/types/Group';
+import { User, Group } from '@/types';
 import functionButton from '@/assets/functionButton.svg';
 import { UserAddContent, UserDeleteContent } from './contents';
 
@@ -32,17 +31,14 @@ export default function UserSettingModal({
   function selectClickHandler() {
     if (!groups) return;
     setCheckedUsers([targUser]);
-    const temp = [...groups];
-    const tempGroup = temp.find((g) => g.groupId === targGroup.groupId);
-    if (tempGroup) {
-      tempGroup.isInEdit = true;
-      temp.map((g) => {
-        const buf = g;
-        if (g.groupId !== targGroup.groupId) buf.isInEdit = false;
-        return buf;
-      });
-      queryClient.setQueryData(['groupList'], temp);
-    }
+    const groupBuffer = groups.map((g) => {
+      if (g.groupId === targGroup.groupId) return { ...targGroup, isInEdit: true };
+      return { ...g, isInEdit: false };
+    });
+    queryClient.setQueryData(['groupList'], {
+      defaultGroup: groupBuffer[groupBuffer.length - 1],
+      groups: groupBuffer.slice(0, -1),
+    });
   }
 
   if (!user || !groups) return null;
