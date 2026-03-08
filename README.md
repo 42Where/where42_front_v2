@@ -6,6 +6,8 @@
 </div>
 <br/>
 
+# where42는 서비스가 종료되었습니다. 그동안 이용해주셔서 감사합니다. 🙇
+
 # where42 frontend
 
 [*where42.kr*](https://where42.kr)
